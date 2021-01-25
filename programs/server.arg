@@ -1,0 +1,20 @@
+debug: 0
+port: 8025
+project: sbs
+
+DbHttpTimeout: 1200
+DbDatabase:    sbsdb@localhost
+
+DbTrustCheckUserip: 127.0.0.1/32,10.0.0.0/8,172.16.0.0/16,192.168.0.0/16,fd01::/16,fe80::/16
+HttpSysexecUserip:  127.0.0.1/32,10.0.0.0/8,172.16.0.0/16,192.168.0.0/16,fd01::/16,fe80::/16
+
+PhpPath: /usr/bin/php-cgi -d include_path=.:/home/manny/projects/web/allg/php:/usr/share/php:/usr/share/pear
+
+#ImapScanDisable: 1
+
+projectroot:          /home/manny/projects
+
+EmbedwebHttpIndex:      sbs
+EmbedwebHttpServerpath: sbs/web:web/app:web/extern
+EmbedwebHttpDataroot:   data
+RepRoot:                tex/report
