@@ -1,0 +1,16 @@
+network:
+    version: 2
+    ethernets:
+        ####DEVICE####:
+            dhcp4: true
+            addresses: 
+            - ####ADDR40####
+            - ####ADDR41####
+            - ####ADDR42####
+            - ####ADDR60####
+            - ####ADDR61####
+            - ####ADDR62####
+            gateway4: ####GW####
+            nameservers:
+              addresses: [####NAMESERVER####]
+              search: [####SEARCH####]

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $certbasedir/config/functions
+. $netbasedir/config/functions
+
+. $(dirname $BASH_SOURCE)/config/functions
+
+dhcpconf4=$(findtemplate  domain dhcpd4.conf)
+dhcpconf6=$(findtemplate  domain dhcpd6.conf)
+dhcpupdate=$(findtemplate domain update-samba-dns.sh)
+radvdconf=$(findtemplate  domain radvd.conf)
+
+#cols="domaintyp,domain,workgroup,description,netdevice,admin,adminpassword,adminpassword2,primaryname,primaryaddr,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcp6start,dhcp6end";
+if [ "$vadescriptionInput" = "" ]; then
+    vadescriptionInput="%h server (Samba,Nelson - technische Informatik)"
+fi
+
+udomain=$(echo "$vadomainInput"  | awk '{print toupper($0)}')
+domaindn=$(echo "$vadomainInput" | sed -e "s/^/dc=/" -e "s/\./,dc=/g")
+
+if [ "$vadomaintypInput" == "primary" ] || [ "$vadomaintypInput" == "second" ]; then
+  netdevicefile="$netconfigdir/00-mne-$vanetdeviceInput.conf"
+  if [ ! -f "$netdevicefile" ]; then
+	echo "#mne_lang#Netzdevice ist nicht konfiguriert#" >&2
+	exit 2
+  fi
+  eval "$(sed -e 's/\[/deviceconfarray=\(/' -e 's/\]/\)/' -e 's/,//g' < "$netdevicefile" )"
+  mod_netpar "$vadomainInput" "$vanetdeviceInput" "$vadnsforwarderInput" "$vadnssearchInput"
+  mod_dhcp "${deviceconfarray[3]}" "$vadhcpstartInput" "$vadhcpendInput" "${deviceconfarray[2]}" "$vadhcp6startInput" "$vadhcp6endInput" \
+           "$vadnssearchInput" "$vadomainInput" "${deviceconfarray[4]}" "${deviceconfarray[5]}" "$vanetdeviceInput" \
+           "$dhcpconf4" "$dhcpconf6" "$dhcpupdate" "$radvdconf"
+fi
+
+exit 0

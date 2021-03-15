@@ -1,0 +1,13 @@
+options {
+        tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+        directory "/var/cache/bind";
+
+        include "/etc/bind/named.conf.options.forwarders";
+
+        dnssec-validation no;
+
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+
+        include "/etc/bind/named.conf.options.local";
+};

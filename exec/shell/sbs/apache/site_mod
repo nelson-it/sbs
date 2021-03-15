@@ -1,0 +1,52 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $certbasedir/config/functions
+. $(dirname $BASH_SOURCE)/config/functions
+
+httpfile=$(findtemplate apache site_http.conf)
+httpsfile=$(findtemplate apache site_https.conf)
+
+if [ "$varenewcertInput" != "0" ]; then ca_checkpasswd "$vapasswd"; fi
+if [ "$vadocumentrootInput" = "" ]; then vadocumentrootInput="$vadomainInput"; fi
+if [ "$vanameInput" = "" ];         then vanameInput="mne_$vadomainInput";     fi
+    
+if [ ${vadocumentrootInput:0:1} != "/" ]; then vadocumentrootInput="$apachedatalocation/$vadocumentrootInput"; fi
+
+file="$apacherootdir/sites-available/$vanameInput_old.conf"
+documentroot=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /documentroot/ { print $2; exit; }' "$file")
+
+if [ "$documentroot" != "" ] && [ "$documentroot" != "$vadocumentrootInput" ]; then
+    mkdir -p "$vadocumentrootInput";
+    ( cd "$documentroot"; tar -cf - . ) | ( cd "$vadocumentrootInput"; tar -xf - )
+    savefile "$documentroot"
+fi
+
+conffile=$httpsfile
+if [ "$vahttpsonlyInput" != "0" ]; then conffile="\"$conffile\" \"$httpfile\""; fi
+
+if [ "$vaconfInput" = "" ]; then
+  vaconfInput="$(eval "cat $conffile")"
+else
+  vaconfInput="$(echo "$vaconfInput" | sed -e 's/\\n/\n/g')"
+  savefile "$apacherootdir/sites-available/$4.conf"
+fi
+
+port=$(get_port)
+sport=$(get_sport)
+
+site_writeconf "$vaconfInput" "$port" "$sport" "$vanameInput" "$vadomainInput" "$vaaliasesInput" "$vaemailInput" "$vadocumentrootInput" "$datadir"
+
+if [ "$varenewcertInput" != "0" ]; then
+  cert_mkkey "$vanameInput"
+  cert_mkcsr "$vanameInput" "$vadomainInput" "$vaaliasesInput"
+  cert_mkcrt "$vanameInput" "$vapasswd"
+fi
+
+if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then
+    a2ensite "$vanameInput" 2>&1 >&$logfile
+else
+    a2dissite "$vanameInput" 2>&1 >&$logfile
+fi
+
+$apachereload 2>&1 >&$logfile

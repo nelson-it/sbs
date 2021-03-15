@@ -1,0 +1,12 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+conffile="$netconfigdir/00-mne-$vadeviceInput_old.yaml"
+rm -f $conffile 
+
+conffile="$netconfigdir/00-mne-$vadeviceInput_old.conf"
+rm -f $conffile 
+
+exit 0

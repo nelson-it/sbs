@@ -1,0 +1,24 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+domain=$(samba-tool domain info $(hostname) | awk '/^Domain/ { print $3 }')
+domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
+
+check_password "$vapasswd" "$domain"
+
+eval $(read_ldap "group" "$vasAMAccountNameInput_old")
+
+if [ "$sAMAccountName" = "" ]; then
+	echo "#mne_lang#Benutzer nicht gefunden#" >&2
+	exit 1
+fi
+
+if [ "$vasAMAccountNameInput" != "$cn" ]; then
+	echo "#mne_lang#Gruppe umbenennen nicht möglich#" >&2
+fi
+
+mod_ldap "$dn" "$vacols" "$vapasswd" "$domaindn"
+
+

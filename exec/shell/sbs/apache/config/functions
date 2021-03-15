@@ -1,0 +1,49 @@
+. $(dirname $BASH_SOURCE)/config
+
+if [ ! -d "$apacheconfigdir" ]; then
+	mkdir -p "$apacheconfigdir";
+fi
+
+if [ ! -d "$apachedatalocation" ]; then
+  mkdir -p "$apachedatalocation";
+fi
+
+function get_port()
+{
+    port=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /listen/ { print $2; exit; }' $apacherootdir/ports.conf)
+    echo "$port"
+}
+
+function get_sport()
+{
+    port=$(awk 'BEGIN { ok=0 } /^[ \t]*#/ { next } /ssl_mod/ { ok=1; next } /mod_gnutls/ { ok=1; next } tolower($1) ~ /listen/ { if ( ok ) { print $2; exit; } }' $apacherootdir/ports.conf)
+    echo "$port"
+}
+
+function site_name()
+{
+    echo "$1" | sed -e 's/\.[^.]*$//g'
+}
+
+function site_enabled()
+{
+    if [ -f "$apacherootdir/sites-enabled/$1" ]; then
+        echo 'true'
+    fi
+}
+
+function site_writeconf()
+{
+
+prog='/####HTTPPORT####/      { gsub(/####HTTPPORT####/, "'$2'");  }
+      /####HTTPSPORT####/     { gsub(/####HTTPSPORT####/,"'$3'"); }
+      /####DOMAIN####/        { gsub(/####DOMAIN####/, "'$5'" ); }
+      /####ALIAS####/         { if ( "'$6'" != "" ) gsub(/####ALIAS####/,"'$6'"); else next; fi }
+      /####EMAIL####/         { if ( "'$7'" != "" ) gsub(/####EMAIL####/,"'$7'"); else next; fi   }
+      /####DOCUMENTROOT####/  { gsub(/####DOCUMENTROOT####/,"'$8'"); }
+      /####NAME####/          { gsub(/####NAME####/,"'$4'"); }
+      /####DATAROOT####/      { gsub(/####DATAROOT####/,"'$9'"); }
+                              { print $0 }'
+                              
+echo "$1" | awk "$prog" > "$apacherootdir/sites-available/$4.conf"
+}

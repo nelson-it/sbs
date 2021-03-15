@@ -1,0 +1,9 @@
+apacheconfigdir="$configdir/apache"
+apacherootdir="/etc/apache2"
+
+apachereload="systemctl reload apache2.service"
+apacherestart="systemctl restart apache2.service"
+
+if [ "$apachedatalocation" = "" ]; then
+  apachedatalocation="$datadir/webcontent";
+fi;

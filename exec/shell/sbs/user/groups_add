@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+domain=$(samba-tool domain info $(hostname) | awk '/^Domain/ { print $3 }')
+domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
+
+check_password "$vapasswd" "$domain"
+
+samba-tool group add "$vasAMAccountNameInput" >&$logfile
+
+eval $(read_ldap "group" "$vasAMAccountNameInput")
+mod_ldap "$dn" "$vacols" "$vapasswd" "$domaindn"

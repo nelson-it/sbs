@@ -1,0 +1,4 @@
+. $certbasedir/config/functions
+#. $domainbasedir/config/functions
+
+. $(dirname $BASH_SOURCE)/config

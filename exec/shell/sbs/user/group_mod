@@ -1,0 +1,8 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+samba-tool group addmembers    "$vamemberOfInput"     "$vasAMAccountNameInput" >&$logfile
+samba-tool group removemembers "$vamemberOfInput_old" "$vasAMAccountNameInput" >&$logfile
+

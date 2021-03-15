@@ -1,0 +1,364 @@
+. $(dirname $BASH_SOURCE)/config
+
+#if [ ! -d "$apacheconfigdir" ]; then
+#	mkdir -p "$apacheconfigdir";
+#fi
+
+
+# domain
+function check_dnspasswd()
+{
+  kinit -F -k -t /var/lib/samba/dhcpd-dns/dhcpd.keytab dns-$(hostname)@$(echo ${1^^})
+}
+
+function check_cert()
+{
+  if [ ! -f  $certcadir/ca.crt ] || [ ! -f $certcertdir/$(hostname).crt ]; then
+    echo 'need certificates for provisoring domain';
+    exit 1
+  fi
+
+  chown root:root $certkeydir/$(hostname).key
+
+  chmod 600 $certkeydir/$(hostname).key
+  chmod 644 $certcertdir/$(hostname).crt
+
+  chmod 600 $certcadir/ca.key
+  chmod 644 $certcadir/ca.crt
+
+  mne_error_ignore=1
+  rm /usr/local/share/ca-certificates/mne_erpca.crt >&$logfile 2>&1
+  mne_error_ignore=
+  ln -s $certcadir/ca.crt /usr/local/share/ca-certificates/mne_erpca.crt
+  update-ca-certificates >&$logfile 2>&1
+}
+
+# workgroup globalextra
+function mod_cert()
+{
+    local prog='/####CERTCERTDIR####/     { gsub(/####CERTCERTDIR####/,"'"$certcertdir"'"); }
+                /####CERTKEYDIR####/      { gsub(/####CERTKEYDIR####/,"'"$certkeydir"'"); }
+                /####CERTCADIR####/       { gsub(/####CERTCADIR####/,"'"$certcadir"'"); }
+                /####HOST####/            { gsub(/####HOST####/,"'"$(hostname)"'"); }
+                /####WORKGROUP####/       { gsub(/####WORKGROUP####/,"'"$1"'"); }
+                                          { print $0 }'
+
+    awk "$prog" < $2 > $domainrootdir/globalextra.conf
+}
+
+# device hostname domain
+function check_host()
+{
+    local addr=$1
+    local hostname=$2
+    local domain=$3
+    
+    addr=$(ip addr show $1 | awk '/inet\b/ { if ( substr($2, 1, 4) != "fe80" ) { split($2, a, "/"); print a[1]} }' )
+#    rm -f /tmp/hosts$$
+#    for addr in $addrs
+#    do
+#        echo "$addr $2 $2.$3" >> /tmp/hosts$$
+#    done
+
+#    prog=' /'$hostname'/ { next; } { print $0 }'
+#    awk "$prog" < /etc/hosts >> /tmp/hosts$$
+#    mv /tmp/hosts$$ /etc/hosts
+    
+    echo $addr
+}
+
+function rm_config()
+{
+    rm -rf /var/run/samba/* >&$logfile 2>&1
+    rm -rf /var/lib/samba   >&$logfile 2>&1
+
+    mkdir -p /var/lib/samba >&$logfile 2>&1
+
+    mne_ignore_error=1
+    if [ -f $domainrootdir/smb.conf ];then
+        rm $domainrootdir/smb.conf >&$logfile 2>&1
+        rm $domainrootdir/validuser.conf >&$logfile 2>&1
+        rm $domainrootdir/shares.conf >&$logfile 2>&1
+        rm $domainrootdir/globalextra.conf >&$logfile 2>&1
+    fi
+    mne_ignore_error=
+}
+
+function mod_smbconf()
+{
+    local prog="/\[global\]/ { start=1; print \$0; next;}
+   /^[    ]*$|^\[/  { if ( start == 1 )
+                    {
+                      print \"        include = $domainrootdir/localextra.conf\";
+                      print \"        include = $domainrootdir/globalextra.conf\";
+                      print \"        include = $domainrootdir/dnsforward.conf\";
+                      print \"        include = $domainrootdir/dhcp.conf\";
+                      start = 2;
+                     }
+                   }
+                   { print \$0; }
+               END { print \"include = $domainrootdir/shares.conf\"; } "
+    
+    awk "$prog" < $domainrootdir/smb.conf  > /tmp/smb.$$
+    mv /tmp/smb.$$ $domainrootdir/smb.conf;
+    
+    touch $domainrootdir/localextra.conf;
+    touch $domainrootdir/globalextra.conf;
+    touch $domainrootdir/dhcp.conf;
+    touch $domainrootdir/dnsforward.conf;
+    touch $domainrootdir/shares.conf;
+}
+
+# namedoption
+function mod_bind()
+{
+  fgrep "$domainbindroot/named.conf.samba" $domainbindroot/named.conf 1>&$logfile 2>&1
+  if [ "$?" != "0" ];then
+    savefile $domainbindroot/named.conf
+    echo "include \"$domainbindroot/named.conf.samba\";" >> $domainbindroot/named.conf
+  fi
+  
+  cat << EOF >"$domainbindroot/named.conf.samba"
+dlz "AD DNS Zone" {
+    database "dlopen /usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_12.so";
+};
+EOF
+  
+  touch $domainbindroot/named.conf.options.local
+  touch $domainbindroot/named.conf.options.forwarders
+  
+  savefile $domainbindroot/named.conf.options
+  cp "$1" $domainbindroot/named.conf.options
+
+  chmod 640 /var/lib/samba/private/dns.keytab
+  chown root:bind /var/lib/samba/private/dns.keytab
+  chown root:bind $domainbindroot/rndc.key
+}
+
+# domain netdevice dnsforward dnssearch
+function mod_netpar()
+{
+    sed -e '/^passwd:/s@ *winbind@@' -e '/^passwd:/s@$@ winbind@' -e '/^group:/s@ *winbind@@' -e '/^group:/s@$@ winbind@' < /etc/nsswitch.conf  > /tmp/nsswitch.$$
+    mv /tmp/nsswitch.$$ /etc/nsswitch.conf
+    
+    sed -e "/interfaces =/s@interfaces.*\$@interfaces = lo $2@" < $domainrootdir/smb.conf  > /tmp/smb.$$; 
+    mv /tmp/smb.$$ $domainrootdir/smb.conf;
+    
+    sed -e "/TLS_REQCERT/d" < /etc/ldap/ldap.conf  > /tmp/ldap.$$; 
+    mv /tmp/ldap.$$ /etc/ldap/ldap.conf;
+    echo "" >> $ldapconf/ldap.conf
+    echo "TLS_REQCERT allow" >> /etc/ldap/ldap.conf
+    
+    if [ "$3" != "" ]; then
+        echo "$3" | sed -e 's/$/;\n};/g ;'\
+                                 -e 's/,/ /g'\
+                                 -e 's/  */;\n    /g'\
+                                 -e 's/^/    /'\
+                                 -e '1 i forwarders {' > $domainbindroot/named.conf.options.forwarders;
+    else
+        echo "" > $bindconf/named.conf.options.forwarders;
+    fi
+    
+    rm -f /etc/resolv.conf 1>&logfile 2>&1
+    echo "nameserver 127.0.0.1"  > /etc/resolv.conf
+    echo "domain $1" >> /etc/resolv.conf
+    if [ "$4" != "" ]; then
+       echo "search $4" >> /etc/resolv.conf
+    fi
+    
+    systemctl restart named >&$logfile 2>&1
+}
+
+
+function mod_kerberos()
+{
+    savefile "$domainkerberosfile"
+    cp /var/lib/samba/private/krb5.conf $domainkerberosfile
+    echo ""                       >>  $domainkerberosfile
+    echo "[realms]"               >>  $domainkerberosfile
+    echo "  $udomain = {"         >>  $domainkerberosfile
+    echo "    kdc = localhost:88" >>  $domainkerberosfile
+    echo "  }"                    >>  $domainkerberosfile
+}
+
+# ip4addr ip4start ip4end ip6addr ip6start ip6end
+# domain dnssearch broadcast router netdevice
+# dhcpconf4 $dhcpconf6 dhcpupdate radvdconf
+function mod_dhcp()
+{
+    mkdir -p /etc/mne/dhcpd 1>&$logfile 2>&1
+    touch /etc/dhcp/fix.conf 1>&$logfile 2>&1
+    touch /etc/dhcp/fix6.conf 1>&$logfile 2>&1
+    
+    dhcp_mod_appamor
+    
+    mkdir -p /var/lib/samba/dhcpd-dns >&$logfile 2>&1
+    chown root:dhcpd /var/lib/samba/dhcpd-dns >&$logfile 2>&1
+    chmod 750 /var/lib/samba/dhcpd-dns >&$logfile 2>&1
+    cp /var/lib/samba/bind-dns/dns.keytab /var/lib/samba/dhcpd-dns/dhcpd.keytab 
+    chown root:dhcpd /var/lib/samba/dhcpd-dns/dhcpd.keytab 
+    
+    local ip4netdevice=
+    local ip6netdevice=
+    
+   systemctl stop  isc-dhcp-server  2>&$logfile 1>&2
+   systemctl stop  isc-dhcp-server6 2>&$logfile 1>&2
+   systemctl stop  radvd            2>&$logfile 1>&2
+    
+    if [ "$1" != "" ]; then
+        mask=$(echo $1 | cut -f2 -d/)
+        net=$(netmask $1)
+        if [ "$2" != "" ]; then
+            netstart=$(netmask $2/$mask)
+            if [ "$netstart" != "$net" ]; then echo "#mne_lang#falsches Netzwerk der DHCP Ipv4 Startadresse#"; exit 1; fi;
+        fi
+        
+        if [ "$3" != "" ]; then
+            netend=$(netmask $3/$mask)
+            if [ "$netend" != "$net" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv4 Endadresse#"; exit 1; fi;
+        fi
+        
+        if [ "$2" != "" ] && [ "$3" != "" ]; then
+            ip4netdevice=${11}
+            systemctl enable  isc-dhcp-server 2>&$logfile 1>&2
+        else
+            systemctl disable  isc-dhcp-server 2>&$logfile 1>&2
+        fi
+    fi
+    
+    if [ "$4" != "" ]; then
+        mask6=$(echo $4 | cut -f2 -d/)
+        net6=$(ipv6calc --addr2compaddr $(sipcalc $4 | fgrep -i subnet | cut -d '-' -f 2))
+
+        if [ "$5" != "" ]; then
+            net6start=$(ipv6calc --addr2compaddr $(sipcalc $5/$mask6 | fgrep -i subnet | cut -d '-' -f 2))
+            if [ "$net6start" != "$net6" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv6 Startadresse#"; exit 1; fi;
+        fi
+
+        if [ "$6" != "" ]; then
+            net6end=$(ipv6calc --addr2compaddr $(sipcalc $6/$mask6 | fgrep -i subnet | cut -d '-' -f 2))
+            if [ "$net6end" != "$net6" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv6 Endadresse#"; exit 1; fi;
+        fi
+
+        if [ "$5" != "" ] && [ "$6" != "" ]; then
+            ip6netdevice=${11}
+            systemctl enable  isc-dhcp-server6 2>&$logfile 1>&2
+            systemctl enable radvd             2>&$logfile 1>&2
+        else
+            systemctl disable isc-dhcp-server6 2>&$logfile 1>&2
+            systemctl disable radvd            2>&$logfile 1>&2
+        fi
+
+    fi
+    
+    prog='/####DOMAIN####/     { gsub(/####DOMAIN####/,"'$7'"); }
+      /####HOST####/       { gsub(/####HOST####/,"'$(hostname)'"); }
+      /####DSEARCH####/    { gsub(/####DSEARCH####/,"'$(echo "$7 $8" | sed -e 's/^ */\\"/' -e 's/ *$/\\"/' -e 's/  */\\", \\"/g')'"); }
+      /####ADDR####/       { gsub(/####ADDR####/,"'$( echo $1 | cut -f1 -d/)'"); }
+      /####ADDR6####/      { gsub(/####ADDR6####/,"'$( echo $4 | cut -f1 -d/)'"); }
+      /####MASK####/       { gsub(/####MASK####/,"'$(ipnetmask mask)'"); }
+      /####NET####/        { gsub(/####NET####/,"'$( echo $net | cut -f1 -d/)'"); }
+      /####NET6####/       { gsub(/####NET6####/,"'$net6'"); }
+      /####START####/      { gsub(/####START####/,"'$2'"); }
+      /####END####/        { gsub(/####END####/,"'$3'"); }
+      /####START6####/     { gsub(/####START6####/,"'$5'"); }
+      /####END6####/       { gsub(/####END6####/,"'$6'"); }
+      /####BCAST####/      { gsub(/####BCAST####/,"'$9'"); }
+      /####ROUTER####/     { gsub(/####ROUTER####/,"'${10}'"); }
+      /####NETDEVICE####/  { gsub(/####NETDEVICE####/,"'${11}'"); }
+      /####DBHOST####/     { gsub(/####DBHOST####/,"'$DBHOST'"); }
+      /####DBUSER####/     { gsub(/####DBUSER####/,"'$DBUSER'"); }
+      /####DB####/         { gsub(/####DB####/,"'$DB'"); }
+                           { print $0 }'
+    
+    savefile /etc/dhcp/dhcpd.conf
+    savefile /etc/dhcp/dhcpd6.conf
+    savefile /etc/radvd.conf
+    savefile /etc/mne/dhcpd/update-samba-dns.sh
+    savefile /etc/default/isc-dhcp-server
+
+    awk "$prog" < ${12} > /etc/dhcp/dhcpd.conf
+    awk "$prog" < ${13} > /etc/dhcp/dhcpd6.conf
+    awk "$prog" < ${14} > /etc/mne/dhcpd/update-samba-dns.sh
+    awk "$prog" < ${15} > /etc/radvd.conf
+    
+    chmod +x /etc/mne/dhcpd/update-samba-dns.sh
+    
+    echo "INTERFACESv4=\"$ip4netdevice\""  > /etc/default/isc-dhcp-server
+    echo "INTERFACESv6=\"$ip6netdevice\"" >> /etc/default/isc-dhcp-server
+    
+    if [ "$ip4netdevice" ]; then systemctl start isc-dhcp-server; fi
+    if [ "$ip6netdevice" ]; then systemctl start isc-dhcp-server6; systemctl start radvd; fi
+}
+
+function dhcp_mod_appamor()
+{
+    if [ -f $apparmorconf/usr.sbin.dhcpd ]; then
+      sed -e "s/^.*include <dhcpd.d>/  include <dhcpd.d>/" < $apparmorconf/usr.sbin.dhcpd > /tmp/dhcpd.$$
+      mv /tmp/dhcpd.$$ /etc/apparmor.d/usr.sbin.dhcpd
+    fi
+    
+    mkdir -p /etc/apparmor.d/dhcpd.d
+    echo "       /etc/mne/dhcpd/update-samba-dns.sh Ux," > /etc/apparmor.d/dhcpd.d/mne_samba_dhcpd
+    
+}
+
+# hostold host addr mac fix comment addrtyp
+function dhcp_fix_mod()
+{
+
+  if [ "$7" = "A" ]; then
+    addrtyp=
+    idname="hardware ethernet"
+  else
+    addrtyp=6
+    idname="host-identifier option dhcp6.client-id"
+  fi
+
+  prog='/host[ \t]+'$1'[ \t]*{/ { hostfound=1; }
+        /}/                     { if ( hostfound ) { hostfound=0; next; }}
+                                { if ( hostfound != 1 ) print $0 }
+                  END           { 
+                                   if ( "'$2'" != "" )
+                                   {
+                                     kommentar = ( '"$5"' == 1 ) ? " " : "#";
+                                     printf("%s   host '"$2"' {\n", kommentar );
+                                     printf("#mnecomment'$6'\n" );
+                                     printf("%s              option host-name \"'"$2"'\";\n", kommentar );
+                                     printf("%s              ddns-hostname \"'"$2"'\";\n", kommentar );
+                                     printf("%s              '"$idname"' '"$4"';\n", kommentar );
+                                     printf("%s              fixed-address'$addrtyp' '"$3"';\n", kommentar );
+                                     printf("%s   }\n", kommentar);
+                                   }
+                                }'
+   
+   awk "$prog" < "/etc/dhcp/fix$addrtyp.conf" > /tmp/fix$$
+   mv /tmp/fix$$ "/etc/dhcp/fix$addrtyp.conf"
+   chown dhcpd:dhcpd "/etc/dhcp/fix$addrtyp.conf"
+
+}
+# host addrtyp
+function dhcp_fix_del()
+{
+
+  if [ "$2" = "A" ]; then
+    filename=/etc/dhcp/fix.conf
+  else
+    filename=/etc/dhcp/fix6.conf
+  fi
+
+  prog='/host[ \t]+'$1'[ \t]*{/ { hostfound=1; host = ( substr($0,1,1) == "#" ) ? $3 : $2; }
+        /}/                        { if ( hostfound )
+                                     {
+                                       hostfound=0;
+                                       next;
+                                     }
+                                   }
+                                   { if ( hostfound != 1 ) print $0 }'
+   
+   awk "$prog" < $filename > /tmp/fix$$
+   mv /tmp/fix$$ $filename
+
+}
+
+

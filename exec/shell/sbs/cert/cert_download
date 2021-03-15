@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+case "$vadirInput_old" in
+    crt) dir="$certcertdir";;
+    key) dir="$certkeydir";;
+    csr) dir="$certcsrdir";;
+    ext) dir="$certextdir";;
+    *) exit 1;;
+esac
+
+file="$dir/$vafilename";
+cat $file;
+
+exit 0

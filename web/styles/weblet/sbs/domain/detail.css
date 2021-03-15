@@ -1,0 +1,4 @@
+.domaintyp #adparam, .domaintyp #adaddr,
+.domaintypstandalone #adparam, .domaintypstandalone #adaddr {
+	display: none;
+}

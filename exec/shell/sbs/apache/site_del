@@ -1,0 +1,20 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $certbasedir/config/functions
+. $(dirname $BASH_SOURCE)/config/functions
+
+file="$apacherootdir/sites-available/$vanameInput_old.conf"
+documentroot=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /documentroot/ { print $2; exit; }' "$file")
+
+if [[ "$documentroot" = "$apachedatalocation"* ]]; then 
+    savefile "$documentroot"
+fi
+
+rm -f "$apacherootdir/sites-enabled/$vanameInput_old.conf"
+rm -f "$apacherootdir/sites-available/$vanameInput_old.conf"
+
+cert_del "$vanameInput_old"
+
+$apachereload  2>&1 >&$logfile
+

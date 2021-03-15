@@ -1,0 +1,42 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $certbasedir/config/functions
+. $(dirname $BASH_SOURCE)/config/functions
+
+httpfile=$(findtemplate apache site_http.conf)
+httpsfile=$(findtemplate apache site_https.conf)
+
+ca_checkpasswd "$vapasswd";
+
+if [ "$vadocumentrootInput" = "" ]; then vadocumentrootInput="$vadomainInput"; fi
+if [ "$vanameInput" = "" ];         then vanameInput="mne_$vadomainInput";     fi
+    
+if [ ${vadocumentrootInput:0:1} != "/" ]; then vadocumentrootInput="$apachedatalocation/$vadocumentrootInput"; fi
+
+mkdir -p "$vadocumentrootInput";
+ 
+conffile=$httpsfile
+if [ "$vahttpsonlyInput" != "" ]; then conffile="\"$conffile\" \"$httpfile\""; fi
+
+if [ "$vaconfInput" = "" ]; then
+  vaconfInput="$(eval "cat $conffile")"
+else
+  vaconfInput="$(echo "$vaconfInput" | sed -e 's/\\n/\n/g')"
+fi
+
+port=$(get_port)
+sport=$(get_sport)
+
+site_writeconf "$vaconfInput" "$port" "$sport" "$vanameInput" "$vadomainInput" "$vaaliasInput" "$vaemailInput" "$vadocumentrootInput" "$datadir"
+
+cert_mkkey "$vanameInput"
+cert_mkcsr "$vanameInput" "$vadomainInput" "$vaaliasesInput"
+cert_mkcrt "$vanameInput" "$vapasswd"
+
+if [ "$vaenabledInput != "" ] && [ "$vaenabledInput != "0" ]; then
+    a2ensite "$vanameInput"  2>&1 >&$logfile
+    $apachereload  2>&1 >&$logfile
+fi
+
+

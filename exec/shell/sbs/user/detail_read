@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+vacols="sAMAccountName,description,givenName,sn,street,postOfficeBox,l,co,initials,homePhone,telephoneNumber,mobile,mail,wWWHomePage,preferredLanguage,postalCode,uidNumber,gidNumber,unixHomeDirectory,loginShell";
+labels="Login,Beschreibung,Vorname,Nachname,Strasse,Postfach,Ort,Land,Kürzel,Fon priv,Fon gesch,Fon mobil,Email,http,Sprache,PLZ,Uid,Gid,Homedir,Login Shell";
+json_writeheader "$vacols" "$labels" "mail:email,wWWHomePage:http," "" "sAMAccountName:notempty";
+
+eval $(read_ldap user "$vasAMAccountNameInput_old")
+
+echo "$street" >&$logfile
+
+echo '  "values"  : ['
+if [ "$sAMAccountName" != "" ]; then
+  json_writedata "$sAMAccountName" "$description" "$givenName" "$sn" "$street" "$postOfficeBox" "$l" "$co" "$initials" "$homePhone" "$telephoneNumber" "$mobile" "$mail" "$wWWHomePage" "$preferredLanguage" "$postalCode"  "$uidNumber"  "$gidNumber"  "$unixHomeDirectory"  "$loginShell"
+fi
+echo ']'

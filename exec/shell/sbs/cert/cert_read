@@ -1,0 +1,45 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+filetype="$vadirInput_old"
+listtype=
+case "$vadirInput_old" in
+    crt) dir="$certcertdir"; listtype="x509";;
+    key) dir="$certkeydir"; listtype="rsa";;
+    csr) dir="$certcsrdir"; listtype="req";;
+    ext) dir="$certextdir"; listtype="x509"; filetype="crt";;
+    *) vano_vals="true";;
+esac
+
+cols="dir,data,filename,dns,valid,ca"
+labels="Ordner,Daten,Zertifikat,DNS,gültig bis,CA";
+json_writeheader "$cols" "$labels" "" "" ""
+
+komma=
+prog='/Issuer/ { split($0, a ,","); split(a[6], aa, " = "); ca=aa[2]; }
+      /DNS:/   { split($0, a, ",");
+                 for ( i in a )
+                 {
+                    split(a[i], aa, ":")
+                    dns = dns aa[2] ",";
+                 }
+                 dns = substr(dns, 0, length(dns) - 1);
+               }
+      /Not After/ { split($0, a, ": ");
+                 valid = a[2];
+                 gsub(/^[ \t]+/,"",valid);
+                 gsub(/[ \t]+$/,"",valid);
+               }
+      END { printf("%s [ \"%s\", \"\", \"%s\", \"%s\", \"%s\", \"%s\" ]\n", komma, dir, file, dns, valid, ca); }'
+
+echo '  "values"  : [ '
+for file in $(cd $dir; set +f; ls -1 *.$filetype 2>&$logfile )
+do
+  openssl "$listtype" -text -noout -in "$dir/$file" | awk -v komma="$komma" -v file="$file" -v dir="$vadirInput_old" "$prog"
+  komma=','
+done
+echo ' ] '
+
+exit 0

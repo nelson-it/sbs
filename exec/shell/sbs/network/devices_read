@@ -1,0 +1,45 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+ids="device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,readtime"
+labels="Schnittstelle,Type,Ipv6 Addresse,Ipv4 Addresse,Broadcast,Gateway,Nameserver,DNS Suchdomains,Lesezeit";
+
+json_writeheader "$ids" "$labels" "readtime:1000" "" "netaddrtyp:notempty,netaddr6:ip6addrmaskmempty,netaddr:ip4addrmaskmempty,netgateway:ip4addrempty";
+
+echo '  "values"  : ['
+komma=
+for device in `ls /sys/class/net`
+do
+  if [ "$device" != "lo" ]; then
+    conffile="$netconfigdir/00-mne-$device.conf"
+    if [ -f $conffile ]; then
+    	echo "$komma"
+    	cat $conffile | sed -e 's/####ACTTIME####/'$acttime'/g'
+    else
+        devices="$devices '$device'"
+        declare netaddr= netmask= netbcast= netgateway= dnssearch= dnsnameserver=
+
+        netgateway="$(route -n       | awk '/^0\.0\.0\.0.*'$device'/ { print $2 }')"
+        netaddr="$(ifconfig $device  | awk '/inet[^6]/ { print $2}')"
+        netaddr6="$(ifconfig $device | awk '/inet6/    { printf("%s%s/%s", eol, $2, $4); eol="\\n" }')"
+        netmask="$(ifconfig $device  | awk '/inet[^6]/ { print $4}')"
+        netbcast="$(ifconfig $device | awk '/inet[^6]/ { print $6}')"
+    
+        if [ "$netmask" != "" ]; then
+          netmask="$(ipmask2int $netmask)"
+          netaddr="$netaddr/$netmask"
+        fi
+
+        dnssearch=`cat /etc/resolv.conf | awk '/^search[ \t]/ { print $2 }'`
+        dnsnameserver=$(cat /etc/resolv.conf | awk 'BEGIN { found=""; } /^nameserver[ \t]+/ { gsub(/%.*$/,"",$2); printf("%s\\\"%s\\\"",found,$2); found = "," }')
+
+       echo "$komma" ' [ "'$device'", "", "'$netaddr6'", "'"$netaddr"'", "'$netbcast'", "'$netgateway'", "'$dnsnameserver'", "'$dnssearch'", "'$acttime'" ]';
+     fi
+    komma=','
+  fi
+done
+echo ']'
+
+exit 0

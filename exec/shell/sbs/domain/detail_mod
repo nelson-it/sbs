@@ -1,0 +1,26 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $certbasedir/config/functions
+. $netbasedir/config/functions
+
+. $(dirname $BASH_SOURCE)/config/functions
+
+if [ "$vadescriptionInput" = "" ]; then
+    vadescriptionInput="%h server (Samba,Nelson - technische Informatik)"
+fi
+
+if [ "$vaadministratorInput" = "" ]; then
+    vaadministratorInput="administrator"
+fi
+
+udomain=$(echo "$vadomainInput"  | awk '{print toupper($0)}')
+domaindn=$(echo "$vadomainInput" | sed -e "s/^/dc=/" -e "s/\./,dc=/g")
+
+if [ "$vadomaintypInput" == "primary" ] || [ "$vadomaintypInput" == "second" ]; then
+  . "$BASH_SOURCE""_domain"
+else
+  . "$BASH_SOURCE""_standalone"
+fi
+
+exit 0

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+vacols="sAMAccountName,description";
+labels="Gruppe,Beschreibung";
+json_writeheader "$vacols" "$labels" "" "" "";
+
+eval $(read_groups all)
+
+echo '  "values"  : ['
+( for i in "${!groups[@]}"; do echo $i; done ) | sort | \
+  while read i
+  do
+	json_writedata "$i" "${groups[$i]}"
+  done
+echo ']'

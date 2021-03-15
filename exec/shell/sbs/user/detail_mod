@@ -1,0 +1,38 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+domain=$(samba-tool domain info $(hostname) | awk '/^Domain/ { print $3 }')
+domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
+
+check_password "$vapasswd" "$domain"
+
+eval $(read_ldap "user" "$vasAMAccountNameInput_old")
+if [ "$sAMAccountName" = "" ]; then
+	echo "#mne_lang#Benutzer nicht gefunden#" >&2
+	exit 1
+fi
+
+if [ "$vasAMAccountNameInput" != "$cn" ]; then
+	
+  echo -e "dn: cn=$cn,cn=users,$domaindn\nchangetype: modrdn\nnewrdn: cn=$vasAMAccountNameInput\ndeleteoldrdn: 1\n" | \
+    ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&1
+
+  echo -e "dn: cn=$vasAMAccountNameInput,cn=users,$domaindn\n"\
+          "changetype: modify\n"\
+          "replace: sAMAccountName\n"\
+          "sAMAccountName: $vasAMAccountNameInput\n"\
+          "-\n"\
+          "replace: userPrincipalName\n"\
+          "userPrincipalName: $vasAMAccountNameInput@$domain\n"\
+          "-\n"\
+  | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&1 
+fi
+
+samba-tool user setexpiry  "$vasAMAccountNameInput" --noexpiry >&$logfile 2>&1
+
+eval $(read_ldap "user" "$vasAMAccountNameInput")
+mod_ldap "$dn" "$vacols" "$vapasswd" "$domaindn"
+
+

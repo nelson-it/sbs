@@ -1,0 +1,4 @@
+div.weblet#dnsaddress tr.missmatchtrue {
+    background-color: var(--modifywarningbackgroundcolor);
+    color: var(--modifywarningcolor);
+}

@@ -1,0 +1,127 @@
+. $(dirname $BASH_SOURCE)/config
+
+function check_password()
+{
+    echo "$1" | kinit administrator@$(echo ${2^^}) > /dev/null
+}
+
+function read_users()
+{
+    echo "declare -A firstname;"
+    echo "declare -A lastname;"
+    echo "declare -A login;"
+    echo "declare -A fullname;"
+
+    prog='/# record/ { start=1; uid=""; gid=""; login=""; firstname=""; lastname=""; fullname=""; i="" }
+          /^$/       { if ( start != 1 ) next;
+                       start=0;
+                       if ( login == "" ) next;
+
+                       if ( firstname == "" && lastname == "" ) firstname = login;
+                       fullname=firstname
+                       if ( lastname ) fullname = fullname " " lastname
+                       i = fullname "-" login
+                       printf("login[\"%s\"]=\"%s\";fullname[\"%s\"]=\"%s\";firstname[\"%s\"]=\"%s\";lastname[\"%s\"]=\"%s\"\n", i, login, i, fullname, i, firstname, i, lastname );
+                     }
+      /^sAMAccountName:/     { login = gensub(/^.*: */, "", 1); }
+      /^sn:/                 { lastname = gensub(/^.*: */, "", 1); }
+      /^givenName:/          { firstname = gensub(/^.*: */, "", 1); }
+      '
+
+      ldbsearch -H /var/lib/samba/private/sam.ldb '(&(&(!(UserAccountControl:1.2.840.113556.1.4.803:=2))(objectClass=user))(!(objectClass=computer)))' | awk "$prog"
+}
+
+function read_groups()
+{
+    local search="(&(&(objectClass=group)(!(isCriticalSystemObject=TRUE)))(!(cn=Dns*)))"
+    if [ "$1" = "all" ]; then search="(objectClass=group)"; fi
+    
+    echo "declare -A groups;"
+    prog='/# record/ { start=1; sAMAccountName=""; description=""; }
+          /^$/       { if ( start != 1 ) next;
+                       start=0;
+                       if ( sAMAccountName == "" ) next;
+                       printf("groups[\"%s\"]=\"%s\";\n", sAMAccountName, description );
+                     }
+      /^sAMAccountName:/ { sAMAccountName = gensub(/^.*: */, "", 1); }
+      /^description:/    { description = gensub(/^.*: */, "", 1);}
+      '
+  
+  ldbsearch -H /var/lib/samba/private/sam.ldb "$search" | awk "$prog"
+}
+
+# type group
+function read_ldap()
+{
+    echo "declare -A ldapids;"
+  prog='/# record/ { start=1}
+          /^$/       { start=0 }
+          /objectClass:/ { next; }
+          /^.*:/     { if ( start )
+                       {
+                         value = gensub(/^.*: */, "", "1");
+                         gsub("\\\\", "\\\\");
+                         gsub("\"", "\\\"", value);
+                         name  = gensub(/:.*/, "", "1");
+                         if ( komma[name] != ";" )
+                           printf("ldapids[%s]=\"1\"; %s=\"%s\"\n", name, name, value)
+                         else
+                           printf("%s=\"$%s\"\"%s%s\"\n", name, name, komma[name], value)
+                       }
+                       komma[name] = ";"
+                     }'
+  
+  ldbsearch -H /var/lib/samba/private/sam.ldb "(&(objectClass=$1)(sAMAccountName=$2))" | awk "$prog"
+}
+
+# dn cols passsword domaindn
+function mod_ldap()
+{
+IFS=',' read -r -a cols  <<< "$2"
+modify=$(
+for col in ${cols[@]} 
+do
+	arg="va$col""Input"
+	if [ "${!arg}" != "${!col}" ]; then
+	  if [ "${!arg}" != "" ]; then
+        echo -e "replace: ${col}\n"\
+        "$col: ${!arg//[$'\\']/\\\\\\\\}\n"-
+      elif [ "${!col}" != "" ]; then
+        echo -e "delete: $col\n-"
+      fi
+    fi	
+done )
+
+echo "$modify" >&$logfile
+if [ "$modify" != "" ]; then
+  echo -e "dn: $1\nchangetype: modify\n$modify" | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$4" -w "$3" -x >&$logfile 2>&1 
+fi
+
+}
+
+# user
+function read_usergroup()
+{
+  local data="$(ldbsearch -H /var/lib/samba/private/sam.ldb "(&(objectClass=user)(sAMAccountName=$1))" )"
+
+  primarygroup=$(echo "$data" | fgrep primaryGroupID | cut -f2 -d" ")
+  domainsid=$(ldbsearch -H /var/lib/samba/private/sam.ldb '(objectClass=domain)' | fgrep objectSid | cut -f2 -d" ")
+  group=$(ldbsearch -H /var/lib/samba/private/sam.ldb "(objectSid=$domainsid-$primarygroup)" | fgrep "cn:" | awk '{ gsub(/^.*: */,""); print $0}')
+
+  echo "declare -a groups;"
+  if [ "$group" != "" ]; then echo "groups[0]=\"$group\";"; fi
+  
+  prog='/# record/   { start=1}
+        /^$/         { start=0 }
+        /^memberOf:/ { if ( start )
+                       {
+                         sub(/^.*: *CN=/, "", $0);
+                         sub(/,.*$/, "", $0);
+                         if ( $0 != "'$group}'" )
+                           printf("groups[${#groups[*]}]=\"%s\";", $0);
+                       }
+                     }'
+
+  echo "$data"| awk "$prog"
+}
+

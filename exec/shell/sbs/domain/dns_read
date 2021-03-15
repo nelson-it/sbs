@@ -1,0 +1,96 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+cols="name,dns_record,address,fix,mac,comment,readtime,missmatch";
+labels="Name,Addresstyp,Adresse,feste Adresse,HW Adresse,Komentar,Gelesen am,HW Address unterschiedlich";
+
+json_writeheader "$cols" "$labels" "fix:bool,missmatch:bool,readtime:datetime" "" ""
+
+
+declare -A host
+declare -A mac
+declare -A fix
+declare -A comment
+declare -A missmatch
+declare -A amac
+
+eval $( arp -n | awk '{ if ( $2 == "ether" ) printf("amac[%s]=\"%s\"\n", $1, $3) }')
+
+eval $(awk '/host.*{/    { disabled = ( substr($0,1,1) == "#" ); host = ( disabled ) ? $3 : $2; addr=""; mac=""; comment=""  }
+     /}/                 { printf("host[%s]=\"%s\"\nmac[%s]=\"%s\"\nfix[%s]=\"%s\"\ncomment[%s]=\"%s\"\n", addr, host, addr, mac, addr, ((disabled) ? "false" : "true"), addr, comment ) }
+     /mnecomment/         { comment = $0; sub("#mnecomment", "", comment);  }
+     /fixed-address/     { addr = ( disabled ) ? $3 : $2; sub(";", "", addr);  }
+     /hardware ethernet/ { mac  = ( disabled ) ? $4 : $3; sub(";", "", mac);   } ' < /etc/dhcp/fix.conf )
+
+eval $(awk '/host.*{/           { disabled = ( substr($0,1,1) == "#" ); host = ( disabled ) ? $3 : $2; addr=""; mac=""; comment="" }
+     /}/                 {printf("host[%s]=\"%s\"\nmac[%s]=\"%s\"\nfix[%s]=\"%s\"\ncomment[%s]=\"%s\"\n", addr, host, addr, mac, addr, ((disabled) ? "false" : "true"), addr, comment ) }
+     /mnecomment/        { comment = $0; sub("#mnecomment", "", comment);  }
+     /fixed-address/     { addr = ( disabled ) ? $3 : $2; sub(";", "", addr); }
+     /dhcp6.client-id/   { mac  = ( disabled ) ? $5 : $4; sub(";", "", mac); } ' < /etc/dhcp/fix6.conf )
+
+for a in ${!host[@]}
+do
+  if [ "${amac[$a]}" != "" ] && [ "${mac[$a]}" != "${amac[$a]}" ]; then
+    missmatch[$a]="true"
+  fi
+done
+
+echo '  "values"  : ['
+
+mne_need_error
+systemctl is-enabled mne_samba-ad-dc.service >/dev/null 2>&1
+if [ "$?" = "0" ]; then
+
+  s_readtime=$(date +%s)
+
+  info=$(samba-tool domain info 127.0.0.1)
+  domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+  check_dnspasswd $domain
+
+  prog='/^  Name=/     { name=""; split($1,n,"="); sub(/,/,"",n[2]); name=n[2]; next}
+        /^    A:/      { if ( name != "" ) printf("A %s %s\n", name,  $2) }
+        /^    AAAA:/   { if ( name != "" ) printf("AAAA %s %s\n", name,  $2) }
+        /^    CNAME:/  { if ( name != "" ) printf("CNAME %s %s\n", name,  substr($2,1,length($2)-1)) }
+        /^    MX:/     { if ( name != "" ) printf("MX %s %s %s\n", name, substr($2,1,length($2) - 1),  num=substr($3,2,length($3) - 2)) }'
+
+  if [ "$vanameInput" != "" ]; then
+    queryname="$vanameInput"
+  else
+    queryname="@"
+  fi
+
+  vawcol="s_$vawcol"
+  komma=
+  samba-tool dns query $(hostname) $domain "$queryname" ALL -k yes | awk "$prog" | \
+  while read line
+  do
+    a=($line)
+    
+    s_name="${a[1]}"
+    s_dns_record="${a[0]}"
+    s_address="${a[2]}"
+    
+    if [[ "$s_address" =~ .*:.* ]]; then
+      s_address=$(ipv6calc --addr2compaddr $s_address)
+    fi
+
+    s_fix="${fix[$s_address]}"
+    s_mac="${mac[$s_address]}"
+    s_comment="${comment[$s_address]}"
+    s_missmatch="${missmatch[$s_address]}"
+
+    if [ "$typ" = "MX" ]; then
+      s_address="$s_address ${a[3]}"
+    fi
+
+    if [ "$(compare "${!vawcol}" "$vawop" "$vawval")" = "1" ]; then
+      echo $komma' ["'"$s_name"'", "'"$s_dns_record"'", "'"$s_address"'", "'"$s_fix"'", "'"$s_mac"'", "'"$s_comment"'", "'"$s_readtime"'", "'"$s_missmatch"'" ] '
+      komma=","
+    fi
+    
+  done
+fi
+echo ' ]'
+

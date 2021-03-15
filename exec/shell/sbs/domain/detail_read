@@ -1,0 +1,50 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+cols="domaintyp,domain,workgroup,description,netdevice,adminpassword,adminpassword2,administrator,primaryname,primaryaddr,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcp6start,dhcp6end";
+labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Administrator,Primary Server,Primary Adresse,DNS Forward,DNS Suche,IPv4 Start,IPv4 Ende,IPv6 Start,IPv6 Ende";
+regexps="primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
+
+mne_need_error
+systemctl is-enabled mne_samba-ad-dc.service 2>&1 >/dev/null
+if [ "$?" = "0" ]; then
+	json_writeheader "$cols" "$labels" "" "" "adminpassword:notempty,$regexps"
+
+	master=$(samba-tool fsmo show | sed -n '/SchemaMasterRole/p' ) 
+	mne_need_error
+	echo "$master" | fgrep $(hostname | awk '{ print toupper($0) }') >&$logfile 
+	if [ "$?" != "0" ];then
+		domaintyp="second";
+
+        primaryname=$(echo "$master" | awk -v RS=, -v FS== '{ if ( $1 == "CN" && name == "" ) name = $2 } END { print tolower(name) }')
+        primaryaddr=$(nslookup -type=A "$primaryname" | awk '/Name:/ { ok=1 } /Address:/ { if ( ok ) { print $2; exit 0 } }' )
+	else
+		domaintyp="primary";
+	fi
+
+    info=$(samba-tool domain info 127.0.0.1)
+    
+    domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+    workgroup=$(echo "$info" | awk -v FS=: '/Netbios domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+	description=$( cat "$domainconfigfile"  | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0 }')
+    
+    netdevice=$(cat "$domainconfigfile" | awk '/interfaces =/ { print $NF }')
+    dnsforwarder=$(cat "$domainforwarderfile" 2>/dev/null | awk '/forwarders/ { start=1; next } /}/ { start=0 } { if ( start ) { sub(";",""); printf("%s%s", space, $NF); space=" " }}')
+    
+    dhcpstart=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $2); print $2; exit 0 }')
+    dhcpend=$(cat "$domaindhcpfile"   2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $3); print $3; exit 0 }')
+    dnssearch=$(cat "$domaindhcpfile" 2>/dev/null | awk -v FS=\" '/^#/ { next; } /domain-search/ { print $2; exit 0 }')
+
+    dhcp6start=$(cat "$domaindhcp6file" 2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $2); print $2; exit 0 }')
+    dhcp6end=$(cat "$domaindhcp6file"   2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $3); print $3; exit 0 }')
+else
+	json_writeheader "$cols" "$labels" "" "" "primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty";
+    domaintyp="standalone";
+	workgroup=$( cat "$domainconfigfile"  | awk -v FS== '/^#/ { next; } /workgroup/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
+	description=$( cat "$domainconfigfile"  | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
+fi
+
+echo '  "values"  : [ ["'"$domaintyp"'", "'"$domain"'", "'"$workgroup"'", "'"$description"'", "'"$netdevice"'", "'"$adminpassword"'", "'"$adminpassword2"'", "'"$administrator"'", "'"$primaryname"'", "'"$primaryaddr"'", "'"$dnsforwarder"'", "'"$dnssearch"'", "'"$dhcpstart"'", "'"$dhcpend"'", "'"$dhcp6start"'", "'"$dhcp6end"'" ] ] '
+exit 0

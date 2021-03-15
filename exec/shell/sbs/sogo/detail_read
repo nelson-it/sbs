@@ -1,0 +1,29 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+cols=certok,domainok,passwd,mailcanonical,mailrelay,mailrelayuser,mailrelaypassword
+labels="Zertifikate,Domain,CA Password,Name als Maildaddresse,Mail Relay Sever, Mail Relay User, Mail Relay Password";
+json_writeheader "$cols" "$labels" "certok:bool,domainok:bool,mailcanonical:bool" "" "passwd:notempty";
+
+certok=
+if [ -f  $certcadir/ca.crt ]; then
+    certok=true
+fi
+
+domainok=
+mne_need_error
+systemctl is-enabled mne_samba-ad-dc.service 2>&1 >/dev/null
+if [ "$?" = "0" ]; then
+  domainok=true
+fi
+
+passwd=
+mailcanonical=
+mailrelay=
+mailrelayuser=
+mailrelaypassword=
+
+echo '  "values"  : [ ["'$certok'", "'$domainok'", "'$passwd'", "'$mailcanonical'", "'$mailrelay'", "'$mailrelayuser'", "'$mailrelaypassword'" ] ] '
+exit 0

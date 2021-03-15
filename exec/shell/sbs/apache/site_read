@@ -1,0 +1,98 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+cols="name,enabled,domain,aliases,email,documentroot,conf,httpsonly,renewcert"
+labels="Name,enabled,Domain,Aliases,Email,Documentroot,Konfiguration,httpsonly,Zertifikat erneuern"
+json_writeheader "$cols" "$labels" "readtime:1000" "" "domain:notempty";
+
+port=$(get_port)
+sport=$(get_sport)
+
+echo '"values" : [ '
+komma=
+IFS='\n' readarray -t sites < <(set +f; cd $apacherootdir/sites-available; ls -1)
+
+for site in "${sites[@]}"
+do
+	file="$apacherootdir/sites-available/$site"
+	
+    name="$( site_name "$site")"
+    enabled="$(site_enabled "$site")"
+
+
+          domain=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /servername/ { print $2; exit; }' "$file")
+         aliases=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /serveralias/ { gsub($1,""); sub(/^ */,""); print $0; exit; }' "$file")
+           email=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /serveradmin/ { print $2; exit; }' "$file")
+    documentroot=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /documentroot/ { print $2; exit; }' "$file")
+    
+    if [ "$domain" = "" ]; then domain=$(hostname); fi
+    
+    mne_error_ignore=1
+    httpsonly=true
+    egrep -q 'mne_default_template_http ' "$file"
+    if [ "$?" = "0" ]; then
+        httpsonly=false
+    fi
+   
+    template=
+    egrep -q 'mne_default_template_http' "$file"
+    if [ "$?" = "0" ]; then
+        template=true
+    fi
+
+    
+    if [ "$documentroot" = "" ]; then
+        dr='leer';
+    else
+       dr="$documentroot"
+    fi
+   
+   ddir=$(echo "$datadir"      | sed -e 's/\//\\\//g')
+     dr=$(echo "$documentroot" | sed -e 's/\//\\\//g')
+   
+   prog='{
+      $0 = gensub(/(^[^#]*Directory).*'$dr'[ \t]*>.*/,  "\\1 ####DOCUMENTROOT####>", "g" );
+
+      $0 = gensub(/(.*VirtualHost.*\*:)$port.*>/, "\\1####HTTPPORT####>", "g");
+      $0 = gensub(/(.*VirtualHost.*\*:)$sport.*>/, "\\1####HTTPSPORT####>", "g");
+
+      $0 = gensub(/(^[^#]*[Ss]erver[Nn]ame).*/,  "\\1 ####DOMAIN####", "g" );
+      $0 = gensub(/(^[^#]*[Ss]erver[Aa]dmin).*/, "\\1 ####EMAIL####",  "g" );
+      $0 = gensub(/(^.*[Ss]erver[Aa]lias).*/,    "\\1 ####ALIAS####",  "g" );
+      $0 = gensub(/(^[^#]*[Dd]ocument[Rr]oot).*'$dr'.*/,  "\\1 ####DOCUMENTROOT####", "g" );
+
+      $0 = gensub(/(^[^#]*SSLCertificatefile).*'$ddir'(.*)/, "\\1  ####DATAROOT####\\2", "g");
+      $0 = gensub(/(^[^#]*SSLCertificateKeyfile).*'$ddir'(.*)/, "\\1  ####DATAROOT####\\2", "g");
+
+      $0 = gensub(/(^[^#]*SSLCertificateFile)[^/]*'$ddir'\/*cert\/cert\/.*/,   "\\1  ####DATAROOT####/cert/cert/####DOMAIN####.crt", "g");
+      $0 = gensub(/(^[^#]*SSLCertificateKeyFile)[^/]*'$ddir'\/*cert\/key\/.*/, "\\1  ####DATAROOT####/cert/key/####DOMAIN####.key", "g");
+
+      $0 = gensub(/(^[^#]*SSLCertificateFile).*snakeoil.*/,    "\\1 ####DATAROOT####/cert/cert/####DOMAIN####.crt", "g");
+      $0 = gensub(/(^[^#]*SSLCertificateKeyFile).*snakeoil.*/, "\\1 ####DATAROOT####/cert/key/####DOMAIN####.key", "g");
+
+      $0 = gensub(/(^[^#]*[Ee]rror[Ll]og).*'$name'/, "\\1 ${APACHE_LOG_DIR}/####NAME####", "g" );
+      $0 = gensub(/(^[^#]*[Cc]ustom[Ll]og).*'$name'(.*)/, "\\1 ${APACHE_LOG_DIR}/####NAME####\\2", "g" );
+ 
+      gsub("\\\\", "\\\\");
+      gsub("\"", "\\\"");
+      gsub("/", "\\/");
+      gsub("\t", "\\t");
+      gsub("\b", "\\b");
+      gsub("\f", "\\f");
+
+      printf("%s\\n", $0)
+    }'
+
+    conf=
+    if [ "$template" = "" ]; then
+    	conf="$(awk -v "template=$template" "$prog" "$file")"
+    fi
+    
+    documentroot="$(echo "$documentroot" | sed -e "s@$apachedatalocation/*@@")"
+    echo "$komma" ' [ "'"$name"'", "'"$enabled"'", "'"$domain"'", "'"$aliases"'", "'"$email"'", "'"$documentroot"'", "'"$conf"'", "'"$httpsonly"'", "" ]';
+    komma=","
+done
+
+echo ' ]'

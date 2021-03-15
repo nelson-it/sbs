@@ -1,0 +1,4 @@
+netconfigdir="$configdir/network"
+netplandir="/etc/netplan"
+cloudcfgdir="/etc/cloud/cloud.cfg.d"
+

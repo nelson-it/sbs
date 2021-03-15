@@ -1,0 +1,13 @@
+#!/bin/bash
+
+configdir=$projectroot/config
+datadir=$projectroot/data
+logid=sbs
+
+certbasedir="$projectroot/sbs/exec/shell/sbs/cert/"
+domainbasedir="$projectroot/sbs/exec/shell/sbs/domain/"
+netbasedir="$projectroot/sbs/exec/shell/sbs/network/"
+
+DBHOST="localhost"
+DBUSER="mne_system"
+DB="sbsdb"

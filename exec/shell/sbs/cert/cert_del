@@ -1,0 +1,24 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+case "$vadirInput_old" in
+    crt) dir="$certcertdir";;
+    key) dir="$certkeydir";;
+    csr) dir="$certcsrdir";;
+    ext) dir="$certextdir";;
+    *) exit 1;;
+esac
+
+file="$dir/$vafilenameInput_old";
+
+if [ -f "$file" ]; then
+	rm "$file" 2>/dev/null
+fi
+
+if [ "$vadirInput_old" == 'ext' ]; then
+	update-ca-certificates -f >&$logfile 2>&1
+fi
+
+exit 0

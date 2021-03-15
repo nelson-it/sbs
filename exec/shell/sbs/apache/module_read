@@ -1,0 +1,27 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+cols="name,enabled"
+labels="Name,enabled"
+json_writeheader "$cols" "$labels" "enabled:1";
+
+echo '"values" : [ '
+komma=
+IFS='\n' readarray -t mods < <(set +f; ls -1 $apacherootdir/mods-available | sed -e 's/\.[^.]*$//g' | sort -u)
+
+for mod in "${mods[@]}"
+do
+    enabled=false
+    if [ -f $apacherootdir/mods-enabled/$mod.load ]; then
+        enabled=true
+    fi
+    
+    echo "$komma" ' [ "'"$mod"'", "'"$enabled"'" ]';
+    komma=","
+done
+
+echo ' ]'
+
+  

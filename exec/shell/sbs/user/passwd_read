@@ -1,0 +1,10 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+vacols="sAMAccountName,password,password2";
+labels="Login,Password,Wiederhohlen"
+json_writeheader "$vacols" "$labels" "" "" "sAMAccountName:notempty,password:notempty";
+
+echo '  "values"  : [[ "'"$vasAMAccountNameInput_old"'", "'""'", "'""'"]]'

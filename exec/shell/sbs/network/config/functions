@@ -1,0 +1,5 @@
+. $(dirname $BASH_SOURCE)/config
+
+if [ ! -d "$netconfigdir" ]; then
+	mkdir -p "$netconfigdir";
+fi

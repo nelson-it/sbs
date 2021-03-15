@@ -1,0 +1,34 @@
+#!/bin/bash
+
+smbconf=$(findtemplate domain smb_standalone.conf)
+
+# -------------------------------------------
+# bereinigen
+# -------------------------------------------
+systemctl daemon-reload
+
+mne_error_ignore=1
+systemctl disable --now mne_sogo samba-ad-dc.service mne_samba-ad-dc.service named isc-dhcp-server isc-dhcp-server6 2>&$logfile 1>&2
+
+systemctl unmask smbd nmbd winbind systemd-resolved 2>&$logfile 1>&2
+systemctl enable smbd nmbd winbind systemd-resolved 2>&$logfile 1>&2
+
+systemctl daemon-reload
+mne_error_ignore=
+rm_config
+
+mkdir -p /var/log/samba 2>/dev/null
+mkdir -p /var/lib/samba/private 2>/dev/null
+mkdir -p /var/lib/samba/printer 2>/dev/null
+
+prog='/####DOMAIN####/  {   gsub(/####DOMAIN####/, "'"$vadomainInput"'" );  }
+      /####WORKGROUP####/ { gsub(/####WORKGROUP####/, "'"$vaworkgroupInput"'" ); }
+      /####DESCRIPTION####/ { gsub(/####DESCRIPTION####/,"'"$vadescriptionInput"'" ); }
+                          { print $0 }'
+
+savefile /etc/samba/smb.conf
+awk "$prog" $smbconf > /etc/samba/smb.conf
+
+systemctl daemon-reload
+systemctl restart smbd.service      2>&$logfile 1>&2
+systemctl restart nmbd.service      2>&$logfile 1>&2

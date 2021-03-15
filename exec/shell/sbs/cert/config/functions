@@ -1,0 +1,82 @@
+. $(dirname $BASH_SOURCE)/config
+
+if [ ! -d "$caconfigdir" ]; then
+	mkdir -p "$caconfigdir";
+fi
+
+function ca_checkpasswd()
+{
+   mne_error_ignore=1
+   echo "$1" | openssl rsa -passin stdin -in "$certcadir/ca.key" >/dev/null 2>/dev/null
+   if [ "$?" != "0" ]; then
+     echo "#mne_lang#Falsches Password#"
+     exit 1
+   fi
+   mne_error_ignore=
+}
+
+function ca_read()
+{
+  declare -A values=([emailAddress]="" [OU]="" [O]="" [L]="" [C]="" [ST]="" )
+
+  if [ -f "$certcadir/ca.crt" ]; then
+    vals=$(openssl x509 -noout -in "$certcadir/ca.crt" -subject | sed -e s'/^subject=//' -e 's/, */,/g' -e 's/ *= */=/g')
+    IFS=',' read -r -a arr <<< $vals
+    for i in "${arr[@]}"; do IFS='=' read -r -a a <<<$i; values[${a[0]}]=${a[1]}; done
+  fi
+
+  declare -p values | sed -e 's/^declare[^=]*=//'
+}
+
+# name
+function cert_mkkey()
+{
+  if [ ! -e "$certkeydir/$1.key" ]; then
+    openssl genrsa -out "$certkeydir/$1.key" 4096 >&$logfile 2>&1
+  fi
+  chmod 600 "$certkeydir/$1.key"
+}
+
+# name domain aliases
+function cert_mkcsr()
+{
+  eval "declare -A ca=$(ca_read)"
+  
+  rm -f "$certcsrdir/$1.csr"  2>&1 >/dev/null
+  rm -f "$certcertdir/$1.crt" 2>&1 >/dev/null
+
+  aliases=$(echo "$2 $3" | sed -e 's/ *$//')
+  echo $aliases | awk 'BEGIN { RS=" "; printf("subjectAltName = @alt_names\n[alt_names]\n") } { count++; printf("DNS.%d = %s\n", count, $0) }' > $(dirname $BASH_SOURCE)/multi.cnf
+
+  cat "$certbasedir/openssl.conf" "$(dirname $BASH_SOURCE)/multi.cnf" > "$(dirname $BASH_SOURCE)/sslconf.cnf"
+  openssl req -new -sha256 -key "$certkeydir/$1.key" -out "$certcsrdir/$1.csr" -config "$(dirname $BASH_SOURCE)/sslconf.cnf" -subj "/C=${ca[C]}/ST=${ca[ST]}/L=${ca[L]}/O=Site $1 : ${ca[O]}/OU=Websites : ${ca[O]}" >&$logfile 2>&1
+
+  rm -f "$(dirname $BASH_SOURCE)/sslconf.cnf"
+}
+
+# name passwd
+function cert_mkcrt()
+{
+openssl req -in "$certcsrdir/$1.csr" -noout -text | \
+  awk '/Subject Alternative Name/ { p=1; next; } { if ( p ) { gsub(" " , ""); printf("subjectAltName=%s\n", $0); exit } } ' > $(dirname $BASH_SOURCE)/multi.cnf
+
+echo "$2" | openssl x509 -req -days 365 -extfile $(dirname $BASH_SOURCE)/multi.cnf \
+		     -in "$certcsrdir/$1.csr" -CA $certcadir/ca.crt -CAkey $certcadir/ca.key -CAcreateserial -CAserial $certcadir/serial.seq -out "$certcertdir/$1.crt" -passin stdin  >&$logfile 2>&1
+
+if [ "$?" != "0" ]; then
+    rm -f "$certcertdir/$1.crt" 2>&$logfile >/dev/null
+else
+    chmod 644 "$certcertdir/$1.crt"
+fi   
+
+rm -f $(dirname $BASH_SOURCE)/multi.cnf
+
+}
+
+# name
+function cert_del()
+{
+    rm -f "$certcsrdir/$1.csr"  2>&$logfile >/dev/null
+    rm -f "$certcertdir/$1.crt" 2>&$logfile >/dev/null
+    rm -f "$certkeydir/$1.key"  2>&$logfile >/dev/null
+}

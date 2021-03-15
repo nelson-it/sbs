@@ -1,0 +1,43 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+filetype="$vadirInput"
+
+case "$vadirInput" in
+    csr) dir="$certcsrdir";;
+    ext) dir="$certextdir"; filetype="crt";;
+    *) exit 1;;
+esac
+
+ext=$(echo $(basename $vafilenameInput) | awk -F. '{ print $NF }')
+
+if [ "$ext" != "$filetype" ]; then
+	echo '#mne_lang#Falscher Dateityp#' >&2
+	exit 1;
+fi
+
+fileold="$dir/$vafilenameInput_old";
+file="$dir/$vafilenameInput";
+
+mv "$fileold" "$file";
+
+if [ "$vadataInput" != "" ]; then
+  echo "$vadataInput" | base64 --decode > $file
+fi
+
+if [ "$vadirInput" == 'ext' ]; then
+	mne_error_ignore=1
+    openssl x509 -text -noout -in $file >/dev/null 2>/dev/null
+    if [ "$?" != "0" ]; then
+    	echo "#mne_lang#Kein Zertifikat#" >&2
+    	rm $file
+    	exit 1
+    fi
+	mne_error_ignore=0
+   
+	update-ca-certificates -f >&$logfile 2>&1
+fi
+
+exit 0

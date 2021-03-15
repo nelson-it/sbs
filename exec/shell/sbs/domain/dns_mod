@@ -1,0 +1,36 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+mne_need_error
+systemctl is-enabled mne_samba-ad-dc.service 2>&1 >/dev/null
+if [ "$?" = "0" ]; then
+
+  info=$(samba-tool domain info 127.0.0.1)
+  domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+  check_dnspasswd $domain
+
+  mne_need_error
+  samba-tool dns delete $(hostname) $domain "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" -k yes >&$logfile 2>&1
+  if [ "$?" != "0" ]; then
+    echo '#mne_lang# Kann Addresse nicht finden#'
+  fi    
+
+  mne_need_error
+  samba-tool dns add $(hostname) $domain "$vanameInput" "$vadns_recordInput" "$vaaddressInput" -k yes >&$logfile 2>&1
+  if [ "$?" != "0" ]; then
+    echo '#mne_lang# Kann Addresse nicht hinzufügen#'
+    exit 1;
+  fi    
+
+  if [ "$vadns_recordInput" != "$vadns_recordInput" ]; then
+  	dhcp_fix_del "$vanameInput_old" "$vadns_recordInput_old"
+  fi
+  dhcp_fix_mod "$vanameInput_old" "$vanameInput" "$vaaddressInput"  "$vamacInput" "$vafixInput" "$vacommentInput" "$vadns_recordInput"
+  
+  systemctl restart isc-dhcp-server
+  systemctl restart isc-dhcp-server6
+fi
+
+exit 0

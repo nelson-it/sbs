@@ -1,0 +1,11 @@
+domainconfigdir="$configdir/domain"
+domainrootdir="/etc/samba"
+
+domainconfigfile="$domainrootdir/smb.conf"
+domainkerberosfile="/etc/krb5.conf"
+
+domainforwarderfile="/etc/bind/named.conf.options.forwarders"
+domaindhcpfile="/etc/dhcp/dhcpd.conf"
+domaindhcp6file="/etc/dhcp/dhcpd6.conf"
+
+domainbindroot="/etc/bind"

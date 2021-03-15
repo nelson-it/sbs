@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+vacols="port,sport,readtime";
+labels="Port,Secure Port,Lesezeit";
+json_writeheader "$vacols" "$labels" "readtime:1000" "";
+
+port=$(get_port)
+sport=$(get_sport)
+	
+echo '  "values"  : ['
+json_writedata "$port" "$sport" "$acttime"
+echo ']'
+
+exit 0

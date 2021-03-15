@@ -1,0 +1,4 @@
+.weblet-sbs-apache-sitetable #confInput:focus {
+    max-height: 100ex;
+    max-width: 80em;
+}

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+portfile=$(findtemplate apache ports.conf)
+
+prog='/####HTTPPORT####/  { gsub(/####HTTPPORT####/, "'$vaportInput'");  }
+      /####HTTPSPORT####/ { gsub(/####HTTPSPORT####/,"'$vasportInput'"); }
+                          { print $0 }'
+
+savefile $apacherootdir/ports.conf
+awk "$prog" "$portfile" > $apacherootdir/ports.conf
+
+$apacherestart 1>&$logfile 2>&1
+
+exit 0

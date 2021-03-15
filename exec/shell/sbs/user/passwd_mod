@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+samba-tool user setpassword "$vasAMAccountNameInput_old" --newpassword="$vapasswordInput" >&$logfile 2>&1

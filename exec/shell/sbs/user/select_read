@@ -1,0 +1,20 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+ids="fullname,sAMAccountName";
+labels="Name,Login";
+json_writeheader "$ids" "$labels";
+
+
+eval $(read_users)
+
+
+echo '  "values"  : ['
+( for i in "${!login[@]}"; do echo $i; done ) | sort | \
+  while read index
+  do
+    json_writedata "${fullname[$index]}" "${login[$index]}"
+  done
+echo ']'
