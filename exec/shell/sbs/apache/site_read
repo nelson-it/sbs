@@ -5,14 +5,14 @@
 
 cols="name,enabled,domain,aliases,email,documentroot,conf,httpsonly,renewcert"
 labels="Name,enabled,Domain,Aliases,Email,Documentroot,Konfiguration,httpsonly,Zertifikat erneuern"
-json_writeheader "$cols" "$labels" "readtime:1000" "" "domain:notempty";
+json_writeheader "$cols" "$labels" "readtime:1000" "" "name:notempty,domain:notempty";
 
 port=$(get_port)
 sport=$(get_sport)
 
 echo '"values" : [ '
 komma=
-IFS='\n' readarray -t sites < <(set +f; cd $apacherootdir/sites-available; ls -1)
+IFS='\n' readarray -t sites < <(set +f; cd $apacherootdir/sites-available; ls -1 *.conf )
 
 for site in "${sites[@]}"
 do
@@ -53,7 +53,7 @@ do
      dr=$(echo "$documentroot" | sed -e 's/\//\\\//g')
    
    prog='{
-      $0 = gensub(/(^[^#]*Directory).*'$dr'[ \t]*>.*/,  "\\1 ####DOCUMENTROOT####>", "g" );
+      $0 = gensub(/(^[^#]*Directory)[ \t]+'$dr'[ \t]*>.*/,  "\\1 ####DOCUMENTROOT####>", "g" );
 
       $0 = gensub(/(.*VirtualHost.*\*:)$port.*>/, "\\1####HTTPPORT####>", "g");
       $0 = gensub(/(.*VirtualHost.*\*:)$sport.*>/, "\\1####HTTPSPORT####>", "g");

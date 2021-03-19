@@ -3,11 +3,14 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-vacols="country,state,city,org,orgunit,email,passwd,overwrite"
-labels="Land,Region,Stadt,Orgnisation,Org. Einheit,Email,Password,Überschreiben";
+vacols="country,state,city,org,orgunit,email,passwd,overwrite,rmkey"
+labels="Land,Region,Stadt,Orgnisation,Org. Einheit,Email,Password,Überschreiben,Schlüssel löschen";
 json_writeheader "$vacols" "$labels" "" "" "passwd:notempty"
 
 eval "declare -A values=$(ca_read)"
-echo '  "values"  : [[ "'${values[C]}'","'${values[ST]}'","'${values[L]}'","'${values[O]}'","'${values[OU]}'","'${values[emailAddress]}'","","" ]] '
+
+echo '  "values"  : ['
+json_writedata "${values[C]}" "${values[ST]}" "${values[L]}" "${values[O]}" "${values[OU]}" "${values[emailAddress]}" "" "" ""
+echo ']'
 
 exit 0

@@ -4,6 +4,11 @@
 . $certbasedir/config/functions
 . $(dirname $BASH_SOURCE)/config/functions
 
+if [ "$vanameInput_old" = "000-default-ssl" ] || [ "$vanameInput_old" = "000-default" ]; then
+  echo "#mne_lang#Default Seiten können nicht gelöscht werden#" >&2
+  exit 1
+fi
+
 file="$apacherootdir/sites-available/$vanameInput_old.conf"
 documentroot=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /documentroot/ { print $2; exit; }' "$file")
 

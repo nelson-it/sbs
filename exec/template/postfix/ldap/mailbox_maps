@@ -1,0 +1,11 @@
+server_host = ldaps://localhost
+version         = 3
+bind            = yes
+start_tls       = no
+bind_dn = ####BINDDN####
+bind_pw = ####BINDPASSWORD####
+search_base = cn=users,####DOMAINDN####
+scope           = sub
+query_filter    = (&(userPrincipalName=%s)(objectClass=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))
+result_attribute = cn
+

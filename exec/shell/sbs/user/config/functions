@@ -50,6 +50,18 @@ function read_groups()
   ldbsearch -H /var/lib/samba/private/sam.ldb "$search" | awk "$prog"
 }
 
+# user
+function read_emails()
+{
+    echo "declare -A emails;"
+    prog='/# record/       { start=1; sAMAccountName=""; description=""; }
+          /^$/             { start=0; }
+          /^otherMailbox:/ { if ( start ) email = gensub(/^.*: */, "", 1); printf("emails[\"%s\"]=\"%s\";\n", email, email ); }
+         '
+  
+  ldbsearch -H /var/lib/samba/private/sam.ldb "(sAMAccountName=$1)" | awk "$prog"
+}
+
 # type group
 function read_ldap()
 {
@@ -92,7 +104,6 @@ do
     fi	
 done )
 
-echo "$modify" >&$logfile
 if [ "$modify" != "" ]; then
   echo -e "dn: $1\nchangetype: modify\n$modify" | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$4" -w "$3" -x >&$logfile 2>&1 
 fi

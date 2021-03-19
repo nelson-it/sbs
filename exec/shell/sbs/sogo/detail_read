@@ -3,9 +3,9 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-cols=certok,domainok,passwd,mailcanonical,mailrelay,mailrelayuser,mailrelaypassword
-labels="Zertifikate,Domain,CA Password,Name als Maildaddresse,Mail Relay Sever, Mail Relay User, Mail Relay Password";
-json_writeheader "$cols" "$labels" "certok:bool,domainok:bool,mailcanonical:bool" "" "passwd:notempty";
+cols=certok,domainok,passwd,mailrelay,mailrelayuser,mailrelaypassword
+labels="Zertifikate,Domain,CA Password,Mail Relay Sever, Mail Relay User, Mail Relay Password";
+json_writeheader "$cols" "$labels" "certok:bool,domainok:bool" "" "passwd:notempty";
 
 certok=
 if [ -f  $certcadir/ca.crt ]; then
@@ -20,10 +20,10 @@ if [ "$?" = "0" ]; then
 fi
 
 passwd=
-mailcanonical=
-mailrelay=
-mailrelayuser=
 mailrelaypassword=
 
-echo '  "values"  : [ ["'$certok'", "'$domainok'", "'$passwd'", "'$mailcanonical'", "'$mailrelay'", "'$mailrelayuser'", "'$mailrelaypassword'" ] ] '
+eval $(cat /etc/postfix/sasl/passwd | awk '/^$|^#/{ next } { printf("mailrelay=\"%s\";mailrelayuser=\"%s\"", $1, gensub(/:.*/,"",1,$2)) }')
+echo '  "values"  : ['
+json_writedata "$certok" "$domainok" "$passwd" "$mailrelay" "$mailrelayuser" "$mailrelaypassword"
+echo ' ] '
 exit 0

@@ -1,4 +1,75 @@
 . $certbasedir/config/functions
-#. $domainbasedir/config/functions
+. $domainbasedir/config/functions
+. $apachebasedir/config/functions
 
 . $(dirname $BASH_SOURCE)/config
+
+
+# certcertdir certkeydir domaindn domain binddn bindpassword mailrelay mailrelayuser mailrelaypassword
+function sogo_confprog()
+{
+  echo '/####CERTCERTDIR####/     { gsub(/####CERTCERTDIR####/,"'$1'"); }
+        /####CERTKEYDIR####/      { gsub(/####CERTKEYDIR####/,"'$2'"); }
+        /####HOST####/            { gsub(/####HOST####/,"'$(hostname)'"); }
+        /####DOMAINDN####/        { gsub(/####DOMAINDN####/,"'$3'"); }
+        /####DOMAIN####/          { gsub(/####DOMAIN####/,"'$4'"); }
+        /####BINDDN####/          { gsub(/####BINDDN####/,"'$5'");  }      
+        /####BINDPASSWORD####/    { gsub(/####BINDPASSWORD####/,"'$6'");  }      
+        /####MAILRELAY####/       { gsub(/####MAILRELAY####/,"'$7'"); }
+        /####MAILRELAYUSER####/   { gsub(/####MAILRELAYUSER####/,"'$8'"); }
+        /####MAILRELAYPASSWD####/ { gsub(/####MAILRELAYPASSWD####/,"'$9'"); }
+                                  { print $0 }'
+
+}
+
+# prog
+function write_postfix()
+{
+    for dir in sasl ldap
+    do
+      mkdir -p           $postfixconf/$dir >&$logfile 2>&1
+      chown root:postfix $postfixconf/$dir >&$logfile 2>&1
+      chmod 750          $postfixconf/$dir >&$logfile 2>&1
+      chmod g+s          $postfixconf/$dir >&$logfile 2>&1
+    done
+
+    for file in main.cf master.cf ldap/aliases ldap/canonical ldap/mailbox_maps ldap/uid_maps sasl/passwd 
+    do
+        template="$(findtemplate postfix $file)"
+        savefile $postfixconf/$file
+        awk "$1" < $template > $postfixconf/$file
+        chgrp postfix $postfixconf/$file
+        chmod 640 $postfixconf/$file
+    done
+
+    postmap $postfixconf/sasl/passwd  >&$logfile 2>&1
+    systemctl restart postfix.service
+}
+
+# prog
+function write_dovecot()
+{
+    for file in dovecot-ldap.conf.ext conf.d/10-auth.conf  conf.d/10-master.conf  conf.d/10-ssl.conf  conf.d/15-mailboxes.conf
+    do
+        template="$(findtemplate dovecot $file)"
+        savefile $dovecotconf/$file
+        awk "$1" < $template > $dovecotconf/$file
+        chgrp dovecot $dovecotconf/$file
+        chmod 640 $dovecotconf/$file
+    done
+
+    systemctl restart dovecot.service
+}
+
+function write_apache()
+{
+port=$(get_port)
+sport=$(get_sport)
+
+template="$(findtemplate sogo site.conf)"
+site_writeconf "$(cat $template)" "$port" "$sport" "sogo" "sogo" "sogo.$1" "" "" "$datadir"
+
+a2ensite sogo >&$logfile 2>&1
+systemctl reload apache2 >&$logfile 2>&1
+
+}

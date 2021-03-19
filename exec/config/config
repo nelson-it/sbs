@@ -7,6 +7,7 @@ logid=sbs
 certbasedir="$projectroot/sbs/exec/shell/sbs/cert/"
 domainbasedir="$projectroot/sbs/exec/shell/sbs/domain/"
 netbasedir="$projectroot/sbs/exec/shell/sbs/network/"
+apachebasedir="$projectroot/sbs/exec/shell/sbs/apache/"
 
 DBHOST="localhost"
 DBUSER="mne_system"

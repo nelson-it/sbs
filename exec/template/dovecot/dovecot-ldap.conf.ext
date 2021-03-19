@@ -1,0 +1,18 @@
+#uris = ldaps://localhost
+hosts = localhost
+tls = yes
+dn = ####BINDDN####
+dnpass = ####BINDPASSWORD####
+
+auth_bind = yes
+auth_bind_userdn = cn=%u,cn=users,dc=test,dc=puran2,dc=ch
+
+base = cn=users,####DOMAINDN####
+scope = subtree
+
+pass_filter = (sAMAccountName=%u)
+user_filter = (sAMAccountName=%u)
+
+user_attrs = =home=/var/dovecot/%Lu,uidNumber=uid,=gid=8
+iterate_attrs = sAMAccountName=user
+iterate_filter = (objectClass=person)

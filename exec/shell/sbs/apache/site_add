@@ -7,11 +7,16 @@
 httpfile=$(findtemplate apache site_http.conf)
 httpsfile=$(findtemplate apache site_https.conf)
 
-ca_checkpasswd "$vapasswd";
-
 if [ "$vadocumentrootInput" = "" ]; then vadocumentrootInput="$vadomainInput"; fi
 if [ "$vanameInput" = "" ];         then vanameInput="mne_$vadomainInput";     fi
     
+if [ -f "$apacherootdir/sites-available/$vanameInput.conf" ];then
+    echo "#mne_lang#Seite exitiert schon#" >&2
+    exit 1
+fi
+
+check_capasswd "$vapasswd";
+
 if [ ${vadocumentrootInput:0:1} != "/" ]; then vadocumentrootInput="$apachedatalocation/$vadocumentrootInput"; fi
 
 mkdir -p "$vadocumentrootInput";

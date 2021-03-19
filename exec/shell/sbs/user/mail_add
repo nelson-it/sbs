@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+domain=$(samba-tool domain info $(hostname) | awk '/^Domain/ { print $3 }')
+domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
+check_password "$vapasswd" "$domain"
+
+eval $(read_ldap user "$vasAMAccountNameInput")
+if [ "$sAMAccountName" = "" ]; then
+	echo "#mne_lang#Benutzer nicht gefunden#" >&2
+	exit 1
+fi
+
+echo -e "dn: $dn\nchangetype: modify\nadd: otherMailbox\notherMailbox: $vaotherMailboxInput\n" \
+  | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&1 

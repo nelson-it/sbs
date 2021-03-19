@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+cols="otherMailbox";
+labels="Email Addresse";
+json_writeheader "$vacols" "$labels" "" "" "otherMailbox:email";
+
+eval $(read_emails "$vasAMAccountNameInput_old")
+
+echo '  "values"  : ['
+( for i in "${!emails[@]}"; do echo $i; done ) | sort | \
+  while read i
+  do
+	json_writedata "$i"
+  done
+echo ']'

@@ -8,6 +8,7 @@ case "$vadirInput_old" in
     key) dir="$certkeydir";;
     csr) dir="$certcsrdir";;
     ext) dir="$certextdir";;
+     ca) dir="$certcadir";;
     *) exit 1;;
 esac
 

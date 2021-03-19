@@ -45,6 +45,22 @@ class MneSbsCertDetail extends MneDbView
   getViewPath() { return this.getView(import.meta.url) }
   //getCssPath()  { return (( super.getCssPath() ) ?  super.getCssPath() + ',' : '') + this.getCss(import.meta.url); }
 
+  reset()
+  {
+    super.reset();
+    this.obj.mkbuttons.push( { id : 'download', value : MneText.getText('#mne_lang#Download CA') } );
+  }
+  
+  async download()
+  {
+    var hiddenElement = document.createElement('a');
+
+    hiddenElement.href = 'sysexec/sbs/cert/cert_download/ca.crt?dirInput.old=ca';
+    hiddenElement.target = '_blank';
+    hiddenElement.click();
+
+    return false;
+  }
 }
 
 export default MneSbsCertDetail;

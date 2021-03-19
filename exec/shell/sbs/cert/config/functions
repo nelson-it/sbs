@@ -4,12 +4,12 @@ if [ ! -d "$caconfigdir" ]; then
 	mkdir -p "$caconfigdir";
 fi
 
-function ca_checkpasswd()
+function check_capasswd()
 {
    mne_error_ignore=1
    echo "$1" | openssl rsa -passin stdin -in "$certcadir/ca.key" >/dev/null 2>/dev/null
    if [ "$?" != "0" ]; then
-     echo "#mne_lang#Falsches Password#"
+     echo "#mne_lang#Falsches Password#" >&2
      exit 1
    fi
    mne_error_ignore=

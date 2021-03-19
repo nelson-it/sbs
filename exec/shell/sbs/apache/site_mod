@@ -1,16 +1,34 @@
 #!/bin/bash
 
 . sbs/exec/config/allg
+
 . $certbasedir/config/functions
 . $(dirname $BASH_SOURCE)/config/functions
 
 httpfile=$(findtemplate apache site_http.conf)
 httpsfile=$(findtemplate apache site_https.conf)
 
-if [ "$varenewcertInput" != "0" ]; then ca_checkpasswd "$vapasswd"; fi
+if [ "$varenewcertInput" != "0" ]; then check_capasswd "$vapasswd"; fi
 if [ "$vadocumentrootInput" = "" ]; then vadocumentrootInput="$vadomainInput"; fi
-if [ "$vanameInput" = "" ];         then vanameInput="mne_$vadomainInput";     fi
-    
+
+if [ "$vanameInput" = "000-default-ssl" ] || [ "$vanameInput" = "000-default" ]; then
+    vadomainInput="$(hostname)";
+    mne_need_error
+    systemctl is-enabled mne_samba-ad-dc.service >/dev/null 2>&1
+    if [ "$?" = "0" ]; then
+       domain=$(samba-tool domain info 127.0.0.1 | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+       vaaliasesInput="$(hostname).$domain $domain"
+    else
+       vaaliasesInput=
+    fi
+fi
+
+if [ "$vanameInput_old" = "000-default-ssl" ] || [ "$vanameInput_old" = "000-default" ]; then
+  vanameInput="$vanameInput_old";
+fi
+
+if [ "$vanameInput" = "" ];  then vanameInput="mne_$vadomainInput";     fi
+
 if [ ${vadocumentrootInput:0:1} != "/" ]; then vadocumentrootInput="$apachedatalocation/$vadocumentrootInput"; fi
 
 file="$apacherootdir/sites-available/$vanameInput_old.conf"
@@ -38,9 +56,15 @@ sport=$(get_sport)
 site_writeconf "$vaconfInput" "$port" "$sport" "$vanameInput" "$vadomainInput" "$vaaliasesInput" "$vaemailInput" "$vadocumentrootInput" "$datadir"
 
 if [ "$varenewcertInput" != "0" ]; then
-  cert_mkkey "$vanameInput"
-  cert_mkcsr "$vanameInput" "$vadomainInput" "$vaaliasesInput"
-  cert_mkcrt "$vanameInput" "$vapasswd"
+
+  name="$vanameInput"
+  if [ "$vanameInput" = "000-default-ssl" ] || [ "$vanameInput" = "000-default" ]; then
+    name="$(hostname)"
+  fi
+  
+  cert_mkkey "$name"
+  cert_mkcsr "$name" "$vadomainInput" "$vaaliasesInput"
+  cert_mkcrt "$name" "$vapasswd"
 fi
 
 if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then

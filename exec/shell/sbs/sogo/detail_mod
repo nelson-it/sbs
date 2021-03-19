@@ -1,0 +1,140 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+if [ ! -f  $certcadir/ca.crt ]; then
+    echo "#mne_lang#Zertifikate nicht vorhanden#" >&2
+    exit 1
+fi
+
+mne_need_error
+systemctl is-enabled mne_samba-ad-dc.service 2>&1 >/dev/null
+if [ "$?" != "0" ]; then
+    echo "#mne_lang#AD Domain ist nicht eingerichtet#" >&2
+    exit 1
+fi
+
+if [ "$vamailrelayInput" != "" ] && [ "$vamailrelayuserInput" != "" ]; then
+	if [ "$vamailrelaypasswordInput" = "" ]; then
+	  vamailrelaypasswordInput="$(cat /etc/postfix/sasl/passwd | awk '/^$|^#/{ next } /^'$vamailrelayInput'/{ printf("%s", gensub(/^.*:/,"",1,$2)) }')"
+	  if [ "$vamailrelaypasswordInput" = "" ]; then
+        echo "#mne_lang#Bitte Mail Relay Password eingeben#" >&2
+        exit 2
+      fi
+      echo  "#mne_lang#Benutze altes Mail Relay Password#" >&2
+   fi
+fi   
+
+# ==================================================================
+# Domain ermitteln
+# ==================================================================
+hostname=$(hostname)
+domain=$(samba-tool domain info "$hostname" | awk '/^Domain/ { print $3 }')
+domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
+
+check_capasswd "$vapasswdInput"
+check_dnspasswd "$domain"
+
+# ==================================================================
+# Systembenutzer erzeugen
+# ==================================================================
+sogouser="sogo$hostname"
+bindpassword=$(dd if=/dev/urandom bs=2048 count=1 2>/dev/null |tr -dc "a-zA-Z0-9"|fold -w 64 |head -1)
+
+mne_need_error
+samba-tool user list | egrep "^$sogouser\$" >/dev/null
+if [ "$errorresult" != "0" ]; then
+  samba-tool user create "$sogouser" --random-password $option 2>&1 >&$logfile
+  samba-tool user setexpiry --noexpiry "$sogouser" 2>&1 >&$logfile
+fi 
+
+samba-tool user setpassword "$sogouser" --newpassword="$bindpassword" 2>&1 >&$logfile
+
+# ==================================================================
+# DNS Alias einrichten
+# ==================================================================
+mne_error_ignore=1
+samba-tool dns add "$hostname" $domain sogo CNAME "$hostname" -k yes >&$logfile 2>&1
+mne_error_ignore=
+
+# ==================================================================
+# Zertifikate in Ordnung bringen
+# ==================================================================
+cert_mkkey "$hostname"
+cert_mkcsr "$hostname" "$hostname" "$hostname.$domain $domain"
+cert_mkcrt "$hostname" "$vapasswdInput"
+
+cert_mkkey "sogo"
+cert_mkcsr "sogo" "sogo" "sogo.$domain"
+cert_mkcrt "sogo" "$vapasswdInput"
+
+
+sogoprog=$(sogo_confprog "$certcertdir" "$certkeydir" "$domaindn" "$domain" "cn=$sogouser,cn=users,$domaindn" "$bindpassword" "$vamailrelayInput" "$vamailrelayuserInput" "$vamailrelaypasswordInput")
+
+# ==================================================================
+# Datenbank und Datenbankbenutzer
+# ==================================================================
+pg_addaccess "local.*$DB.*postgres"       "local   $DB       postgres                         trust"
+pg_addaccess "host.*$sogouser.*127.0.0.1" "host    $DB       $sogouser          127.0.0.1/32  trust"
+
+pg_adduser $sogouser
+echo "ALTER ROLE $sogouser SET search_path TO ext_sogo;"              | psql -U postgres $DB >&$logfile 2>&1
+echo "CREATE SCHEMA ext_sogo AUTHORIZATION $sogouser;"                | psql -U postgres $DB >&$logfile 2>&1
+echo "ALTER  SCHEMA ext_sogo OWNER TO $sogouser;"                     | psql -U postgres $DB >&$logfile 2>&1
+echo "GRANT SELECT ON TABLE mne_system.mailaliaspublic TO $sogouser;" | psql -U postgres $DB >&$logfile 2>&1
+
+cmd=
+for tbl in $(psql -qAt -c "select tablename from pg_tables where schemaname = 'ext_sogo';" -U postgres $DB)
+do
+  cmd="$cmd""ALTER TABLE ext_sogo.\"$tbl\" owner to $sogouser;"
+done
+
+for tbl in $(psql -qAt -c "select sequence_name from information_schema.sequences where sequence_schema = 'ext_sogo';" -U postgres $DB)
+do
+  cmd="$cmd""ALTER SEQUENCE ext_sogo.\"$tbl\" owner to $sogouser;"
+done
+
+for tbl in $(psql -qAt -c "select table_name from information_schema.views where table_schema = 'ext_sogo';" -U postgres $DB)
+do
+  cmd="$cmd""ALTER VIEW ext_sogo.\"$tbl\" owner to $sogouser;"
+done
+
+echo "$cmd" | psql -U postgres $DB >&$logfile 2>&1
+
+# ==================================================================
+# Conf File
+# ==================================================================
+prog='/####BINDPASSWORD####/ { gsub(/####BINDPASSWORD####/, "'$bindpassword'");  }
+      /####BINDUSER####/     { gsub(/####BINDUSER####/,"'$sogouser'"); }
+      /####DOMAIN####/       { gsub(/####DOMAIN####/,"'$domain'"); }
+      /####DOMAINDN####/     { gsub(/####DOMAINDN####/,"'$domaindn'"); }
+      /####DATABASE####/     { gsub(/####DATABASE####/,"'$DB'"); }
+      /####EMAIL####/        { gsub(/####EMAIL####/,"'$sogouser'@'$domain'"); }
+                             { print $0 }'
+
+mkdir -p        /var/spool/sogo >&$logfile 2>&1
+chown www-data  /var/spool/sogo >&$logfile 2>&1
+chmod 700       /var/spool/sogo >&$logfile 2>&1
+
+sogoconf="$(findtemplate sogo sogo.conf)"
+mkdir -p /etc/sogo 1>&$logfile 2>&1
+savefile /etc/sogo/sogo.conf
+awk "$prog" < $sogoconf > /etc/sogo/sogo.conf
+
+mkdir -p /var/log/sogo >&$logfile 2>&1
+chown www-data:www-data /var/log/sogo
+
+systemctl enable mne_sogo.service 1>&$logfile 2>&1
+systemctl daemon-reload
+systemctl restart mne_sogo.service
+
+# ==================================================================
+# Postfix, Dovecot, Apache
+# ==================================================================
+
+write_postfix "$sogoprog"
+write_dovecot "$sogoprog"
+write_apache  "$domain"
+
+exit 0

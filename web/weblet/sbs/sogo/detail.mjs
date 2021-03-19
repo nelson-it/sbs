@@ -24,6 +24,7 @@ class MneSbsSogoDetail extends MneDbView
     var ivalues = 
     {
       url           : 'sysexec/sbs/sogo/detail_read',
+      modurl        : 'sysexec/sbs/sogo/detail_mod',
 
       //okids  : [''], setzen wenn ergebnis nicht showid ist
 
