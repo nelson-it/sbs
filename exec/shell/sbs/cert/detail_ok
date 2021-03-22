@@ -45,7 +45,7 @@ if [ -f $certcadir/ca.crt ] && [ -f $certcadir/ca.key ]; then
             exit 0;
         fi
        
-        echo "#mne_lang#CA exitiert bereits#"; >&2
+        echo "#mne_lang#CA exitiert bereits#" >&2
         exit 1;
     else
     	mne_error_ignore=1

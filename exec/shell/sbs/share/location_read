@@ -1,0 +1,41 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+vacols="action,item,menuid,typ,pos,folder";
+labels="Aktion,Item,Menuid,Typ,Position,Ordner";
+json_writeheader "$vacols" "$labels";
+
+IFS=',' read -r -a wcol <<< "$vawcol"
+IFS=',' read -r -a wval <<< "$vawval"
+
+if [ "${#wcol[@]}" = "2" ]; then
+	searchtype="-type "
+	if [ "${wval[0]}" = "" ]; then
+		searchtype="$searchtype d"
+	else 
+		searchtype="$searchtype f"
+    fi
+fi
+
+eval $(read_dir "${wval[-1]}" "$searchtype" )
+
+echo '  "values"  : ['
+( for i in "${!files[@]}"; do echo ${files[$i]}; done ) | sort | \
+  while read index
+  do
+  	if [ "${filetype[$index]}" = "d" ]; then
+  		typ=''
+  		action='{ "action": "submenu", "parameter" : [ "", "", { "menuid" : "'${wval[-1]}/$index'" } ] }'
+  	elif [ "${filetype[$index]}" = "f" ]; then
+  		typ='leaf'
+  		action='{ "action" : "show", "parameter" : [ "", "", { "parentid" : "'${wval[-1]}'", "menuid" : "'${wval[-1]}/$index'" } ] }'
+    else
+    	action=
+    fi
+    if [ "$action" != "" ]; then
+    	json_writedata "$action" "$index" "${wval[-1]}/$index" "$typ" "$index" "${wval[-1]}/$index"
+    fi
+  done
+echo ']'

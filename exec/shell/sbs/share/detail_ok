@@ -1,0 +1,38 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+domaintype=$(domain_type)
+
+# ==================================================================
+# Domain ermitteln
+# ==================================================================
+if [ "$domaintype" = "primary" ]; then
+  hostname=$(hostname)
+  domain=$(samba-tool domain info "$hostname" | awk '/^Domain/ { print $3 }')
+  domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
+
+  # ==================================================================
+  # Systembenutzer erzeugen
+  # ==================================================================
+  apacheuser="apache$(hostname)"
+
+  mne_need_error 2
+  samba-tool user list | egrep "^$apacheuser\$" >/dev/null
+  if [ "$?" != "0" ]; then
+    bindpassword=$(dd if=/dev/urandom bs=2048 count=1 2>/dev/null |tr -dc "a-zA-Z0-9"|fold -w 64 |head -1)
+    echo "$bindpassword" > "$shareconfigdir/bindpassword"
+    chmod 600 "$shareconfigdir/bindpassword"
+    samba-tool user create "$apacheuser" --random-password $option 2>&1 >&$logfile
+    samba-tool user setexpiry --noexpiry "$apacheuser" 2>&1 >&$logfile
+    samba-tool user setpassword "$apacheuser" --newpassword="$bindpassword" 2>&1 >&$logfile
+  else
+    bindpassword=$(cat $shareconfigdir/bindpassword)
+  fi 
+fi
+
+write_samba  "$domaintype" "$vashareInput_old" "$vashareInput" "$valocationInput" "$vadescriptionInput" "$vardonlyInput" "" ""
+write_apache "$domaintype" "$domain" "$domaindn" "$bindpassword" "$vashareInput_old" "$vashareInput" "$valocationInput" "$vadescriptionInput" "$vardonlyInput"
+
+    

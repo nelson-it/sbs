@@ -1,0 +1,148 @@
+. $domainbasedir/config/config
+. $apachebasedir/config/config
+
+. $(dirname $BASH_SOURCE)/config
+
+if [ ! -d "$shareconfigdir" ]; then
+	mkdir -p "$shareconfigdir";
+fi
+
+function domain_type()
+{
+  mne_need_error
+  systemctl is-enabled mne_samba-ad-dc.service 2>&1 >/dev/null
+  if [ "$?" = "0" ]; then echo "primary"; else echo "standalone"; fi
+}
+
+function read_shares()
+{
+    echo "declare -A shares;"
+    prog='BEGIN        { share=""; description=""}
+           /\[.*\]/    { if ( share != "" ) { printf("shares[\"%s\"]=\"%s\";", share, description); }
+                         sub(/^.*\[/, "")
+                         sub(/\].*$/, "")
+                         share = $0
+                         description = ""
+                        }
+          /comment/   { description = gensub(/^.*=[ \t]*/, "", 1 ); }
+          END         { if ( share != "" ) { printf("shares[\"%s\"]=\"%s\";", share, description); } }
+         '
+    awk "$prog" < "$domainrootdir/shares.conf"
+    
+}
+
+# share
+function read_share()
+{
+    local prog='/\[.*\]/   { start = 0 }
+                /\['$1'\]/ { start = 1 ; printf ( "share=\"'$1'\";") }
+               /read only/ { if ( start ) printf ("readonly=\"%s\";", ( $NF != "no" ) ? "true" : "false" ) }
+               /path/      { path = gensub(/^.*=[ \t]*/, "", 1 ); sub(/'${datadir//\//\\/}'\/*/, "", path ); if ( start) printf ("location=\"%s\";", path) }
+               /comment/   { description = gensub(/^.*=[ \t]*/, "", 1 ); if ( start) printf ("description=\"%s\";", description) }
+         '
+    awk "$prog" < "$domainrootdir/shares.conf"
+    
+}
+
+# dirname typ
+function read_dir()
+{
+    echo 'declare -a files;'
+    echo 'declare -A accesstime;'
+    echo 'declare -A changetime;'
+    echo 'declare -A filetype;'
+    echo 'declare -A filesize;'
+    
+   find -L $datadir/$1 $2 -mindepth 1 -maxdepth 1 -printf 'files[${#files[@]}]="%f";accesstime["%f"]="%As";changetime["%f"]="%Cs";filetype["%f"]="%y";filesize["%f"]="%s"\n'
+}
+
+#domaintype share_old share location description readonly validuser rduser
+function write_samba()
+{
+    local template="$(findtemplate share samba_$1.conf)"
+    local rdonly="no"
+    if [ "$6" = "1" ]; then rdonly="yes"; fi
+    
+    local prog='/####RELEASENAME####/ { gsub(/####RELEASENAME####/,"'$3'"); }
+                /####FOLDERNAME####/  { gsub(/####FOLDERNAME####/,"'$datadir$4'");  }
+                /####DESCRIPTION####/ { gsub(/####DESCRIPTION####/,"'$5'"); }
+                /####READONLY####/    { gsub(/####READONLY####/,"'$rdonly'");    }
+                /####VALIDUSER####/   { gsub(/####VALIDUSER####/,"'$7'");   }
+                /####RDUSER####/      { gsub(/####RDUSER####/,"'$8'");      }
+                                      { print $0 }'
+    
+    local share="$(awk "$prog" < $template )"
+    
+    prog='/\[.*\]/ { if ( found == 1 ) found = 0 } /\['$2'\]/ { found = 1;} { if ( found != 1 ) print $0 }'
+    savefile "$domainrootdir/shares.conf"
+    awk "$prog" < $savedfile > "$domainrootdir/shares.conf"
+    
+    if [ "$3" != "" ]; then
+      echo "$share" >>  "$domainrootdir/shares.conf"
+    fi
+}
+
+#domaintype domain domaindn bindpassword share_old share location description readonly validuser rduser
+function write_apache()
+{
+    if [ "$domaintype" != "primary" ]; then
+      echo "#mne_lang#Webdav Shares nur mit Domain möglich" >&2
+      return;
+    fi
+    
+    local template="$(findtemplate share webdav.conf)"
+    local oldname="mne_webdav_$5.conf"
+    local confname="mne_webdav_$6.conf"
+    
+    local groupname="Mneshare $(Tolower $hostname) $(Tolower $6)"
+    local groupnameread="$groupname Read"
+    
+    if [ "$9" = "1" ]; then groupname="$groupname Disabled"; fi
+    
+    local prog='/####RELEASENAME####/   { gsub(/####RELEASENAME####/,"'$6'"); }
+                /####FOLDERNAME####/    { gsub(/####FOLDERNAME####/,"'$datadir/$7'");   }
+                /####DESCRIPTION####/   { gsub(/####DESCRIPTION####/,"'$8'"); }
+                /####GROUPNAME####/     { gsub(/####GROUPNAME####/,"'$groupname'"); }
+                /####GROUPNAMEREAD####/ { gsub(/####GROUPNAMEREAD####/,"'$groupnameread'"); }
+                /####BINDPASSWD####/    { gsub(/####BINDPASSWD####/,"'$4'"); }
+                /####DCDOMAIN####/      { gsub(/####DCDOMAIN####/,"'$3'"); }
+                /####HOSTNAME####/      { gsub(/####HOSTNAME####/,"'$(hostname)'"); }
+                                        { print $0 }'
+   
+    rm -f "$apacherootdir/conf-available/$oldname" >&$logfile
+    awk "$prog" < $template > "$apacherootdir/conf-available/$confname"
+    
+    write_access "$"$groupname" "$groupnameread"
+}
+
+# groupname groupnamewrite
+
+function write_access()
+{
+    local groupname=$1
+    local groupnameread=$2
+    
+    mne_need_error 2
+    samba-tool group list | egrep "^$groupname\$" 2>&1 >/dev/null
+    if [ ! "$?" = "0" ]; then
+      samba-tool group add "$groupname" >&$logfile 2>&1
+    fi
+    samba-tool group list | egrep "^$groupnameread\$" 2>&1 >/dev/null
+    if [ ! "$?" = "0" ]; then
+       samba-tool group add "$groupnameread" >&$logfile 2>&1
+    fi
+    
+    wwwid=$(wbinfo --name-to-sid="www-data" | cut -f1 "-d ")
+    wrsid=$(wbinfo --name-to-sid="$groupname" | cut -f1 "-d ")
+    rdsid=$(wbinfo --name-to-sid="$groupnameread" | cut -f1 "-d ")
+
+    ww="(A;OICI;0x001f01ff;;;$wwwid)"
+    wr="(A;OICI;0x001f01ff;;;$wrsid)"
+    rd="(A;OICI;0x001200a9;;;$rdsid)"
+
+    sddl=$(samba-tool ntacl get --as-sddl "$DATAROOT/$location" | sed -e "s/(A.*$//" )
+    samba-tool ntacl set "$sddl$wr$rd$ww" "$DATAROOT/$location"
+
+    chmod g+s "$DATAROOT/$location"
+    ( cd "$DATAROOT/$location"; getfacl . | setfacl -R --set-file=- . )
+}

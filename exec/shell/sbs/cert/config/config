@@ -6,4 +6,4 @@ certdatabasedir=$datadir/cert
  certkeydir=$certdatabasedir/key
 certcertdir=$certdatabasedir/cert
  certcsrdir=$certdatabasedir/csr
- certextdir=/usr/local/share/ca-certificates
+ certextdir=$certdatabasedir/extern

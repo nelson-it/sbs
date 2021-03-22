@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+cols="share,location,description,rdonly"
+labels="Freigabe,Ordner,Beschreibung,Nur Lesen";
+json_writeheader "$vacols" "$labels" "rdony:bool" "" "share:notempty";
+
+eval $(read_share "$vashareInput_old")
+
+echo '  "values"  : ['
+if [ "$share" != "" ]; then json_writedata "$share" "$location" "$description" "$readonly"; fi
+echo ']'

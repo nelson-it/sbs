@@ -42,7 +42,7 @@ check_dnspasswd "$domain"
 sogouser="sogo$hostname"
 bindpassword=$(dd if=/dev/urandom bs=2048 count=1 2>/dev/null |tr -dc "a-zA-Z0-9"|fold -w 64 |head -1)
 
-mne_need_error
+mne_need_error 2
 samba-tool user list | egrep "^$sogouser\$" >/dev/null
 if [ "$errorresult" != "0" ]; then
   samba-tool user create "$sogouser" --random-password $option 2>&1 >&$logfile

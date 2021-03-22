@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+cols="share,share";
+labels="Freigabe,Freigabe";
+json_writeheader "$vacols" "$labels";
+
+eval $(read_shares)
+
+echo '  "values"  : ['
+( for i in "${!shares[@]}"; do echo $i; done ) | sort | \
+  while read index
+  do
+    json_writedata "$index" "$index"
+  done
+echo ']'
