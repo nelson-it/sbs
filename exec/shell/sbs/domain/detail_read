@@ -8,7 +8,7 @@ labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Admini
 regexps="primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
 
 mne_need_error
-systemctl is-enabled mne_samba-ad-dc.service 2>&1 >/dev/null
+systemctl is-enabled mne_samba-ad-dc.service >&$logfile 2>&1
 if [ "$?" = "0" ]; then
 	json_writeheader "$cols" "$labels" "" "" "adminpassword:notempty,$regexps"
 
@@ -42,9 +42,10 @@ if [ "$?" = "0" ]; then
 else
 	json_writeheader "$cols" "$labels" "" "" "primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty";
     domaintyp="standalone";
-	workgroup=$( cat "$domainconfigfile"  | awk -v FS== '/^#/ { next; } /workgroup/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
-	description=$( cat "$domainconfigfile"  | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
+	workgroup=$( cat "$domainconfigfile"  2>/dev/null | awk -v FS== '/^#/ { next; } /workgroup/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
+	description=$( cat "$domainconfigfile" 2>/dev/null | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
 fi
 
-echo '  "values"  : [ ["'"$domaintyp"'", "'"$domain"'", "'"$workgroup"'", "'"$description"'", "'"$netdevice"'", "'"$adminpassword"'", "'"$adminpassword2"'", "'"$administrator"'", "'"$primaryname"'", "'"$primaryaddr"'", "'"$dnsforwarder"'", "'"$dnssearch"'", "'"$dhcpstart"'", "'"$dhcpend"'", "'"$dhcp6start"'", "'"$dhcp6end"'" ] ] '
-exit 0
+echo '  "values"  : ['
+json_writedata "$domaintyp" "$domain" "$workgroup" "$description" "$netdevice" "$adminpassword" "$adminpassword2" "$administrator" "$primaryname" "$primaryaddr" "$dnsforwarder" "$dnssearch" "$dhcpstart" "$dhcpend" "$dhcp6start" "$dhcp6end" 
+echo ']'

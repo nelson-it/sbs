@@ -6,6 +6,19 @@
 domaintype=$(domain_type)
 
 # ==================================================================
+# Check Path
+# ==================================================================
+path=$(realpath "$datadir$valocationInput")
+length=${#datadir}
+checkpath=${path:0:$length}
+    
+if [ "$datadir" != "$checkpath" ]; then
+    echo "$path : $datadir $length" >&$logfile
+    echo "#mne_lang#Ordner ist nicht korrekt#" >&2
+    exit 1
+fi
+
+# ==================================================================
 # Domain ermitteln
 # ==================================================================
 if [ "$domaintype" = "primary" ]; then
@@ -35,4 +48,3 @@ fi
 write_samba  "$domaintype" "$vashareInput_old" "$vashareInput" "$valocationInput" "$vadescriptionInput" "$vardonlyInput" "" ""
 write_apache "$domaintype" "$domain" "$domaindn" "$bindpassword" "$vashareInput_old" "$vashareInput" "$valocationInput" "$vadescriptionInput" "$vardonlyInput"
 
-    

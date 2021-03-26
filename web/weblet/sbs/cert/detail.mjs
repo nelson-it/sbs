@@ -36,6 +36,7 @@ class MneSbsCertDetail extends MneDbView
       modcols : [ 'country', 'state', 'city', 'org', 'orgunit', 'email', 'passwd', 'overwrite'],
 
       title  : { mod :  config.label },
+      regexp : { country : { reg : new RegExp('[A-Z][A-Z]'), help : MneText.getText("#mne_lang#Bitte 2 stelliges Landeskenzeichen eingeben") }},
       hinput : false
     };
 

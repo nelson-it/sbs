@@ -14,7 +14,7 @@ fi
 
 domainok=
 mne_need_error
-systemctl is-enabled mne_samba-ad-dc.service 2>&1 >/dev/null
+systemctl is-enabled mne_samba-ad-dc.service >/dev/null 2>&1
 if [ "$?" = "0" ]; then
   domainok=true
 fi
@@ -22,7 +22,7 @@ fi
 passwd=
 mailrelaypassword=
 
-eval $(cat /etc/postfix/sasl/passwd | awk '/^$|^#/{ next } { printf("mailrelay=\"%s\";mailrelayuser=\"%s\"", $1, gensub(/:.*/,"",1,$2)) }')
+eval $(cat /etc/postfix/sasl/passwd 2>/dev/null | awk '/^$|^#/{ next } { printf("mailrelay=\"%s\";mailrelayuser=\"%s\"", $1, gensub(/:.*/,"",1,$2)) }')
 echo '  "values"  : ['
 json_writedata "$certok" "$domainok" "$passwd" "$mailrelay" "$mailrelayuser" "$mailrelaypassword"
 echo ' ] '

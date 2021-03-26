@@ -1,0 +1,10 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+mkdir -p "$datadir/.trash"
+
+check_path "$vatreeidInput_old"
+
+mv "$datadir/$vatreeidInput_old" "$datadir/.trash/$vatreeidInput_old_$(date)"

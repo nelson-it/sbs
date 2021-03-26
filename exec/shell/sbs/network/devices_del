@@ -6,7 +6,7 @@
 conffile="$netconfigdir/00-mne-$vadeviceInput_old.yaml"
 rm -f $conffile 
 
-conffile="$netconfigdir/00-mne-$vadeviceInput_old.conf"
+conffile="$netconfigdir/$vadeviceInput_old"
 rm -f $conffile 
 
 exit 0

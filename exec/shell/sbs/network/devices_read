@@ -8,12 +8,20 @@ labels="Schnittstelle,Type,Ipv6 Addresse,Ipv4 Addresse,Broadcast,Gateway,Nameser
 
 json_writeheader "$ids" "$labels" "readtime:1000" "" "netaddrtyp:notempty,netaddr6:ip6addrmaskmempty,netaddr:ip4addrmaskmempty,netgateway:ip4addrempty";
 
+if [ -f $netplandir/mnesys-config ]; then
+  for file in $(ls -1 "$netconfigdir")
+  do
+	if [ ! -e "/sys/class/net/$file" ] || [ "$(stat -c %Y "$netconfigdir/$file")" -lt "$(stat -c %Y "$netplandir/00-mne-$file.yaml" )" ]; then
+	  rm "$netconfigdir/$file" >&$logfile 2>&1;
+	fi
+  done
+fi
+
 echo '  "values"  : ['
-komma=
 for device in `ls /sys/class/net`
 do
   if [ "$device" != "lo" ]; then
-    conffile="$netconfigdir/00-mne-$device.conf"
+    conffile="$netconfigdir/$device"
     if [ -f $conffile ]; then
     	echo "$komma"
     	cat $conffile | sed -e 's/####ACTTIME####/'$acttime'/g'
@@ -33,11 +41,10 @@ do
         fi
 
         dnssearch=`cat /etc/resolv.conf | awk '/^search[ \t]/ { print $2 }'`
-        dnsnameserver=$(cat /etc/resolv.conf | awk 'BEGIN { found=""; } /^nameserver[ \t]+/ { gsub(/%.*$/,"",$2); printf("%s\\\"%s\\\"",found,$2); found = "," }')
+        dnsnameserver=$(cat /etc/resolv.conf | awk 'BEGIN { found=""; } /^nameserver[ \t]+/ { gsub(/%.*$/,"",$2); printf("%s%s",found,$2); found = "," }')
 
-       echo "$komma" ' [ "'$device'", "", "'$netaddr6'", "'"$netaddr"'", "'$netbcast'", "'$netgateway'", "'$dnsnameserver'", "'$dnssearch'", "'$acttime'" ]';
+        json_writedata "$device" "" "$netaddr6" "$netaddr" "$netbcast" "$netgateway" "$dnsnameserver" "$dnssearch" "$acttime";
      fi
-    komma=','
   fi
 done
 echo ']'

@@ -138,6 +138,10 @@ EOF
 # domain netdevice dnsforward dnssearch
 function mod_netpar()
 {
+    local template=$(findtemplate domain hosts )
+    savefile /etc/hosts
+    cp "$template" /etc/hosts
+    
     sed -e '/^passwd:/s@ *winbind@@' -e '/^passwd:/s@$@ winbind@' -e '/^group:/s@ *winbind@@' -e '/^group:/s@$@ winbind@' < /etc/nsswitch.conf  > /tmp/nsswitch.$$
     mv /tmp/nsswitch.$$ /etc/nsswitch.conf
     

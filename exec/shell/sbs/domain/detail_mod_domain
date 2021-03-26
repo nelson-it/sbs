@@ -25,8 +25,10 @@ addr=$(echo ${deviceconfarray[3]} | cut -f1 -d/)
 # bereinigen
 # -------------------------------------------
 systemctl daemon-reload
+mne_error_ignore=1
 systemctl disable --now smbd nmbd winbind systemd-resolved samba-ad-dc.service 2>&$logfile 1>&2
 systemctl mask          smbd nmbd winbind samba-ad-dc.service 2>&$logfile 1>&2
+mne_error_ignore=
 
 systemctl enable mne_samba-ad-dc.service 2>&$logfile 1>&2
 systemctl stop   mne_samba-ad-dc.service 2>&$logfile 1>&2
@@ -91,7 +93,7 @@ fi
 mkdir -p /etc/mne/dns >&$logfile 2>&1
 chmod 755 /etc/mne/dns
 
-samba-tool domain exportkeytab --principal=dnsadmin@$udomain /etc/mne/dns/dns.keytab >&$logfile 2>&1
+samba-tool domain exportkeytab --principal=dns-$(hostname)@$udomain /etc/mne/dns/dns.keytab >&$logfile 2>&1
 chown root:dhcpd /etc/mne/dns/dns.keytab
 chmod 440 /etc/mne/dns/dns.keytab
 

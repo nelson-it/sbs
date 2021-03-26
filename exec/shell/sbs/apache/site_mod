@@ -41,7 +41,7 @@ if [ "$documentroot" != "" ] && [ "$documentroot" != "$vadocumentrootInput" ]; t
 fi
 
 conffile=$httpsfile
-if [ "$vahttpsonlyInput" != "0" ]; then conffile="\"$conffile\" \"$httpfile\""; fi
+if [ "$vahttpsonlyInput" != "1" ]; then conffile="\"$conffile\" \"$httpfile\""; fi
 
 if [ "$vaconfInput" = "" ]; then
   vaconfInput="$(eval "cat $conffile")"
@@ -68,9 +68,17 @@ if [ "$varenewcertInput" != "0" ]; then
 fi
 
 if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then
-    a2ensite "$vanameInput" 2>&1 >&$logfile
+    a2ensite "$vanameInput" >&$logfile 2>&1 
+    mne_need_error
+    err="$(apachectl configtest  2>&1 >/dev/null; exit $? )"
+    if [ "$?" != "0" ]; then
+       echo "$err" >&2
+       a2disconf "$vanameInput"
+       $apachereload >&$logfile 2>&1 
+       exit 1
+    fi
 else
-    a2dissite "$vanameInput" 2>&1 >&$logfile
+    a2dissite "$vanameInput" >&$logfile 2>&1  
 fi
 
-$apachereload 2>&1 >&$logfile
+$apachereload >&$logfile 2>&1

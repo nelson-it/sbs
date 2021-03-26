@@ -49,6 +49,11 @@ function write_postfix()
 # prog
 function write_dovecot()
 {
+    mkdir -p /var/dovecot 2>&$logfile
+    chown root:mail /var/dovecot
+    chmod 770 /var/dovecot
+    chmod g+s /var/dovecot
+       
     for file in dovecot-ldap.conf.ext conf.d/10-auth.conf  conf.d/10-master.conf  conf.d/10-ssl.conf  conf.d/15-mailboxes.conf
     do
         template="$(findtemplate dovecot $file)"

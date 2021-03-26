@@ -1,0 +1,11 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+check_path "$vaparentidInput"
+check_path "$vaparentidInput/$vatreenameInput"
+
+mkdir -p "$datadir/$vaparentidInput/$vatreenameInput"
+
+

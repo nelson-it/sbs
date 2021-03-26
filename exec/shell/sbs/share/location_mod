@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+if [ "$vaparentidInput" != "" ]; then
+	name="$vaparentidInput/$vatreeidInput_old";
+else
+	name="$vatreenameInput";
+fi
+
+check_path "$vatreeidInput_old"
+check_path "$name"
+
+mv "$datadir/$vatreeidInput_old" "$datadir/$name"

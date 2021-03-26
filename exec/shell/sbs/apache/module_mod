@@ -6,21 +6,17 @@
 exit_status=0 
 
 if [ "$vaenabledInput" = "1" ]; then
-  if [ ! -f "$apacherootdir/mods-enabled/$vanameInput.load" ]; then 
-    a2enmod "$vanameInput" 2>&1 > /dev/null
+    a2enmod "$vanameInput" >&$logfile 2>&1
     if [ $? != 0 ]; then
       echo "error in enable $vanameInput" 1>&2;
       exit_status=1 
     fi
-  fi
 else
-  if [ -f "$apacherootdir/mods-enabled/$vanameInput.load" ]; then 
-    a2dismod "$vanameInput" 2>&1 > /dev/null
+    a2dismod "$vanameInput" >&$logfile 2>&1
     if [ $? != 0 ]; then
       echo "error in disable $vanameInput" 1>&2;
       exit_status=1 
     fi
-  fi
 fi
 
 $apachereload 2>&1 >&$logfile

@@ -5,16 +5,17 @@
 
 filetype="$vadirInput_old"
 listtype=
+zertifikat="Zertifikat"
 case "$vadirInput_old" in
     crt) dir="$certcertdir"; listtype="x509";;
-    key) dir="$certkeydir"; listtype="rsa";;
+    key) dir="$certkeydir"; listtype="rsa"; zertifikat="Schlüssel";;
     csr) dir="$certcsrdir"; listtype="req";;
     ext) dir="$certextdir"; listtype="x509"; filetype="crt";;
     *) vano_vals="true";;
 esac
 
 cols="dir,data,filename,dns,valid,ca"
-labels="Ordner,Daten,Zertifikat,DNS,gültig bis,CA";
+labels="Ordner,Daten,$zertifikat,DNS,gültig bis,CA";
 json_writeheader "$cols" "$labels" "" "" ""
 
 komma=
@@ -32,13 +33,15 @@ prog='/Issuer/ { split($0, a ,","); split(a[6], aa, " = "); ca=aa[2]; }
                  gsub(/^[ \t]+/,"",valid);
                  gsub(/[ \t]+$/,"",valid);
                }
-      END { printf("%s [ \"%s\", \"\", \"%s\", \"%s\", \"%s\", \"%s\" ]\n", komma, dir, file, dns, valid, ca); }'
+      END { printf("dns=\"%s\"; valid=\"%s\"; ca=\"%s\";", dns, valid, ca); }'
 
 echo '  "values"  : [ '
-for file in $(cd $dir; set +f; ls -1 *.$filetype 2>&$logfile )
+for filename in $(cd $dir; set +f; ls -1 *.$filetype 2>&$logfile )
 do
-  openssl "$listtype" -text -noout -in "$dir/$file" | awk -v komma="$komma" -v file="$file" -v dir="$vadirInput_old" "$prog"
-  komma=','
+  eval $(openssl "$listtype" -text -noout -in "$dir/$filename" | awk "$prog")
+  if [ "$vawcol" = "" ] || [ "$(compare "${!vawcol}" "$vawop" "$vawval")" = "1" ]; then
+    json_writedata "$dir" "$data" "$filename" "$dns" "$valid" "$ca"
+  fi
 done
 echo ' ] '
 

@@ -40,8 +40,15 @@ cert_mkcsr "$vanameInput" "$vadomainInput" "$vaaliasesInput"
 cert_mkcrt "$vanameInput" "$vapasswd"
 
 if [ "$vaenabledInput != "" ] && [ "$vaenabledInput != "0" ]; then
-    a2ensite "$vanameInput"  2>&1 >&$logfile
-    $apachereload  2>&1 >&$logfile
+    a2ensite "$vanameInput" >&$logfile 2>&1 
+    mne_need_error
+    err="$(apachectl configtest  2>&1 >/dev/null; exit $? )"
+    if [ "$?" != "0" ]; then
+       echo "$err" >&2
+       a2disconf "$vanameInput"
+       exit 1
+    fi
+    $apachereload >&$logfile 2>&1 
 fi
 
 

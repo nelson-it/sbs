@@ -14,7 +14,6 @@ prog='/inet[^6]/ { found=1; printf("addr='"'"'%s'"'"'; bcast='"'"'%s'"'"'; mask=
       END        { if ( ! found ) printf("addr='"'"''"'"'; bcast='"'"''"'"'; mask='"'"''"'"'\n");}'
 
 echo '  "values"  : ['
-komma=
 for device in `ls /sys/class/net`
 do
   if [ "$device" != "lo" ]; then
@@ -26,10 +25,8 @@ do
        if [ "$bcast" != "" ] && [ "$mask" != "" ]; then
          mask="$(ipmask2int $mask)"
        fi
-       echo "$komma"'  [ "'$device'", "'$addr'", "'$mask'", "'$bcast'", "'$acttime'" ] ';
-       komma=","
+       json_writedata "$device" "$addr" "$mask" "$bcast" "$acttime";
      done
-     komma=","
    fi
 done
 

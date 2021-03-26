@@ -11,15 +11,20 @@ echo '"values" : [ '
 komma=
 IFS='\n' readarray -t mods < <(set +f; ls -1 $apacherootdir/mods-available | sed -e 's/\.[^.]*$//g' | sort -u)
 
-for mod in "${mods[@]}"
+declare -A modsenabled
+eval "$(set +f; ls -1 $apacherootdir/mods-enabled | sed -e 's/\.[^.]*$//g' |  awk '{ printf("modsenabled[\"%s\"]=true;\n", $1) }' )"
+
+for name in "${mods[@]}"
 do
     enabled=false
-    if [ -f $apacherootdir/mods-enabled/$mod.load ]; then
+    if [ "${modsenabled[$name]}" = "true" ]; then
         enabled=true
     fi
     
-    echo "$komma" ' [ "'"$mod"'", "'"$enabled"'" ]';
-    komma=","
+   if [ "$vawcol" = "" ] || [ "$(compare "${!vawcol}" "$vawop" "$vawval")" = "1" ]; then
+     echo "$komma" ' [ "'"$name"'", "'"$enabled"'" ]';
+     komma=","
+   fi
 done
 
 echo ' ]'

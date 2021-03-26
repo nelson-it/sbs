@@ -1,0 +1,9 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+eval $(get_groupnames "$vashareInput_old")
+
+samba-tool group removemembers "$groupnameread" "$valoginInput_old" >&$logfile
+samba-tool group removemembers "$groupname" "$valoginInput_old" >&$logfile

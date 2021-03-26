@@ -14,6 +14,27 @@ function domain_type()
   if [ "$?" = "0" ]; then echo "primary"; else echo "standalone"; fi
 }
 
+# share
+function get_groupnames()
+{
+    echo 'groupname="Mneshare $(Tolower $(hostname)) $(Tolower '$1')"'
+    echo 'groupnameread="$groupname Read"'
+}
+
+# location
+function check_path()
+{
+  local path=$(realpath "$datadir/$1")
+  local length=${#datadir}
+  local checkpath=${path:0:$length}
+    
+  if [ "$datadir" != "$checkpath" ]; then
+    echo "$path : $datadir $length" >&$logfile
+    echo "#mne_lang#Ordner ist nicht korrekt#" >&2
+    exit 1
+  fi
+}
+
 function read_shares()
 {
     echo "declare -A shares;"
@@ -34,10 +55,11 @@ function read_shares()
 # share
 function read_share()
 {
+echo $datadir >&$logfile
     local prog='/\[.*\]/   { start = 0 }
                 /\['$1'\]/ { start = 1 ; printf ( "share=\"'$1'\";") }
                /read only/ { if ( start ) printf ("readonly=\"%s\";", ( $NF != "no" ) ? "true" : "false" ) }
-               /path/      { path = gensub(/^.*=[ \t]*/, "", 1 ); sub(/'${datadir//\//\\/}'\/*/, "", path ); if ( start) printf ("location=\"%s\";", path) }
+               /path/      { path = gensub(/^.*=[ \t]*/, "", 1 ); sub(/'${datadir//\//\\/}'/, "", path ); if ( start) printf ("location=\"%s\";", path) }
                /comment/   { description = gensub(/^.*=[ \t]*/, "", 1 ); if ( start) printf ("description=\"%s\";", description) }
          '
     awk "$prog" < "$domainrootdir/shares.conf"
@@ -53,7 +75,36 @@ function read_dir()
     echo 'declare -A filetype;'
     echo 'declare -A filesize;'
     
-   find -L $datadir/$1 $2 -mindepth 1 -maxdepth 1 -printf 'files[${#files[@]}]="%f";accesstime["%f"]="%As";changetime["%f"]="%Cs";filetype["%f"]="%y";filesize["%f"]="%s"\n'
+   find -L $datadir/$1 $2 ! -path "*/.trash" -mindepth 1 -maxdepth 1 -printf 'files[${#files[@]}]="%f";accesstime["%f"]="%As";changetime["%f"]="%Cs";filetype["%f"]="%y";filesize["%f"]="%s"\n'
+}
+
+# groupname prefix rw
+function read_users()
+{
+    echo "declare -A $2firstname;"
+    echo "declare -A $2lastname;"
+    echo "declare -A $2login;"
+    echo "declare -A $2fullname;"
+
+    prog='/# record/ { start=1; uid=""; gid=""; login=""; firstname=""; lastname=""; fullname=""; i="" }
+          /^$/       { if ( start != 1 ) next;
+                       start=0;
+                       if ( login == "" ) next;
+
+                       if ( firstname == "" && lastname == "" ) firstname = login;
+                       fullname=firstname
+                       if ( lastname ) fullname = fullname " " lastname
+                       i = fullname "-" login
+                       printf("'$2'login[\"%s\"]=\"%s\";'$2'fullname[\"%s\"]=\"%s\";'$2'firstname[\"%s\"]=\"%s\";'$2'lastname[\"%s\"]=\"%s\"; rw[\"%s\"]='$3'\n", i, login, i, fullname, i, firstname, i, lastname, i );
+                     }
+      /^sAMAccountName:/     { login = gensub(/^.*: */, "", 1); }
+      /^sn:/                 { lastname = gensub(/^.*: */, "", 1); }
+      /^givenName:/          { firstname = gensub(/^.*: */, "", 1); }
+      '
+
+      ldbsearch -H /var/lib/samba/private/sam.ldb "(&(!(UserAccountControl:1.2.840.113556.1.4.803:=2))(objectClass=user)(!(objectClass=computer))(memberOf=CN=$1,CN=Users,DC=test,DC=puran2,DC=ch))" | awk "$prog" >&$logfile
+      ldbsearch -H /var/lib/samba/private/sam.ldb "(&(!(UserAccountControl:1.2.840.113556.1.4.803:=2))(objectClass=user)(!(objectClass=computer))(memberOf=CN=$1,CN=Users,DC=test,DC=puran2,DC=ch))" | awk "$prog"
+
 }
 
 #domaintype share_old share location description readonly validuser rduser
@@ -63,6 +114,7 @@ function write_samba()
     local rdonly="no"
     if [ "$6" = "1" ]; then rdonly="yes"; fi
     
+
     local prog='/####RELEASENAME####/ { gsub(/####RELEASENAME####/,"'$3'"); }
                 /####FOLDERNAME####/  { gsub(/####FOLDERNAME####/,"'$datadir$4'");  }
                 /####DESCRIPTION####/ { gsub(/####DESCRIPTION####/,"'$5'"); }
@@ -90,6 +142,7 @@ function write_apache()
       return;
     fi
     
+    local err
     local template="$(findtemplate share webdav.conf)"
     local oldname="mne_webdav_$5.conf"
     local confname="mne_webdav_$6.conf"
@@ -98,9 +151,11 @@ function write_apache()
     local groupnameread="$groupname Read"
     
     if [ "$9" = "1" ]; then groupname="$groupname Disabled"; fi
+
+    write_access "$7" "$groupname" "$groupnameread"
     
     local prog='/####RELEASENAME####/   { gsub(/####RELEASENAME####/,"'$6'"); }
-                /####FOLDERNAME####/    { gsub(/####FOLDERNAME####/,"'$datadir/$7'");   }
+                /####FOLDERNAME####/    { gsub(/####FOLDERNAME####/,"'$datadir$7'");   }
                 /####DESCRIPTION####/   { gsub(/####DESCRIPTION####/,"'$8'"); }
                 /####GROUPNAME####/     { gsub(/####GROUPNAME####/,"'$groupname'"); }
                 /####GROUPNAMEREAD####/ { gsub(/####GROUPNAMEREAD####/,"'$groupnameread'"); }
@@ -112,21 +167,41 @@ function write_apache()
     rm -f "$apacherootdir/conf-available/$oldname" >&$logfile
     awk "$prog" < $template > "$apacherootdir/conf-available/$confname"
     
-    write_access "$"$groupname" "$groupnameread"
+    a2enconf "$confname" >&$logfile 2>&1
+    mne_need_error
+    err="$(apachectl configtest 2>&1 >/dev/null ; exit $? )"
+    if [ "$?" != "0" ]; then
+       echo "$err" >$2
+       a2disconf "$confname"
+       exit 1
+    fi
+    
+    systemctl reload apache2.service
 }
 
-# groupname groupnamewrite
-
+# location groupname groupnamewrite
 function write_access()
 {
-    local groupname=$1
-    local groupnameread=$2
+    local location=$1
+    local groupname=$2
+    local groupnameread=$3
     
+    local path=$(realpath "$datadir$location")
+    local length=${#datadir}
+    local checkpath=${path:0:$length}
+    
+    if [ "$checkpath" != "$datadir" ] || [ ! -d "$path" ]; then
+        echo "#mne_lang#Ordner ist nicht korrekt#" >&2
+        exit 1
+    fi
+
     mne_need_error 2
     samba-tool group list | egrep "^$groupname\$" 2>&1 >/dev/null
     if [ ! "$?" = "0" ]; then
       samba-tool group add "$groupname" >&$logfile 2>&1
     fi
+
+    mne_need_error 2
     samba-tool group list | egrep "^$groupnameread\$" 2>&1 >/dev/null
     if [ ! "$?" = "0" ]; then
        samba-tool group add "$groupnameread" >&$logfile 2>&1
@@ -140,9 +215,11 @@ function write_access()
     wr="(A;OICI;0x001f01ff;;;$wrsid)"
     rd="(A;OICI;0x001200a9;;;$rdsid)"
 
-    sddl=$(samba-tool ntacl get --as-sddl "$DATAROOT/$location" | sed -e "s/(A.*$//" )
-    samba-tool ntacl set "$sddl$wr$rd$ww" "$DATAROOT/$location"
+    sddl=$(samba-tool ntacl get --as-sddl "$path" | sed -e "s/(A.*$//" )
+    samba-tool ntacl set "$sddl$wr$rd$ww" "$path"
 
-    chmod g+s "$DATAROOT/$location"
-    ( cd "$DATAROOT/$location"; getfacl . | setfacl -R --set-file=- . )
+    chmod g+s "$path"
+    ( cd "$path"; getfacl . | setfacl -R --set-file=- . )
+    
+    smbcontrol all reload-config
 }

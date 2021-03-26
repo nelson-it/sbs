@@ -6,6 +6,16 @@
 disable=$(findtemplate network netplan_disable)
 conf_single=$(findtemplate network netplan_single)
 
+if [ -d "$cloudcfgdir" ] && [ ! -f "$cloudcfgdir/99-mne-disable-network-config.cfg" ]; then
+  cp $disable $cloudcfgdir/99-mne-disable-network-config.cfg;
+fi
+
+if [ ! -f $netplandir/mnesys-config ]; then
+   mv $netplandir "$netplandir"_"$actdate"
+   mkdir $netplandir
+   touch $netplandir/mnesys-config
+fi
+
 declare -a addr4 addr6
 for i in $(echo  "$vanetaddrInput"  | sed -e s'/\\n/\n/g'); do addr4[${#addr4[@]}]="$i"; done;
 for i in $(echo  "$vanetaddr6Input" | sed -e s'/\\n/\n/g'); do addr6[${#addr6[@]}]="$i"; done;
@@ -19,9 +29,6 @@ if [ "$vanetaddrtypInput" != "static" ]; then
 	vadnsnameserverInput=
 	vadnssearchInput=
 fi
-
-conffile="$netconfigdir/00-mne-$vadeviceInput.conf"
-echo ' [ "'$vadeviceInput'", "'$vanetaddrtypInput'", "'$vanetaddr6Input'", "'"$vanetaddrInput"'", "'$vanetbcastInput'", "'$vanetgatewayInput'", "'$vadnsnameserverInput'", "'$vadnssearchInput'", "'####ACTTIME####'" ]' > $conffile;
 
 prog='/####DEVICE####/     { gsub(/####DEVICE####/,"'$vadeviceInput'"); }
 
@@ -56,24 +63,11 @@ prog='/####DEVICE####/     { gsub(/####DEVICE####/,"'$vadeviceInput'"); }
       /####SEARCH####/     { if ( "'$vadnssearchInput'"     == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####SEARCH####/, "'$vadnssearchInput'"); }
       { print $0 }'
 
-      conffile="$netconfigdir/00-mne-$vadeviceInput.yaml"
-      awk "$prog" "$conf_single" > $conffile
+conffile="$netplandir/00-mne-$vadeviceInput.yaml"
+awk "$prog" "$conf_single" > $conffile
 
-if [ -d "$cloudcfgdir" ] && [ ! -f "$cloudcfgdir/99-mne-disable-network-config.cfg" ]; then
-  cp $disable $cloudcfgdir/99-mne-disable-network-config.cfg;
-fi
-
-if [ ! -f $netplandir/mnesys-config ]; then
-   mv $netplandir "$netplandir"_"$actdate"
-   mkdir $netplandir
-   touch $netplandir/mnesys-config
-fi
-
-for file in $(cd $netconfigdir; set +f; ls -1 *.yaml )
-do
-    savefile "$netplandir/$file"
-    cp "$netconfigdir/$file" "$netplandir/$file"
-done
+conffile="$netconfigdir/$vadeviceInput"
+echo ' [ "'$vadeviceInput'", "'$vanetaddrtypInput'", "'$vanetaddr6Input'", "'"$vanetaddrInput"'", "'$vanetbcastInput'", "'$vanetgatewayInput'", "'$vadnsnameserverInput'", "'$vadnssearchInput'", "'####ACTTIME####'" ]' > $conffile;
 
 netplan apply
  
