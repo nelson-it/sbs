@@ -1,9 +1,5 @@
 . $(dirname $BASH_SOURCE)/config
 
-if [ ! -d "$caconfigdir" ]; then
-	mkdir -p "$caconfigdir";
-fi
-
 function check_capasswd()
 {
    mne_error_ignore=1

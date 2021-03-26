@@ -1,5 +1,3 @@
-caconfigdir="$configdir/ca"
-
 certdatabasedir=$datadir/cert
 
   certcadir=$certdatabasedir/ca
