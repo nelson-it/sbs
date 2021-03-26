@@ -1,12 +1,12 @@
 . $(dirname $BASH_SOURCE)/config
 
-if [ ! -d "$apacheconfigdir" ]; then
-	mkdir -p "$apacheconfigdir";
-fi
-
 if [ ! -d "$apachedatalocation" ]; then
   mkdir -p "$apachedatalocation";
 fi
+
+if [ "$apachedatalocation" = "" ]; then
+  apachedatalocation="$datadir/webcontent";
+fi;
 
 function get_port()
 {
