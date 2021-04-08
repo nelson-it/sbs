@@ -1,5 +1,17 @@
 . $(dirname $BASH_SOURCE)/config
 
+if [ ! -d "$certdatabasedir" ]; then
+  mkdir -p "$certcadir"   >/dev/null 2>&1
+  mkdir -p "$certkeydir"  >/dev/null 2>&1
+  mkdir -p "$certcertdir" >/dev/null 2>&1
+  mkdir -p "$certcsrdir"  >/dev/null 2>&1
+  mkdir -p "$certextdir"  >/dev/null 2>&1
+fi
+
+chown -R root:root "$certdatabasedir" 
+find "$certdatabasedir" -type d | xargs chmod 770 
+find "$certkeydir" -type f -exec chmod 600 {} \;
+
 function check_capasswd()
 {
    mne_error_ignore=1

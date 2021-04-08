@@ -78,7 +78,7 @@ function read_dir()
    find -L $datadir/$1 $2 ! -path "*/.trash" -mindepth 1 -maxdepth 1 -printf 'files[${#files[@]}]="%f";accesstime["%f"]="%As";changetime["%f"]="%Cs";filetype["%f"]="%y";filesize["%f"]="%s"\n'
 }
 
-# groupname prefix rw
+# groupname prefix rw domaindn
 function read_users()
 {
     echo "declare -A $2firstname;"
@@ -102,8 +102,8 @@ function read_users()
       /^givenName:/          { firstname = gensub(/^.*: */, "", 1); }
       '
 
-      ldbsearch -H /var/lib/samba/private/sam.ldb "(&(!(UserAccountControl:1.2.840.113556.1.4.803:=2))(objectClass=user)(!(objectClass=computer))(memberOf=CN=$1,CN=Users,DC=test,DC=puran2,DC=ch))" | awk "$prog" >&$logfile
-      ldbsearch -H /var/lib/samba/private/sam.ldb "(&(!(UserAccountControl:1.2.840.113556.1.4.803:=2))(objectClass=user)(!(objectClass=computer))(memberOf=CN=$1,CN=Users,DC=test,DC=puran2,DC=ch))" | awk "$prog"
+      ldbsearch -H /var/lib/samba/private/sam.ldb "(&(!(UserAccountControl:1.2.840.113556.1.4.803:=2))(objectClass=user)(!(objectClass=computer))(memberOf=CN=$1,CN=Users,$4))" | awk "$prog" >&$logfile
+      ldbsearch -H /var/lib/samba/private/sam.ldb "(&(!(UserAccountControl:1.2.840.113556.1.4.803:=2))(objectClass=user)(!(objectClass=computer))(memberOf=CN=$1,CN=Users,$4))" | awk "$prog"
 
 }
 
@@ -165,7 +165,7 @@ function write_apache()
                                         { print $0 }'
    
     rm -f "$apacherootdir/conf-available/$oldname" >&$logfile
-    awk "$prog" < $template > "$apacherootdir/conf-available/$confname"
+    awk "$prog" < "$template" > "$apacherootdir/conf-available/$confname"
     
     a2enconf "$confname" >&$logfile 2>&1
     mne_need_error

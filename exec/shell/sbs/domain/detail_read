@@ -35,7 +35,7 @@ if [ "$?" = "0" ]; then
     
     dhcpstart=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $2); print $2; exit 0 }')
     dhcpend=$(cat "$domaindhcpfile"   2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $3); print $3; exit 0 }')
-    dnssearch=$(cat "$domaindhcpfile" 2>/dev/null | awk -v FS=\" '/^#/ { next; } /domain-search/ { print $2; exit 0 }')
+    dnssearch=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /domain-search/ { sub(/^.*domain-search[ \t]*/, ""); gsub("\"",""); gsub(","," "); gsub(" +", " ");  print $0; exit 0 }')
 
     dhcp6start=$(cat "$domaindhcp6file" 2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $2); print $2; exit 0 }')
     dhcp6end=$(cat "$domaindhcp6file"   2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $3); print $3; exit 0 }')

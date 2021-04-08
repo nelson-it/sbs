@@ -73,7 +73,7 @@ if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then
     err="$(apachectl configtest  2>&1 >/dev/null; exit $? )"
     if [ "$?" != "0" ]; then
        echo "$err" >&2
-       a2disconf "$vanameInput"
+       a2dissite "$vanameInput"
        $apachereload >&$logfile 2>&1 
        exit 1
     fi

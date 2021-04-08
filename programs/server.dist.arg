@@ -1,17 +1,18 @@
-debug: 0
-project: erp
+debug:   0
+project: sbs
+port:    8025
 
 DbHttpTimeout: 1200
-DbDatabase:    erpdb@localhost
+DbDatabase:    sbsdb@localhost
 
-DbTrustCheckUserip: 127.0.0.1/32,10.0.0.0/8,172.16.0.0/16,192.168.0.0/16,fd01::/16,fe80::/16
-HttpSysexecUserip:  127.0.0.1/32,10.0.0.0/8,172.16.0.0/16,192.168.0.0/16,fd01::/16,fe80::/16
+DbTrustCheckUserip: 127.0.0.1/32,10.0.0.0/8,172.16.0.0/16,192.168.0.0/16,fc00::/7,fe80::/16
+HttpSysexecUserip:  127.0.0.1/32,10.0.0.0/8,172.16.0.0/16,192.168.0.0/16,fc00::/7,fe80::/16
 HttpSysexecCommand: sbs/programs/rexec
 
 PhpPath: /usr/bin/php-cgi -d include_path=.:/home/manny/projects/web/allg/php:/usr/share/php:/usr/share/pear
 
-EmbedwebHttpIndex:      erp
-EmbedwebHttpServerpath: erp/web:web/app:web/extern
-EmbedwebHttpDataroot:   data
+EmbedwebHttpIndex:      sbs
+EmbedwebHttpServerpath: sbs/web:web/app:web/extern
+EmbedwebHttpDataroot:   /opt/mne/data
 
 HttpSysexecPath:        sbs/exec:exec/allg

@@ -167,7 +167,7 @@ function mod_netpar()
     echo "nameserver 127.0.0.1"  > /etc/resolv.conf
     echo "domain $1" >> /etc/resolv.conf
     if [ "$4" != "" ]; then
-       echo "search $4" >> /etc/resolv.conf
+       echo "search $1 $4" >> /etc/resolv.conf
     fi
     
     systemctl restart named >&$logfile 2>&1
@@ -270,9 +270,6 @@ function mod_dhcp()
       /####BCAST####/      { gsub(/####BCAST####/,"'$9'"); }
       /####ROUTER####/     { gsub(/####ROUTER####/,"'${10}'"); }
       /####NETDEVICE####/  { gsub(/####NETDEVICE####/,"'${11}'"); }
-      /####DBHOST####/     { gsub(/####DBHOST####/,"'$DBHOST'"); }
-      /####DBUSER####/     { gsub(/####DBUSER####/,"'$DBUSER'"); }
-      /####DB####/         { gsub(/####DB####/,"'$DB'"); }
                            { print $0 }'
     
     savefile /etc/dhcp/dhcpd.conf

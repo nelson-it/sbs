@@ -8,12 +8,12 @@ domaintype=$(domain_type)
 # ==================================================================
 # Check Path
 # ==================================================================
-path=$(realpath "$datadir$valocationInput")
+realpath=$(realpath "$datadir$valocationInput")
 length=${#datadir}
-checkpath=${path:0:$length}
+checkpath=${realpath:0:$length}
     
 if [ "$datadir" != "$checkpath" ]; then
-    echo "$path : $datadir $length" >&$logfile
+    echo "$realpath : $datadir $length" >&$logfile
     echo "#mne_lang#Ordner ist nicht korrekt#" >&2
     exit 1
 fi

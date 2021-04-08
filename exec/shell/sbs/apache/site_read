@@ -66,11 +66,11 @@ do
       $0 = gensub(/(^[^#]*SSLCertificatefile).*'$ddir'(.*)/, "\\1  ####DATAROOT####\\2", "g");
       $0 = gensub(/(^[^#]*SSLCertificateKeyfile).*'$ddir'(.*)/, "\\1  ####DATAROOT####\\2", "g");
 
-      $0 = gensub(/(^[^#]*SSLCertificateFile)[^/]*'$ddir'\/*cert\/cert\/.*/,   "\\1  ####DATAROOT####/cert/cert/####DOMAIN####.crt", "g");
-      $0 = gensub(/(^[^#]*SSLCertificateKeyFile)[^/]*'$ddir'\/*cert\/key\/.*/, "\\1  ####DATAROOT####/cert/key/####DOMAIN####.key", "g");
+      $0 = gensub(/(^[^#]*SSLCertificateFile)[^/]*'$ddir'\/*cert\/cert\/.*/,   "\\1  ####DATAROOT####/cert/cert/####NAME####.crt", "g");
+      $0 = gensub(/(^[^#]*SSLCertificateKeyFile)[^/]*'$ddir'\/*cert\/key\/.*/, "\\1  ####DATAROOT####/cert/key/####NAME####.key", "g");
 
-      $0 = gensub(/(^[^#]*SSLCertificateFile).*snakeoil.*/,    "\\1 ####DATAROOT####/cert/cert/####DOMAIN####.crt", "g");
-      $0 = gensub(/(^[^#]*SSLCertificateKeyFile).*snakeoil.*/, "\\1 ####DATAROOT####/cert/key/####DOMAIN####.key", "g");
+      $0 = gensub(/(^[^#]*SSLCertificateFile).*snakeoil.*/,    "\\1 ####DATAROOT####/cert/cert/####NAME####.crt", "g");
+      $0 = gensub(/(^[^#]*SSLCertificateKeyFile).*snakeoil.*/, "\\1 ####DATAROOT####/cert/key/####NAME####.key", "g");
 
       $0 = gensub(/(^[^#]*[Ee]rror[Ll]og).*'$name'/, "\\1 ${APACHE_LOG_DIR}/####NAME####", "g" );
       $0 = gensub(/(^[^#]*[Cc]ustom[Ll]og).*'$name'(.*)/, "\\1 ${APACHE_LOG_DIR}/####NAME####\\2", "g" );

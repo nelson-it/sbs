@@ -13,7 +13,7 @@ radvdconf=$(findtemplate  domain radvd.conf)
 # -------------------------------------------
 check_cert
 
-netdevicefile="$netconfigdir/00-mne-$vanetdeviceInput.conf"
+netdevicefile="$netconfigdir/$vanetdeviceInput"
 if [ ! -f "$netdevicefile" ]; then
 	echo "#mne_lang#Netzdevice ist nicht konfiguriert#" >&2
 	exit 2

@@ -20,7 +20,7 @@ udomain=$(echo "$vadomainInput"  | awk '{print toupper($0)}')
 domaindn=$(echo "$vadomainInput" | sed -e "s/^/dc=/" -e "s/\./,dc=/g")
 
 if [ "$vadomaintypInput" == "primary" ] || [ "$vadomaintypInput" == "second" ]; then
-  netdevicefile="$netconfigdir/00-mne-$vanetdeviceInput.conf"
+  netdevicefile="$netconfigdir/$vanetdeviceInput"
   if [ ! -f "$netdevicefile" ]; then
 	echo "#mne_lang#Netzdevice ist nicht konfiguriert#" >&2
 	exit 2

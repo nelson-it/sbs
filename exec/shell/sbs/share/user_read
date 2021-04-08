@@ -3,6 +3,9 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
+domain=$(samba-tool domain info $(hostname) | awk '/^Domain/ { print $3 }')
+domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
+
 cols="login,fullname,rw";
 labels="Login,Benutzer,Schreibzugriff";
 json_writeheader "$cols" "$labels" "rw:bool";
@@ -10,8 +13,8 @@ json_writeheader "$cols" "$labels" "rw:bool";
 eval $(get_groupnames "$vashareInput_old")
 
 declare -A rw
-eval $(read_users "$groupnameread" "rd" "false")
-eval $(read_users "$groupname" "rw" "true")
+eval $(read_users "$groupnameread" "rd" "false" "$domaindn")
+eval $(read_users "$groupname" "rw" "true" "$domaindn")
 
 echo '  "values"  : ['
 ( for i in "${!rdlogin[@]}"; do echo $i; done ) | sort | \
