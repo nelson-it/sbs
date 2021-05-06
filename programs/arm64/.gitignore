@@ -2,3 +2,5 @@
 /Makefile.dep
 /object/
 /server.o
+/rexec
+/rexec.o

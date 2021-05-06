@@ -51,7 +51,31 @@ class MneSbsCertDetail extends MneDbView
     super.reset();
     this.obj.mkbuttons.push( { id : 'download', value : MneText.getText('#mne_lang#Download CA') } );
   }
+
+  async load()
+  {
+	await super.load();
+	this.obj.files.file.addEventListener('change', (evt) =>
+    {
+      if ( evt.target.files[0].size > 5000000 )
+      {
+        MneLog.error(MneText.getText('#mne_lang#Datei ist grösser als 5MB'));
+        this.obj.inputs.data.modValue('');
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.addEventListener('load', (evt) =>
+      {
+        this.obj.inputs.data.modValue(evt.target.result.split(',')[1]);
+        this.obj.inputs.country.modValue("OK");
+        this.obj.inputs.passwd.modValue("**************");
+      });
+      reader.readAsDataURL(evt.target.files[0]);
+    }, true);
+  }
   
+
   async download()
   {
     var hiddenElement = document.createElement('a');

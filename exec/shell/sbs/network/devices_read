@@ -23,7 +23,8 @@ do
   if [ "$device" != "lo" ]; then
     conffile="$netconfigdir/$device"
     if [ -f $conffile ]; then
-    	echo "$komma"
+    	echo "$json_komma"
+    	json_komma=","
     	cat $conffile | sed -e 's/####ACTTIME####/'$acttime'/g'
     else
         devices="$devices '$device'"

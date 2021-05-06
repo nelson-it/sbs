@@ -27,6 +27,7 @@ do
        fi
        json_writedata "$device" "$addr" "$mask" "$bcast" "$acttime";
      done
+     json_komma=","
    fi
 done
 

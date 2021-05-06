@@ -29,6 +29,14 @@ if [ "$varmkeyInput" = "1" ]; then
 	rm -f $certcadir/ca.key 2>&1 >&$logfile
 fi
 
+if [ "$vadataInput" != "" ]; then
+  if [ -f $certcadir/ca.crt ]; then
+    echo "#mne_lang#Hochgeladenes CA File wird ignoriert - bitte Schlüssel löschen#" >&2
+    exit 0;
+  fi
+  echo "$vadataInput" | base64 --decode > $certcadir/ca.crt
+fi
+
 if [ -f $certcadir/ca.crt ] && [ -f $certcadir/ca.key ]; then
     chmod 660 $certcadir/ca.key
     chmod 664 $certcadir/ca.crt
@@ -59,7 +67,7 @@ if [ -f $certcadir/ca.crt ] && [ -f $certcadir/ca.key ]; then
         echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096  >&$logfile 2>&1
         echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
     fi
-else
+elif [ -f $certcadir/ca.key ]; then
     echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096   >&$logfile 2>&$logfile
     echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
     
@@ -69,7 +77,9 @@ else
 
 fi
 
-chmod 600 $certcadir/ca.key
+if [ -f $certcadir/ca.key ]; then
+  chmod 600 $certcadir/ca.key
+fi
 chmod 644 $certcadir/ca.crt
 
 mne_error_ignore=1

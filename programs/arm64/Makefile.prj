@@ -2,11 +2,30 @@
       WITH_SHARED_LIBS := FALSE
          WITH_PTHREADS := TRUE
 
-   TARGETS  := $(SHLIB_PRE)mnebase.$(SHLIB) $(SHLIB_PRE)mnemail.$(SHLIB)  $(SHLIB_PRE)mnexml.$(SHLIB) $(SHLIB_PRE)mnehttp.$(SHLIB) \
-               $(SHLIB_PRE)mnehttpxml.$(SHLIB) $(SHLIB_PRE)mnedb.$(SHLIB) $(SHLIB_PRE)mnedbhttp.$(SHLIB) $(SHLIB_PRE)mnedbhttpmail.$(SHLIB)\
-               server
+   LUBTARGETS  := $(SHLIB_PRE)mnebase.$(SHLIB) $(SHLIB_PRE)mnemail.$(SHLIB)  $(SHLIB_PRE)mnexml.$(SHLIB) $(SHLIB_PRE)mnehttp.$(SHLIB) \
+                  $(SHLIB_PRE)mnehttpxml.$(SHLIB) $(SHLIB_PRE)mnedb.$(SHLIB) $(SHLIB_PRE)mnedbhttp.$(SHLIB) $(SHLIB_PRE)mnedbhttpmail.$(SHLIB)
                
+ifeq "$(UNAME)" "CYGWIN_NT-10.0"
+  LIB_ADD := -lnetapi32
+  TARGETS := $(LIBTARGETS) server winservice
+else
+  TARGETS := $(LIBTARGETS) server rexec
+endif
+
 server.WITH_GD       := FALSE
 server.WITH_POSTGRES := TRUE
 server.LIBS          := mnebase mnexml mnemail mnehttp mnehttpxml mnedb mnedbhttp mnedbhttpmail
 server.SOURCES       := ../server.cpp
+
+winservice.WITH_GD := FALSE
+winservice.WITH_POSTGRES := FALSE
+winservice.LIBS    := mnebase
+winservice.SOURCES := \
+		       $(PROJECT_ROOT)/allg/deamon/winmkservice.c \
+		       $(PROJECT_ROOT)/allg/deamon/winaddaccess.cpp \
+		       $(PROJECT_ROOT)/allg/deamon/winservice.cpp
+
+rexec.WITH_GD       := FALSE
+rexec.WITH_POSTGRES := FALSE
+rexec.LIBS          := mnebase
+rexec.SOURCES       := ../rexec.cpp 
