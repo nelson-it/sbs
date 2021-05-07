@@ -40,7 +40,7 @@ for filename in $(cd $dir; set +f; ls -1 *.$filetype 2>&$logfile )
 do
   eval $(openssl "$listtype" -text -noout -in "$dir/$filename" | awk "$prog")
   if [ "$vawcol" = "" ] || [ "$(compare "${!vawcol}" "$vawop" "$vawval")" = "1" ]; then
-    json_writedata "$dir" "$data" "$filename" "$dns" "$valid" "$ca"
+    json_writedata "$vadirInput_old" "$data" "$filename" "$dns" "$valid" "$ca"
   fi
 done
 echo ' ] '

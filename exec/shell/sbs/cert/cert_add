@@ -6,20 +6,21 @@
 filetype="$vadirInput"
 
 case "$vadirInput" in
-    csr) dir="$certcsrdir";;
+    csr) dir="$certcsrdir"; filetype="csr";;
     ext) dir="$certextdir"; filetype="crt";;
-    *) exit 1;;
+    *) echo '#mne_lang#Falscher Dateityp#' >&2; exit 1;;
 esac
 
 
-ext=$(echo $(basename $vafilenameInput) | awk -F. '{ print $NF }')
+ext=${vafilenameInput##*.}
+name=${vafilenameInput%.*}
 
 if [ "$ext" != "$filetype" ]; then
-	echo '#mne_lang#Falscher Dateityp#' >&2
-	exit 1;
+	echo '#mne_lang#Falscher Dateityp#'" $ext" >&2
+	exit 2;
 fi
 
-file="$dir/$vafilenameInput";
+file="/tmp/$$.$vadirInput";
 echo "$vadataInput" | base64 --decode > $file
 
 if [ "$vadirInput" == 'ext' ]; then
@@ -30,9 +31,26 @@ if [ "$vadirInput" == 'ext' ]; then
     	rm $file
     	exit 1
     fi
+    mv "$file" "$dir/$vafilenameInput"
 	mne_error_ignore=0
    
 	update-ca-certificates >&$logfile 2>&1
+fi
+
+if [ "$vadirInput" == 'csr' ]; then
+    check_capasswd "$vapasswd"
+    cert_checkcsr "$name"
+    if [ -f "$certkeydir/$name.key" ]; then
+      keydata=$(openssl pkey -in "$certkeydir/$name.key" -pubout -outform pem)
+      csrdata=$(openssl req  -in "$file" -noout -pubkey -outform pem)
+      if [ "$keydata" != "$csrdata" ]; then
+        echo "#mne_lang#Request gehört nicht zum Schlüssel#" >&2
+        rm $file
+        exit 1
+      fi
+    fi
+    mv "$file" "$dir/$vafilenameInput"
+    cert_mkcrt "$name" "$vapasswd"
 fi
 
 exit 0
