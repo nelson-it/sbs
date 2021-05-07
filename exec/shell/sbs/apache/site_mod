@@ -11,8 +11,13 @@ httpsfile=$(findtemplate apache site_https.conf)
 if [ "$varenewcertInput" != "0" ]; then check_capasswd "$vapasswd"; fi
 if [ "$vadocumentrootInput" = "" ]; then vadocumentrootInput="$vadomainInput"; fi
 
+certname="$vanameInput"
 if [ "$vanameInput" = "000-default-ssl" ] || [ "$vanameInput" = "000-default" ]; then
     vadomainInput="$(hostname)";
+    certname="$(hostname)";
+    vaenabledInput="1";
+    vanameInput="$vanameInput_old";
+
     mne_need_error
     systemctl is-enabled mne_samba-ad-dc.service >/dev/null 2>&1
     if [ "$?" = "0" ]; then
@@ -21,10 +26,6 @@ if [ "$vanameInput" = "000-default-ssl" ] || [ "$vanameInput" = "000-default" ];
     else
        vaaliasesInput=
     fi
-fi
-
-if [ "$vanameInput_old" = "000-default-ssl" ] || [ "$vanameInput_old" = "000-default" ]; then
-  vanameInput="$vanameInput_old";
 fi
 
 if [ "$vanameInput" = "" ];  then vanameInput="mne_$vadomainInput";     fi
@@ -53,7 +54,7 @@ fi
 port=$(get_port)
 sport=$(get_sport)
 
-site_writeconf "$vaconfInput" "$port" "$sport" "$vanameInput" "$vadomainInput" "$vaaliasesInput" "$vaemailInput" "$vadocumentrootInput" "$datadir"
+site_writeconf "$vaconfInput" "$port" "$sport" "$vanameInput" "$vadomainInput" "$vaaliasesInput" "$vaemailInput" "$vadocumentrootInput" "$datadir" "$certname"
 
 if [ "$varenewcertInput" != "0" ]; then
 

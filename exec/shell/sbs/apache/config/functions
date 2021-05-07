@@ -42,6 +42,7 @@ prog='/####HTTPPORT####/      { gsub(/####HTTPPORT####/, "'$2'");  }
       /####EMAIL####/         { if ( "'$7'" != "" ) gsub(/####EMAIL####/,"'$7'"); else next; fi   }
       /####DOCUMENTROOT####/  { gsub(/####DOCUMENTROOT####/,"'$8'"); }
       /####NAME####/          { gsub(/####NAME####/,"'$4'"); }
+      /####CERTNAME####/      { gsub(/####CERTNAME####/,"'${10}'"); }
       /####DATAROOT####/      { gsub(/####DATAROOT####/,"'$9'"); }
                               { print $0 }'
                               
