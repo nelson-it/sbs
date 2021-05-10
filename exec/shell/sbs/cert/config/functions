@@ -63,14 +63,19 @@ function cert_mkcsr()
   rm -f "$(dirname $BASH_SOURCE)/sslconf.cnf"
 }
 
-# name
+# name file
 function cert_checkcsr()
 {
+local file="$2"
+if [ "$2" = "" ]; then
+   file="$certcsrdir/$1.csr"
+fi
+
 mne_need_error
-openssl req -in "$certcsrdir/$1.csr" -noout -text 2>&$logfile >/dev/null
+openssl req -in "$file" -noout -text 2>&$logfile >/dev/null
 if [ "$?" != "0" ]; then
     echo "#mne_lang#File scheint kein Zertifikatrequest zu sein#" >&2
-    rm -f "$certcsrdir/$1.csr"  2>&$logfile >/dev/null
+    rm -f "$file"  2>&$logfile >/dev/null
     exit 1;
 fi
 }

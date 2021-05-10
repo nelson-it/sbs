@@ -43,7 +43,7 @@ if [ "$vadataInput" != "" ]; then
   
   if [ "$vadirInput" == 'csr' ]; then
     check_capasswd "$vapasswd"
-    cert_checkcsr "$name"
+    cert_checkcsr "$name" "$file"
     if [ -f "$certkeydir/$name.key" ]; then
       keydata=$(openssl pkey -in "$certkeydir/$name.key" -pubout -outform pem)
       csrdata=$(openssl req  -in "$file" -noout -pubkey -outform pem)
