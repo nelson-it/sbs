@@ -6,6 +6,7 @@
 filetype="$vadirInput"
 
 case "$vadirInput" in
+    crt) dir="$certcertdir"; filetype="crt";;
     csr) dir="$certcsrdir"; filetype="csr";;
     ext) dir="$certextdir"; filetype="crt";;
     *) exit 1;;
@@ -55,6 +56,22 @@ if [ "$vadataInput" != "" ]; then
     fi
     mv "$file" "$dir/$vafilenameInput"
     cert_mkcrt "$name" "$vapasswd"
+  fi
+  
+  if [ "$vadirInput" == 'crt' ]; then
+    if [ -f "$certkeydir/$name.key" ]; then
+      keydata=$(openssl pkey -in "$certkeydir/$name.key" -pubout -outform pem)
+      crtdata=$(openssl x509  -in "$file" -noout -pubkey -outform pem)
+      if [ "$keydata" != "$csrdata" ]; then
+        echo "#mne_lang#Zertifikat gehört nicht zum Schlüssel#" >&2
+        rm $file
+        exit 1
+      fi
+      mv "$file" "$dir/$vafilenameInput"
+    else
+        echo "#mne_lang#Zum Zertifikat existiert kein Schlüssel#" >&2
+        rm $file
+    fi
   fi
   
 fi

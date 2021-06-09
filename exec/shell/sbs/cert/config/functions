@@ -14,6 +14,10 @@ find "$certkeydir" -type f -exec chmod 600 {} \;
 
 function check_capasswd()
 {
+   if [ ! -f "$certcadir/ca.key" ] && [ -f "$certcadir/ca.crt" ]; then
+       return;
+   fi
+   
    mne_error_ignore=1
    echo "$1" | openssl rsa -passin stdin -in "$certcadir/ca.key" >/dev/null 2>/dev/null
    if [ "$?" != "0" ]; then
@@ -83,27 +87,35 @@ fi
 # name passwd
 function cert_mkcrt()
 {
-mne_need_error
-openssl req -in "$certcsrdir/$1.csr" -noout -text 2>&$logfile | \
-  awk '/Subject Alternative Name/ { p=1; next; } { if ( p ) { gsub(" " , ""); printf("subjectAltName=%s\n", $0); exit } } ' > $(dirname $BASH_SOURCE)/multi.cnf
 
-if [ "${PIPESTATUS[0]}" != "0" ]; then
+
+  mne_need_error
+  openssl req -in "$certcsrdir/$1.csr" -noout -text 2>&$logfile | \
+    awk '/Subject Alternative Name/ { p=1; next; } { if ( p ) { gsub(" " , ""); printf("subjectAltName=%s\n", $0); exit } } ' > $(dirname $BASH_SOURCE)/multi.cnf
+
+  if [ "${PIPESTATUS[0]}" != "0" ]; then
     echo "#mne_lang#File scheint kein Zertifikatrequest zu sein#" >&2
     rm -f "$certcsrdir/$1.csr"  2>&$logfile >/dev/null
     exit 1;
-fi
+  fi
 
-openssl x509 -req -days 365 -extfile $(dirname $BASH_SOURCE)/multi.cnf \
-		     -in "$certcsrdir/$1.csr" -CA $certcadir/ca.crt -CAkey $certcadir/ca.key -CAcreateserial -CAserial $certcadir/serial.seq \
-		     -out "$certcertdir/$1.crt" -passin "pass:$2"  >&$logfile 2>&1
+  if [ ! -f "$certcadir/ca.key" ]; then
+    echo "#mne_lang#Bitte auf dem Hauptrechner zertifizieren#"  >&2
+    openssl x509 -req -days 365 -extfile $(dirname $BASH_SOURCE)/multi.cnf \
+		         -in "$certcsrdir/$1.csr" -out "$certcertdir/$1.crt" -signkey "$certkeydir/$1.key"  >&$logfile 2>&1
+  else
+    openssl x509 -req -days 365 -extfile $(dirname $BASH_SOURCE)/multi.cnf \
+		         -in "$certcsrdir/$1.csr" -CA $certcadir/ca.crt -CAkey $certcadir/ca.key -CAcreateserial -CAserial $certcadir/serial.seq \
+		         -out "$certcertdir/$1.crt" -passin "pass:$2"  >&$logfile 2>&1
+  fi
 
-if [ "$?" != "0" ]; then
+  if [ "$?" != "0" ]; then
     echo "#mne_lang#Fehler während des Signierens#" >&2
     rm -f "$certcsrdir/$1.csr"  2>&$logfile >/dev/null
     rm -f "$certcertdir/$1.crt" 2>&$logfile >/dev/null
-else
-    chmod 644 "$certcertdir/$1.crt"
-fi   
+  else
+   chmod 644 "$certcertdir/$1.crt"
+  fi   
 
 rm -f $(dirname $BASH_SOURCE)/multi.cnf
 

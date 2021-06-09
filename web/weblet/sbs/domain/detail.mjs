@@ -63,9 +63,18 @@ class MneTemplate extends MneDbView
     this.obj.inputs.domaintyp.addEventListener('change', (evt) =>
     {
       MneElement.mkClass(this.frame, 'domaintyp' + this.obj.inputs.domaintyp.getValue(), true,  'domaintyp');
-      var passwd = ( this.obj.inputs.domaintyp.getValue() == 'standalone' ) ? 'dummy' : '';
-      this.obj.inputs.adminpassword.setValue(passwd);
-      this.obj.inputs.adminpassword2.setValue(passwd);
+      if ( this.obj.inputs.domaintyp.getValue() == 'standalone' )
+      {
+        var passwd = 'dummy';
+        this.obj.inputs.adminpassword.setValue(passwd);
+        this.obj.inputs.adminpassword2.setValue(passwd);
+      }
+      else
+      {
+        var passwd = '';
+        this.obj.inputs.adminpassword.setValue(passwd);
+        this.obj.inputs.adminpassword2.setValue(passwd);
+      }
     });
     this.obj.inputs.adminpassword.addEventListener('input', (evt) => {  this.checkpasswd() } );
 

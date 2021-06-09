@@ -8,7 +8,12 @@
 # domain
 function check_dnspasswd()
 {
-  kinit -F -k -t /var/lib/samba/dhcpd-dns/dhcpd.keytab dns-$(hostname)@$(echo ${1^^})
+  local hostname=$(hostname)
+  mne_need_error
+  kinit -F -k -t /var/lib/samba/dhcpd-dns/dhcpd.keytab dns-$hostname@$(echo ${1^^}) >/dev/null 2>&1 
+  if [ "$?" != "0" ]; then
+    kinit -F -k -t /var/lib/samba/dhcpd-dns/dhcpd.keytab dns-${hostname^^}@$(echo ${1^^})
+  fi
 }
 
 function check_cert()
@@ -18,13 +23,13 @@ function check_cert()
     exit 1
   fi
 
-  chown root:root $certkeydir/$(hostname).key
+  chown root:root $certkeydir/$(hostname).key 2>&$logfile
 
-  chmod 600 $certkeydir/$(hostname).key
-  chmod 644 $certcertdir/$(hostname).crt
+  chmod 600 $certkeydir/$(hostname).key 2>&$logfile
+  chmod 644 $certcertdir/$(hostname).crt 2>&$logfile
 
-  chmod 600 $certcadir/ca.key
-  chmod 644 $certcadir/ca.crt
+  chmod 600 $certcadir/ca.key 2>&$logfile
+  chmod 644 $certcadir/ca.crt 2>&$logfile
 
   mne_error_ignore=1
   rm /usr/local/share/ca-certificates/mne_erpca.crt >&$logfile 2>&1
@@ -120,7 +125,7 @@ function mod_bind()
   
   cat << EOF >"$domainbindroot/named.conf.samba"
 dlz "AD DNS Zone" {
-    database "dlopen /usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_12.so";
+    database "dlopen /usr/lib/$(uname -i)-linux-gnu/samba/bind9/dlz_bind9_12.so";
 };
 EOF
   

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
@@ -8,17 +9,17 @@ labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Admini
 regexps="primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
 
 mne_need_error
-systemctl is-enabled mne_samba-ad-dc.service >&$logfile 2>&1
+systemctl status mne_samba-ad-dc.service >/dev/null 2>&1
 if [ "$?" = "0" ]; then
-	json_writeheader "$cols" "$labels" "" "" "adminpassword:notempty,$regexps"
+	json_writeheader "$cols" "$labels" "" "" "adminpassword:notempty,domain:notempty,$regexps"
 
-	master=$(samba-tool fsmo show | sed -n '/SchemaMasterRole/p' ) 
-	mne_need_error
-	echo "$master" | fgrep $(hostname | awk '{ print toupper($0) }') >&$logfile 
-	if [ "$?" != "0" ];then
+    host=$(hostname | awk '{ print toupper($0) }')
+	info=$(samba-tool fsmo show | sed -n "/SchemaMasterRole/p" ) 
+	master=$(echo $info | sed -n "/SchemaMasterRole.*CN=$host/p" )
+	if [ "$master" = "" ];then
 		domaintyp="second";
 
-        primaryname=$(echo "$master" | awk -v RS=, -v FS== '{ if ( $1 == "CN" && name == "" ) name = $2 } END { print tolower(name) }')
+        primaryname=$(echo "$info" | awk -v RS=, -v FS== '{ if ( $1 == "CN" && name == "" ) name = $2 } END { print tolower(name) }')
         primaryaddr=$(nslookup -type=A "$primaryname" | awk '/Name:/ { ok=1 } /Address:/ { if ( ok ) { print $2; exit 0 } }' )
 	else
 		domaintyp="primary";
@@ -35,7 +36,7 @@ if [ "$?" = "0" ]; then
     
     dhcpstart=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $2); print $2; exit 0 }')
     dhcpend=$(cat "$domaindhcpfile"   2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $3); print $3; exit 0 }')
-    dnssearch=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /domain-search/ { sub(/^.*domain-search[ \t]*/, ""); gsub("\"",""); gsub(","," "); gsub(" +", " ");  print $0; exit 0 }')
+    dnssearch=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /domain-search/ { sub(/^.*domain-search[ \t]*/, ""); gsub("\"",""); gsub(","," "); gsub(";"," "); gsub(" +", " ");  print $0; exit 0 }')
 
     dhcp6start=$(cat "$domaindhcp6file" 2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $2); print $2; exit 0 }')
     dhcp6end=$(cat "$domaindhcp6file"   2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $3); print $3; exit 0 }')
@@ -44,6 +45,9 @@ else
     domaintyp="standalone";
 	workgroup=$( cat "$domainconfigfile"  2>/dev/null | awk -v FS== '/^#/ { next; } /workgroup/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
 	description=$( cat "$domainconfigfile" 2>/dev/null | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
+	if [ "$workgroup" == "" ]; then
+	  domaintyp=""
+	fi
 fi
 
 echo '  "values"  : ['

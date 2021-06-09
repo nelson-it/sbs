@@ -39,7 +39,7 @@ cert_mkkey "$vanameInput"
 cert_mkcsr "$vanameInput" "$vadomainInput" "$vaaliasesInput"
 cert_mkcrt "$vanameInput" "$vapasswd"
 
-if [ "$vaenabledInput != "" ] && [ "$vaenabledInput != "0" ]; then
+if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then
     a2ensite "$vanameInput" >&$logfile 2>&1 
     mne_need_error
     err="$(apachectl configtest  2>&1 >/dev/null; exit $? )"

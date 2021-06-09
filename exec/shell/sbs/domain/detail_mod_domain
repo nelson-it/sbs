@@ -8,6 +8,8 @@ dhcpconf6=$(findtemplate  domain dhcpd6.conf)
 dhcpupdate=$(findtemplate domain update-samba-dns.sh)
 radvdconf=$(findtemplate  domain radvd.conf)
 
+sambaservice=$(findtemplate  domain mne_samba-ad-dc.service)
+
 # -------------------------------------------
 # permission certifikat files
 # -------------------------------------------
@@ -24,6 +26,8 @@ addr=$(echo ${deviceconfarray[3]} | cut -f1 -d/)
 # -------------------------------------------
 # bereinigen
 # -------------------------------------------
+cp "$sambaservice" "/lib/systemd/system"
+
 systemctl daemon-reload
 mne_error_ignore=1
 systemctl disable --now smbd nmbd winbind systemd-resolved samba-ad-dc.service 2>&$logfile 1>&2
@@ -53,15 +57,20 @@ if [ "$vadomaintypInput" == "primary" ]; then
      --server-role=dc \
      --dns-backend=BIND9_DLZ \
      --adminpass="123()$vaadminpasswordInput" >&$logfile 2>&1
+
+    samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&1
 else
     echo "nameserver $vaprimaryaddrInput" > /etc/resolv.conf
+    echo "search $vadomainInput" >> /etc/resolv.conf
 
 	samba-tool domain join $vadomainInput DC \
     --option="interfaces=lo,$vanetdeviceInput" \
     --option="bind interfaces only=yes" \
     --realm="$vadomainInput" -U"$vaadministratorInput" \
     --dns-backend=BIND9_DLZ \
-    --password="$vaadminpasswordInput" >&$logfile 2>&1
+    --password="123()$vaadminpasswordInput" >&$logfile 2>&1
+    
+    samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&1
 fi
 
 mod_smbconf
@@ -74,12 +83,11 @@ mod_dhcp "${deviceconfarray[3]}" "$vadhcpstartInput" "$vadhcpendInput" "${device
          "$vadnssearchInput" "$vadomainInput" "${deviceconfarray[4]}" "${deviceconfarray[5]}" "$vanetdeviceInput" \
          "$dhcpconf4" "$dhcpconf6" "$dhcpupdate" "$radvdconf"
 
-if [ "$vadomaintypInput" == "primary" ]; then
-  samba-tool user setexpiry --noexpiry administrator >&$logfile 2>&1
-  samba-tool domain passwordsettings set --complexity=off >&$logfile 2>&1
-  samba-tool domain passwordsettings set --min-pwd-length=1 >&$logfile 2>&1
-  samba-tool user setpassword "administrator" --newpassword="$vaadminpasswordInput" >&$logfile 2>&1
-fi
+samba-tool user setexpiry --noexpiry administrator >&$logfile 2>&1
+samba-tool user setexpiry --noexpiry dns-$(hostname) >&$logfile 2>&1
+samba-tool domain passwordsettings set --complexity=off >&$logfile 2>&1
+samba-tool domain passwordsettings set --min-pwd-length=1 >&$logfile 2>&1
+samba-tool user setpassword "administrator" --newpassword="$vaadminpasswordInput" >&$logfile 2>&1
 samba-tool group addmembers DnsAdmins dns-$(hostname) >&$logfile 2>&1
 samba-tool user disable Guest
 

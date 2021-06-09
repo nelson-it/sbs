@@ -37,6 +37,11 @@ if [ "$vadataInput" != "" ]; then
   echo "$vadataInput" | base64 --decode > $certcadir/ca.crt
 fi
 
+if [ ! -f $certkeydir/$(hostname).key ]; then
+  cert_mkkey "$(hostname)"
+  cert_mkcsr "$(hostname)" "$(hostname)" "$(hostname --all-fqdns | sed -e 's/ *$//' -e "s/  */\n/g" | sort -u | awk '{ printf("%s%s", space, $0); space=" "  }')"
+fi
+
 if [ -f $certcadir/ca.crt ] && [ -f $certcadir/ca.key ]; then
     chmod 660 $certcadir/ca.key
     chmod 664 $certcadir/ca.crt
@@ -46,10 +51,7 @@ if [ -f $certcadir/ca.crt ] && [ -f $certcadir/ca.key ]; then
 	        check_capasswd "$vapasswdInput"
             echo "#mne_lang#Erstelle Rechnerzertifikat#" >&2;
 
-	        cert_mkkey "$(hostname)"
-            cert_mkcsr "$(hostname)" "$(hostname)" "$(hostname --all-fqdns | sed -e 's/ *$//' -e "s/  */\n/g" | sort -u | awk '{ printf("%s%s", space, $0); space=" "  }')"
             cert_mkcrt "$(hostname)" "$vapasswdInput"
-            
             exit 0;
         fi
        
@@ -71,10 +73,7 @@ elif [ -f $certcadir/ca.key ]; then
     echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096   >&$logfile 2>&$logfile
     echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
     
-    cert_mkkey "$(hostname)"
-    cert_mkcsr "$(hostname)" "$(hostname)" "$(hostname --all-fqdns | sed -e 's/ *$//' -e "s/  */\n/g" | sort -u | awk '{ printf("%s%s", space, $0); space=" "  }')"
     cert_mkcrt "$(hostname)" "$vapasswdInput"
-
 fi
 
 if [ -f $certcadir/ca.key ]; then

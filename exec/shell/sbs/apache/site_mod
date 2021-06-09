@@ -56,13 +56,13 @@ sport=$(get_sport)
 
 site_writeconf "$vaconfInput" "$port" "$sport" "$vanameInput" "$vadomainInput" "$vaaliasesInput" "$vaemailInput" "$vadocumentrootInput" "$datadir" "$certname"
 
-if [ "$varenewcertInput" != "0" ]; then
 
+if [ "$varenewcertInput" != "0" ]; then
   name="$vanameInput"
   if [ "$vanameInput" = "000-default-ssl" ] || [ "$vanameInput" = "000-default" ]; then
     name="$(hostname)"
   fi
-  
+
   cert_mkkey "$name"
   cert_mkcsr "$name" "$vadomainInput" "$vaaliasesInput"
   cert_mkcrt "$name" "$vapasswd"
