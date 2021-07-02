@@ -219,12 +219,12 @@ function mod_dhcp()
         net=$(netmask $1)
         if [ "$2" != "" ]; then
             netstart=$(netmask $2/$mask)
-            if [ "$netstart" != "$net" ]; then echo "#mne_lang#falsches Netzwerk der DHCP Ipv4 Startadresse#"; exit 1; fi;
+            if [ "$netstart" != "$net" ]; then echo "#mne_lang#falsches Netzwerk der DHCP Ipv4 Startadresse#" >&2; exit 1; fi;
         fi
         
         if [ "$3" != "" ]; then
             netend=$(netmask $3/$mask)
-            if [ "$netend" != "$net" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv4 Endadresse#"; exit 1; fi;
+            if [ "$netend" != "$net" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv4 Endadresse#" >&2; exit 1; fi;
         fi
         
         if [ "$2" != "" ] && [ "$3" != "" ]; then
@@ -241,12 +241,12 @@ function mod_dhcp()
 
         if [ "$5" != "" ]; then
             net6start=$(ipv6calc --addr2compaddr $(sipcalc $5/$mask6 | fgrep -i subnet | cut -d '-' -f 2))
-            if [ "$net6start" != "$net6" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv6 Startadresse#"; exit 1; fi;
+            if [ "$net6start" != "$net6" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv6 Startadresse#" >&2; exit 1; fi;
         fi
 
         if [ "$6" != "" ]; then
             net6end=$(ipv6calc --addr2compaddr $(sipcalc $6/$mask6 | fgrep -i subnet | cut -d '-' -f 2))
-            if [ "$net6end" != "$net6" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv6 Endadresse#"; exit 1; fi;
+            if [ "$net6end" != "$net6" ]; then echo "#mne_lang#falsches Netzwerk der DHCP IPv6 Endadresse#" >&2; exit 1; fi;
         fi
 
         if [ "$5" != "" ] && [ "$6" != "" ]; then

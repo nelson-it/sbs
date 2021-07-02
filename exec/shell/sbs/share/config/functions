@@ -207,11 +207,24 @@ function write_access()
        samba-tool group add "$groupnameread" >&$logfile 2>&1
     fi
     
-    wwwid=$(wbinfo --name-to-sid="www-data" | cut -f1 "-d ")
+    dusid=$(wbinfo --name-to-sid="Domain Users" | cut -f1 "-d ")
+    du="(A;OICI;0x001200a9;;;$dusid)"
+    
+    sddl=$(samba-tool ntacl get --as-sddl "$datadir" | sed -e "s/(A.*$//" )
+    samba-tool ntacl set "$sddl$du" "$datadir"
+    p=
+    for dir in $(echo $location | tr "/" "\n")
+    do
+        sddl=$(samba-tool ntacl get --as-sddl "$datadir/$p/$dir" | sed -e "s/(A.*$//" )
+        samba-tool ntacl set "$sddl$du" "$datadir/$p/$dir"
+        p="$p/$dir"
+    done
+    
+    wwsid=$(wbinfo --name-to-sid="www-data" | cut -f1 "-d ")
     wrsid=$(wbinfo --name-to-sid="$groupname" | cut -f1 "-d ")
     rdsid=$(wbinfo --name-to-sid="$groupnameread" | cut -f1 "-d ")
 
-    ww="(A;OICI;0x001f01ff;;;$wwwid)"
+    ww="(A;OICI;0x001f01ff;;;$wwsid)"
     wr="(A;OICI;0x001f01ff;;;$wrsid)"
     rd="(A;OICI;0x001200a9;;;$rdsid)"
 

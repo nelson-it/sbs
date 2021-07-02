@@ -68,7 +68,7 @@ else
     --option="bind interfaces only=yes" \
     --realm="$vadomainInput" -U"$vaadministratorInput" \
     --dns-backend=BIND9_DLZ \
-    --password="123()$vaadminpasswordInput" >&$logfile 2>&1
+    --password="$vaadminpasswordInput" >&$logfile 2>&1
     
     samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&1
 fi

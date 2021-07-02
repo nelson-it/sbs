@@ -33,7 +33,7 @@ fi
 port=$(get_port)
 sport=$(get_sport)
 
-site_writeconf "$vaconfInput" "$port" "$sport" "$vanameInput" "$vadomainInput" "$vaaliasInput" "$vaemailInput" "$vadocumentrootInput" "$datadir" "$vanameInput"
+site_writeconf "$vaconfInput" "$port" "$sport" "$vanameInput" "$vadomainInput" "$vaaliasesInput" "$vaemailInput" "$vadocumentrootInput" "$datadir" "$vanameInput"
 
 cert_mkkey "$vanameInput"
 cert_mkcsr "$vanameInput" "$vadomainInput" "$vaaliasesInput"

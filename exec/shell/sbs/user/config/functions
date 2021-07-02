@@ -108,6 +108,7 @@ if [ "$modify" != "" ]; then
   echo -e "dn: $1\nchangetype: modify\n$modify" | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$4" -w "$3" -x >&$logfile 2>&1 
 fi
 
+net cache flush
 }
 
 # user

@@ -5,7 +5,7 @@
 
 cols="share,location,description,rdonly"
 labels="Freigabe,Ordner,Beschreibung,Nur Lesen";
-json_writeheader "$vacols" "$labels" "rdony:bool" "" "share:notempty";
+json_writeheader "$vacols" "$labels" "rdony:bool" "" "share:alpha_alphanum";
 
 eval $(read_share "$vashareInput_old")
 
