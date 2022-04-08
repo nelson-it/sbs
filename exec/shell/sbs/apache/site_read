@@ -22,8 +22,8 @@ do
     enabled="$(site_enabled "$site")"
 
 
-          domain=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /servername/ { print $2; exit; }' "$file")
-         aliases=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /serveralias/ { gsub($1,""); sub(/^ */,""); print $0; exit; }' "$file")
+          domain=$(awk '/Only Key/ { onlykey=1 } /^[ \t]*#/ { if ( !onlykey ) next } tolower($1) ~ /servername/ { print $2; exit; }' "$file")
+         aliases=$(awk '/Only Key/ { onlykey=1 } /^[ \t]*#/ { if ( !onlykey ) next } tolower($1) ~ /serveralias/ { gsub($1,""); sub(/^ */,""); print $0; exit; }' "$file")
            email=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /serveradmin/ { print $2; exit; }' "$file")
     documentroot=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /documentroot/ { print $2; exit; }' "$file")
     
@@ -58,9 +58,12 @@ do
       $0 = gensub(/(.*VirtualHost.*\*:)$port.*>/, "\\1####HTTPPORT####>", "g");
       $0 = gensub(/(.*VirtualHost.*\*:)$sport.*>/, "\\1####HTTPSPORT####>", "g");
 
+      $0 = gensub(/(^#[Ss]erver[Nn]ame).*/,  "\\1 ####DOMAIN####", "g" );
+      $0 = gensub(/(^#[Ss]erver[Aa]lias).*/,    "\\1 ####ALIAS####",  "g" );
+
       $0 = gensub(/(^[^#]*[Ss]erver[Nn]ame).*/,  "\\1 ####DOMAIN####", "g" );
       $0 = gensub(/(^[^#]*[Ss]erver[Aa]dmin).*/, "\\1 ####EMAIL####",  "g" );
-      $0 = gensub(/(^.*[Ss]erver[Aa]lias).*/,    "\\1 ####ALIAS####",  "g" );
+      $0 = gensub(/(^[^#]*[Ss]erver[Aa]lias).*/,    "\\1 ####ALIAS####",  "g" );
       $0 = gensub(/(^[^#]*[Dd]ocument[Rr]oot).*'$dr'.*/,  "\\1 ####DOCUMENTROOT####", "g" );
 
       $0 = gensub(/(^[^#]*SSLCertificatefile).*'$ddir'(.*)/, "\\1  ####DATAROOT####\\2", "g");

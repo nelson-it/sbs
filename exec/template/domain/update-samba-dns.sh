@@ -25,7 +25,11 @@ else
   ipshort="$ip"
 fi
 
-kinit -F -k -t /var/lib/samba/dhcpd-dns/dhcpd.keytab dns-$(hostname)@$realm
+hostname=$(hostname)
+kinit -F -k -t /var/lib/samba/dhcpd-dns/dhcpd.keytab dns-$hostname@$realm >/dev/null 2>&1
+if [ "$?" != "0" ]; then
+  kinit -F -k -t /var/lib/samba/dhcpd-dns/dhcpd.keytab dns-${hostname^^}@$realm
+fi
 
 case $op in
         add)
@@ -40,7 +44,6 @@ case $op in
            if [ "$check" = "$net" ]; then
              if [ "$addr" = "$ip" ]; then
                echo 1
-             else
              else
                echo samba-tool dns delete $(hostname) $domain $name $addrtyp  $addr -k yes 1>&2
                samba-tool dns delete $(hostname) $domain $name $addrtyp  $addr -k yes 1>&2
@@ -68,7 +71,7 @@ case $op in
               fi
               prog='/#[ \t]*host[ \t]+'$name'[ \t]*{/ { hostfound=1; next; }
                     /host[ \t]+'$name'[ \t]*{/        { hostfound=2; }
-                    /}/                        { if ( hostfound == 1 ) hostfound = 0; }
+                    /}/                        { if ( hostfound == 1 ) { hostfound = 0; next; } }
                                                { if ( hostfound != 1 ) print $0 }
                     END                        { 
                                                  if ( hostfound !=2 )

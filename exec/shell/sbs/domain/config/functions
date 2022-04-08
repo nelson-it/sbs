@@ -364,6 +364,7 @@ function dhcp_fix_del()
    
    awk "$prog" < $filename > /tmp/fix$$
    mv /tmp/fix$$ $filename
+   chown dhcpd:dhcpd "$filename"
 
 }
 
