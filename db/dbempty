@@ -1,0 +1,20 @@
+#!/bin/bash
+
+origdb=sbsdb
+orighost=localhost
+origuser=admindb
+origport=5432
+
+checkdb=esbsdb
+checkhost=localhost
+checkuser=admindb
+checkport=5432
+output=sbs.sql
+
+. ../../dbsync/dbempty
+
+version=`cat ../../installer/mnesbs/dist/version`
+
+echo "-- Database Version: $version" > $output
+pg_dump --username=$origuser --host=$orighost $checkdb | sed -e "/CREATE EXTENSION.*plpgsql/d" -e "/COMMENT ON EXTENSION plpgsql/d" >> $output
+

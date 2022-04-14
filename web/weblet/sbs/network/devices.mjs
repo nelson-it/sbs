@@ -21,11 +21,11 @@ class MneSbsNetworkDevices extends MneTableWeblet
         url        : 'sysexec/sbs/network/devices_read',
         primarykey : ['device'],
 
-        cols        : 'device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,readtime',
-        tablecoltype: {  netaddrtyp : 'selection', netaddr : 'mtext', netaddr6: 'mtext', netbcast: 'text', netgateway: 'text', dnssearch : 'text', 'dnsnameserver' : 'mtext', dnsdomain : 'text' },
+        cols        : 'device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,wlan,wlanpass,wlanhidden,readtime',
+        tablecoltype: {  netaddrtyp : 'selection', netaddr : 'mtext', netaddr6: 'mtext', netbcast: 'text', netgateway: 'text', dnssearch : 'text', 'dnsnameserver' : 'mtext', dnsdomain : 'text', wlan : 'text', wlanpass : "text", wlanhidden : 'bool' },
 
         modurl  : 'sysexec/sbs/network/devices_ok',
-        modcols : ['device','netaddrtyp', 'netaddr6','netaddr','netbcast','netgateway','dnsnameserver','dnssearch'],
+        modcols : ['device','netaddrtyp', 'netaddr6','netaddr','netbcast','netgateway','dnsnameserver','dnssearch','wlan','wlanpass','wlanhidden'],
         
         delurl  : 'sysexec/sbs/network/devices_del',
         delids  : ['device'],

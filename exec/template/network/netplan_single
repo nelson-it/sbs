@@ -1,16 +1,22 @@
 network:
     version: 2
-    ethernets:
+    ####DEVICETYPE####:
         ####DEVICE####:
-            dhcp4: true
-            addresses: 
+          dhcp4: true
+          dhcp6: true
+          addresses: 
             - ####ADDR40####
             - ####ADDR41####
             - ####ADDR42####
             - ####ADDR60####
             - ####ADDR61####
             - ####ADDR62####
-            gateway4: ####GW####
-            nameservers:
-              addresses: [####NAMESERVER####]
-              search: [####SEARCH####]
+          gateway4: ####GW####
+          nameservers:
+            addresses: [####NAMESERVER####]
+            search: [####SEARCH####]
+          access-points:
+            "####WLAN####":
+              hidden: true
+              password: "####WLANPASS####"
+              

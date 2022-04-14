@@ -3,15 +3,15 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-ids="device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,readtime"
-labels="Schnittstelle,Type,Ipv6 Addresse,Ipv4 Addresse,Broadcast,Gateway,Nameserver,DNS Suchdomains,Lesezeit";
+ids="device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,wlan,wlanpass,wlanhidden,readtime"
+labels="Schnittstelle,Type,Ipv6 Addresse,Ipv4 Addresse,Broadcast,Gateway,Nameserver,DNS Suchdomains,WLan,Password,versteckt,Lesezeit";
 
-json_writeheader "$ids" "$labels" "readtime:1000" "" "netaddrtyp:notempty,netaddr6:ip6addrmaskmempty,netaddr:ip4addrmaskmempty,netgateway:ip4addrempty";
+json_writeheader "$ids" "$labels" "readtime:1000,wlanhidden:1" "" "netaddrtyp:notempty,netaddr6:ip6addrmaskmempty,netaddr:ip4addrmaskmempty,netgateway:ip4addrempty";
 
 if [ -f $netplandir/mnesys-config ]; then
   for file in $(ls -1 "$netconfigdir")
   do
-	if [ ! -e "/sys/class/net/$file" ] || [ "$(stat -c %Y "$netconfigdir/$file")" -lt "$(stat -c %Y "$netplandir/00-mne-$file.yaml" )" ]; then
+	if [ ! -e "/sys/class/net/$file" ] || [ ! -e "$netplandir/00-mne-$file.yaml" ] || [ "$(stat -c %Y "$netconfigdir/$file")" -lt "$(stat -c %Y "$netplandir/00-mne-$file.yaml" )" ]; then
 	  rm "$netconfigdir/$file" >&$logfile 2>&1;
 	fi
   done
@@ -27,7 +27,6 @@ do
     	json_komma=","
     	cat $conffile | sed -e 's/####ACTTIME####/'$acttime'/g'
     else
-        devices="$devices '$device'"
         declare netaddr= netmask= netbcast= netgateway= dnssearch= dnsnameserver=
 
         netgateway="$(route -n       | awk '/^0\.0\.0\.0.*'$device'/ { print $2 }')"
@@ -44,7 +43,7 @@ do
         dnssearch=`cat /etc/resolv.conf | awk '/^search[ \t]/ { print $2 }'`
         dnsnameserver=$(cat /etc/resolv.conf | awk 'BEGIN { found=""; } /^nameserver[ \t]+/ { gsub(/%.*$/,"",$2); printf("%s%s",found,$2); found = "," }')
 
-        json_writedata "$device" "" "$netaddr6" "$netaddr" "$netbcast" "$netgateway" "$dnsnameserver" "$dnssearch" "$acttime";
+        json_writedata "$device" "" "$netaddr6" "$netaddr" "$netbcast" "$netgateway" "$dnsnameserver" "$dnssearch" "" "" "" "$acttime";
      fi
   fi
 done

@@ -30,9 +30,16 @@ if [ "$vanetaddrtypInput" != "static" ]; then
 	vadnssearchInput=
 fi
 
+if [ "$vawlanInput" != "" ] && [ "$vawlanpassInput" == "" ]; then
+   echo "Bitte Wlan Password eingeben" >&2
+   exit 1
+fi
+
 prog='/####DEVICE####/     { gsub(/####DEVICE####/,"'$vadeviceInput'"); }
+      /####DEVICETYPE####/ { if ( "'$vawlanInput'" == "" ) gsub(/####DEVICETYPE####/, "ethernets"); else gsub(/####DEVICETYPE####/, "wifis"); } 
 
       /dhcp4/              { if ( "'$vanetaddrtypInput'" != "dhcp"   ) next; }
+      /dhcp6/              { if ( "'$vanetaddrtypInput'" != "dhcp"   ) next; }
       /addresses/          { if ( "'$vanetaddrtypInput'" != "static" ) next; }
 
       /####ADDR40####/     { if ( "'${addr4[0]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR40####/, "'${addr4[0]}'"); }
@@ -61,13 +68,19 @@ prog='/####DEVICE####/     { gsub(/####DEVICE####/,"'$vadeviceInput'"); }
       /nameserver/         { if ( "'$vadnsnameserverInput'" == "" && "'$vadnssearchInput'" == "" || "'$vanetaddrtypInput'" != "static" ) next; }
       /####NAMESERVER####/ { if ( "'$vadnsnameserverInput'" == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####NAMESERVER####/, "'$vadnsnameserverInput'"); }
       /####SEARCH####/     { if ( "'$vadnssearchInput'"     == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####SEARCH####/, "'$vadnssearchInput'"); }
+      
+      /access-points/      { if ( "'$vawlanInput'" == "" ) next; }
+      /hidden/             { if ( "'$vawlanInput'" == "" || "'$vawlanhiddenInput'" == "" ) next;  }
+      /####WLAN####/       { if ( "'$vawlanInput'" == "" ) next; gsub(/####WLAN####/, "'$vawlanInput'"); }
+      /####WLANPASS####/   { if ( "'$vawlanInput'" == "" ) next; gsub(/####WLANPASS####/, "'$vawlanpassInput'"); }
+      
       { print $0 }'
 
 conffile="$netplandir/00-mne-$vadeviceInput.yaml"
 awk "$prog" "$conf_single" > $conffile
 
 conffile="$netconfigdir/$vadeviceInput"
-echo ' [ "'$vadeviceInput'", "'$vanetaddrtypInput'", "'$vanetaddr6Input'", "'"$vanetaddrInput"'", "'$vanetbcastInput'", "'$vanetgatewayInput'", "'$vadnsnameserverInput'", "'$vadnssearchInput'", "'####ACTTIME####'" ]' > $conffile;
+echo ' [ "'$vadeviceInput'", "'$vanetaddrtypInput'", "'$vanetaddr6Input'", "'"$vanetaddrInput"'", "'$vanetbcastInput'", "'$vanetgatewayInput'", "'$vadnsnameserverInput'", "'$vadnssearchInput'", "'$vawlanInput'", "", "'$vawlanhiddenInput'", "'####ACTTIME####'" ]' > $conffile;
 
 netplan apply
  

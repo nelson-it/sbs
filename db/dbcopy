@@ -1,0 +1,18 @@
+#!/bin/bash
+
+develophost=puck
+
+origdb=sbsdb
+orighost=$develophost
+origuser=admindb
+origport=5432
+
+checkdb=sbsdb
+checkhost=localhost
+checkuser=admindb
+checkport=5432
+
+precmd="ALTER ROLE sogo$(hostname) RENAME TO sogo$develophost;"
+postcmd="ALTER ROLE sogo$develophost RENAME TO sogo$(hostname);"
+
+. ../../dbsync/dbcopy

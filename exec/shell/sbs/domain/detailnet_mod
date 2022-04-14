@@ -28,7 +28,7 @@ if [ "$vadomaintypInput" == "primary" ] || [ "$vadomaintypInput" == "second" ]; 
   eval "$(sed -e 's/\[/deviceconfarray=\(/' -e 's/\]/\)/' -e 's/,//g' < "$netdevicefile" )"
   mod_netpar "$vadomainInput" "$vanetdeviceInput" "$vadnsforwarderInput" "$vadnssearchInput"
   mod_dhcp "${deviceconfarray[3]}" "$vadhcpstartInput" "$vadhcpendInput" "${deviceconfarray[2]}" "$vadhcp6startInput" "$vadhcp6endInput" \
-           "$vadnssearchInput" "$vadomainInput" "${deviceconfarray[4]}" "${deviceconfarray[5]}" "$vanetdeviceInput" \
+           "$vadomainInput" "$vadnssearchInput" "${deviceconfarray[4]}" "${deviceconfarray[5]}" "$vanetdeviceInput" \
            "$dhcpconf4" "$dhcpconf6" "$dhcpupdate" "$radvdconf"
 fi
 

@@ -69,7 +69,7 @@ if [ -f $certcadir/ca.crt ] && [ -f $certcadir/ca.key ]; then
         echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096  >&$logfile 2>&1
         echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
     fi
-elif [ -f $certcadir/ca.key ]; then
+elif [ ! -f $certcadir/ca.key ]; then
     echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096   >&$logfile 2>&$logfile
     echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
     

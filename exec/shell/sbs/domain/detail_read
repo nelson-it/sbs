@@ -36,10 +36,11 @@ if [ "$?" = "0" ]; then
     
     dhcpstart=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $2); print $2; exit 0 }')
     dhcpend=$(cat "$domaindhcpfile"   2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $3); print $3; exit 0 }')
-    dnssearch=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /domain-search/ { sub(/^.*domain-search[ \t]*/, ""); gsub("\"",""); gsub(","," "); gsub(";"," "); gsub(" +", " ");  print $0; exit 0 }')
 
     dhcp6start=$(cat "$domaindhcp6file" 2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $2); print $2; exit 0 }')
     dhcp6end=$(cat "$domaindhcp6file"   2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $3); print $3; exit 0 }')
+    
+    dnssearch=$(cat "/etc/resolv.conf" 2>/dev/null | awk '/^#/ { next; } /search/ { sub(/^.*search[ \t]*/, "");  print $0; exit 0 }')
 else
 	json_writeheader "$cols" "$labels" "" "" "primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty";
     domaintyp="standalone";
