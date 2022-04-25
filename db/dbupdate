@@ -15,6 +15,7 @@ checkuser=admindb
 if [ "$(id -u)" = "0" ]; then
     orighost=127.0.156.1
     checkhost=127.0.156.1
+    export PGPASSWORD="trust"
 fi
 
 cus_schemas="$cus_schemas"
