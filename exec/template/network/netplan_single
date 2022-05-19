@@ -11,7 +11,9 @@ network:
             - ####ADDR60####
             - ####ADDR61####
             - ####ADDR62####
-          gateway4: ####GW####
+          routes:
+            - to: default
+              via: ####GW####
           nameservers:
             addresses: [####NAMESERVER####]
             search: [####SEARCH####]

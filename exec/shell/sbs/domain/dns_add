@@ -3,7 +3,7 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 mne_need_error
-systemctl is-enabled mne_samba-ad-dc.service 2>&1 >/dev/null
+systemctl is-enabled samba-ad-dc.service 2>&1 >/dev/null
 if [ "$?" = "0" ]; then
 
   info=$(samba-tool domain info 127.0.0.1)

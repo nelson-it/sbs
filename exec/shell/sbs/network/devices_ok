@@ -64,6 +64,9 @@ prog='/####DEVICE####/     { gsub(/####DEVICE####/,"'$vadeviceInput'"); }
       /####ADDR68####/     { if ( "'${addr6[8]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR68####/, "'${addr6[8]}'"); }
       /####ADDR69####/     { if ( "'${addr6[9]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR69####/, "'${addr6[9]}'"); }
 
+      /routes:/            { if ( "'$vanetgatewayInput'"    == "" || "'$vanetaddrtypInput'" != "static" ) next; }
+      /to:/                { if ( "'$vanetgatewayInput'"    == "" || "'$vanetaddrtypInput'" != "static" ) next; }
+      /via:/               { if ( "'$vanetgatewayInput'"    == "" || "'$vanetaddrtypInput'" != "static" ) next; }
       /####GW####/         { if ( "'$vanetgatewayInput'"    == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####GW####/, "'$vanetgatewayInput'"); }
       /nameserver/         { if ( "'$vadnsnameserverInput'" == "" && "'$vadnssearchInput'" == "" || "'$vanetaddrtypInput'" != "static" ) next; }
       /####NAMESERVER####/ { if ( "'$vadnsnameserverInput'" == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####NAMESERVER####/, "'$vadnsnameserverInput'"); }

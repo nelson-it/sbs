@@ -305,7 +305,7 @@ function dhcp_mod_appamor()
     fi
     
     mkdir -p /etc/apparmor.d/dhcpd.d
-    echo "       /etc/mne/dhcpd/update-samba-dns.sh Ux," > /etc/apparmor.d/dhcpd.d/mne_samba_dhcpd
+    echo "       /etc/mne/dhcpd/update-samba-dns.sh Ux," > /etc/apparmor.d/dhcpd.d/samba_dhcpd
     
 }
 

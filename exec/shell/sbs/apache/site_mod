@@ -19,7 +19,7 @@ if [ "$vanameInput" = "000-default-ssl" ] || [ "$vanameInput" = "000-default" ];
     vanameInput="$vanameInput_old";
 
     mne_need_error
-    systemctl is-enabled mne_samba-ad-dc.service >/dev/null 2>&1
+    systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
     if [ "$?" = "0" ]; then
        domain=$(samba-tool domain info 127.0.0.1 | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
        vaaliasesInput="$(hostname).$domain $domain"

@@ -8,7 +8,7 @@ dhcpconf6=$(findtemplate  domain dhcpd6.conf)
 dhcpupdate=$(findtemplate domain update-samba-dns.sh)
 radvdconf=$(findtemplate  domain radvd.conf)
 
-sambaservice=$(findtemplate  domain mne_samba-ad-dc.service)
+sambaservice=$(findtemplate  domain samba-ad-dc.service)
 
 # -------------------------------------------
 # permission certifikat files
@@ -34,8 +34,8 @@ systemctl disable --now smbd nmbd winbind systemd-resolved samba-ad-dc.service 2
 systemctl mask          smbd nmbd winbind samba-ad-dc.service 2>&$logfile 1>&2
 mne_error_ignore=
 
-systemctl enable mne_samba-ad-dc.service 2>&$logfile 1>&2
-systemctl stop   mne_samba-ad-dc.service 2>&$logfile 1>&2
+systemctl enable samba-ad-dc.service 2>&$logfile 1>&2
+systemctl stop   samba-ad-dc.service 2>&$logfile 1>&2
 
 systemctl enable named.service 2>&$logfile 1>&2
 
@@ -105,10 +105,10 @@ samba-tool domain exportkeytab --principal=dns-$(hostname)@$udomain /etc/mne/dns
 chown root:dhcpd /etc/mne/dns/dns.keytab
 chmod 440 /etc/mne/dns/dns.keytab
 
-systemctl restart mne_samba-ad-dc >&$logfile 2>&1
+systemctl restart samba-ad-dc >&$logfile 2>&1
 systemctl restart named >&$logfile 2>&1
 sleep 2
-systemctl status mne_samba-ad-dc >&$logfile 2>&1
+systemctl status samba-ad-dc >&$logfile 2>&1
 
 echo "$vaadminpasswordInput" | kinit  administrator@$udomain >&$logfile 2>&1
 klist >&$logfile 2>&1

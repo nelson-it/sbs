@@ -8,7 +8,7 @@ smbconf=$(findtemplate domain smb_standalone.conf)
 systemctl daemon-reload
 
 mne_error_ignore=1
-systemctl disable --now mne_sogo samba-ad-dc.service mne_samba-ad-dc.service named isc-dhcp-server isc-dhcp-server6 2>&$logfile 1>&2
+systemctl disable --now sogo samba-ad-dc.service samba-ad-dc.service named isc-dhcp-server isc-dhcp-server6 2>&$logfile 1>&2
 
 systemctl unmask smbd nmbd winbind systemd-resolved 2>&$logfile 1>&2
 systemctl enable smbd nmbd winbind systemd-resolved 2>&$logfile 1>&2
