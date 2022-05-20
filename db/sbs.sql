@@ -1,10 +1,10 @@
--- Database Version: 11
+-- Database Version: 12
 --
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.9 (Ubuntu 12.9-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.9 (Ubuntu 12.9-0ubuntu0.20.04.1)
+-- Dumped from database version 14.2 (Ubuntu 14.2-1ubuntu1)
+-- Dumped by pg_dump version 14.2 (Ubuntu 14.2-1ubuntu1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2329,6 +2329,120 @@ CREATE TABLE ext_sogo.sogomanny001611f754f_quick (
 ALTER TABLE ext_sogo.sogomanny001611f754f_quick OWNER TO sogogaia;
 
 --
+-- Name: sogotest001587c6ced; Type: TABLE; Schema: ext_sogo; Owner: sogogaia
+--
+
+CREATE TABLE ext_sogo.sogotest001587c6ced (
+    c_name character varying(255) NOT NULL,
+    c_content text NOT NULL,
+    c_creationdate integer NOT NULL,
+    c_lastmodified integer NOT NULL,
+    c_version integer NOT NULL,
+    c_deleted integer
+);
+
+
+ALTER TABLE ext_sogo.sogotest001587c6ced OWNER TO sogogaia;
+
+--
+-- Name: sogotest001587c6ced_acl; Type: TABLE; Schema: ext_sogo; Owner: sogogaia
+--
+
+CREATE TABLE ext_sogo.sogotest001587c6ced_acl (
+    c_uid character varying(255) NOT NULL,
+    c_object character varying(255) NOT NULL,
+    c_role character varying(80) NOT NULL
+);
+
+
+ALTER TABLE ext_sogo.sogotest001587c6ced_acl OWNER TO sogogaia;
+
+--
+-- Name: sogotest001587c6ced_quick; Type: TABLE; Schema: ext_sogo; Owner: sogogaia
+--
+
+CREATE TABLE ext_sogo.sogotest001587c6ced_quick (
+    c_name character varying(255) NOT NULL,
+    c_uid character varying(255) NOT NULL,
+    c_startdate integer,
+    c_enddate integer,
+    c_cycleenddate integer,
+    c_title character varying(1000) NOT NULL,
+    c_participants text,
+    c_isallday integer,
+    c_iscycle integer,
+    c_cycleinfo text,
+    c_classification integer NOT NULL,
+    c_isopaque integer NOT NULL,
+    c_status integer NOT NULL,
+    c_priority integer,
+    c_location character varying(255),
+    c_orgmail character varying(255),
+    c_partmails text,
+    c_partstates text,
+    c_category character varying(255),
+    c_sequence integer,
+    c_component character varying(10) NOT NULL,
+    c_nextalarm integer,
+    c_description text
+);
+
+
+ALTER TABLE ext_sogo.sogotest001587c6ced_quick OWNER TO sogogaia;
+
+--
+-- Name: sogotest00223211dc6; Type: TABLE; Schema: ext_sogo; Owner: sogogaia
+--
+
+CREATE TABLE ext_sogo.sogotest00223211dc6 (
+    c_name character varying(255) NOT NULL,
+    c_content text NOT NULL,
+    c_creationdate integer NOT NULL,
+    c_lastmodified integer NOT NULL,
+    c_version integer NOT NULL,
+    c_deleted integer
+);
+
+
+ALTER TABLE ext_sogo.sogotest00223211dc6 OWNER TO sogogaia;
+
+--
+-- Name: sogotest00223211dc6_acl; Type: TABLE; Schema: ext_sogo; Owner: sogogaia
+--
+
+CREATE TABLE ext_sogo.sogotest00223211dc6_acl (
+    c_uid character varying(255) NOT NULL,
+    c_object character varying(255) NOT NULL,
+    c_role character varying(80) NOT NULL
+);
+
+
+ALTER TABLE ext_sogo.sogotest00223211dc6_acl OWNER TO sogogaia;
+
+--
+-- Name: sogotest00223211dc6_quick; Type: TABLE; Schema: ext_sogo; Owner: sogogaia
+--
+
+CREATE TABLE ext_sogo.sogotest00223211dc6_quick (
+    c_name character varying(255) NOT NULL,
+    c_givenname character varying(255),
+    c_cn character varying(255),
+    c_sn character varying(255),
+    c_screenname character varying(255),
+    c_l character varying(255),
+    c_mail text,
+    c_o character varying(255),
+    c_ou character varying(255),
+    c_telephonenumber character varying(255),
+    c_categories character varying(255),
+    c_component character varying(10) NOT NULL,
+    c_hascertificate integer
+);
+
+
+ALTER TABLE ext_sogo.sogotest00223211dc6_quick OWNER TO sogogaia;
+
+--
 -- Name: applications; Type: TABLE; Schema: mne_application; Owner: admindb
 --
 
@@ -3203,6 +3317,8 @@ COPY ext_sogo.sogo_cache_folder_manny (c_path, c_parent_path, c_type, c_creation
 COPY ext_sogo.sogo_folder_info (c_folder_id, c_path, c_path1, c_path2, c_path3, c_path4, c_foldername, c_location, c_quick_location, c_acl_location, c_folder_type) FROM stdin;
 1	/Users/manny/Calendar/personal	Users	manny	Calendar	personal	Persönlicher Kalender	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogomanny001611f754f	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogomanny001611f754f_quick	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogomanny001611f754f_acl	Appointment
 2	/Users/manny/Contacts/personal	Users	manny	Contacts	personal	Persönliches Adressbuch	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogomanny0012a410d78	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogomanny0012a410d78_quick	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogomanny0012a410d78_acl	Contact
+3	/Users/test/Calendar/personal	Users	test	Calendar	personal	Personal Calendar	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogotest001587c6ced	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogotest001587c6ced_quick	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogotest001587c6ced_acl	Appointment
+4	/Users/test/Contacts/personal	Users	test	Contacts	personal	Personal Address Book	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogotest00223211dc6	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogotest00223211dc6_quick	postgresql://sogogaia@127.0.0.1:5432/sbsdb/sogotest00223211dc6_acl	Contact
 \.
 
 
@@ -3212,6 +3328,8 @@ COPY ext_sogo.sogo_folder_info (c_folder_id, c_path, c_path1, c_path2, c_path3, 
 
 COPY ext_sogo.sogo_sessions_folder (c_id, c_value, c_creationdate, c_lastseen) FROM stdin;
 xFbl/ySNZWZHthIikuN4ag==	b1mk/YcVQCyaUq9bkfYhYUa4o8FAmvUnSM+1g7FMRtOpACXVAm0CJM3PSAPrP8ECFS0uwP3JasiZb34E5tIGN6XqZ7srOma9uURfECzkcPURP4VM1PtMXQGZpa4FJP4vSU4wFTA94RJvIwxqGywWwhgWfT84TtNmSnksCQFd7FMeN0Jp6GlWBQZQqyj3IaLlPS/ltV5fchxC1fBKiyMAUQ==	1649943708	1649944286
+1QSUKnNKKo3JRvIItwtMjw==	VYfm7oss9oKi2kFBkHKNj8zaMeZC/af/4XuCwVMMsfaZG3/WipMSrKddwh91NVCkNO3TaaMGltdoCoLCo+sok+DCtdQwZ6WnXLidsmHtcTe1mri+WOIBhSdxZaXY8jTuk+XTItCJnG3W+DdPXoXzoDeLwVcRQrgZoRLm0SNV5xWaDqymY3RMraw68gacFTak2I//LLpY2AvpeCn89q9kgw==	1652953600	1652971331
+i4IW3eLfDSnksbwdD9toKg==	Wq+T6kgq71s3sMJr/4fdb1NP0a7q8swR4hFVxQZmA0bln1qzeQ8bs7i+Rue+cDOGcaHMrMq6uH241fJdsrVgdmu+yplEqwdeukkDANNbglfdiLir9oLIGLHh79PuWxJjMe8yzBJCiMTtLWhWFvhsUhzfDPxyJEdKQFJYxIxfE0Hmu0q24XignWS1lWrJSoHY6PWyygqCi4JzfJFxJA4jBA==	1653028985	1653028985
 \.
 
 
@@ -3221,6 +3339,7 @@ xFbl/ySNZWZHthIikuN4ag==	b1mk/YcVQCyaUq9bkfYhYUa4o8FAmvUnSM+1g7FMRtOpACXVAm0CJM3
 
 COPY ext_sogo.sogo_user_profile (c_uid, c_defaults, c_settings) FROM stdin;
 manny	{"SOGoMailLabelsColors": {"$mdnsent": ["Empfangsbestätigung gesendet", "#006600"], "$label5": ["Später", "#993399"], "$label2": ["Geschäftlich", "#FF9900"], "$label4": ["To-Do", "#3333FF"], "$label1": ["Wichtig", "#FF0000"], "$label3": ["Persönlich", "#009900"]}, "SOGoMailAutoSave": "5", "SOGoTimeFormat": "%H:%M", "SOGoMailAddOutgoingAddresses": 0, "SOGoCalendarCategories": ["Kunde", "Anrufe", "Favoriten", "Besprechung", "Ideen", "Verschiedenes", "Geburtstag", "Jubiläum", "Urlaub", "Reise", "Projekte", "Lieferanten", "Geschenke", "Klienten", "Fragen", "Geschäft", "Ferien", "Persönlich", "Status", "Konkurrenz", "Fortsetzung", "Feiertag"], "SOGoCalendarDefaultReminder": "NONE", "SOGoCalendarCategoriesColors": {"Lieferanten": "#9708CC", "Geschäft": "#FA016D", "Ideen": "#32CCBC", "Ferien": "#0E197D", "Persönlich": "#DE4313", "Projekte": "#8C1BAB", "Geburtstag": "#28C76F", "Fragen": "#3677FF", "Urlaub": "#623AA2", "Konkurrenz": "#6018DC", "Jubiläum": "#9F44D3", "Status": "#002661", "Feiertag": "#E80505", "Fortsetzung": "#D939CD", "Klienten": "#E96D71", "Anrufe": "#0396FF", "Reise": "#F55555", "Verschiedenes": "#F6416C", "Besprechung": "#7367F0", "Geschenke": "#736EFE", "Kunde": "#F8D800", "Favoriten": "#EA5455"}, "SOGoLoginModule": "Mail", "SOGoDayStartTime": "08:00", "SOGoCalendarWeekdays": ["SU", "MO", "TU", "WE", "TH", "FR", "SA"], "SOGoCalendarTasksDefaultClassification": "PUBLIC", "SOGoTimeZone": "Europe\\/Berlin", "SOGoRefreshViewCheck": "manually", "SOGoLanguage": "German", "SOGoAnimationMode": "normal", "SOGoMailSignaturePlacement": "below", "SOGoSelectedAddressBook": "collected", "SOGoContactsCategories": ["Familie", "Freund", "Geschäftspartner", "Kollegin", "Konkurrenten", "Kunden", "Lieferant", "Presse", "VIP"], "SOGoShortDateFormat": "%d-%b-%y", "SOGoFirstWeekOfYear": "January1", "SOGoDefaultCalendar": "selected", "SOGoFirstDayOfWeek": 0, "SOGoAlternateAvatar": "none", "SOGoCalendarEventsDefaultClassification": "PUBLIC", "SOGoMailComposeMessageType": "html", "SOGoGravatarEnabled": 0, "SOGoLongDateFormat": "%A, %B %d, %Y", "SOGoMailDisplayRemoteInlineImages": "never", "SOGoMailComposeFontSize": "0", "SOGoGoogleAuthenticatorEnabled": 0, "SOGoMailMessageForwarding": "inline", "SOGoDayEndTime": "18:00", "SOGoMailReplyPlacement": "below"}	{"Calendar": {"SelectedList": "eventsListView", "FoldersOrder": ["personal"], "EventsFilterState": "view_next7", "EventsSortingState": ["start", "1"], "View": "weekview"}}
+test	{"SOGoMailLabelsColors": {"$mdnsent": ["Return Receipt Sent", "#006600"], "$label5": ["Later", "#993399"], "$label2": ["Work", "#FF9900"], "$label4": ["To Do", "#3333FF"], "$label1": ["Important", "#FF0000"], "$label3": ["Personal", "#009900"]}, "SOGoMailAutoSave": "5", "SOGoTimeFormat": "%H:%M", "SOGoMailAddOutgoingAddresses": 0, "SOGoCalendarCategories": ["Customer", "Calls", "Favorites", "Meeting", "Ideas", "Miscellaneous", "Birthday", "Anniversary", "Vacation", "Travel", "Projects", "Suppliers", "Gifts", "Clients", "Issues", "Business", "Holidays", "Personal", "Status", "Competition", "Follow up", "Public Holiday"], "SOGoCalendarDefaultReminder": "NONE", "SOGoCalendarCategoriesColors": {"Personal": "#DE4313", "Miscellaneous": "#F6416C", "Gifts": "#736EFE", "Customer": "#F8D800", "Business": "#FA016D", "Status": "#002661", "Anniversary": "#9F44D3", "Vacation": "#623AA2", "Clients": "#E96D71", "Travel": "#F55555", "Competition": "#6018DC", "Calls": "#0396FF", "Favorites": "#EA5455", "Meeting": "#7367F0", "Issues": "#3677FF", "Public Holiday": "#E80505", "Projects": "#8C1BAB", "Holidays": "#0E197D", "Birthday": "#28C76F", "Ideas": "#32CCBC", "Suppliers": "#9708CC", "Follow up": "#D939CD"}, "SOGoLoginModule": "Mail", "SOGoDayStartTime": "08:00", "SOGoCalendarWeekdays": ["SU", "MO", "TU", "WE", "TH", "FR", "SA"], "SOGoCalendarTasksDefaultClassification": "PUBLIC", "SOGoTimeZone": "Europe\\/Berlin", "SOGoRefreshViewCheck": "manually", "SOGoLanguage": "English", "SOGoAnimationMode": "normal", "SOGoMailSignaturePlacement": "below", "SOGoSelectedAddressBook": "collected", "SOGoContactsCategories": ["Business Partner", "Colleague", "Competitor", "Customer", "Family", "Friend", "Press", "Provider", "VIP"], "SOGoShortDateFormat": "%d-%b-%y", "SOGoFirstWeekOfYear": "January1", "SOGoDefaultCalendar": "selected", "SOGoFirstDayOfWeek": 0, "SOGoAlternateAvatar": "none", "SOGoTOTPEnabled": 0, "SOGoCalendarEventsDefaultClassification": "PUBLIC", "SOGoMailComposeMessageType": "html", "SOGoGravatarEnabled": 0, "SOGoLongDateFormat": "%A, %B %d, %Y", "SOGoMailDisplayRemoteInlineImages": "never", "SOGoMailAutoMarkAsReadDelay": 0, "SOGoMailComposeFontSize": "0", "SOGoMailMessageForwarding": "inline", "SOGoDayEndTime": "18:00", "SOGoMailReplyPlacement": "below"}	{"Contact": {"SortingState": ["c_cn", "1"]}, "Calendar": {}}
 \.
 
 
@@ -3271,6 +3390,54 @@ COPY ext_sogo.sogomanny001611f754f_acl (c_uid, c_object, c_role) FROM stdin;
 
 COPY ext_sogo.sogomanny001611f754f_quick (c_name, c_uid, c_startdate, c_enddate, c_cycleenddate, c_title, c_participants, c_isallday, c_iscycle, c_cycleinfo, c_classification, c_isopaque, c_status, c_priority, c_location, c_orgmail, c_partmails, c_partstates, c_category, c_sequence, c_component, c_nextalarm, c_description) FROM stdin;
 1EC0-62582480-1-17F9DE60.ics	1EC0-62582480-1-17F9DE60	1649574000	1649576700	\N	test	\N	0	0	\N	0	1	1	0		manny@gtest.puran2.ch	\N		\N	1	vevent	0	
+\.
+
+
+--
+-- Data for Name: sogotest001587c6ced; Type: TABLE DATA; Schema: ext_sogo; Owner: sogogaia
+--
+
+COPY ext_sogo.sogotest001587c6ced (c_name, c_content, c_creationdate, c_lastmodified, c_version, c_deleted) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sogotest001587c6ced_acl; Type: TABLE DATA; Schema: ext_sogo; Owner: sogogaia
+--
+
+COPY ext_sogo.sogotest001587c6ced_acl (c_uid, c_object, c_role) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sogotest001587c6ced_quick; Type: TABLE DATA; Schema: ext_sogo; Owner: sogogaia
+--
+
+COPY ext_sogo.sogotest001587c6ced_quick (c_name, c_uid, c_startdate, c_enddate, c_cycleenddate, c_title, c_participants, c_isallday, c_iscycle, c_cycleinfo, c_classification, c_isopaque, c_status, c_priority, c_location, c_orgmail, c_partmails, c_partstates, c_category, c_sequence, c_component, c_nextalarm, c_description) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sogotest00223211dc6; Type: TABLE DATA; Schema: ext_sogo; Owner: sogogaia
+--
+
+COPY ext_sogo.sogotest00223211dc6 (c_name, c_content, c_creationdate, c_lastmodified, c_version, c_deleted) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sogotest00223211dc6_acl; Type: TABLE DATA; Schema: ext_sogo; Owner: sogogaia
+--
+
+COPY ext_sogo.sogotest00223211dc6_acl (c_uid, c_object, c_role) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sogotest00223211dc6_quick; Type: TABLE DATA; Schema: ext_sogo; Owner: sogogaia
+--
+
+COPY ext_sogo.sogotest00223211dc6_quick (c_name, c_givenname, c_cn, c_sn, c_screenname, c_l, c_mail, c_o, c_ou, c_telephonenumber, c_categories, c_component, c_hascertificate) FROM stdin;
 \.
 
 
@@ -3353,7 +3520,6 @@ admindb	1542279038	admindb	/weblet/dbadmin/table/check	check	20	bottom			0	admin
 admindb	1611648963	admindb	/weblet/sbs/network/detail	network	0	network			0		f	600ebad78000	600e93548000	1611578071
 admindb	1599565612	admindb	/weblet/allg/menu/fix	querys	10	selection	'schema'    : 'mne_application',\n 'table'        : 'queryname',\n 'cols'         : 'schema,query,unionnum',\n 'showcols' : 'queryid',\n\n loaddirect : 1	detail	0		f	575ea20580ae	575e9c458001	1206446752
 admindb	1611903530	admindb	/weblet/sbs/network/devices	devices	0	devices			0		f	60115dfa8000	600e93548000	1611750906
-admindb	1614591855	admindb	/weblet/allg/table/select	deviceselect	0	popup	url      : 'sysexec/sbs/network/devices_read',\ncols     : 'device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,readtime',\nshowcols : 'device',\n\ntablehidecols : 'netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,readtime'.split(','),		0		f	6034b0ee8000	57bab6120000	1614065902
 admindb	1616151099	admindb	/weblet/allg/menu/fix	all	0	selection	url : 'sysexec/sbs/share/select_read',\ncols : 'share',\nshowcols : 'share'	detail	0		f	6054762b8000	605475c38000	1616148011
 admindb	1603794891	admindb	/weblet/allg/table/fix	webletselect	20	bottom	schema : 'mne_application',\ntable : 'htmlcomposetabselect',\ncols : 'htmlcomposeid,htmlcomposetabselectid,id,element,type,schema,query,tab,wcol,wop,wval,cols,showcols,scols,selval,showids,showalias,weblet,custom',\nscols : 'id,element',\n\nshowids : ['htmlcomposeid'],\n  okids : ['htmlcomposetabselectid'],\n\ntablehidecols : ['htmlcomposeid','htmlcomposetabselectid'],\ntablecoltype : { id: 'text', element: 'text', type: 'text', schema: 'text', query: 'text', tab: 'text', wcol: 'text', wop: 'text', wval: 'text',cols: 'text',showcols: 'text',scols: 'text',showids: 'text', showalias : 'text', selval : 'text', weblet: 'text',custom: 'text' },\n\n\n		0		f	575ea20580bf	575e9c45801d	1226394770
 admindb	1615283099	admindb	/weblet/allg/menu/fix	all	0	selection	url : 'sysexec/sbs/user/select_read',\ncols : 'fullname',\nshowcols : 'sAMAccountName'	detail	0		f	604718e08000	604718218000	1615272160
@@ -3433,6 +3599,7 @@ admindb	1616743255	admindb	/weblet/allg/table/fix	bottom	0	bottom	url    : 'syse
 admindb	1620368191	admindb	/weblet/allg/table/filter	keys	300	bottom	tableweblet   : '/weblet/sbs/cert/certtable',\nurl           : 'sysexec/sbs/cert/cert_read',\ncols          : 'dir,data,filename,dns,valid,ca',\nshowids       : ['dir'],\nshowalias     : ['#key'],\ntablehidecols : [ 'dir', 'data', 'dns', 'valid', 'ca' ],\n\ndelurl        : 'sysexec/sbs/cert/cert_del',\ndelids        : [ 'dir', 'filename'],\ndelconfirmids : [ 'filename' ],\n	certs,csrs	0		f	575ea2058217	575e9c458039	1459840726
 admindb	1616579317	admindb	/weblet/allg/menu/rselect	locationselect	0	popup	url    : 'sysexec/sbs/share/location_read',\naddurl : 'sysexec/sbs/share/location_add',\nmodurl : 'sysexec/sbs/share/location_mod',\ndelurl : 'sysexec/sbs/share/location_del',\n\ncols : 'action,item,menuid,typ,pos',\nscols : 'pos',\nshowcols : 'menuid',\n\nwcol : 'typ,parentid',\nwop  : '=,=',\nwval : ',',\n\nloaddirect : 1		0		f	6054b1c38000	605475c38000	1616163267
 admindb	1616741429	admindb	/weblet/allg/table/frame	userselect	0	popup	url : 'sysexec/sbs/user/select_read',\ncols : 'fullname',\nshowcols : 'sAMAccountName'\n		0		f	605d83d08000	605475c38000	1616741328
+admindb	1653028423	admindb	/weblet/allg/table/select	deviceselect	0	popup	url : 'sysexec/sbs/network/devices_read',\ncols : 'device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,wlan,wlanpass,wlanhidden,readtime',\nshowcols : 'device',\n\ntablehidecols : 'netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,wlanpass,wlanhidden,readtime'.split(','),\n		0		f	6034b0ee8000	57bab6120000	1614065902
 \.
 
 
@@ -3443,7 +3610,6 @@ admindb	1616741429	admindb	/weblet/allg/table/frame	userselect	0	popup	url : 'sy
 COPY mne_application.htmlcomposetabnames (createdate, createuser, modifydate, modifyuser, label_en, label_de, custom, htmlcomposetabid, htmlcomposeid) FROM stdin;
 1226313601	admindb	1359387171	admindb	user settings	Benutzereinstellungen	f	575ea205804c	575e9c458034
 1471854209	admindb	1613985136	admindb	domain	Domain	f	57bab6810000	57bab6120000
-1614065902	admindb	1614591855	admindb	network device	Netzwerkadapter	f	6034b0ee8000	57bab6120000
 1220269084	admindb	1591090455	admindb	second table columns	zweite Tabelle Spalten	f	575ea2058050	575e9c458002
 1611578071	admindb	1611648963	admindb	actual network	aktuelles Netzwerk	f	600ebad78000	600e93548000
 1615272160	admindb	1615283099	admindb	User	Benutzer	f	604718e08000	604718218000
@@ -3525,6 +3691,7 @@ COPY mne_application.htmlcomposetabnames (createdate, createuser, modifydate, mo
 1616741328	admindb	1616741429	admindb	select user	Benutzer auswählen	f	605d83d08000	605475c38000
 1616581804	admindb	1616743255	admindb	user	Benutzer	f	605b14ac8000	605475c38000
 1459840726	admindb	1620368191	admindb	keys	Schlüssel	f	575ea2058217	575e9c458039
+1614065902	admindb	1653028423	admindb	network device	Netzwerkadapter	f	6034b0ee8000	57bab6120000
 \.
 
 
@@ -9251,7 +9418,7 @@ COPY mne_catalog.uuid (uuid, uuidid) FROM stdin;
 -- Name: sogo_folder_info_c_folder_id_seq; Type: SEQUENCE SET; Schema: ext_sogo; Owner: sogogaia
 --
 
-SELECT pg_catalog.setval('ext_sogo.sogo_folder_info_c_folder_id_seq', 2, true);
+SELECT pg_catalog.setval('ext_sogo.sogo_folder_info_c_folder_id_seq', 4, true);
 
 
 --
@@ -9316,6 +9483,38 @@ ALTER TABLE ONLY ext_sogo.sogomanny001611f754f
 
 ALTER TABLE ONLY ext_sogo.sogomanny001611f754f_quick
     ADD CONSTRAINT sogomanny001611f754f_quick_pkey PRIMARY KEY (c_name);
+
+
+--
+-- Name: sogotest001587c6ced sogotest001587c6ced_pkey; Type: CONSTRAINT; Schema: ext_sogo; Owner: sogogaia
+--
+
+ALTER TABLE ONLY ext_sogo.sogotest001587c6ced
+    ADD CONSTRAINT sogotest001587c6ced_pkey PRIMARY KEY (c_name);
+
+
+--
+-- Name: sogotest001587c6ced_quick sogotest001587c6ced_quick_pkey; Type: CONSTRAINT; Schema: ext_sogo; Owner: sogogaia
+--
+
+ALTER TABLE ONLY ext_sogo.sogotest001587c6ced_quick
+    ADD CONSTRAINT sogotest001587c6ced_quick_pkey PRIMARY KEY (c_name);
+
+
+--
+-- Name: sogotest00223211dc6 sogotest00223211dc6_pkey; Type: CONSTRAINT; Schema: ext_sogo; Owner: sogogaia
+--
+
+ALTER TABLE ONLY ext_sogo.sogotest00223211dc6
+    ADD CONSTRAINT sogotest00223211dc6_pkey PRIMARY KEY (c_name);
+
+
+--
+-- Name: sogotest00223211dc6_quick sogotest00223211dc6_quick_pkey; Type: CONSTRAINT; Schema: ext_sogo; Owner: sogogaia
+--
+
+ALTER TABLE ONLY ext_sogo.sogotest00223211dc6_quick
+    ADD CONSTRAINT sogotest00223211dc6_quick_pkey PRIMARY KEY (c_name);
 
 
 --
