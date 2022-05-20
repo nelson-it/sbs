@@ -9,7 +9,7 @@ labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Admini
 regexps="primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
 
 mne_need_error
-systemctl status samba-ad-dc.service >/dev/null 2>&1
+systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
 if [ "$?" = "0" ]; then
 	json_writeheader "$cols" "$labels" "" "" "adminpassword:notempty,domain:notempty,$regexps"
 

@@ -8,8 +8,6 @@ dhcpconf6=$(findtemplate  domain dhcpd6.conf)
 dhcpupdate=$(findtemplate domain update-samba-dns.sh)
 radvdconf=$(findtemplate  domain radvd.conf)
 
-sambaservice=$(findtemplate  domain samba-ad-dc.service)
-
 # -------------------------------------------
 # permission certifikat files
 # -------------------------------------------
@@ -26,12 +24,12 @@ addr=$(echo ${deviceconfarray[3]} | cut -f1 -d/)
 # -------------------------------------------
 # bereinigen
 # -------------------------------------------
-cp "$sambaservice" "/lib/systemd/system"
 
 systemctl daemon-reload
 mne_error_ignore=1
-systemctl disable --now smbd nmbd winbind systemd-resolved samba-ad-dc.service 2>&$logfile 1>&2
-systemctl mask          smbd nmbd winbind samba-ad-dc.service 2>&$logfile 1>&2
+systemctl disable --now smbd nmbd winbind systemd-resolved 2>&$logfile 1>&2
+systemctl mask          smbd nmbd winbind 2>&$logfile 1>&2
+systemctl unmask  samba-ad-dc.service 2>&$logfile 1>&2
 mne_error_ignore=
 
 systemctl enable samba-ad-dc.service 2>&$logfile 1>&2
