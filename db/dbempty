@@ -15,6 +15,10 @@ output=sbs.sql
 
 version=`cat ../../installer/mnesbs/dist/version`
 
+rm -f empty.sql
+. ./empty/mk_empty > empty.sql
+psql --username=$origuser --host=$orighost $checkdb < empty.sql > /dev/null
+rm empty.sql
+
 echo "-- Database Version: $version" > $output
 pg_dump --username=$origuser --host=$orighost $checkdb | sed -e "/CREATE EXTENSION.*plpgsql/d" -e "/COMMENT ON EXTENSION plpgsql/d" >> $output
-
