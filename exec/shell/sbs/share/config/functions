@@ -134,7 +134,7 @@ function write_samba()
     fi
 }
 
-#domaintype domain domaindn bindpassword share_old share location description readonly validuser rduser
+#domaintype domain domaindn bindpassword share_old share location description readonly
 function write_apache()
 {
     if [ "$domaintype" != "primary" ]; then
@@ -150,24 +150,28 @@ function write_apache()
     local groupname="Mneshare $(Tolower $hostname) $(Tolower $6)"
     local groupnameread="$groupname Read"
     
+    rm -f "$apacherootdir/conf-available/$oldname" >&$logfile
+    rm -f "$apacherootdir/conf-enabled/$oldname" >&$logfile
+
     if [ "$9" = "1" ]; then groupname="$groupname Disabled"; fi
 
-    write_access "$7" "$groupname" "$groupnameread"
+    if [ "$6" != "" ]; then
+      write_access "$7" "$groupname" "$groupnameread"
     
-    local prog='/####RELEASENAME####/   { gsub(/####RELEASENAME####/,"'$6'"); }
-                /####FOLDERNAME####/    { gsub(/####FOLDERNAME####/,"'$datadir$7'");   }
-                /####DESCRIPTION####/   { gsub(/####DESCRIPTION####/,"'$8'"); }
-                /####GROUPNAME####/     { gsub(/####GROUPNAME####/,"'$groupname'"); }
-                /####GROUPNAMEREAD####/ { gsub(/####GROUPNAMEREAD####/,"'$groupnameread'"); }
-                /####BINDPASSWD####/    { gsub(/####BINDPASSWD####/,"'$4'"); }
-                /####DCDOMAIN####/      { gsub(/####DCDOMAIN####/,"'$3'"); }
-                /####HOSTNAME####/      { gsub(/####HOSTNAME####/,"'$(hostname)'"); }
-                                        { print $0 }'
+      local prog='/####RELEASENAME####/   { gsub(/####RELEASENAME####/,"'$6'"); }
+                  /####FOLDERNAME####/    { gsub(/####FOLDERNAME####/,"'$datadir$7'");   }
+                  /####DESCRIPTION####/   { gsub(/####DESCRIPTION####/,"'$8'"); }
+                  /####GROUPNAME####/     { gsub(/####GROUPNAME####/,"'$groupname'"); }
+                  /####GROUPNAMEREAD####/ { gsub(/####GROUPNAMEREAD####/,"'$groupnameread'"); }
+                  /####BINDPASSWD####/    { gsub(/####BINDPASSWD####/,"'$4'"); }
+                  /####DCDOMAIN####/      { gsub(/####DCDOMAIN####/,"'$3'"); }
+                  /####HOSTNAME####/      { gsub(/####HOSTNAME####/,"'$(hostname)'"); }
+                                          { print $0 }'
    
-    rm -f "$apacherootdir/conf-available/$oldname" >&$logfile
-    awk "$prog" < "$template" > "$apacherootdir/conf-available/$confname"
+      awk "$prog" < "$template" > "$apacherootdir/conf-available/$confname"
+      a2enconf "$confname" >&$logfile 2>&1
+    fi
     
-    a2enconf "$confname" >&$logfile 2>&1
     mne_need_error
     err="$(apachectl configtest 2>&1 >/dev/null ; exit $? )"
     if [ "$?" != "0" ]; then
