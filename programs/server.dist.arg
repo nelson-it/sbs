@@ -15,4 +15,4 @@ EmbedwebHttpIndex:      sbs
 EmbedwebHttpServerpath: sbs/web:web/app:web/extern
 EmbedwebHttpDataroot:   /opt/mne/data
 
-HttpSysexecPath:        sbs/exec:exec/allg
+HttpSysexecPath:        local/exec:sbs/exec:exec/allg

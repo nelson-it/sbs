@@ -26,6 +26,8 @@ if [ "$vadomaintypInput" == "primary" ] || [ "$vadomaintypInput" == "second" ]; 
 	exit 2
   fi
   eval "$(sed -e 's/\[/deviceconfarray=\(/' -e 's/\]/\)/' -e 's/,//g' < "$netdevicefile" )"
+  check_dnspasswd $udomain
+  create_reverse "${deviceconfarray[3]}" "${deviceconfarray[2]}"
   mod_netpar "$vadomainInput" "$vanetdeviceInput" "$vadnsforwarderInput" "$vadnssearchInput"
   mod_dhcp "${deviceconfarray[3]}" "$vadhcpstartInput" "$vadhcpendInput" "${deviceconfarray[2]}" "$vadhcp6startInput" "$vadhcp6endInput" \
            "$vadomainInput" "$vadnssearchInput" "${deviceconfarray[4]}" "${deviceconfarray[5]}" "$vanetdeviceInput" \

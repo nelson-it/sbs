@@ -40,6 +40,7 @@ prog='/####DEVICE####/     { gsub(/####DEVICE####/,"'$vadeviceInput'"); }
 
       /dhcp4/              { if ( "'$vanetaddrtypInput'" != "dhcp"   ) next; }
       /dhcp6/              { if ( "'$vanetaddrtypInput'" != "dhcp"   ) next; }
+      /accept-ra/          { if ( "'$vanetaddrtypInput'" != "dhcp"   ) next; }
       /addresses/          { if ( "'$vanetaddrtypInput'" != "static" ) next; }
 
       /####ADDR40####/     { if ( "'${addr4[0]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR40####/, "'${addr4[0]}'"); }

@@ -140,6 +140,50 @@ EOF
   chown root:bind $domainbindroot/rndc.key
 }
 
+function get_reverse() {
+  if [ "$1" = "AAAA" ]; then
+    let num=$3/4
+    zone="$(ipv6calc -a -I ipv6addr $2/$3 | sed -e 's/\.$//')"
+    raddr="$(ipv6calc -a -I ipv6addr $2 | tr "." $'\n' | head -n $num | paste -s -d '.')"
+  else
+    let num=$3/8
+    zone="$(echo $2 | tr -d "[:blank:]" | cut -d/ -f1 | tr "." $'\n' | head -n $num | tac | paste -s -d '.').in-addr.arpa"
+    let num=4-$num
+    raddr="$(echo $2 | tr -d "[:blank:]" | cut -d/ -f1 | tr "." $'\n' | tail -$num | tac | paste -s -d '.')"
+  fi
+}
+
+function get_netparam() {
+
+  netdevicefile="$netconfigdir/$(cat /etc/samba/smb.conf | awk '/^[ \t]*interface/ { print $NR }')"
+  if [ ! -f "$netdevicefile" ]; then
+    echo "#mne_lang#Netzdevice ist nicht konfiguriert#" >&2
+    exit 2
+  fi
+  eval "$(sed -e 's/\[/deviceconfarray=\(/' -e 's/\]/\)/' -e 's/,//g' < "$netdevicefile" )"
+  
+  daddr4="${deviceconfarray[3]}"
+  daddr6="${deviceconfarray[2]}"
+}
+
+# ip4addr ip6addr
+function create_reverse()
+{
+  let num=$(echo $1 | cut -f2 -d/)/8
+  
+  zone4="$(netmask $1 | tr -d "[:blank:]" | cut -d/ -f1 | tr "." $'\n' | head -n $num | tac | paste -s -d '.').in-addr.arpa"
+  zone6="$(ipv6calc -a -I ipv6addr $2 | sed -e 's/\.$//')"
+  
+  hostname=$(hostname)
+  if [ "$(samba-tool dns zonelist $hostname --reverse --use-kerberos=required | awk '/pszZoneName.*'$zone4'/ { print 1 }')" = "" ]; then
+    samba-tool dns zonecreate $hostname $zone4 >&2
+  fi
+  if [ "$(samba-tool dns zonelist $hostname --reverse --use-kerberos=required | awk '/pszZoneName.*'$zone6'/ { print 1 }')" = "" ]; then
+    samba-tool dns zonecreate $hostname $zone6 >&2
+  fi
+}
+
+
 # domain netdevice dnsforward dnssearch
 function mod_netpar()
 {

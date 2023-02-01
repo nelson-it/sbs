@@ -4,6 +4,7 @@ network:
         ####DEVICE####:
           dhcp4: true
           dhcp6: true
+          accept-ra: no
           addresses: 
             - ####ADDR40####
             - ####ADDR41####

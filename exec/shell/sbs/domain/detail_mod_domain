@@ -111,6 +111,7 @@ systemctl status samba-ad-dc >&$logfile 2>&1
 echo "$vaadminpasswordInput" | kinit  administrator@$udomain >&$logfile 2>&1
 klist >&$logfile 2>&1
 
+create_reverse "${deviceconfarray[3]}" "${deviceconfarray[2]}"
 # -------------------------------------------
 # Grant share Rights to Domainadmins
 # -------------------------------------------

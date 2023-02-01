@@ -1,7 +1,9 @@
 #!/bin/bash
 
 . sbs/exec/config/allg
+. $netbasedir/config/functions
 . $(dirname $BASH_SOURCE)/config/functions
+
 mne_need_error
 systemctl is-enabled samba-ad-dc.service 2>&1 >/dev/null
 if [ "$?" = "0" ]; then
@@ -9,14 +11,30 @@ if [ "$?" = "0" ]; then
   info=$(samba-tool domain info 127.0.0.1)
   domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
   check_dnspasswd $domain
+  
+  get_netparam
+  
+  if [ "$vadns_recordInput" = "AAAA" ]; then
+    mask="$(echo $daddr6 | cut -f2 -d/)"
+  else
+    mask="$(echo $daddr4 | cut -f2 -d/)"
+  fi 
+  
+  get_reverse $vadns_recordInput_old $vaaddressInput_old $mask
 
   mne_need_error
-  samba-tool dns delete $(hostname) $domain "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" -k yes >&$logfile 2>&1
+  samba-tool dns delete $(hostname) $domain "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" --use-kerberos=required >&$logfile 2>&1
   if [ "$?" != "0" ]; then
-    echo '#mne_lang# Kann Addresse nicht löschen#'
-    exit 1;
+    echo '#mne_lang# Kann Addresse nicht finden#' 1>&2
+  fi
+  
+  mne_need_error
+  samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$domain" --use-kerberos=required >&$logfile 2>&1
+  if [ "$?" != "0" ]; then
+    echo '#mne_lang# Kann Rückaddresse nicht finden#' 1>&2
   fi    
- dhcp_fix_del "$vanameInput_old" "$vadns_recordInput"
+  
+  dhcp_fix_del "$vanameInput_old" "$vadns_recordInput"
 fi
 
 exit 0
