@@ -12,6 +12,9 @@ checkport=5432
 output=sbs.sql
 
 . ../../dbsync/dbempty
+psql --username=$origuser --host=$orighost $checkdb <<EOF >/dev/null 2>&1
+DROP SCHEMA ext_sogo CASCADE;
+EOF
 
 version=`cat ../../installer/mnesbs/dist/version`
 

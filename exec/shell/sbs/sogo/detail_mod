@@ -82,7 +82,6 @@ pg_adduser $sogouser
 echo "ALTER ROLE $sogouser SET search_path TO ext_sogo;"              | psql -U postgres $DB >&$logfile 2>&1
 echo "CREATE SCHEMA ext_sogo AUTHORIZATION $sogouser;"                | psql -U postgres $DB >&$logfile 2>&1
 echo "ALTER  SCHEMA ext_sogo OWNER TO $sogouser;"                     | psql -U postgres $DB >&$logfile 2>&1
-echo "GRANT SELECT ON TABLE mne_system.mailaliaspublic TO $sogouser;" | psql -U postgres $DB >&$logfile 2>&1
 
 cmd=
 for tbl in $(psql -qAt -c "select tablename from pg_tables where schemaname = 'ext_sogo';" -U postgres $DB)
