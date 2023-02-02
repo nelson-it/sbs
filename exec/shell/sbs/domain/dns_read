@@ -19,13 +19,14 @@ declare -A amac
 eval $( arp -n | awk '{ if ( $2 == "ether" ) printf("amac[%s]=\"%s\"\n", $1, $3) }')
 
 prog='/mnecomment/         { comment = $0; sub("#mnecomment", "", comment);  }
-      /^#/                 { next; }
-      /[        ]*host.*{/ { host = $2; addr=""; mac=""; comment="" }
-      /}/                  { printf("host[%s]=\"%s\"\nmac[%s]=\"%s\"\nfix[%s+%s]=\"true\"\ncomment[%s]=\"%s\"\n", addr, host, addr, mac, addr, host, addr, comment ) }
-      /fixed-address/      { addr = $2; sub(";", "", addr); }
-      /hardware ethernet/  { mac  = ( disabled ) ? $4 : $3; sub(";", "", mac);   } 
-      /dhcp6.client-id/    { mac  = $4; sub(";", "", mac); } '
+      /[ /t]*host.*{/      { fix=1; host = $2; addr=""; mac=""; comment="" }
+      /#[ /t]*host.*{/     { fix=0; host = $3; addr=""; mac=""; comment="" }
+      /}|#}/               { printf("host[%s]=\"%s\"\nmac[%s]=\"%s\"\nfix[%s+%s]=\"%s\"\ncomment[%s]=\"%s\"\n", addr, host, addr, mac, addr, host, fix, addr, comment ) }
+      /fixed-address/      { addr = ( fix ) ? $2 : $3; sub(";", "", addr); }
+      /hardware ethernet/  { mac  = ( fix ) ? $3 : $4; sub(";", "", mac);   } 
+      /dhcp6.client-id/    { mac  = ( fix ) ? $4 : $5; sub(";", "", mac); } '
 
+awk "$prog" /etc/dhcp/fix.conf 1>&2 2>&$logfile
 eval $(awk "$prog" /etc/dhcp/fix.conf  2>&$logfile )
 eval $(awk "$prog" /etc/dhcp/fix6.conf 2>&$logfile )
 

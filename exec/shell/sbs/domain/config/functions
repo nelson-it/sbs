@@ -367,9 +367,10 @@ function dhcp_fix_mod()
 
   prog='/host[ \t]+'$1'[ \t]*{/ { hostfound=1; }
         /}/                     { if ( hostfound ) { hostfound=0; next; }}
+        /#}/                    { if ( hostfound ) { hostfound=0; next; }}
                                 { if ( hostfound != 1 ) print $0 }
                   END           { 
-                                   if ( "'$2'" != "" )
+                                   if ( "'$2'" != "" && "'$3'" != "" )
                                    {
                                      kommentar = ( '"$5"' == 1 ) ? " " : "#";
                                      printf("%s   host '"$2"' {\n", kommentar );

@@ -71,6 +71,11 @@ function del_wrong_addr() {
     done)
 }
 
+if [ "$(samba-tool dns query $(hostname) "$domain" $name "CNAME" --use-kerberos=required | awk '/^    'CNAME':/  { print 1}')X" = "1X" ]; then
+  echo Host as CNAME found 1>&1
+  exit 0
+fi
+
 case $op in
   add)
     del_wrong_addr
