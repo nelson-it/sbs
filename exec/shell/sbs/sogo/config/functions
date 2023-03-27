@@ -41,6 +41,8 @@ function write_postfix()
         chgrp postfix $postfixconf/$file
         chmod 640 $postfixconf/$file
     done
+    
+    chmod 644 $postfixconf/main.cf
 
     postmap $postfixconf/sasl/passwd  >&$logfile 2>&1
     systemctl restart postfix.service

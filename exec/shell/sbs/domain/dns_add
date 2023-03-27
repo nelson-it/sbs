@@ -28,13 +28,14 @@ if [ "$?" = "0" ]; then
     exit 1;
   fi    
 
-  mne_need_error
-  samba-tool dns add $(hostname) $zone $raddr PTR "$vanameInput.$domain" --use-kerberos=required >&$logfile 2>&1
-  if [ "$?" != "0" ]; then
-    echo '#mne_lang# Kann Rückaddresse nicht hinzufügen#'
-    exit 1;
-  fi    
-  
+  if [ "$vadns_recordInput" = "AAAA" ] or [ "$vadns_recordInput" = "A" ]; then
+    mne_need_error
+    samba-tool dns add $(hostname) $zone $raddr PTR "$vanameInput.$domain" --use-kerberos=required >&$logfile 2>&1
+    if [ "$?" != "0" ]; then
+      echo '#mne_lang# Kann Rückaddresse nicht hinzufügen#'
+      exit 1;
+    fi    
+  fi
   dhcp_fix_mod "$vanameInput_old" "$vanameInput" "$vaaddressInput"  "$vamacInput" "$vafixInput" "$vacommentInput" "$vadns_recordInput"
 fi
 

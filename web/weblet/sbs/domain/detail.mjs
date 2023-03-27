@@ -98,6 +98,7 @@ class MneTemplate extends MneDbView
   
   async ok()
   {
+    this.obj.run.okaction = 'mod';
     if ( this.confirm(MneText.sprintf( MneText.getText("#mne_lang#Domaindaten wirklich ändern? Alle Domaindaten ins besondere die Benutzer und deren Passwörter werden gelöscht")) ))
         return super.ok()
     return false;

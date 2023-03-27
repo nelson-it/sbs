@@ -28,11 +28,13 @@ if [ "$?" = "0" ]; then
     echo '#mne_lang# Kann Addresse nicht finden#' 1>&2
   fi
   
-  mne_need_error
-  samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$domain" --use-kerberos=required >&$logfile 2>&1
-  if [ "$?" != "0" ]; then
-    echo '#mne_lang# Kann Rückaddresse nicht finden#' 1>&2
-  fi    
+  if [ "$vadns_recordInput_old" = "AAAA" ] or [ "$vadns_recordInput_old" = "A" ]; then
+    mne_need_error
+    samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$domain" --use-kerberos=required >&$logfile 2>&1
+    if [ "$?" != "0" ]; then
+      echo '#mne_lang# Kann Rückaddresse nicht finden#' 1>&2
+    fi    
+  fi
   
   dhcp_fix_del "$vanameInput_old" "$vadns_recordInput"
 fi
