@@ -33,7 +33,7 @@ if [ "$?" = "0" ]; then
     echo '#mne_lang# Kann Addresse nicht finden#' >&2
   fi
   
-  if [ "$vadns_recordInput_old" = "AAAA" ] or [ "$vadns_recordInput_old" = "A" ]; then
+  if [ "$vadns_recordInput_old" = "AAAA" ] || [ "$vadns_recordInput_old" = "A" ]; then
     mne_need_error
     samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$domain" --use-kerberos=required >&$logfile 2>&1
     if [ "$?" != "0" ]; then
@@ -49,7 +49,7 @@ if [ "$?" = "0" ]; then
     exit 1;
   fi
   
-  if [ "$vadns_recordInput" = "AAAA" ] or [ "$vadns_recordInput" = "A" ]; then
+  if [ "$vadns_recordInput" = "AAAA" ] || [ "$vadns_recordInput" = "A" ]; then
      mne_need_error
     samba-tool dns add $(hostname) $zone $raddr PTR "$vanameInput.$domain" --use-kerberos=required >&$logfile 2>&1
     if [ "$?" != "0" ]; then
