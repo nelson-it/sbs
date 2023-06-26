@@ -17,7 +17,7 @@ smtpd_sasl_path = private/auth
 
 smtp_use_tls = yes
 smtp_tls_loglevel = 0
-smtp_tls_wrappermode=yes
+smtp_tls_wrappermode=####WRAPPERMODE####
 smtp_tls_security_level = encrypt
 smtp_tls_cert_file = ####CERTCERTDIR####/####HOST####.crt
 smtp_tls_key_file = ####CERTKEYDIR####/####HOST####.key
