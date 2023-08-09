@@ -23,7 +23,7 @@ class MneSbsNetworkDetail extends MneDbView
   {
     var ivalues = 
     {
-      url           : 'sysexec/sbs/network/detail_read',
+      url           : 'sysexec/sbs/network/network_read',
       hinput : false
     };
 

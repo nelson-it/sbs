@@ -54,7 +54,7 @@ if [ "$vadomaintypInput" == "primary" ]; then
      --domain="$vaworkgroupInput" \
      --server-role=dc \
      --dns-backend=BIND9_DLZ \
-     --adminpass="123()$vaadminpasswordInput" >&$logfile 2>&1
+     --adminpass="$vaadminpasswordInput" >&$logfile 2>&1
 
     samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&1
 else
