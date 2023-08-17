@@ -15,6 +15,16 @@ if [ "$?" != "0" ]; then
     exit 1
 fi
 
+# ==================================================================
+# Domain ermitteln
+# ==================================================================
+hostname=$(hostname)
+domain=$(samba-tool domain info "$hostname" | awk '/^Domain/ { print $3 }')
+domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
+
+check_capasswd "$vapasswdInput"
+check_dnspasswd "$domain"
+
 if [ "$vamailrelayInput" != "" ] && [ "$vamailrelayuserInput" != "" ]; then
 	if [ "$vamailrelaypasswordInput" = "" ]; then
 	  vamailrelaypasswordInput="$(cat /etc/postfix/sasl/passwd | awk '/^$|^#/{ next } /^'$vamailrelayInput'/{ printf("%s", gensub(/^.*:/,"",1,$2)) }')"
@@ -26,20 +36,11 @@ if [ "$vamailrelayInput" != "" ] && [ "$vamailrelayuserInput" != "" ]; then
    fi
 fi   
 
-# ==================================================================
-# Domain ermitteln
-# ==================================================================
-hostname=$(hostname)
-domain=$(samba-tool domain info "$hostname" | awk '/^Domain/ { print $3 }')
-domaindn=$(echo "$domain" | sed -e 's/\./,DC=/g' -e 's/^/DC=/')
-
-check_capasswd "$vapasswdInput"
-check_dnspasswd "$domain"
 
 # ==================================================================
 # Systembenutzer erzeugen
 # ==================================================================
-sogouser="sogo$hostname"
+sogouser="sogo-$hostname"
 bindpassword=$(dd if=/dev/urandom bs=2048 count=1 2>/dev/null |tr -dc "a-zA-Z0-9"|fold -w 64 |head -1)
 
 mne_need_error 2
@@ -55,7 +56,7 @@ samba-tool user setpassword "$sogouser" --newpassword="$bindpassword" 2>&1 >&$lo
 # DNS Alias einrichten
 # ==================================================================
 mne_error_ignore=1
-samba-tool dns add "$hostname" $domain sogo CNAME "$hostname.$domain" -k yes >&$logfile 2>&1
+samba-tool dns add "$hostname" $domain sogo CNAME "$hostname.$domain" --use-kerberos=required >&$logfile 2>&1
 mne_error_ignore=
 
 # ==================================================================
@@ -78,25 +79,25 @@ sogoprog=$(sogo_confprog "$certcertdir" "$certkeydir" "$domaindn" "$domain" "cn=
 pg_addaccess "local.*$DB.*postgres"       "local   $DB       postgres                         trust"
 pg_addaccess "host.*$sogouser.*127.0.0.1" "host    $DB       $sogouser          127.0.0.1/32  trust"
 
-pg_adduser $sogouser
-echo "ALTER ROLE $sogouser SET search_path TO ext_sogo;"              | psql -U postgres $DB >&$logfile 2>&1
-echo "CREATE SCHEMA ext_sogo AUTHORIZATION $sogouser;"                | psql -U postgres $DB >&$logfile 2>&1
-echo "ALTER  SCHEMA ext_sogo OWNER TO $sogouser;"                     | psql -U postgres $DB >&$logfile 2>&1
+pg_adduser "$sogouser"
+echo "ALTER ROLE \"$sogouser\" SET search_path TO ext_sogo;"              | psql -U postgres $DB >&$logfile 2>&1
+echo "CREATE SCHEMA ext_sogo AUTHORIZATION \"$sogouser\";"                | psql -U postgres $DB >&$logfile 2>&1
+echo "ALTER  SCHEMA ext_sogo OWNER TO \"$sogouser\";"                     | psql -U postgres $DB >&$logfile 2>&1
 
 cmd=
 for tbl in $(psql -qAt -c "select tablename from pg_tables where schemaname = 'ext_sogo';" -U postgres $DB)
 do
-  cmd="$cmd""ALTER TABLE ext_sogo.\"$tbl\" owner to $sogouser;"
+  cmd="$cmd""ALTER TABLE ext_sogo.\"$tbl\" owner to \"$sogouser\";"
 done
 
 for tbl in $(psql -qAt -c "select sequence_name from information_schema.sequences where sequence_schema = 'ext_sogo';" -U postgres $DB)
 do
-  cmd="$cmd""ALTER SEQUENCE ext_sogo.\"$tbl\" owner to $sogouser;"
+  cmd="$cmd""ALTER SEQUENCE ext_sogo.\"$tbl\" owner to \"$sogouser\";"
 done
 
 for tbl in $(psql -qAt -c "select table_name from information_schema.views where table_schema = 'ext_sogo';" -U postgres $DB)
 do
-  cmd="$cmd""ALTER VIEW ext_sogo.\"$tbl\" owner to $sogouser;"
+  cmd="$cmd""ALTER VIEW ext_sogo.\"$tbl\" owner to \"$sogouser\";"
 done
 
 echo "$cmd" | psql -U postgres $DB >&$logfile 2>&1

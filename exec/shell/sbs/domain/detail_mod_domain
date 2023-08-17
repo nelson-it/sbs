@@ -41,6 +41,8 @@ systemctl daemon-reload
 
 rm_config
 
+hostname=$(hostname)
+
 # -------------------------------------------
 # domain provision
 # -------------------------------------------
@@ -53,23 +55,23 @@ if [ "$vadomaintypInput" == "primary" ]; then
      --realm="$vadomainInput" \
      --domain="$vaworkgroupInput" \
      --server-role=dc \
-     --dns-backend=BIND9_DLZ \
+     --dns-backend=SAMBA_INTERNAL \
      --adminpass="$vaadminpasswordInput" >&$logfile 2>&1
 
-    samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&1
 else
-    echo "nameserver $vaprimaryaddrInput" > /etc/resolv.conf
-    echo "search $vadomainInput" >> /etc/resolv.conf
+  echo "nameserver $vaprimaryaddrInput" > /etc/resolv.conf
+  echo "search $vadomainInput" >> /etc/resolv.conf
 
 	samba-tool domain join $vadomainInput DC \
     --option="interfaces=lo,$vanetdeviceInput" \
     --option="bind interfaces only=yes" \
     --realm="$vadomainInput" -U"$vaadministratorInput" \
-    --dns-backend=BIND9_DLZ \
+    --dns-backend=SAMBA_INTERNAL \
     --password="$vaadminpasswordInput" >&$logfile 2>&1
-    
-    samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&1
+  
 fi
+
+samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&1
 
 mod_smbconf
 mod_bind "$namedoption"
@@ -77,16 +79,12 @@ mod_netpar "$vadomainInput" "$vanetdeviceInput" "$vadnsforwarderInput" "$vadnsse
 mod_cert "$vaworkgroupInput" "$globalextra"
 mod_kerberos
 
-mod_dhcp "${deviceconfarray[3]}" "$vadhcpstartInput" "$vadhcpendInput" "${deviceconfarray[2]}" "$vadhcp6startInput" "$vadhcp6endInput" \
-         "$vadnssearchInput" "$vadomainInput" "${deviceconfarray[4]}" "${deviceconfarray[5]}" "$vanetdeviceInput" \
-         "$dhcpconf4" "$dhcpconf6" "$dhcpupdate" "$radvdconf"
-
 samba-tool user setexpiry --noexpiry administrator >&$logfile 2>&1
-samba-tool user setexpiry --noexpiry dns-$(hostname) >&$logfile 2>&1
+samba-tool user setexpiry --noexpiry dns-"$hostname" >&$logfile 2>&1
 samba-tool domain passwordsettings set --complexity=off >&$logfile 2>&1
 samba-tool domain passwordsettings set --min-pwd-length=1 >&$logfile 2>&1
 samba-tool user setpassword "administrator" --newpassword="$vaadminpasswordInput" >&$logfile 2>&1
-samba-tool group addmembers DnsAdmins dns-$(hostname) >&$logfile 2>&1
+samba-tool group addmembers DnsAdmins dns-"$hostname" >&$logfile 2>&1
 samba-tool user disable Guest
 
 mne_need_error
@@ -99,9 +97,9 @@ fi
 mkdir -p /etc/mne/dns >&$logfile 2>&1
 chmod 755 /etc/mne/dns
 
-samba-tool domain exportkeytab --principal=dns-$(hostname)@$udomain /etc/mne/dns/dns.keytab >&$logfile 2>&1
-chown root:dhcpd /etc/mne/dns/dns.keytab
-chmod 440 /etc/mne/dns/dns.keytab
+mod_dhcp "${deviceconfarray[3]}" "$vadhcpstartInput" "$vadhcpendInput" "${deviceconfarray[2]}" "$vadhcp6startInput" "$vadhcp6endInput" \
+         "$vadnssearchInput" "$vadomainInput" "${deviceconfarray[4]}" "${deviceconfarray[5]}" "$vanetdeviceInput" \
+         "$dhcpconf4" "$dhcpconf6" "$dhcpupdate" "$radvdconf"
 
 systemctl restart samba-ad-dc >&$logfile 2>&1
 systemctl restart named >&$logfile 2>&1

@@ -24,62 +24,44 @@ chmod 770 $certextdir
 setfacl -R -m   u:$daemongroup:rwx $certkeydir
 setfacl    -m d:u:$daemongroup:rwx $certkeydir
 
-if [ "$varmkeyInput" = "1" ]; then
-	rm -f $certcadir/ca.crt 2>&1 >&$logfile
-	rm -f $certcadir/ca.key 2>&1 >&$logfile
+if [[ "$vakeyInput" != "" && "$vacaInput" == "" || "$vakeyInput" == "" && "$vacaInput" != "" ]]; then
+    echo "#mne_lang#Bitte Schlüssel und Zertifikat hochladen#" >&2
+    exit 1;
 fi
 
-if [ "$vadataInput" != "" ]; then
-  if [ -f $certcadir/ca.crt ]; then
-    echo "#mne_lang#Hochgeladenes CA File wird ignoriert - bitte Schlüssel löschen#" >&2
-    exit 0;
+if [ "$vakeyInput" != "" ]; then
+  if [ "$(echo "$vakeyInput" | base64 --decode | awk '/-----BEGIN.*KEY-----/ { print 1 }')" != "1" ]; then
+    echo "#mne_lang#Datei ist kein Schlüssel#" >&2
   fi
-  echo "$vadataInput" | base64 --decode > $certcadir/ca.crt
+
+  if [ "$(echo "$vacaInput" | base64 --decode | awk '/-----BEGIN CERTIFICATE-----/ { print 1 }')" != "1" ]; then
+    echo "#mne_lang#Datei ist kein Zertifikat#" >&2
+  fi
+    
+  echo "$vakeyInput" | base64 --decode > $certcadir/ca.keynew
+  check_capasswd "$vapasswdInput" $certcadir/ca.keynew
+  mv $certcadir/ca.keynew $certcadir/ca.key
+  echo "$vacaInput" | base64 --decode > $certcadir/ca.crt
+  vaoverwriteInput=0
 fi
+
+if [ ! -f "$certcadir/ca.key" ] || [ ! -f "$certcadir/ca.crt" ] || [ "$vaoverwriteInput" = "1" ]; then
+    echo "#mne_lang#Erstelle CA Zertifikat#" >&2
+    echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096   >&$logfile 2>&$logfile
+    echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
+fi
+
+chmod 660 $certcadir/ca.key
+chmod 664 $certcadir/ca.crt
 
 if [ ! -f $certkeydir/$(hostname).key ]; then
+  echo "#mne_lang#Erstelle Rechner Schlüssel#" >&2
   cert_mkkey "$(hostname)"
   cert_mkcsr "$(hostname)" "$(hostname)" "$(hostname --all-fqdns | sed -e 's/ *$//' -e "s/  */\n/g" | sort -u | awk '{ printf("%s%s", space, $0); space=" "  }')"
 fi
 
-if [ -f $certcadir/ca.crt ] && [ -f $certcadir/ca.key ]; then
-    chmod 660 $certcadir/ca.key
-    chmod 664 $certcadir/ca.crt
-    if [ "$vaoverwriteInput" != "1" ]; then
-
-    	if [ ! -f $certcertdir/$(hostname).crt ]; then
-	        check_capasswd "$vapasswdInput"
-            echo "#mne_lang#Erstelle Rechnerzertifikat#" >&2;
-
-            cert_mkcrt "$(hostname)" "$vapasswdInput"
-            exit 0;
-        fi
-       
-        echo "#mne_lang#CA exitiert bereits#" >&2
-        exit 1;
-    else
-    	mne_error_ignore=1
-    	echo $vapasswdInput | openssl rsa -passin stdin -in "$certcadir/ca.key" >/dev/null 2>/dev/null
-    	if [ "$?" != "0" ]; then
-    		echo "#mne_lang#Falsches Password#" >&2
-    		exit 1
-    	fi
-    	mne_error_ignore=
-
-        echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096  >&$logfile 2>&1
-        echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
-    fi
-elif [ ! -f $certcadir/ca.key ]; then
-    echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096   >&$logfile 2>&$logfile
-    echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
-    
-    cert_mkcrt "$(hostname)" "$vapasswdInput"
-fi
-
-if [ -f $certcadir/ca.key ]; then
-  chmod 600 $certcadir/ca.key
-fi
-chmod 644 $certcadir/ca.crt
+check_capasswd "$vapasswdInput"
+cert_mkcrt "$(hostname)" "$vapasswdInput"
 
 mne_error_ignore=1
 rm /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt >&$logfile 2>&1

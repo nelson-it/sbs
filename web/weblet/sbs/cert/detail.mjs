@@ -8,73 +8,92 @@
 //================================================================================
 'use strict';
 
-import MneConfig   from '/js/basic/config.mjs'
-import MneText     from '/js/basic/text.mjs'
-import MneInput    from '/js/basic/input.mjs'
-import MneLog      from '/js/basic/log.mjs'
-import MneRequest  from '/js/basic/request.mjs'
+import MneConfig from '/js/basic/config.mjs'
+import MneText from '/js/basic/text.mjs'
+import MneInput from '/js/basic/input.mjs'
+import MneLog from '/js/basic/log.mjs'
+import MneRequest from '/js/basic/request.mjs'
 
 import MneElement from '/weblet/basic/element.mjs'
-import MneDbView  from '/weblet/db/view.mjs'
+import MneDbView from '/weblet/db/view.mjs'
 
 class MneSbsCertDetail extends MneDbView
 {
-  constructor(parent, frame, id, initpar = {}, config = {} )
+  constructor(parent, frame, id, initpar = {}, config = {})
   {
-    var ivalues = 
+    var ivalues =
     {
-      url           : 'sysexec/sbs/cert/detail_read',
+      url: 'sysexec/sbs/cert/detail_read',
 
-      placeholder   : { country : MneText.getText("#mne_lang#Mein Land"),
-                          state : MneText.getText("#mne_lang#Meine Region"),
-                           city : MneText.getText("#mne_lang#Meine Stadt"),
-                            org : MneText.getText("#mne_lang#Meine Firma#"),
-                        orgunit : MneText.getText("#mne_lang#Meine Abteilung#"),
-                          email : MneText.getText("#mne_lang#email@meine.domain") },
+      placeholder: {
+        country: MneText.getText("#mne_lang#Mein Land"),
+        state: MneText.getText("#mne_lang#Meine Region"),
+        city: MneText.getText("#mne_lang#Meine Stadt"),
+        org: MneText.getText("#mne_lang#Meine Firma#"),
+        orgunit: MneText.getText("#mne_lang#Meine Abteilung#"),
+        email: MneText.getText("#mne_lang#email@meine.domain")
+      },
 
-      modurl  : 'sysexec/sbs/cert/detail_ok',
-      modcols : [ 'country', 'state', 'city', 'org', 'orgunit', 'email', 'passwd', 'overwrite'],
+      modurl: 'sysexec/sbs/cert/detail_ok',
+      modcols: ['country', 'state', 'city', 'org', 'orgunit', 'email', 'passwd', 'overwrite'],
 
-      title  : { mod :  config.label },
-      regexp : { country : { reg : new RegExp('[A-Z][A-Z]'), help : MneText.getText("#mne_lang#Bitte 2 stelliges Landeskenzeichen eingeben") }},
-      hinput : false
+      title: { mod: config.label },
+      regexp: { country: { reg: new RegExp('[A-Z][A-Z]'), help: MneText.getText("#mne_lang#Bitte 2 stelliges Landeskenzeichen eingeben") } },
+      hinput: false
     };
 
-    super(parent, frame, id, Object.assign(ivalues, initpar), config );
+    super(parent, frame, id, Object.assign(ivalues, initpar), config);
   }
-  
+
   getViewPath() { return this.getView(import.meta.url) }
   //getCssPath()  { return (( super.getCssPath() ) ?  super.getCssPath() + ',' : '') + this.getCss(import.meta.url); }
 
   reset()
   {
     super.reset();
-    this.obj.mkbuttons.push( { id : 'download', value : MneText.getText('#mne_lang#Download CA') } );
+    this.obj.mkbuttons.push({ id: 'download', value: MneText.getText('#mne_lang#Download CA') });
   }
 
   async load()
   {
-	await super.load();
-	this.obj.files.file.addEventListener('change', (evt) =>
+    await super.load();
+    this.obj.files.cafile.addEventListener('change', (evt) =>
     {
-      if ( evt.target.files[0].size > 5000000 )
+      if (evt.target.files[0].size > 5000000)
       {
         MneLog.error(MneText.getText('#mne_lang#Datei ist grösser als 5MB'));
-        this.obj.inputs.data.modValue('');
+        this.obj.inputs.ca.modValue('');
         return;
       }
 
       var reader = new FileReader();
       reader.addEventListener('load', (evt) =>
       {
-        this.obj.inputs.data.modValue(evt.target.result.split(',')[1]);
-        this.obj.inputs.country.modValue("OK");
-        this.obj.inputs.passwd.modValue("**************");
+        this.obj.inputs.ca.modValue(evt.target.result.split(',')[1]);
+        this.obj.inputs.country.modValue('OK')
+      });
+      reader.readAsDataURL(evt.target.files[0]);
+    }, true);
+
+    this.obj.files.keyfile.addEventListener('change', (evt) =>
+    {
+      if (evt.target.files[0].size > 5000000)
+      {
+        MneLog.error(MneText.getText('#mne_lang#Datei ist grösser als 5MB'));
+        this.obj.inputs.key.modValue('');
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.addEventListener('load', (evt) =>
+      {
+        this.obj.inputs.key.modValue(evt.target.result.split(',')[1]);
+        this.obj.inputs.country.modValue('OK')
       });
       reader.readAsDataURL(evt.target.files[0]);
     }, true);
   }
-  
+
 
   async download()
   {

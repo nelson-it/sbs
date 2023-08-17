@@ -3,17 +3,18 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-cols="name,dns_record,address,fix,mac,comment,readtime,missmatch";
-labels="Name,Addresstyp,Adresse,feste Adresse,HW Adresse,Komentar,Gelesen am,HW Address unterschiedlich";
+cols="name,dns_record,address,fix,mac,comment,readtime,missmatch,nodns";
+labels="Name,Addresstyp,Adresse,feste Adresse,HW Adresse,Komentar,Gelesen am,HW Address unterschiedlich,Kein DNS Eintrag";
 
-json_writeheader "$cols" "$labels" "fix:bool,missmatch:bool,readtime:datetime" "" ""
-
+json_writeheader "$cols" "$labels" "fix:bool,missmatch:bool,readtime:datetime,nodns:bool" "" "" 
 
 declare -A host
 declare -A mac
 declare -A fix
 declare -A comment
 declare -A missmatch
+declare -A addrfound
+declare -A recordtype
 declare -A amac
 
 eval $( arp -n | awk '{ if ( $2 == "ether" ) printf("amac[%s]=\"%s\"\n", $1, $3) }')
@@ -21,18 +22,18 @@ eval $( arp -n | awk '{ if ( $2 == "ether" ) printf("amac[%s]=\"%s\"\n", $1, $3)
 prog='/mnecomment/         { comment = $0; sub("#mnecomment", "", comment);  }
       /[ /t]*host.*{/      { fix=1; host = $2; addr=""; mac=""; comment="" }
       /#[ /t]*host.*{/     { fix=0; host = $3; addr=""; mac=""; comment="" }
-      /}|#}/               { printf("host[%s]=\"%s\"\nmac[%s]=\"%s\"\nfix[%s+%s]=\"%s\"\ncomment[%s]=\"%s\"\n", addr, host, addr, mac, addr, host, fix, addr, comment ) }
+      /}|#}/               { printf("host[%s]=\"%s\"\nmac[%s+%s]=\"%s\"\nfix[%s+%s]=\"%s\"\ncomment[%s+%s]=\"%s\"\naddrfound[%s+%s]=\"\"\nrecordtype[%s+%s]=\"%s\"\n", addr, host, addr, host, mac, addr, host, fix, addr, host, comment, addr, host, addr, host, recordtype ) }
       /fixed-address/      { addr = ( fix ) ? $2 : $3; sub(";", "", addr); }
       /hardware ethernet/  { mac  = ( fix ) ? $3 : $4; sub(";", "", mac);   } 
       /dhcp6.client-id/    { mac  = ( fix ) ? $4 : $5; sub(";", "", mac); } '
 
-# awk "$prog" /etc/dhcp/fix.conf 1>&2 2>&$logfile
-eval $(awk "$prog" /etc/dhcp/fix.conf  2>&$logfile )
-eval $(awk "$prog" /etc/dhcp/fix6.conf 2>&$logfile )
+#awk "$prog" /etc/dhcp/fix.conf 1>&2 2>&$logfile
+eval $(awk -v recordtype=A "$prog" /etc/dhcp/fix.conf  2>&$logfile )
+eval $(awk -v recordtype=AAAA "$prog" /etc/dhcp/fix6.conf 2>&$logfile )
 
 for a in ${!host[@]}
 do
-  if [ "${amac[$a]}" != "" ] && [ "${mac[$a]}" != "${amac[$a]}" ]; then
+  if [ "${amac[$a]}" != "" ] && [ "${mac[$a+${host[$a]}]}" != "${amac[$a]}" ]; then
     missmatch[$a]="true"
   fi
 done
@@ -50,10 +51,10 @@ if [ "$?" = "0" ]; then
   check_dnspasswd $domain
 
   prog='/^  Name=/     { name=""; split($1,n,"="); sub(/,/,"",n[2]); name=n[2]; next}
-        /^    A:/      { if ( name != "" ) printf("A %s %s\n", name,  $2) }
-        /^    AAAA:/   { if ( name != "" ) printf("AAAA %s %s\n", name,  $2) }
-        /^    CNAME:/  { if ( name != "" ) printf("CNAME %s %s\n", name,  substr($2,1,length($2)-1)) }
-        /^    MX:/     { if ( name != "" ) printf("MX %s %s %s\n", name, substr($2,1,length($2) - 1),  num=substr($3,2,length($3) - 2)) }'
+        /^    A:/      { if ( name != "" ) printf("line[%d]=\"A %s %s\";", i++, name,  $2) }
+        /^    AAAA:/   { if ( name != "" ) printf("line[%d]=\"AAAA %s %s\";", i++, name,  $2) }
+        /^    CNAME:/  { if ( name != "" ) printf("line[%d]=\"CNAME %s %s\";", i++, name,  substr($2,1,length($2)-1)) }
+        /^    MX:/     { if ( name != "" ) printf("line[%d]=\"MX %s %s %s\";", i++, name, substr($2,1,length($2) - 1),  num=substr($3,2,length($3) - 2)) }'
 
   if [ "$vanameInput" != "" ]; then
     queryname="$vanameInput"
@@ -61,11 +62,14 @@ if [ "$?" = "0" ]; then
     queryname="@"
   fi
 
+  declare -A line
+  eval $(samba-tool dns query $(hostname) $domain "$queryname" ALL -k yes | awk "$prog" )
+  length=${#line[@]}
+
   vawcol="s_$vawcol"
-  samba-tool dns query $(hostname) $domain "$queryname" ALL -k yes | awk "$prog" | \
-  while read line
+  for (( i=0; i<${length}; i++ ))
   do
-    a=($line)
+    a=(${line[$i]})
     
     s_name="${a[1]}"
     s_dns_record="${a[0]}"
@@ -75,9 +79,11 @@ if [ "$?" = "0" ]; then
       s_address=$(ipv6calc --addr2compaddr $s_address)
     fi
 
+    addrfound[$s_address+$s_name]=1
+
     s_fix="${fix[$s_address+$s_name]}"
-    s_mac="${mac[$s_address]}"
-    s_comment="${comment[$s_address]}"
+    s_mac="${mac[$s_address+$s_name]}"
+    s_comment="${comment[$s_address+$s_name]}"
     s_missmatch="${missmatch[$s_address]}"
 
     if [ "$typ" = "MX" ]; then
@@ -85,10 +91,26 @@ if [ "$?" = "0" ]; then
     fi
 
     if [ "$(compare "${!vawcol}" "$vawop" "$vawval")" = "1" ]; then
-      json_writedata "$s_name" "$s_dns_record" "$s_address" "$s_fix" "$s_mac" "$s_comment" "$s_readtime" "$s_missmatch"
+      json_writedata "$s_name" "$s_dns_record" "$s_address" "$s_fix" "$s_mac" "$s_comment" "$s_readtime" "$s_missmatch" "false"
     fi
     
   done
+  
+  for key in "${!addrfound[@]}"
+  do
+    if [ "${addrfound[$key]}" != "1" ] && [ "${fix[$key]}" != "0" ]; then
+      s_name="${key#*+}"
+      s_dns_record="${recordtype[$key]}"
+      s_address="${key%+*}"
+      s_fix=1
+      s_mac=${mac[$key]}
+      s_comment=${comment[$key]}
+      s_missmatch=
+      
+      if [ "$(compare "${!vawcol}" "$vawop" "$vawval")" = "1" ]; then
+        json_writedata "$s_name" "$s_dns_record" "$s_address" "$s_fix" "$s_mac" "$s_comment" "$s_readtime" "$s_missmatch" "true"
+      fi
+    fi
+  done
 fi
 echo ' ]'
-

@@ -14,7 +14,7 @@ if [ "$?" = "0" ]; then
   
   get_netparam
   
-  if [ "$vadns_recordInput" = "AAAA" ]; then
+  if [ "$vadns_recordInput_old" = "AAAA" ]; then
     mask="$(echo $daddr6 | cut -f2 -d/)"
   else
     mask="$(echo $daddr4 | cut -f2 -d/)"

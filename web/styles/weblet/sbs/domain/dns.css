@@ -2,3 +2,7 @@ div.weblet#dnsaddress tr.missmatchtrue {
     background-color: var(--modifywarningbackgroundcolor);
     color: var(--modifywarningcolor);
 }
+
+div.weblet#dnsaddress tr.nodnstrue {
+    color: var(--rdonlycolor);
+}

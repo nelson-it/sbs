@@ -14,14 +14,22 @@ find "$certkeydir" -type f -exec chmod 600 {} \;
 
 function check_capasswd()
 {
-   if [ ! -f "$certcadir/ca.key" ] && [ -f "$certcadir/ca.crt" ]; then
+   local keyfile="$certcadir/ca.key"
+   if [ "$2" != "" ]; then
+     keyfile="$2"
+   fi
+   
+   if [ ! -f "$keyfile" ]; then
        return;
    fi
    
    mne_error_ignore=1
-   echo "$1" | openssl rsa -passin stdin -in "$certcadir/ca.key" >/dev/null 2>/dev/null
+   echo "$1" | openssl rsa -passin stdin -in "$keyfile" >/dev/null 2>/dev/null
    if [ "$?" != "0" ]; then
      echo "#mne_lang#Falsches Password#" >&2
+     if [ "$2" != "" ]; then
+      rm "$keyfile" 
+     fi
      exit 1
    fi
    mne_error_ignore=
@@ -29,13 +37,14 @@ function check_capasswd()
 
 function ca_read()
 {
-  declare -A values=([emailAddress]="" [OU]="" [O]="" [L]="" [C]="" [ST]="" [file]="" )
+  declare -A values=([emailAddress]="" [OU]="" [O]="" [L]="" [C]="" [ST]="" [cafile]="" [keyfile]="")
 
   if [ -f "$certcadir/ca.crt" ]; then
     vals=$(openssl x509 -noout -in "$certcadir/ca.crt" -subject | sed -e s'/^subject=//' -e 's/, */,/g' -e 's/ *= */=/g')
     IFS=',' read -r -a arr <<< $vals
     for i in "${arr[@]}"; do IFS='=' read -r -a a <<<$i; values[${a[0]}]=${a[1]}; done
-    values[file]="ca.crt"
+    values[cafile]=""
+    values[keyfile]=""
   fi
   
   declare -p values | sed -e 's/^declare[^=]*=//'

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+
+. $(dirname $BASH_SOURCE)/config/functions
+
+udomain=$(echo "$vadomainInput"  | awk '{print toupper($0)}')
+domaindn=$(echo "$vadomainInput" | sed -e "s/^/dc=/" -e "s/\./,dc=/g")
+
+mne_need_error
+systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
+if [ "$?" = "0" ]; then
+  host=$(hostname | awk '{ print toupper($0) }')
+  master=$(samba-tool fsmo show | sed -n "/SchemaMasterRole.*CN=$host/p" )
+  if [ "$master" != "" ];then
+    echo "#mne_lang#Ist schon primary Controller#" >&2
+    exit 0
+  fi
+  
+  if [ "$vaadministratorInput" = "" ]; then
+    vaadministratorInput="administrator"
+  fi
+  echo "$vaadminpasswordInput" | samba-tool fsmo transfer --role=all --username="$vaadministratorInput" >&$logfile 2>&1
+  
+else
+  echo "#mne_lang#Ist kein Domaincontroller#" >&2
+  exit 1
+fi
+
+exit 0

@@ -29,7 +29,7 @@ if [ "$domaintype" = "primary" ]; then
   # ==================================================================
   # Systembenutzer erzeugen
   # ==================================================================
-  apacheuser="apache$(hostname)"
+  apacheuser="apache-$(hostname)"
 
   mne_need_error 2
   samba-tool user list | egrep "^$apacheuser\$" >/dev/null

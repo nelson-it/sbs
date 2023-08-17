@@ -4,7 +4,9 @@ network:
         ####DEVICE####:
           dhcp4: true
           dhcp6: true
-          accept-ra: no
+          accept-ra: true
+          dhcp6-overrides:
+              hostname: "ignore"
           addresses: 
             - ####ADDR40####
             - ####ADDR41####

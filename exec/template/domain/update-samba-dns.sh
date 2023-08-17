@@ -17,8 +17,8 @@ else
   mask=$6
 fi
 
-if [ "$name" = "n/a" ]; then
-  name="dyn_$(echo $ip | sed -e "s/:/_/g")"
+if [ "$name" = "n/a" ] || [ "$name" = "ignore" ]; then
+  exit 0;
 fi
 
 if [ "$addrtyp" = "AAAA" ]; then
@@ -118,9 +118,9 @@ case $op in
                                                    printf("#   }\n");
                                                  }
                                                }'
-      cp $filename /tmp/fix$$
-      awk "$prog" </tmp/fix$$ >$filename
-      rm /tmp/fix$$
+      awk "$prog" < $filename > /tmp/fix$$
+      mv /tmp/fix$$ $filename
+      chown dhcpd:dhcpd "$filename"
     fi
     ;;
 

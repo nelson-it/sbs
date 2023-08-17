@@ -26,7 +26,8 @@ class MneTemplate extends MneDbView
       url    : 'sysexec/sbs/domain/detail_read',
       modurl : 'sysexec/sbs/domain/detail_mod',
       
-      readparurl : 'sysexec/sbs/domain/detailnet_mod',
+      netparurl : 'sysexec/sbs/domain/detailnet_mod',
+      primaryurl : 'sysexec/sbs/domain/detailprimary_mod',
       
       hinput : false
     };
@@ -40,16 +41,31 @@ class MneTemplate extends MneDbView
   reset()
   {
     super.reset();
-    this.obj.mkbuttons.push( { id : 'netpar', value : MneText.getText('#mne_lang#Netzwerk übernehmen') } );
+    this.delbutton('ok');
+    
+    this.obj.mkbuttons.push( { id : 'domain', value : MneText.getText('#mne_lang#Domain'), before : 'cancel' } );
+    this.obj.mkbuttons.push( { id : 'netpar', value : MneText.getText('#mne_lang#Netzwerk übernehmen'), space : 'before' } );
+    this.obj.mkbuttons.push( { id : 'primary', value : MneText.getText('#mne_lang#Primär') } );
     
     this.obj.run.netparpar = {};
     
-    this.obj.run.btnrequest.netpar = this.initpar.readparurl;
+    this.obj.run.btnrequest.netpar = this.initpar.netparurl;
+    this.obj.run.btnrequest.primary = this.initpar.primaryurl;
   }
   
   getParamNetpar(p)
   {
       "domaintyp,domain,workgroup,description,netdevice,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcp6start,dhcp6end".split(',').forEach( ( item) =>
+      {
+        p = this.addParam(p, item + "Input", this.obj.inputs[item]);
+      });
+      
+      return p;
+  }
+  
+  getParamPrimary(p)
+  {
+      "administrator,adminpassword,adminpassword2".split(',').forEach( ( item) =>
       {
         p = this.addParam(p, item + "Input", this.obj.inputs[item]);
       });
@@ -96,7 +112,20 @@ class MneTemplate extends MneDbView
     return super.ok();
   }
   
+  async primary()
+  {
+    this.obj.run.okaction = 'primary';
+    if ( this.confirm(MneText.sprintf( MneText.getText("#mne_lang#wirklich zum Primary Controller ändern?")) ))
+      return super.ok();
+    return false;
+  }
+  
   async ok()
+  {
+    return false;
+  }
+  
+  async domain()
   {
     this.obj.run.okaction = 'mod';
     if ( this.confirm(MneText.sprintf( MneText.getText("#mne_lang#Domaindaten wirklich ändern? Alle Domaindaten ins besondere die Benutzer und deren Passwörter werden gelöscht")) ))
