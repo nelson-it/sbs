@@ -24,4 +24,7 @@ psql --username=$origuser --host=$orighost $checkdb < empty.sql > /dev/null
 rm empty.sql
 
 echo "-- Database Version: $version" > $output
-pg_dump --username=$origuser --host=$orighost --inserts $checkdb | sed -e "/CREATE EXTENSION.*plpgsql/d" -e "/COMMENT ON EXTENSION plpgsql/d" >> $output
+pg_dump --username=$origuser --host=$orighost $checkdb | sed -e "/CREATE EXTENSION.*plpgsql/d" -e "/COMMENT ON EXTENSION plpgsql/d" >> $output
+
+echo "-- Database Version: $version" > $outputinsert
+pg_dump --username=$origuser --host=$orighost --inserts $checkdb | sed -e "/CREATE EXTENSION.*plpgsql/d" -e "/COMMENT ON EXTENSION plpgsql/d" >> $outputinsert
