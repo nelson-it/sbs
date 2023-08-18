@@ -17,7 +17,7 @@ import MneRequest  from '/js/basic/request.mjs'
 import MneElement from '/weblet/basic/element.mjs'
 import MneDbView  from '/weblet/db/view.mjs'
 
-class MneTemplate extends MneDbView
+class MneSbsDomain extends MneDbView
 {
   constructor(parent, frame, id, initpar = {}, config = {} )
   {
@@ -46,6 +46,7 @@ class MneTemplate extends MneDbView
     this.obj.mkbuttons.push( { id : 'domain', value : MneText.getText('#mne_lang#Domain'), before : 'cancel' } );
     this.obj.mkbuttons.push( { id : 'netpar', value : MneText.getText('#mne_lang#Netzwerk übernehmen'), space : 'before' } );
     this.obj.mkbuttons.push( { id : 'primary', value : MneText.getText('#mne_lang#Primär') } );
+    this.obj.mkbuttons.push( { id : 'demote', value : MneText.getText('#mne_lang#Controller entfernen'), space : 'before' } );
     
     this.obj.run.netparpar = {};
     
@@ -79,7 +80,7 @@ class MneTemplate extends MneDbView
     this.obj.inputs.domaintyp.addEventListener('change', (evt) =>
     {
       MneElement.mkClass(this.frame, 'domaintyp' + this.obj.inputs.domaintyp.getValue(), true,  'domaintyp');
-      if ( this.obj.inputs.domaintyp.getValue() == 'standalone' )
+      if ( this.obj.inputs.domaintyp.getValue() == 'standalone' || this.obj.inputs.domaintyp.getValue() == '' )
       {
         var passwd = 'dummy';
         this.obj.inputs.adminpassword.setValue(passwd);
@@ -141,4 +142,4 @@ class MneTemplate extends MneDbView
 
 }
 
-export default MneTemplate;
+export default MneSbsDomain;
