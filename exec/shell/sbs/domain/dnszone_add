@@ -1,0 +1,29 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $netbasedir/config/functions
+. $(dirname $BASH_SOURCE)/config/functions
+
+mne_need_error
+systemctl is-enabled samba-ad-dc.service 2>&1 >/dev/null
+if [ "$?" = "0" ]; then
+
+  info=$(samba-tool domain info 127.0.0.1)
+  domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+  check_dnspasswd $domain
+  
+  if [ "$vatypInput" == "reverse" ]; then
+    zone=$(ipv6calc -q -O revnibbles.arpa "$vaaddrInput")
+  else
+    zone="$vanameInput"
+  fi
+  
+  mne_need_error
+  samba-tool dns zonecreate $(hostname) $zone --use-kerberos=required >&$logfile 2>&1
+  if [ "$?" != "0" ]; then
+    echo '#mne_lang# Kann Zone nicht hinzufügen#' >&2
+    exit 1;
+  fi    
+fi
+
+exit 0

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 

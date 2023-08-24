@@ -46,8 +46,11 @@ if [ "$?" = "0" ]; then
 
   s_readtime=$(date +%s)
 
-  info=$(samba-tool domain info 127.0.0.1)
-  domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+  domain=$(samba-tool domain info 127.0.0.1 | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+  if [ "$vadomainInput" = "" ]; then
+    vadomainInput="$domain"
+  fi
+  
   check_dnspasswd $domain
 
   prog='/^  Name=/     { name=""; split($1,n,"="); sub(/,/,"",n[2]); name=n[2]; next}
@@ -63,7 +66,7 @@ if [ "$?" = "0" ]; then
   fi
 
   declare -A line
-  eval $(samba-tool dns query $(hostname) $domain "$queryname" ALL -k yes | awk "$prog" )
+  eval $(samba-tool dns query $(hostname) $vadomainInput "$queryname" ALL  --use-kerberos=required | awk "$prog" )
   length=${#line[@]}
 
   vawcol="s_$vawcol"

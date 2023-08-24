@@ -20,7 +20,7 @@ import MneDbTableView from '/weblet/db/table/view.mjs'
 
 class MneSbsNetworkDevicestable extends MneDbTableView
 {
-  async ok()
+  async ook()
   {
     await this.execute_selected( () => { MneDbView.prototype.ok.call(this) } );
     this.dependweblet = this;

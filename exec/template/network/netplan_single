@@ -2,26 +2,30 @@ network:
     version: 2
     ####DEVICETYPE####:
         ####DEVICE####:
-          dhcp4: true
-          dhcp6: true
-          accept-ra: true
-          dhcp6-overrides:
-              hostname: "ignore"
-          addresses: 
+          dhcp4: false
+          dhcp6: false
+          accept-ra: false
+          addresses:
             - ####ADDR40####
             - ####ADDR41####
             - ####ADDR42####
+            - ####ADDR43####
+            - ####ADDR44####
             - ####ADDR60####
             - ####ADDR61####
             - ####ADDR62####
+            - ####ADDR63####
+            - ####ADDR64####
           routes:
             - to: default
-              via: ####GW####
+              via: ####GW4####
+            - to: "::/0"
+              via: ####GW6####
           nameservers:
             addresses: [####NAMESERVER####]
             search: [####SEARCH####]
           access-points:
-            "####WLAN####":
-              hidden: true
-              password: "####WLANPASS####"
+            "MyWlanID":
+              hidden: false
+              password: "MyWlanPass"
               

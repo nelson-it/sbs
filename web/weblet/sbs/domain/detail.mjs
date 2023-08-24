@@ -28,6 +28,7 @@ class MneSbsDomain extends MneDbView
       
       netparurl : 'sysexec/sbs/domain/detailnet_mod',
       primaryurl : 'sysexec/sbs/domain/detailprimary_mod',
+      demoteurl : 'sysexec/sbs/domain/detaildemote_mod',
       
       hinput : false
     };
@@ -43,7 +44,7 @@ class MneSbsDomain extends MneDbView
     super.reset();
     this.delbutton('ok');
     
-    this.obj.mkbuttons.push( { id : 'domain', value : MneText.getText('#mne_lang#Domain'), before : 'cancel' } );
+    this.obj.mkbuttons.push( { id : 'domain', value : MneText.getText('#mne_lang#Domain Ok'), before : 'cancel' } );
     this.obj.mkbuttons.push( { id : 'netpar', value : MneText.getText('#mne_lang#Netzwerk übernehmen'), space : 'before' } );
     this.obj.mkbuttons.push( { id : 'primary', value : MneText.getText('#mne_lang#Primär') } );
     this.obj.mkbuttons.push( { id : 'demote', value : MneText.getText('#mne_lang#Controller entfernen'), space : 'before' } );
@@ -52,6 +53,7 @@ class MneSbsDomain extends MneDbView
     
     this.obj.run.btnrequest.netpar = this.initpar.netparurl;
     this.obj.run.btnrequest.primary = this.initpar.primaryurl;
+    this.obj.run.btnrequest.demote = this.initpar.demoteurl;
   }
   
   getParamNetpar(p)
@@ -64,7 +66,17 @@ class MneSbsDomain extends MneDbView
       return p;
   }
   
-  getParamPrimary(p)
+ getParamPrimary(p)
+  {
+      "administrator,adminpassword,adminpassword2".split(',').forEach( ( item) =>
+      {
+        p = this.addParam(p, item + "Input", this.obj.inputs[item]);
+      });
+      
+      return p;
+  }
+
+  getParamDemote(p)
   {
       "administrator,adminpassword,adminpassword2".split(',').forEach( ( item) =>
       {
@@ -117,6 +129,14 @@ class MneSbsDomain extends MneDbView
   {
     this.obj.run.okaction = 'primary';
     if ( this.confirm(MneText.sprintf( MneText.getText("#mne_lang#wirklich zum Primary Controller ändern?")) ))
+      return super.ok();
+    return false;
+  }
+
+  async demote()
+  {
+    this.obj.run.okaction = 'demote';
+    if ( this.confirm(MneText.sprintf( MneText.getText("#mne_lang#wirklich Controller entfernen?")) ))
       return super.ok();
     return false;
   }

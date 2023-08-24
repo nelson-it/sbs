@@ -10,81 +10,16 @@ if [ -d "$cloudcfgdir" ] && [ ! -f "$cloudcfgdir/99-mne-disable-network-config.c
   cp $disable $cloudcfgdir/99-mne-disable-network-config.cfg;
 fi
 
-if [ ! -f $netplandir/mnesys-config ]; then
-   mv $netplandir "$netplandir"_"$actdate"
-   mkdir $netplandir
-   touch $netplandir/mnesys-config
-fi
-
-declare -a addr4 addr6
-for i in $(echo  "$vanetaddrInput"  | sed -e s'/\\n/\n/g'); do addr4[${#addr4[@]}]="$i"; done;
-for i in $(echo  "$vanetaddr6Input" | sed -e s'/\\n/\n/g'); do addr6[${#addr6[@]}]="$i"; done;
-vadnsnameserverInput=$(echo $vadnsnameserverInput | sed -e 's/"/\\"/g')
-
-if [ "$vanetaddrtypInput" != "static" ]; then
-	vanetaddrInput=
-	vanetaddr6Input=
-	vanetbcastInput=
-	vanetgatewayInput=
-	vadnsnameserverInput=
-	vadnssearchInput=
-fi
-
-if [ "$vawlanInput" != "" ] && [ "$vawlanpassInput" == "" ]; then
-   echo "Bitte Wlan Password eingeben" >&2
-   exit 1
-fi
-
-prog='/####DEVICE####/     { gsub(/####DEVICE####/,"'$vadeviceInput'"); }
-      /####DEVICETYPE####/ { if ( "'$vawlanInput'" == "" ) gsub(/####DEVICETYPE####/, "ethernets"); else gsub(/####DEVICETYPE####/, "wifis"); } 
-
-      /dhcp4/              { if ( "'$vanetaddrtypInput'" != "dhcp"   ) gsub("true", "false"); }
-      /hostname:.*ignore/  { if ( "'$vanetaddrtypInput'" == "dhcp"   ) next; } 
-      /addresses/          { if ( "'$vanetaddrtypInput'" != "static" ) next; }
-
-      /####ADDR40####/     { if ( "'${addr4[0]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR40####/, "'${addr4[0]}'"); }
-      /####ADDR41####/     { if ( "'${addr4[1]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR41####/, "'${addr4[1]}'"); }
-      /####ADDR42####/     { if ( "'${addr4[2]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR42####/, "'${addr4[2]}'"); }
-      /####ADDR43####/     { if ( "'${addr4[3]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR43####/, "'${addr4[3]}'"); }
-      /####ADDR44####/     { if ( "'${addr4[4]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR44####/, "'${addr4[4]}'"); }
-      /####ADDR45####/     { if ( "'${addr4[5]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR45####/, "'${addr4[5]}'"); }
-      /####ADDR46####/     { if ( "'${addr4[6]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR46####/, "'${addr4[6]}'"); }
-      /####ADDR47####/     { if ( "'${addr4[7]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR47####/, "'${addr4[7]}'"); }
-      /####ADDR48####/     { if ( "'${addr4[8]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR48####/, "'${addr4[8]}'"); }
-      /####ADDR49####/     { if ( "'${addr4[9]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR49####/, "'${addr4[9]}'"); }
-
-      /####ADDR60####/     { if ( "'${addr6[0]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR60####/, "'${addr6[0]}'"); }
-      /####ADDR61####/     { if ( "'${addr6[1]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR61####/, "'${addr6[1]}'"); }
-      /####ADDR62####/     { if ( "'${addr6[2]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR62####/, "'${addr6[2]}'"); }
-      /####ADDR63####/     { if ( "'${addr6[3]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR63####/, "'${addr6[3]}'"); }
-      /####ADDR64####/     { if ( "'${addr6[4]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR64####/, "'${addr6[4]}'"); }
-      /####ADDR65####/     { if ( "'${addr6[5]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR65####/, "'${addr6[5]}'"); }
-      /####ADDR66####/     { if ( "'${addr6[6]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR66####/, "'${addr6[6]}'"); }
-      /####ADDR67####/     { if ( "'${addr6[7]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR67####/, "'${addr6[7]}'"); }
-      /####ADDR68####/     { if ( "'${addr6[8]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR68####/, "'${addr6[8]}'"); }
-      /####ADDR69####/     { if ( "'${addr6[9]}'"           == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####ADDR69####/, "'${addr6[9]}'"); }
-
-      /routes:/            { if ( "'$vanetgatewayInput'"    == "" || "'$vanetaddrtypInput'" != "static" ) next; }
-      /to:/                { if ( "'$vanetgatewayInput'"    == "" || "'$vanetaddrtypInput'" != "static" ) next; }
-      /via:/               { if ( "'$vanetgatewayInput'"    == "" || "'$vanetaddrtypInput'" != "static" ) next; }
-      /####GW####/         { if ( "'$vanetgatewayInput'"    == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####GW####/, "'$vanetgatewayInput'"); }
-      /nameserver/         { if ( "'$vadnsnameserverInput'" == "" && "'$vadnssearchInput'" == "" || "'$vanetaddrtypInput'" != "static" ) next; }
-      /####NAMESERVER####/ { if ( "'$vadnsnameserverInput'" == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####NAMESERVER####/, "'$vadnsnameserverInput'"); }
-      /####SEARCH####/     { if ( "'$vadnssearchInput'"     == "" || "'$vanetaddrtypInput'" != "static" ) next; gsub(/####SEARCH####/, "'$vadnssearchInput'"); }
-      
-      /access-points/      { if ( "'$vawlanInput'" == "" ) next; }
-      /hidden/             { if ( "'$vawlanInput'" == "" || "'$vawlanhiddenInput'" == "" ) next;  }
-      /####WLAN####/       { if ( "'$vawlanInput'" == "" ) next; gsub(/####WLAN####/, "'$vawlanInput'"); }
-      /####WLANPASS####/   { if ( "'$vawlanInput'" == "" ) next; gsub(/####WLANPASS####/, "'$vawlanpassInput'"); }
-      
-      { print $0 }'
 
 conffile="$netplandir/00-mne-$vadeviceInput.yaml"
-awk "$prog" "$conf_single" > $conffile
+mv "$conffile" "$conffile.save"
+echo "$vaconfigInput" > "$conffile"
 
-conffile="$netconfigdir/$vadeviceInput"
-echo ' [ "'$vadeviceInput'", "'$vanetaddrtypInput'", "'$vanetaddr6Input'", "'"$vanetaddrInput"'", "'$vanetbcastInput'", "'$vanetgatewayInput'", "'$vadnsnameserverInput'", "'$vadnssearchInput'", "'$vawlanInput'", "", "'$vawlanhiddenInput'", "'####ACTTIME####'" ]' > $conffile;
-
-netplan apply
+mne_need_error 
+echo | netplan try > /dev/null
+if [ "$?" != "0" ]; then
+  mv "$conffile.save" "$conffile"
+  exit 1
+fi
  
 exit 0

@@ -12,16 +12,8 @@ if [ "$?" = "0" ]; then
   domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
   check_dnspasswd $domain
   
-  get_netparam
+  eval "$(get_reverse $vadns_recordInput_old $vaaddressInput_old)"
   
-  if [ "$vadns_recordInput_old" = "AAAA" ]; then
-    mask="$(echo $daddr6 | cut -f2 -d/)"
-  else
-    mask="$(echo $daddr4 | cut -f2 -d/)"
-  fi 
-  
-  get_reverse $vadns_recordInput_old $vaaddressInput_old $mask
-
   mne_need_error
   samba-tool dns delete $(hostname) $domain "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" --use-kerberos=required >&$logfile 2>&1
   if [ "$?" != "0" ]; then

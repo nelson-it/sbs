@@ -9,21 +9,23 @@ json_writeheader "$ids" "$labels" "readtime:1000" "";
 
 hostname=$(hostname)
 
-prog='/inet[^6]/ { found=1; printf("addr='"'"'%s'"'"'; bcast='"'"'%s'"'"'; mask='"'"'%s'"'"'\n", $2, $6, $4); }
-      /inet6/    { found=1; printf("addr='"'"'%s'"'"'; bcast='"'"''"'"'; mask='"'"'%s'"'"'\n", $2, $4); }
-      END        { if ( ! found ) printf("addr='"'"''"'"'; bcast='"'"''"'"'; mask='"'"''"'"'\n");}'
+prog='/inet[^6]/ { printf("addr=\"%s\";bcast=\"%s\";\n", $2, $4); }
+      /inet6/    { printf("addr=\"%s\";bcast=\"\";\n", $2); }
+      '
 
 echo '  "values"  : ['
 for device in `ls /sys/class/net`
 do
   if [ "$device" != "lo" ]; then
 
-    ifconfig $device | awk "$prog" | \
+    ip address show dev $device | awk "$prog" >&$logfile
+    ip address show dev $device | awk "$prog" | \
     while read line
     do
        eval $line
-       if [ "$bcast" != "" ] && [ "$mask" != "" ]; then
-         mask="$(ipmask2int $mask)"
+       if [ "$addr" != "" ]; then
+         mask=${addr#*/}
+         addr=${addr%/*}
        fi
        json_writedata "$device" "$addr" "$mask" "$bcast" "$acttime";
      done

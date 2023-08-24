@@ -13,14 +13,6 @@ radvdconf=$(findtemplate  domain radvd.conf)
 # -------------------------------------------
 check_cert
 
-netdevicefile="$netconfigdir/$vanetdeviceInput"
-if [ ! -f "$netdevicefile" ]; then
-	echo "#mne_lang#Netzdevice ist nicht konfiguriert#" >&2
-	exit 2
-fi
-eval "$(sed -e 's/\[/deviceconfarray=\(/' -e 's/\]/\)/' -e 's/,//g' < "$netdevicefile" )"
-addr=$(echo ${deviceconfarray[3]} | cut -f1 -d/)
-
 # -------------------------------------------
 # bereinigen
 # -------------------------------------------
@@ -97,10 +89,6 @@ fi
 mkdir -p /etc/mne/dns >&$logfile 2>&1
 chmod 755 /etc/mne/dns
 
-mod_dhcp "${deviceconfarray[3]}" "$vadhcpstartInput" "$vadhcpendInput" "${deviceconfarray[2]}" "$vadhcp6startInput" "$vadhcp6endInput" \
-         "$vadnssearchInput" "$vadomainInput" "${deviceconfarray[4]}" "${deviceconfarray[5]}" "$vanetdeviceInput" \
-         "$dhcpconf4" "$dhcpconf6" "$dhcpupdate" "$radvdconf"
-
 systemctl restart samba-ad-dc >&$logfile 2>&1
 systemctl restart named >&$logfile 2>&1
 sleep 2
@@ -109,11 +97,19 @@ systemctl status samba-ad-dc >&$logfile 2>&1
 echo "$vaadminpasswordInput" | kinit  administrator@$udomain >&$logfile 2>&1
 klist >&$logfile 2>&1
 
-create_reverse "${deviceconfarray[3]}" "${deviceconfarray[2]}"
+addr4=$(ip -4 address show dev $vanetdeviceInput | awk '/inet/ { print $2 }')
+addr6=$(ip -6 address show dev $vanetdeviceInput | awk '/inet6/ { if ( substr($2,1,4) != "fe80" ) print $2 } ')
+  
 # -------------------------------------------
 # Grant share Rights to Domainadmins
 # -------------------------------------------
-echo "$vaadminpasswordInput" | net rpc rights grant "$(toupper $vaworkgroupInput)\Domain Admins" SeDiskOperatorPrivilege -Uadministrator -I $addr >&$logfile 2>&1 
+workgroup=$(samba-tool domain info 127.0.0.1 | awk -v FS=: '/Netbios domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+
+echo "$vaadminpasswordInput" | net rpc rights grant "$workgroup\Domain Admins" SeDiskOperatorPrivilege -Uadministrator -I ${addr4%%/*} >&$logfile 2>&1 
+
+mod_dhcp "$addr4" "$vadhcpstartInput" "$vadhcpendInput" "$addr6" "$vadhcp6startInput" "$vadhcp6endInput" \
+         "$vadomainInput" "$vadnssearchInput" "" "" "$vanetdeviceInput" \
+         "$dhcpconf4" "$dhcpconf6" "$dhcpupdate" "$radvdconf"
 
 needreboot=1
 

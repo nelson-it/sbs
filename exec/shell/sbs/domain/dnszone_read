@@ -1,0 +1,37 @@
+#!/bin/bash
+
+. sbs/exec/config/allg
+. $(dirname $BASH_SOURCE)/config/functions
+
+  cols="typ,name,addr";
+  labels="Typ,Name,Addresse";
+  regexp="addr:ipaddrmaskempty";
+
+json_writeheader "$cols" "$labels" "" "" "$regexp" 
+
+echo '  "values"  : ['
+
+mne_need_error
+systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
+if [ "$?" = "0" ]; then
+
+  s_readtime=$(date +%s)
+
+  info=$(samba-tool domain info 127.0.0.1)
+  domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+  check_dnspasswd $domain
+
+  samba-tool dns zonelist puck --$vawval --use-kerberos=required | awk '/pszZoneName/ { if ( substr($3,1,1) != "_" && substr($3,1,1) != ".") print $3 }' | \
+  while read zone
+  do
+    if [ "$vawval" == "reverse" ]; then
+      if [ "$(echo $zone | awk '/ip6.arpa/ { print 6 } /in-addr.arpa/ { print 4 }')" == "4" ]; then
+        addr=$(echo $zone | sed -e 's/\.in-addr.arpa.*//' | tr "." $'\n' | tac | awk '{ print $0; count++} END { mask=count *8; while ( count++ < 4 ) print "0"; print "/" mask }' | paste -s -d "." | sed -e "s@\./@/@")
+      else
+        addr=$(ipv6calc -I revnibbles.arpa $zone)
+      fi
+    fi
+    json_writedata "$vawval" "$zone" "$addr"
+  done
+fi
+echo ' ]'

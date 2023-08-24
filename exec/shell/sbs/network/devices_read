@@ -3,50 +3,96 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-ids="device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,wlan,wlanpass,wlanhidden,readtime"
-labels="Schnittstelle,Type,Ipv6 Addresse,Ipv4 Addresse,Broadcast,Gateway,Nameserver,DNS Suchdomains,WLan,Password,versteckt,Lesezeit";
+netplan=$(findtemplate network netplan_single )
+ids="device,config"
+labels="Schnittstelle,Konfiguration";
 
-json_writeheader "$ids" "$labels" "readtime:1000,wlanhidden:1" "" "netaddrtyp:notempty,netaddr6:ip6addrmaskmempty,netaddr:ip4addrmaskmempty,netgateway:ip4addrempty";
+json_writeheader "$ids" "$labels" "" "" "";
 
-if [ -f $netplandir/mnesys-config ]; then
-  for file in $(ls -1 "$netconfigdir")
-  do
-	if [ ! -e "/sys/class/net/$file" ] || [ ! -e "$netplandir/00-mne-$file.yaml" ] || [ "$(stat -c %Y "$netconfigdir/$file")" -lt "$(stat -c %Y "$netplandir/00-mne-$file.yaml" )" ]; then
-	  rm "$netconfigdir/$file" >&$logfile 2>&1;
-	fi
-  done
+if [ ! -f $netplandir/mnesys-config ]; then
+   mv $netplandir "$netplandir"_"$actdate"
+   mkdir $netplandir
+   touch $netplandir/mnesys-config
 fi
 
-echo '  "values"  : ['
 for device in `ls /sys/class/net`
 do
-  if [ "$device" != "lo" ]; then
-    conffile="$netconfigdir/$device"
-    if [ -f $conffile ]; then
-    	echo "$json_komma"
-    	json_komma=","
-    	cat $conffile | sed -e 's/####ACTTIME####/'$acttime'/g'
-    else
-        declare netaddr= netmask= netbcast= netgateway= dnssearch= dnsnameserver=
+  if [ ! -e "$netplandir/00-mne-$device.yaml" ]; then
+    devicetyp=
+    if [ -x "/sys/class/net/$device/device" ]; then devicetyp=ethernets; fi
+    if [ -x "/sys/class/net/$device/wireless" ]; then devicetyp=wifis; fi
+    if [ -x "/sys/class/net/$device/bridge" ]; then devicetyp=bridges; fi
 
-        netgateway="$(route -n       | awk '/^0\.0\.0\.0.*'$device'/ { print $2 }')"
-        netaddr="$(ifconfig $device  | awk '/inet[^6]/ { print $2}')"
-        netaddr6="$(ifconfig $device | awk '/inet6/    { printf("%s%s/%s", eol, $2, $4); eol="\\n" }')"
-        netmask="$(ifconfig $device  | awk '/inet[^6]/ { print $4}')"
-        netbcast="$(ifconfig $device | awk '/inet[^6]/ { print $6}')"
+    if [ "$devicetyp" != "" ]; then
     
-        if [ "$netmask" != "" ]; then
-          netmask="$(ipmask2int $netmask)"
-          netaddr="$netaddr/$netmask"
-        fi
+      prog='/inet[^6]/ { printf("netaddr4%d=\"%s\";", ipv4num++, $2 ); }
+            /inet6/    { if ( substr($2, 1, 4 ) != "fe80" ) {  printf("netaddr6%d=\"%s\";", ipv6num++, $2); } }'
 
-        dnssearch=`cat /etc/resolv.conf | awk '/^search[ \t]/ { print $2 }'`
-        dnsnameserver=$(cat /etc/resolv.conf | awk 'BEGIN { found=""; } /^nameserver[ \t]+/ { gsub(/%.*$/,"",$2); printf("%s%s",found,$2); found = "," }')
+      eval $(ip address show dev $device | awk "$prog")
+      gateway4=$(route -n  | awk '/^0\.0\.0\.0.*'$device'/ { print $2 }')
+      gateway6=$(route -6n | awk '/::\/0.*'$device'/ { print $2 }')
+      dnssearch=`cat /etc/resolv.conf | awk '/^search[ \t]/ { print $2 }'`
+      dnsnameserver=$(cat /etc/resolv.conf | awk 'BEGIN { found=""; } /^nameserver[ \t]+/ { gsub(/%.*$/,"",$2); printf("%s%s",found,$2); found = "," }')
+    
+      prog='/####DEVICE####/     { gsub("####DEVICE####", "'$device'"); }
+            /####DEVICETYPE####/ { gsub("####DEVICETYPE####", "'$devicetyp'"); }
+  
+            /addresses/          { if ( "'$netaddr40'" == "" && "'$netaddr60'" == "" ) gsub(/^/, "#"); }
+            /####ADDR40####/     { if ( "'$netaddr40'" == "" ) next; gsub("####ADDR40####", "'$netaddr40'"); }
+            /####ADDR41####/     { if ( "'$netaddr41'" == "" ) next; gsub("####ADDR41####", "'$netaddr41'"); }
+            /####ADDR42####/     { if ( "'$netaddr42'" == "" ) next; gsub("####ADDR42####", "'$netaddr42'"); }
+            /####ADDR43####/     { if ( "'$netaddr43'" == "" ) next; gsub("####ADDR43####", "'$netaddr43'"); }
+            /####ADDR44####/     { if ( "'$netaddr44'" == "" ) next; gsub("####ADDR44####", "'$netaddr44'"); }
+      
+            /####ADDR60####/     { if ( "'$netaddr60'" == "" ) next; gsub("####ADDR60####", "'$netaddr60'"); }
+            /####ADDR61####/     { if ( "'$netaddr61'" == "" ) next; gsub("####ADDR61####", "'$netaddr61'"); }
+            /####ADDR62####/     { if ( "'$netaddr62'" == "" ) next; gsub("####ADDR62####", "'$netaddr62'"); }
+            /####ADDR63####/     { if ( "'$netaddr63'" == "" ) next; gsub("####ADDR63####", "'$netaddr63'"); }
+            /####ADDR64####/     { if ( "'$netaddr64'" == "" ) next; gsub("####ADDR64####", "'$netaddr64'"); }
+    
+            /to:.*default/       { if ( "'$gateway4'" == "" ) gsub(/^/, "#"); }
+            /####GW4####/        { if ( "'$gateway4'" == "" ) gsub(/^/, "#"); gsub("####GW4####", "'$gateway4'"); }
+          
+            /to:.*::\/0/         { if ( "'$gateway6'" == "" ) gsub(/^/, "#"); }
+            /####GW6####/        { if ( "'$gateway6'" == "" ) gsub(/^/, "#"); gsub("####GW6####", "'$gateway6'"); }
+          
+            /####NAMESERVER####/ { gsub("####NAMESERVER####", "'$dnsnameserver'"); }
+            /####SEARCH####/     { gsub("####SEARCH####", "'$dnssearch'"); }
+            /access-points/      { if ( "$devicetyp" != "wifis" ) noprint=1 }
 
-        json_writedata "$device" "" "$netaddr6" "$netaddr" "$netbcast" "$netgateway" "$dnsnameserver" "$dnssearch" "" "" "" "$acttime";
+            { if ( ! noprint ) print $0 }
+            '
+
+       awk "$prog" < "$netplan" > "$netplandir/00-mne-$device.yaml" 2>&$logfile;
      fi
   fi
 done
+
+for file in $( ls -1 "$netplandir" )
+  do
+  if [ "$file" == "mnesys-config" ]; then
+    continue
+  fi
+  
+  if [ "${file:0:6}" != "00-mne" ]; then
+    rm "$netplandir/$file" >&$logfile 2>&1;
+  else 
+    file="${file:7}"
+    if [ ! -e "/sys/class/net/${file%.yaml}" ];then 
+      rm "$netplandir/00-mne-$file" >&$logfile 2>&1;
+    fi
+  fi
+done
+
+echo '  "values"  : ['
+
+for device in $(ls -1 /sys/class/net)
+do
+  if [ -f "$netplandir/00-mne-$device.yaml" ]; then
+    json_writedata "$device" "$(cat $netplandir/00-mne-$device.yaml)"
+  fi
+done
+
 echo ']'
 
 exit 0
