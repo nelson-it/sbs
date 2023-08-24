@@ -8,21 +8,23 @@ mne_need_error
 systemctl is-enabled samba-ad-dc.service 2>&1 >/dev/null
 if [ "$?" = "0" ]; then
 
-  info=$(samba-tool domain info 127.0.0.1)
-  domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+  domain=$(samba-tool domain info 127.0.0.1 | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
+  if [ "$vadomainInput" = "" ]; then
+    vadomainInput="$domain"
+  fi
   check_dnspasswd $domain
   
   eval "$(get_reverse $vadns_recordInput_old $vaaddressInput_old)"
   
   mne_need_error
-  samba-tool dns delete $(hostname) $domain "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" --use-kerberos=required >&$logfile 2>&1
+  samba-tool dns delete $(hostname) $vadomainInput "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" --use-kerberos=required >&$logfile 2>&1
   if [ "$?" != "0" ]; then
     echo '#mne_lang# Kann Addresse nicht finden#' 1>&2
   fi
   
   if [ "$vadns_recordInput_old" = "AAAA" ] || [ "$vadns_recordInput_old" = "A" ]; then
     mne_need_error
-    samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$domain" --use-kerberos=required >&$logfile 2>&1
+    samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$vadomainInput" --use-kerberos=required >&$logfile 2>&1
     if [ "$?" != "0" ]; then
       echo '#mne_lang# Kann Rückaddresse nicht finden#' 1>&2
     fi    

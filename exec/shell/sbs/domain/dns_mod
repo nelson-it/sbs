@@ -29,7 +29,7 @@ if [ "$?" = "0" ]; then
   
   if [ "$vadns_recordInput_old" = "AAAA" ] || [ "$vadns_recordInput_old" = "A" ]; then
     mne_need_error
-    samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$domain" --use-kerberos=required >&$logfile 2>&1
+    samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$vadomainInput" --use-kerberos=required >&$logfile 2>&1
     if [ "$?" != "0" ]; then
       echo '#mne_lang# Kann Rückaddresse nicht finden#' >&2
     fi    
@@ -44,7 +44,7 @@ if [ "$?" = "0" ]; then
   
   if [ "$vadns_recordInput" = "AAAA" ] || [ "$vadns_recordInput" = "A" ]; then
      mne_need_error
-    samba-tool dns add $(hostname) $zone $raddr PTR "$vanameInput.$domain" --use-kerberos=required >&$logfile 2>&1
+    samba-tool dns add $(hostname) $zone $raddr PTR "$vanameInput.$vadomainInput" --use-kerberos=required >&$logfile 2>&1
     if [ "$?" != "0" ]; then
       echo '#mne_lang# Kann Rückaddresse nicht hinzufügen#' >&2
     fi

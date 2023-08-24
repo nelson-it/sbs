@@ -21,7 +21,7 @@ if [ "$?" = "0" ]; then
   domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
   check_dnspasswd $domain
 
-  samba-tool dns zonelist puck --$vawval --use-kerberos=required | awk '/pszZoneName/ { if ( substr($3,1,1) != "_" && substr($3,1,1) != ".") print $3 }' | \
+  samba-tool dns zonelist $(hostname) --$vawval --use-kerberos=required | awk '/pszZoneName/ { if ( substr($3,1,1) != "_" && substr($3,1,1) != ".") print $3 }' | \
   while read zone
   do
     if [ "$vawval" == "reverse" ]; then
