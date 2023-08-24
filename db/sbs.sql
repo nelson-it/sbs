@@ -3,8 +3,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.8 (Ubuntu 14.8-0ubuntu0.22.04.1)
--- Dumped by pg_dump version 14.8 (Ubuntu 14.8-0ubuntu0.22.04.1)
+-- Dumped from database version 14.9 (Ubuntu 14.9-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.9 (Ubuntu 14.9-0ubuntu0.22.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -3019,12 +3019,203 @@ INSERT INTO mne_application.htmlcomposenames VALUES (1616147907, 'admindb', 1616
 -- Data for Name: htmlcomposetab; Type: TABLE DATA; Schema: mne_application; Owner: admindb
 --
 
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1542279038, 'admindb', '/weblet/dbadmin/table/check', 'check', 20, 'bottom', '', '', 0, 'admindb', false, '575ea2058177', '575e9c45800d', 1221503696);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1591188671, 'admindb', '/weblet/dbadmin/procedure/detail', 'detail', 0, 'detail', '', 'access', 0, '', false, '575ea20580d2', '575e9c45801a', 1222163144);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1692697786, 'admindb', '/weblet/allg/table/filter', 'dnszone', 20, 'bottom', 'url    : ''sysexec/sbs/domain/dnszone_read'',
+addurl : ''sysexec/sbs/domain/dnszone_add'',
+modurl : ''sysexec/sbs/domain/dnszone_add'',
+delurl : ''sysexec/sbs/domain/dnszone_del'',
+
+defvalues : { typ : ''forward'' },
+
+cols         : ''typ,name,addr'',
+primarykey   : [''name''],
+tablecoltype : { name : ''text'' },
+tablehidecols : [''typ'',''addr''],
+
+wcol : ''typ'',
+wop  : ''='',
+wval : ''forward'',
+
+addcols : [''name'', ''typ''],
+addtyps : {},
+
+delids : [''name''],
+deltyps : {},
+delconfirmids : [ ''name''],
+
+', '', 0, '', false, '64e4653d8000', '57bab6120000', 1692689725);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1692697873, 'admindb', '/weblet/allg/table/filter', 'dnsrzone', 30, 'bottom', 'url    : ''sysexec/sbs/domain/dnszone_read'',
+addurl : ''sysexec/sbs/domain/dnszone_add'',
+modurl : ''sysexec/sbs/domain/dnszone_add'',
+delurl : ''sysexec/sbs/domain/dnszone_del'',
+
+defvalues : { typ : ''reverse'' },
+
+cols         : ''typ,name,addr'',
+primarykey   : [''name''],
+tablecoltype : { addr : ''text'' },
+tablehidecols : [ ''typ''],
+
+wcol : ''typ'',
+wop  : ''='',
+wval : ''reverse'',
+
+addcols : [''name'', ''addr'', ''typ''],
+addtyps : {},
+
+delids : [''name''],
+deltyps : {},
+delconfirmids : [ ''addr''],
+
+', '', 0, '', false, '64e46ac38000', '57bab6120000', 1692691139);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1692789511, 'admindb', '/weblet/sbs/domain/dns', 'dnsaddress', 10, 'bottom', '', '', 0, '', false, '581c7ce40000', '57bab6120000', 1478261988);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1692625469, 'admindb', '/weblet/allg/table/select', 'deviceselect', 0, 'popup', 'url : ''sysexec/sbs/network/devices_read'',
+cols : ''device,config'',
+showcols : ''device'',
+
+tablehidecols : [ ''config'' ],
+', '', 0, '', false, '6034b0ee8000', '57bab6120000', 1614065902);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1547548771, 'admindb', '/weblet/dbadmin/table/fkey', 'foreigndetail', 10, 'popup', '', '', 0, '', false, '575ea2058137', '575e9c45800d', 1221728783);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1620389672, 'admindb', '/weblet/allg/table/filter', 'csrs', 250, 'bottom', 'tableweblet : ''/weblet/sbs/cert/certtable'',
+url : ''sysexec/sbs/cert/cert_read'',
+cols : ''dir,data,filename,dns,valid,ca'',
+showids : [''dir''],
+showalias : [''#csr''],
+tablehidecols : [ ''dir'', ''data'', ''valid'', ''ca'' ],
+tablecoltype : { filename : ''file'' },
+
+addurl : ''sysexec/sbs/cert/cert_add'',
+addcols : [ ''dir'', ''filename'', ''data'' ],
+
+modurl : ''sysexec/sbs/cert/cert_mod'',
+okcols : [ ''dir'', ''filename'', ''data'' ],
+okids : [ ''dir'', ''filename'' ],
+
+
+delurl : ''sysexec/sbs/cert/cert_del'',
+delids : [ ''dir'', ''filename''],
+delconfirmids : [ ''filename'' ],
+
+defvalues : { dir : ''csr'' }
+', 'certs,keys', 0, '', false, '575ea2058215', '575e9c458039', 1459840832);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1420729368, 'admindb', '/weblet/dbadmin/table/content', 'content', 100, 'bottom', 'showdynpar : ''"schema" : "schema", "table" : "table"'',
+showdynparweblet : ''detail'',
+
+popup : ''contentedit'',
+no_vals : false,
+notclose : true,
+
+ignore_notdefined : true', '', 0, '', false, '575ea20581d8', '575e9c45800d', 1221469373);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1466414716, 'admindb', '/weblet/basic/message', 'message', 0, 'popup', '', '', 0, '', false, '575ea2058010', '575e9c458013', 1427952906);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1597657792, 'admindb', '/weblet/allg/table/select', 'search', 90, 'selection', 'schema : ''mne_application'', 
+ query : ''weblet_detail'',
+
+    cols : ''htmlcomposeid,id,path,initpar'',
+showcols : ''htmlcomposeid'',
+
+tablehidecols : [ ''htmlcomposeid'' ],
+
+selectok : (res) => { var self = s.composeparent.obj.weblets[s.id];
+                      var i; for ( i in res.ids ) self.obj.run.values[res.ids[i]] = res.values[0][i];
+                      self.newselect = true }
+', 'detail', 0, '', false, '575ea205819a', '575e9c45801d', 1400059224);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1589965925, 'admindb', '/weblet/dbadmin/query/column', 'column', 10, 'bottom', 'loaddirect : 1', '', 0, '', false, '575ea2058207', '575e9c458001', 1210872151);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1615902527, 'admindb', '/weblet/allg/table/filter', 'cert', 200, 'bottom', 'tableweblet : ''/weblet/sbs/cert/certtable'',
+url : ''sysexec/sbs/cert/cert_read'',
+cols : ''dir,data,filename,dns,valid,ca'',
+showids : [''dir''],
+showalias : [''#crt''],
+tablehidecols : [ ''dir'', ''data'' ],
+
+delurl : ''sysexec/sbs/cert/cert_del'',
+delids : [ ''dir'', ''filename''],
+delconfirmids : [ ''filename'' ],
+', '', 0, '', false, '575ea2058214', '575e9c458038', 1457702905);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1612338359, 'admindb', '/weblet/sbs/apache/detail', 'detail', 0, 'detail', '', '', 0, '', false, '575ea205820e', '575e9c458038', 1453800703);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1605511953, 'admindb', '/weblet/allg/table/fix', 'index', 15, 'bottom', 'schema     : ''mne_application'', query : ''table_index'', 
+cols       : ''index,isunique,text_de,text_en,custom'',
+scols      : ''index'',
+showids    : [  ''schema'',  ''table'' ],
+primarykey : [''index''],
+
+detailweblet : ''indexdetail''', '', 0, 'admindb', false, '575ea205812b', '575e9c45800d', 1223212325);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1615903050, 'admindb', '/weblet/allg/table/filter', 'site', 0, 'bottom', 'tableweblet  : ''/weblet/sbs/apache/sitetable'',
+url          : ''sysexec/sbs/apache/site_read'',
+
+cols         : ''name,enabled,domain,aliases,email,documentroot,conf,httpsonly,renewcert'',
+primarykey   : [ ''name'' ],
+tablecoltype : { name : ''text'', enabled : ''bool'', domain : ''text'', aliases : ''text'', email : ''text'', documentroot : ''text'', conf : ''mtext'', httpsonly : ''bool'', renewcert : ''bool'' },
+
+addurl : ''sysexec/sbs/apache/site_add'',
+modurl : ''sysexec/sbs/apache/site_mod'',
+delurl : ''sysexec/sbs/apache/site_del'',
+
+okids        : [ ''name'' ],
+okcols       : [ ''name'', ''enabled'', ''domain'', ''aliases'', ''email'', ''documentroot'', ''conf'', ''httpsonly'', ''renewcert'' ],
+oktyps       : { renewcert : ''bool'', httpsonly : ''bool'' },
+
+delids       : [ ''name'' ],
+deltyps      : {},
+delconfirmids : [ ''name''],
+
+defvalues : { name : '''' },
+
+loaddirect : true', '', 0, '', false, '575ea2058210', '575e9c458038', 1453807783);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1616743255, 'admindb', '/weblet/allg/table/fix', 'bottom', 0, 'bottom', 'url    : ''sysexec/sbs/share/user_read'',
+addurl : ''sysexec/sbs/share/user_add'',
+modurl : ''sysexec/sbs/share/user_mod'',
+delurl : ''sysexec/sbs/share/user_del'',
+
+cols    : ''login,fullname,rw'',
+tablecoltype : { login : ''text'', rw : ''bool'' },
+
+showids : [ ''share'' ],
+okids   : [ ''login'' ],
+
+delids  : [ ''login'', ''share'' ],
+delconfirmids : [ ''fullname''],
+
+defvalues : { login : '''', fullname : '''', rw : false },
+
+loaddirect : 1', '', 0, '', false, '605b14ac8000', '605475c38000', 1616581804);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1620368191, 'admindb', '/weblet/allg/table/filter', 'keys', 300, 'bottom', 'tableweblet   : ''/weblet/sbs/cert/certtable'',
+url           : ''sysexec/sbs/cert/cert_read'',
+cols          : ''dir,data,filename,dns,valid,ca'',
+showids       : [''dir''],
+showalias     : [''#key''],
+tablehidecols : [ ''dir'', ''data'', ''dns'', ''valid'', ''ca'' ],
+
+delurl        : ''sysexec/sbs/cert/cert_del'',
+delids        : [ ''dir'', ''filename''],
+delconfirmids : [ ''filename'' ],
+', 'certs,csrs', 0, '', false, '575ea2058217', '575e9c458039', 1459840726);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1616579317, 'admindb', '/weblet/allg/menu/rselect', 'locationselect', 0, 'popup', 'url    : ''sysexec/sbs/share/location_read'',
+addurl : ''sysexec/sbs/share/location_add'',
+modurl : ''sysexec/sbs/share/location_mod'',
+delurl : ''sysexec/sbs/share/location_del'',
+
+cols : ''action,item,menuid,typ,pos'',
+scols : ''pos'',
+showcols : ''menuid'',
+
+wcol : ''typ,parentid'',
+wop  : ''=,='',
+wval : '','',
+
+loaddirect : 1', '', 0, '', false, '6054b1c38000', '605475c38000', 1616163267);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1616741429, 'admindb', '/weblet/allg/table/frame', 'userselect', 0, 'popup', 'url : ''sysexec/sbs/user/select_read'',
+cols : ''fullname'',
+showcols : ''sAMAccountName''
+', '', 0, '', false, '605d83d08000', '605475c38000', 1616741328);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1691563328, 'admindb', '/weblet/sbs/network/network', 'network', 0, 'network', '', '', 0, '', false, '600ebad78000', '600e93548000', 1611578071);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1597749086, 'admindb', '/weblet/dbadmin/table/name', 'detail', 10, 'detail', 'mainweblet : true', 'bottom', 0, '', false, '575ea20580f0', '575e9c45800d', 1291107024);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1605600034, 'admindb', '/weblet/allg/user/passwd', 'bottom', 0, 'bottom', '
 ', '', 0, '', false, '575ea205808c', '575e9c458034', 1276678196);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1599565653, 'admindb', '/weblet/dbadmin/query/detail', 'detail', 0, 'detail', 'mainweblet : true', 'join,bottom', 0, '', false, '575ea20580b9', '575e9c458001', 1206451053);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1359387171, 'admindb', '/weblet/allg/user/settings', 'detail', 0, 'detail', 'showtitle : true', 'bottom', 0, '', false, '575ea205804c', '575e9c458034', 1226313601);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1585905837, 'admindb', '/weblet/basic/framebutton', 'menubutton', 0, 'menubutton', 'frame : this.obj.slider.s1.frame', '', 0, '', false, '575e9c458016', '575e9c458013', 1585905837);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1465829261, 'admindb', '/weblet/allg/menu/fix', 'all', 10, 'selection', 'classname : ''tree'', schema : ''mne_application'', query : ''weblet_all'', cols : ''schema,name'', showcols : ''htmlcomposeid'',loaddirect : 1', 'detail', 0, '', false, '575ea20580e4', '575e9c45801d', 1220255283);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1615983542, 'admindb', '/weblet/allg/table/fix', 'mail', 0, 'bottom', 'tableweblet : ''/weblet/sbs/user/mailtable'',
 passwdweblet : ''detail'',
 
@@ -3045,7 +3236,6 @@ defvalues : { otherMailbox : '''' },
 loaddirect : true
 
 ', '', 0, '', false, '6050679b8000', '604718218000', 1615882139);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1542279038, 'admindb', '/weblet/dbadmin/table/check', 'check', 20, 'bottom', '', '', 0, 'admindb', false, '575ea2058177', '575e9c45800d', 1221503696);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1599565612, 'admindb', '/weblet/allg/menu/fix', 'querys', 10, 'selection', '''schema''    : ''mne_application'',
  ''table''        : ''queryname'',
  ''cols''         : ''schema,query,unionnum'',
@@ -3099,6 +3289,7 @@ INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1440594410, 'admin
   sschema : ''mne_application'',
    squery : ''table_checks''', '', 0, '', false, '575ea20580ea', '575e9c45800d', 1221722756);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1610121067, 'admindb', '/weblet/main/menu', 'menu', 0, 'menu', 'weblet : ''detail''', 'detail', 0, '', false, '575e9c458014', '575e9c458013', 1585893280);
+INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1613985136, 'admindb', '/weblet/sbs/domain/detail', 'detail', 0, 'detail', '', 'bottom', 0, '', false, '57bab6810000', '57bab6120000', 1471854209);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1596541380, 'admindb', '/weblet/allg/table/fix', 'column', 5, 'bottom', 'schema : ''mne_application'',
 query : ''table_cols'',
 cols : ''schema,table,column,text_de,text_en,ntyp,maxlength,nullable,default,defvalue,ndpytype,showhistory,regexp,regexphelp,custom'',
@@ -3184,8 +3375,6 @@ INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1547561906, 'admin
  showcols : ''schema,fullname'', 
 
 loaddirect : 1', 'detail', 0, '', false, '575ea205810e', '575e9c45801a', 1222162435);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1465829261, 'admindb', '/weblet/allg/menu/fix', 'all', 10, 'selection', 'classname : ''tree'', schema : ''mne_application'', query : ''weblet_all'', cols : ''schema,name'', showcols : ''htmlcomposeid'',loaddirect : 1', 'detail', 0, '', false, '575ea20580e4', '575e9c45801d', 1220255283);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1591188671, 'admindb', '/weblet/dbadmin/procedure/detail', 'detail', 0, 'detail', '', 'access', 0, '', false, '575ea20580d2', '575e9c45801a', 1222163144);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1347866180, 'admindb', '/weblet/allg/menu/fix', 'all', 20, 'selection', '''classname'' : ''tree'',
       schema: ''mne_application'', 
     ''query'' : ''table_all'',
@@ -3268,14 +3457,6 @@ tablehidecols : [ ''schema'', ''table''],
    showids : [ ''schema'', ''table'' ],
 okfunction : ''table_access_ok'',
     okcols : [ ''schema'', ''table'', ''user'', ''select'', ''insert'', ''update'', ''delete'', ''reference'', ''trigger'' ]', '', 0, 'admindb', false, '575ea20580b8', '575e9c45800d', 1222088958);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1605511953, 'admindb', '/weblet/allg/table/fix', 'index', 15, 'bottom', 'schema     : ''mne_application'', query : ''table_index'', 
-cols       : ''index,isunique,text_de,text_en,custom'',
-scols      : ''index'',
-showids    : [  ''schema'',  ''table'' ],
-primarykey : [''index''],
-
-detailweblet : ''indexdetail''', '', 0, 'admindb', false, '575ea205812b', '575e9c45800d', 1223212325);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1613985136, 'admindb', '/weblet/sbs/domain/detail', 'detail', 0, 'detail', '', 'bottom', 0, '', false, '57bab6810000', '57bab6120000', 1471854209);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1603699904, 'admindb', '/weblet/allg/menu/recursive', 'detail', 0, 'detail', '  schema : ''mne_application'',
    query : ''menu'',
     cols : "show,editname,menuid,pos,typ",
@@ -3411,174 +3592,14 @@ showids  : [  ''schema'',  ''table''  ],
 detailweblet : ''foreigndetail''', '', 0, 'admindb', false, '575ea2058178', '575e9c45800d', 1221555822);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1427952927, 'admindb', '/weblet/basic/count', 'count', 0, 'count', '', '', 0, '', false, '575ea20581e2', '575e9c458013', 1427952927);
 INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1591603931, 'admindb', '/weblet/dbadmin/menu/detail', 'bottom', 0, 'bottom', '', '', 0, '', false, '575ea205811a', '575e9c458027', 1289901272);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1547548771, 'admindb', '/weblet/dbadmin/table/fkey', 'foreigndetail', 10, 'popup', '', '', 0, '', false, '575ea2058137', '575e9c45800d', 1221728783);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1620389672, 'admindb', '/weblet/allg/table/filter', 'csrs', 250, 'bottom', 'tableweblet : ''/weblet/sbs/cert/certtable'',
-url : ''sysexec/sbs/cert/cert_read'',
-cols : ''dir,data,filename,dns,valid,ca'',
-showids : [''dir''],
-showalias : [''#csr''],
-tablehidecols : [ ''dir'', ''data'', ''valid'', ''ca'' ],
-tablecoltype : { filename : ''file'' },
-
-addurl : ''sysexec/sbs/cert/cert_add'',
-addcols : [ ''dir'', ''filename'', ''data'' ],
-
-modurl : ''sysexec/sbs/cert/cert_mod'',
-okcols : [ ''dir'', ''filename'', ''data'' ],
-okids : [ ''dir'', ''filename'' ],
-
-
-delurl : ''sysexec/sbs/cert/cert_del'',
-delids : [ ''dir'', ''filename''],
-delconfirmids : [ ''filename'' ],
-
-defvalues : { dir : ''csr'' }
-', 'certs,keys', 0, '', false, '575ea2058215', '575e9c458039', 1459840832);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1420729368, 'admindb', '/weblet/dbadmin/table/content', 'content', 100, 'bottom', 'showdynpar : ''"schema" : "schema", "table" : "table"'',
-showdynparweblet : ''detail'',
-
-popup : ''contentedit'',
-no_vals : false,
-notclose : true,
-
-ignore_notdefined : true', '', 0, '', false, '575ea20581d8', '575e9c45800d', 1221469373);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1466414716, 'admindb', '/weblet/basic/message', 'message', 0, 'popup', '', '', 0, '', false, '575ea2058010', '575e9c458013', 1427952906);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1597657792, 'admindb', '/weblet/allg/table/select', 'search', 90, 'selection', 'schema : ''mne_application'', 
- query : ''weblet_detail'',
-
-    cols : ''htmlcomposeid,id,path,initpar'',
-showcols : ''htmlcomposeid'',
-
-tablehidecols : [ ''htmlcomposeid'' ],
-
-selectok : (res) => { var self = s.composeparent.obj.weblets[s.id];
-                      var i; for ( i in res.ids ) self.obj.run.values[res.ids[i]] = res.values[0][i];
-                      self.newselect = true }
-', 'detail', 0, '', false, '575ea205819a', '575e9c45801d', 1400059224);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1589965925, 'admindb', '/weblet/dbadmin/query/column', 'column', 10, 'bottom', 'loaddirect : 1', '', 0, '', false, '575ea2058207', '575e9c458001', 1210872151);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1615902527, 'admindb', '/weblet/allg/table/filter', 'cert', 200, 'bottom', 'tableweblet : ''/weblet/sbs/cert/certtable'',
-url : ''sysexec/sbs/cert/cert_read'',
-cols : ''dir,data,filename,dns,valid,ca'',
-showids : [''dir''],
-showalias : [''#crt''],
-tablehidecols : [ ''dir'', ''data'' ],
-
-delurl : ''sysexec/sbs/cert/cert_del'',
-delids : [ ''dir'', ''filename''],
-delconfirmids : [ ''filename'' ],
-', '', 0, '', false, '575ea2058214', '575e9c458038', 1457702905);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1612338359, 'admindb', '/weblet/sbs/apache/detail', 'detail', 0, 'detail', '', '', 0, '', false, '575ea205820e', '575e9c458038', 1453800703);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1615903050, 'admindb', '/weblet/allg/table/filter', 'site', 0, 'bottom', 'tableweblet  : ''/weblet/sbs/apache/sitetable'',
-url          : ''sysexec/sbs/apache/site_read'',
-
-cols         : ''name,enabled,domain,aliases,email,documentroot,conf,httpsonly,renewcert'',
-primarykey   : [ ''name'' ],
-tablecoltype : { name : ''text'', enabled : ''bool'', domain : ''text'', aliases : ''text'', email : ''text'', documentroot : ''text'', conf : ''mtext'', httpsonly : ''bool'', renewcert : ''bool'' },
-
-addurl : ''sysexec/sbs/apache/site_add'',
-modurl : ''sysexec/sbs/apache/site_mod'',
-delurl : ''sysexec/sbs/apache/site_del'',
-
-okids        : [ ''name'' ],
-okcols       : [ ''name'', ''enabled'', ''domain'', ''aliases'', ''email'', ''documentroot'', ''conf'', ''httpsonly'', ''renewcert'' ],
-oktyps       : { renewcert : ''bool'', httpsonly : ''bool'' },
-
-delids       : [ ''name'' ],
-deltyps      : {},
-delconfirmids : [ ''name''],
-
-defvalues : { name : '''' },
-
-loaddirect : true', '', 0, '', false, '575ea2058210', '575e9c458038', 1453807783);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1616743255, 'admindb', '/weblet/allg/table/fix', 'bottom', 0, 'bottom', 'url    : ''sysexec/sbs/share/user_read'',
-addurl : ''sysexec/sbs/share/user_add'',
-modurl : ''sysexec/sbs/share/user_mod'',
-delurl : ''sysexec/sbs/share/user_del'',
-
-cols    : ''login,fullname,rw'',
-tablecoltype : { login : ''text'', rw : ''bool'' },
-
-showids : [ ''share'' ],
-okids   : [ ''login'' ],
-
-delids  : [ ''login'', ''share'' ],
-delconfirmids : [ ''fullname''],
-
-defvalues : { login : '''', fullname : '''', rw : false },
-
-loaddirect : 1', '', 0, '', false, '605b14ac8000', '605475c38000', 1616581804);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1620368191, 'admindb', '/weblet/allg/table/filter', 'keys', 300, 'bottom', 'tableweblet   : ''/weblet/sbs/cert/certtable'',
-url           : ''sysexec/sbs/cert/cert_read'',
-cols          : ''dir,data,filename,dns,valid,ca'',
-showids       : [''dir''],
-showalias     : [''#key''],
-tablehidecols : [ ''dir'', ''data'', ''dns'', ''valid'', ''ca'' ],
-
-delurl        : ''sysexec/sbs/cert/cert_del'',
-delids        : [ ''dir'', ''filename''],
-delconfirmids : [ ''filename'' ],
-', 'certs,csrs', 0, '', false, '575ea2058217', '575e9c458039', 1459840726);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1616579317, 'admindb', '/weblet/allg/menu/rselect', 'locationselect', 0, 'popup', 'url    : ''sysexec/sbs/share/location_read'',
-addurl : ''sysexec/sbs/share/location_add'',
-modurl : ''sysexec/sbs/share/location_mod'',
-delurl : ''sysexec/sbs/share/location_del'',
-
-cols : ''action,item,menuid,typ,pos'',
-scols : ''pos'',
-showcols : ''menuid'',
-
-wcol : ''typ,parentid'',
-wop  : ''=,='',
-wval : '','',
-
-loaddirect : 1', '', 0, '', false, '6054b1c38000', '605475c38000', 1616163267);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1616741429, 'admindb', '/weblet/allg/table/frame', 'userselect', 0, 'popup', 'url : ''sysexec/sbs/user/select_read'',
-cols : ''fullname'',
-showcols : ''sAMAccountName''
-', '', 0, '', false, '605d83d08000', '605475c38000', 1616741328);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1653028423, 'admindb', '/weblet/allg/table/select', 'deviceselect', 0, 'popup', 'url : ''sysexec/sbs/network/devices_read'',
-cols : ''device,netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,wlan,wlanpass,wlanhidden,readtime'',
-showcols : ''device'',
-
-tablehidecols : ''netaddrtyp,netaddr6,netaddr,netbcast,netgateway,dnsnameserver,dnssearch,wlanpass,wlanhidden,readtime''.split('',''),
-', '', 0, '', false, '6034b0ee8000', '57bab6120000', 1614065902);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1691563328, 'admindb', '/weblet/sbs/network/network', 'network', 0, 'network', '', '', 0, '', false, '600ebad78000', '600e93548000', 1611578071);
-INSERT INTO mne_application.htmlcomposetab VALUES ('admindb', 1692004181, 'admindb', '/weblet/allg/table/filter', 'dnsaddress', 10, 'bottom', 'css : ''sbs/domain/dns.css'',
-
-url    : ''sysexec/sbs/domain/dns_read'',
-addurl : ''sysexec/sbs/domain/dns_add'',
-modurl : ''sysexec/sbs/domain/dns_mod'',
-delurl : ''sysexec/sbs/domain/dns_del'',
-
-cols         : ''name,dns_record,address,fix,mac,comment,readtime,missmatch,nodns'',
-primarykey   : [''name'', ''dns_record'', ''address''],
-tablecoltype : { dns_record : ''selection'', name : ''text'', address : ''text'', fix : ''bool'', mac : ''text'', comment : ''text'' },
-tablerowstyle : [''missmatch'',''nodns''],
-tablerowstylecol : [''missmatch'',''nodns''],
-tablehidecols : [''nodns''],
-
-nomodifyok: true,
-
-okids   : [ ''name'', ''dns_record'', ''address''],
-addcols : [''name'', ''dns_record'', ''address'', ''fix'', ''mac'', ''comment''],
-addtyps : {},
-
-modcols : [''name'', ''dns_record'', ''address'', ''fix'', ''mac'', ''comment''],
-modtyps : {},
-
-delids : [''name'', ''dns_record'', ''address''],
-deltyps : {},
-delconfirmids : [ ''name'', ''dns_record'', ''address''],
-
-defvalues : { name : '''', dns_record : ''A'', address : '''' }
-
-', '', 0, '', false, '581c7ce40000', '57bab6120000', 1478261988);
 
 
 --
 -- Data for Name: htmlcomposetabnames; Type: TABLE DATA; Schema: mne_application; Owner: admindb
 --
 
+INSERT INTO mne_application.htmlcomposetabnames VALUES (1692689725, 'admindb', 1692697786, 'admindb', 'zone', 'Zonen', false, '64e4653d8000', '57bab6120000');
+INSERT INTO mne_application.htmlcomposetabnames VALUES (1692691139, 'admindb', 1692697873, 'admindb', 'reverse zone', 'Reverse Zonen', false, '64e46ac38000', '57bab6120000');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1471854209, 'admindb', 1613985136, 'admindb', 'domain', 'Domain', false, '57bab6810000', '57bab6120000');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1226313601, 'admindb', 1359387171, 'admindb', 'user settings', 'Benutzereinstellungen', false, '575ea205804c', '575e9c458034');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1220269084, 'admindb', 1591090455, 'admindb', 'second table columns', 'zweite Tabelle Spalten', false, '575ea2058050', '575e9c458002');
@@ -3646,6 +3667,7 @@ INSERT INTO mne_application.htmlcomposetabnames VALUES (1400059224, 'admindb', 1
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1221469374, 'admindb', 1420729368, 'admindb', 'content', 'Inhalt', false, '575ea20581d8', '575e9c45800d');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1427952906, 'admindb', 1466414716, 'admindb', 'logfile', 'Logdatei', false, '575ea2058010', '575e9c458013');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1226481868, 'admindb', 1472537003, 'admindb', 'by path', 'nach Path', false, '575ea20580a0', '575e9c45801d');
+INSERT INTO mne_application.htmlcomposetabnames VALUES (1220269859, 'admindb', 1589977626, 'admindb', 'content', 'Inhalt', false, '575ea2058008', '575e9c458001');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1459247454, 'admindb', 1614074388, 'admindb', 'certification authority', 'Zertifizierungsstelle', false, '575ea2058212', '575e9c458039');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1616151095, 'admindb', 1616583522, 'admindb', 'share', 'Freigabe', false, '605482378000', '605475c38000');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1459515940, 'admindb', 1620368154, 'admindb', 'certificates', 'Zertifikate', false, '575ea2058218', '575e9c458039');
@@ -3654,15 +3676,14 @@ INSERT INTO mne_application.htmlcomposetabnames VALUES (1554107391, 'admindb', 1
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1308646210, 'admindb', 1347866190, 'admindb', 'views', 'Sichten', false, '575ea2058156', '575e9c45800d');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1289910833, 'admindb', 1440590358, 'admindb', 'menu', 'Menü', false, '575ea2058102', '575e9c458027');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1477056247, 'admindb', 1615185249, 'admindb', 'groupware', 'Groupware', false, '580a16f70000', '57bab6120000');
-INSERT INTO mne_application.htmlcomposetabnames VALUES (1220269859, 'admindb', 1589977626, 'admindb', 'content', 'Inhalt', false, '575ea2058008', '575e9c458001');
-INSERT INTO mne_application.htmlcomposetabnames VALUES (1478261988, 'admindb', 1692004181, 'admindb', 'dns', 'DNS', false, '581c7ce40000', '57bab6120000');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1220269177, 'admindb', 1590669707, 'admindb', 'first table', 'erste Tabelle', false, '575ea20580de', '575e9c458002');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1616163267, 'admindb', 1616579317, 'admindb', 'select folder', 'Verzeichnis auswählen', false, '6054b1c38000', '605475c38000');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1616741328, 'admindb', 1616741429, 'admindb', 'select user', 'Benutzer auswählen', false, '605d83d08000', '605475c38000');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1616581804, 'admindb', 1616743255, 'admindb', 'user', 'Benutzer', false, '605b14ac8000', '605475c38000');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1459840726, 'admindb', 1620368191, 'admindb', 'keys', 'Schlüssel', false, '575ea2058217', '575e9c458039');
-INSERT INTO mne_application.htmlcomposetabnames VALUES (1614065902, 'admindb', 1653028423, 'admindb', 'network device', 'Netzwerkadapter', false, '6034b0ee8000', '57bab6120000');
 INSERT INTO mne_application.htmlcomposetabnames VALUES (1611578071, 'admindb', 1691563328, 'admindb', 'actual network', 'aktuelles Netzwerk', false, '600ebad78000', '600e93548000');
+INSERT INTO mne_application.htmlcomposetabnames VALUES (1614065902, 'admindb', 1692625469, 'admindb', 'network device', 'Netzwerkadapter', false, '6034b0ee8000', '57bab6120000');
+INSERT INTO mne_application.htmlcomposetabnames VALUES (1478261988, 'admindb', 1692789511, 'admindb', 'dns', 'DNS', false, '581c7ce40000', '57bab6120000');
 
 
 --
@@ -3953,6 +3974,8 @@ INSERT INTO mne_application.joindef VALUES (1321445524, 'admindb', 1322042330, '
 INSERT INTO mne_application.joindef VALUES (1321982770, 'admindb', 1322042334, 'admindb', 'refid', 'invoicetransaction', 'invoiceid', 'invoice', 1, 'mne_shipment', 'mne_shipment', '4ecbdb320000', '=');
 INSERT INTO mne_application.joindef VALUES (1321982817, 'admindb', 1322042339, 'admindb', 'refid', 'invoicetransaction', 'invoicerefid', 'invoiceref', 1, 'mne_shipment', 'mne_shipment', '4ecbdb610000', '=');
 INSERT INTO mne_application.joindef VALUES (1321524059, 'admindb', 1322042348, 'admindb', 'invoiceid', 'invoice', 'refid', 'invoicetransaction', 1, 'mne_shipment', 'mne_shipment', '4ec4db5b0000', '=');
+INSERT INTO mne_application.joindef VALUES (1426266856, 'admindb', 1426490515, 'admindb', 'personid', 'person', 'personid', 'personsharepasswd', 1, 'mne_crm', 'mne_crm', '55031ae80000', '=');
+INSERT INTO mne_application.joindef VALUES (1432891671, 'admindb', 1432891671, 'admindb', 'personid', 'person', 'personid', 'shares', 1, 'mne_system', 'mne_crm', '556831170000', '=');
 INSERT INTO mne_application.joindef VALUES (1321524074, 'admindb', 1322042353, 'admindb', 'invoicerefid', 'invoiceref', 'refid', 'invoicetransaction', 1, 'mne_shipment', 'mne_shipment', '4ec4db6a0000', '=');
 INSERT INTO mne_application.joindef VALUES (1321445315, 'admindb', 1322042360, 'admindb', '', 'umsatz', '', 'invoicetransaction', 1, 'mne_shipment', 'ext_hibiscus', '4ec3a7c30000', '#0.umsatzid = to_char(#1.id,''FM99999999999999999999999999999999'')');
 INSERT INTO mne_application.joindef VALUES (1322149938, 'admindb', 1322149938, 'admindb', '', 'invoiceaccount', '', 'konto', 1, 'ext_hibiscus', 'mne_shipment', '4ece68320000', 'to_char(#0.id,''FM99999999999999999999'') = #1.accountid');
@@ -4005,8 +4028,6 @@ INSERT INTO mne_application.joindef VALUES (1414133984, 'admindb', 1415615869, '
 INSERT INTO mne_application.joindef VALUES (1422261950, 'admindb', 1422261950, 'admindb', 'personid', 'person', 'refid', 'repository', 1, 'mne_repository', 'mne_crm', '54c5febe0000', '=');
 INSERT INTO mne_application.joindef VALUES (1422261983, 'admindb', 1422261983, 'admindb', 'companyid', 'company', 'refid', 'repository', 1, 'mne_repository', 'mne_crm', '54c5fedf0000', '=');
 INSERT INTO mne_application.joindef VALUES (1422262003, 'admindb', 1422262003, 'admindb', 'offerid', 'offer', 'refid', 'repository', 1, 'mne_repository', 'mne_crm', '54c5fef30000', '=');
-INSERT INTO mne_application.joindef VALUES (1426266856, 'admindb', 1426490515, 'admindb', 'personid', 'person', 'personid', 'personsharepasswd', 1, 'mne_crm', 'mne_crm', '55031ae80000', '=');
-INSERT INTO mne_application.joindef VALUES (1432891671, 'admindb', 1432891671, 'admindb', 'personid', 'person', 'personid', 'shares', 1, 'mne_system', 'mne_crm', '556831170000', '=');
 INSERT INTO mne_application.joindef VALUES (1432891690, 'admindb', 1432891690, 'admindb', 'folderid', 'folder', 'folderid', 'shares', 1, 'mne_system', 'mne_application', '5568312a0000', '=');
 INSERT INTO mne_application.joindef VALUES (1465820583, 'admindb', 1465820583, 'admindb', 'htmlcomposeid', 'htmlcomposetab', 'htmlcomposeid', 'htmlcompose', 1, 'mne_application', 'mne_application', '575ea5a70000', '=');
 INSERT INTO mne_application.joindef VALUES (1465821082, 'admindb', 1465821082, 'admindb', 'htmlcomposetabnamesid', 'htmlcomposetabnames', 'htmlcomposetabid', 'htmlcomposetab', 1, 'mne_application', 'mne_application', '575ea79a0000', '=');
@@ -4554,6 +4575,75 @@ INSERT INTO mne_application.querycolnames VALUES (1610519462, 'admindb', 1610519
 -- Data for Name: querycolumns; Type: TABLE DATA; Schema: mne_application; Owner: admindb
 --
 
+INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', -1, 7, '580a19280000', 2, 0, 'passwd', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 8, '580a19280000', 4, 0, 'createdate', 'createdate', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 9, '580a19280000', 2, 0, 'createuser', 'createuser', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 6, '57da3e460000', 2, 0, 'typ', 'typ', '', false, true, false);
+INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 10, '580a19280000', 4, 0, 'modifydate', 'modifydate', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 11, '580a19280000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 14, '57da3e460000', 2, 0, 'addr', 'addr', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 15, '57da3e460000', 2, 0, 'addr6', 'addr6', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 16, '57da3e460000', 4, 0, 'createdate', 'createdate', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 19, '57da3e460000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 0, '5dfa2c070000', 2, 0, 'netparamid', 'netparamid', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', -1, 1, '5dfa2c070000', 2, 0, 'domain', 'COALESCE(#1.domain, #0.domain)', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', -1, 2, '5dfa2c070000', 2, 0, 'search', 'CASE WHEN #1.typ = ''standalone'' THEN #0.search ELSE #1.dnssearch END', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', -1, 4, '5dfa2c070000', 2, 0, 'nameserver', 'CASE WHEN #1.typ = ''standalone'' THEN #0.nameserver ELSE COALESCE(NULLIF(#2.addr6,''''),NULLIF(#2.addr,''''),''127.0.0.1'') END', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 5, '5dfa2c070000', 4, 0, 'createdate', 'createdate', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 6, '5dfa2c070000', 2, 0, 'createuser', 'createuser', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 7, '5dfa2c070000', 4, 0, 'modifydate', 'modifydate', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 8, '5dfa2c070000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', -1, 7, '57da3e460000', 2, 0, 'nameserver', 'CASE WHEN #2.typ = ''standalone'' THEN #0.nameserver ELSE COALESCE(NULLIF(#3.addr6,''''),NULLIF(#3.addr,''''),''127.0.0.1'') END', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 0, '581c7c020000', 2, 0, 'dnsaddressid', 'dnsaddressid', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 1, '581c7c020000', 2, 0, 'name', 'name', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 2, '581c7c020000', 2, 0, 'address', 'address', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 3, '581c7c020000', 2, 0, 'record', 'record', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 4, '581c7c020000', 1, 0, 'fix', 'fix', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 5, '581c7c020000', 2, 0, 'mac', 'mac', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 6, '581c7c020000', 2, 0, 'comment', 'comment', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 7, '581c7c020000', 4, 0, 'createdate', 'createdate', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 8, '581c7c020000', 2, 0, 'createuser', 'createuser', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 9, '581c7c020000', 4, 0, 'modifydate', 'modifydate', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 10, '581c7c020000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 0, '57da3e520000', 2, 0, 'networkid', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 1, '57da3e520000', 3, 0, 'ownnetwork', '1', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 2, '57da3e520000', 2, 0, 'networkidname', '''#mne_lang#keine''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 3, '57da3e520000', 2, 0, 'hostname', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 4, '57da3e520000', 2, 0, 'available', '''0''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 5, '57da3e520000', 2, 0, 'search', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 6, '57da3e520000', 2, 0, 'typ', '''static''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 7, '57da3e520000', 2, 0, 'nameserver', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 8, '57da3e520000', 2, 0, 'mask', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 9, '57da3e520000', 2, 0, 'mask6', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 10, '57da3e520000', 2, 0, 'gateway', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 11, '57da3e520000', 2, 0, 'domain', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 12, '57da3e520000', 2, 0, 'configured', 'true', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 13, '57da3e520000', 2, 0, 'broadcast', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 14, '57da3e520000', 2, 0, 'addr', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 15, '57da3e520000', 2, 0, 'addr6', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 16, '57da3e520000', 2, 0, 'createdate', '0', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 17, '57da3e520000', 2, 0, 'createuser', '''admindb''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 18, '57da3e520000', 2, 0, 'modifydate', '0', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 19, '57da3e520000', 2, 0, 'modifyuser', '''admindb''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 0, '57d910560000', 2, 0, 'domainid', 'domainid', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 1, '57d910560000', 2, 0, 'domain', 'domain', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 2, '57d910560000', 2, 0, 'typ', 'typ', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 3, '57d910560000', 2, 0, 'workgroup', 'workgroup', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 4, '57d910560000', 2, 0, 'description', 'description', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 5, '57d910560000', 2, 0, 'netdevice', 'netdevice', '', false, true, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 6, '57d910560000', 2, 0, 'primaryname', 'primaryname', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 7, '57d910560000', 2, 0, 'primaryaddr', 'primaryaddr', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 8, '57d910560000', 2, 0, 'dnsforwarder', 'dnsforwarder', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 9, '57d910560000', 2, 0, 'dnssearch', 'dnssearch', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', -1, 10, '57d910560000', 2, 0, 'admin', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', -1, 11, '57d910560000', 2, 0, 'adminpassword', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', -1, 12, '57d910560000', 2, 0, 'adminpassword2', '''''', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 13, '57d910560000', 2, 0, 'dhcpstart', 'dhcpstart', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 14, '57d910560000', 2, 0, 'dhcpend', 'dhcpend', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 15, '57d910560000', 2, 0, 'dhcp6start', 'dhcp6start', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 16, '57d910560000', 2, 0, 'dhcp6end', 'dhcp6end', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 17, '57d910560000', 4, 0, 'createdate', 'createdate', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 18, '57d910560000', 2, 0, 'createuser', 'createuser', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1591372373, 'admindb', 1591372373, 'admindb', 0, 5, '4ce24d130000', 4, 0, 'pos', 'menupos', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1591195919, 'admindb', 1591195919, 'admindb', 0, 4, '48de01ca0000', 2, 0, 'routine_schema', 'routine_schema', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1216810623, 'admindb', 1216810623, 'admindb', 0, 0, 'test_1', 2, 0, 'test', 'name', '', false, true, false);
@@ -4818,6 +4908,7 @@ INSERT INTO mne_application.querycolumns VALUES (1512555690, 'admindb', 15125556
 INSERT INTO mne_application.querycolumns VALUES (1512555690, 'admindb', 1512555690, 'admindb', 0, 3, '48e8bb150000', 1, 0, 'isunique', 'indisunique', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1512555690, 'admindb', 1512555690, 'admindb', 0, 4, '48e8bb150000', 2, 0, 'column', 'column', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1512555690, 'admindb', 1512555690, 'admindb', 0, 5, '48e8bb150000', 4, 0, 'position', 'position', '', false, true, false);
+INSERT INTO mne_application.querycolumns VALUES (1603794803, 'admindb', 1603794803, 'admindb', 0, 18, '5c18a8bf0000', 2, 0, 'type', 'type', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1512555690, 'admindb', 1512555690, 'admindb', 1, 6, '48e8bb150000', 2, 0, 'text_de', 'text_de', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1512555690, 'admindb', 1512555690, 'admindb', 1, 7, '48e8bb150000', 2, 0, 'text_en', 'text_en', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1512555690, 'admindb', 1512555690, 'admindb', 1, 8, '48e8bb150000', 1, 0, 'custom', 'custom', '', false, false, false);
@@ -4834,6 +4925,7 @@ INSERT INTO mne_application.querycolumns VALUES (1473783246, 'admindb', 14737832
 INSERT INTO mne_application.querycolumns VALUES (1473783246, 'admindb', 1473783246, 'admindb', 11, 10, '556831b90000', 2, 0, 'company', 'name', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1473783246, 'admindb', 1473783246, 'admindb', -1, 11, '556831b90000', 1, 0, 'havedav', '#31.group IS NOT NULL', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1473783246, 'admindb', 1473783246, 'admindb', -1, 12, '556831b90000', 1, 0, 'havesmb', '#32.group IS NOT NULL', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1591195919, 'admindb', 1591195919, 'admindb', -1, 0, '48de01ca0000', 2, 0, 'id', '#1.oid', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1465828142, 'admindb', 1465828142, 'admindb', -1, 1, '48b3b18a0000', 2, 0, 'schema', 'split_part(#0.name, ''_'', 1)', '', true, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1478018905, 'admindb', 1478018905, 'admindb', 0, 0, '5502b8300000', 2, 0, 'personid', 'personid', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1478018905, 'admindb', 1478018905, 'admindb', 0, 1, '5502b8300000', 2, 0, 'loginname', 'loginname', '', false, true, false);
@@ -4899,6 +4991,9 @@ INSERT INTO mne_application.querycolumns VALUES (1522137609, 'admindb', 15221376
 INSERT INTO mne_application.querycolumns VALUES (1522137609, 'admindb', 1522137609, 'admindb', 0, 4, 'mne_application_table_cols_1', 2, 0, 'column_default', 'column_default', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1522137609, 'admindb', 1522137609, 'admindb', 0, 5, 'mne_application_table_cols_1', 2, 0, 'origtyp', 'data_type', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1522137609, 'admindb', 1522137609, 'admindb', 0, 6, 'mne_application_table_cols_1', 4, 0, 'maxlength', 'character_maximum_length', '', false, true, false);
+INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 3, '5dfa2c070000', 2, 0, 'gw', 'gw', '', false, false, false);
+INSERT INTO mne_application.querycolumns VALUES (1306422520, 'admindb', 1306422520, 'admindb', 1, 16, 'mne_application_querycols_1', 2, 0, 'text_en', 'text_en', '', false, true, false);
+INSERT INTO mne_application.querycolumns VALUES (1306422520, 'admindb', 1306422520, 'admindb', 1, 15, 'mne_application_querycols_1', 2, 0, 'text_de', 'text_de', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1522137609, 'admindb', 1522137609, 'admindb', -1, 7, 'mne_application_table_cols_1', 2, 0, 'typ', 'CASE WHEN #0.data_type = ''character varying'' THEN ''character''  WHEN #0.data_type = ''smallint'' THEN ''short''  WHEN #0.data_type = ''integer'' THEN ''long'' WHEN #0.data_type = ''real'' THEN ''float''  WHEN #0.data_type = ''double precision'' THEN ''double'' ELSE #0.data_type END', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 17, '57da3e460000', 2, 0, 'createuser', 'createuser', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 18, '57da3e460000', 4, 0, 'modifydate', 'modifydate', '', false, false, false);
@@ -4945,76 +5040,6 @@ INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 15537661
 INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 4, '580a19280000', 2, 0, 'mailrelay', 'mailrelay', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 5, '580a19280000', 2, 0, 'mailrelayuser', 'mailrelayuser', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', -1, 6, '580a19280000', 2, 0, 'mailrelaypassword', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', -1, 7, '580a19280000', 2, 0, 'passwd', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 8, '580a19280000', 4, 0, 'createdate', 'createdate', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 9, '580a19280000', 2, 0, 'createuser', 'createuser', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 6, '57da3e460000', 2, 0, 'typ', 'typ', '', false, true, false);
-INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 10, '580a19280000', 4, 0, 'modifydate', 'modifydate', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1553766118, 'admindb', 1553766118, 'admindb', 0, 11, '580a19280000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 14, '57da3e460000', 2, 0, 'addr', 'addr', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 15, '57da3e460000', 2, 0, 'addr6', 'addr6', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 16, '57da3e460000', 4, 0, 'createdate', 'createdate', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 19, '57da3e460000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 0, '5dfa2c070000', 2, 0, 'netparamid', 'netparamid', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', -1, 1, '5dfa2c070000', 2, 0, 'domain', 'COALESCE(#1.domain, #0.domain)', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', -1, 2, '5dfa2c070000', 2, 0, 'search', 'CASE WHEN #1.typ = ''standalone'' THEN #0.search ELSE #1.dnssearch END', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 3, '5dfa2c070000', 2, 0, 'gw', 'gw', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', -1, 4, '5dfa2c070000', 2, 0, 'nameserver', 'CASE WHEN #1.typ = ''standalone'' THEN #0.nameserver ELSE COALESCE(NULLIF(#2.addr6,''''),NULLIF(#2.addr,''''),''127.0.0.1'') END', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 5, '5dfa2c070000', 4, 0, 'createdate', 'createdate', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 6, '5dfa2c070000', 2, 0, 'createuser', 'createuser', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 7, '5dfa2c070000', 4, 0, 'modifydate', 'modifydate', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620644, 'admindb', 1579620644, 'admindb', 0, 8, '5dfa2c070000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', -1, 7, '57da3e460000', 2, 0, 'nameserver', 'CASE WHEN #2.typ = ''standalone'' THEN #0.nameserver ELSE COALESCE(NULLIF(#3.addr6,''''),NULLIF(#3.addr,''''),''127.0.0.1'') END', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 0, '581c7c020000', 2, 0, 'dnsaddressid', 'dnsaddressid', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 1, '581c7c020000', 2, 0, 'name', 'name', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 2, '581c7c020000', 2, 0, 'address', 'address', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 3, '581c7c020000', 2, 0, 'record', 'record', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 4, '581c7c020000', 1, 0, 'fix', 'fix', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 5, '581c7c020000', 2, 0, 'mac', 'mac', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 6, '581c7c020000', 2, 0, 'comment', 'comment', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 7, '581c7c020000', 4, 0, 'createdate', 'createdate', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 8, '581c7c020000', 2, 0, 'createuser', 'createuser', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 9, '581c7c020000', 4, 0, 'modifydate', 'modifydate', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578380726, 'admindb', 1578380726, 'admindb', 0, 10, '581c7c020000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 0, '57da3e520000', 2, 0, 'networkid', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 1, '57da3e520000', 3, 0, 'ownnetwork', '1', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 2, '57da3e520000', 2, 0, 'networkidname', '''#mne_lang#keine''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 3, '57da3e520000', 2, 0, 'hostname', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 4, '57da3e520000', 2, 0, 'available', '''0''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 5, '57da3e520000', 2, 0, 'search', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 6, '57da3e520000', 2, 0, 'typ', '''static''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 7, '57da3e520000', 2, 0, 'nameserver', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 8, '57da3e520000', 2, 0, 'mask', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 9, '57da3e520000', 2, 0, 'mask6', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 10, '57da3e520000', 2, 0, 'gateway', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 11, '57da3e520000', 2, 0, 'domain', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 12, '57da3e520000', 2, 0, 'configured', 'true', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 13, '57da3e520000', 2, 0, 'broadcast', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 14, '57da3e520000', 2, 0, 'addr', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 15, '57da3e520000', 2, 0, 'addr6', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 16, '57da3e520000', 2, 0, 'createdate', '0', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 17, '57da3e520000', 2, 0, 'createuser', '''admindb''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 18, '57da3e520000', 2, 0, 'modifydate', '0', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578480576, 'admindb', 1578480576, 'admindb', -1, 19, '57da3e520000', 2, 0, 'modifyuser', '''admindb''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 0, '57d910560000', 2, 0, 'domainid', 'domainid', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 1, '57d910560000', 2, 0, 'domain', 'domain', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 2, '57d910560000', 2, 0, 'typ', 'typ', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 3, '57d910560000', 2, 0, 'workgroup', 'workgroup', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 4, '57d910560000', 2, 0, 'description', 'description', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 5, '57d910560000', 2, 0, 'netdevice', 'netdevice', '', false, true, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 6, '57d910560000', 2, 0, 'primaryname', 'primaryname', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 7, '57d910560000', 2, 0, 'primaryaddr', 'primaryaddr', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 8, '57d910560000', 2, 0, 'dnsforwarder', 'dnsforwarder', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 9, '57d910560000', 2, 0, 'dnssearch', 'dnssearch', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', -1, 10, '57d910560000', 2, 0, 'admin', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', -1, 11, '57d910560000', 2, 0, 'adminpassword', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', -1, 12, '57d910560000', 2, 0, 'adminpassword2', '''''', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 13, '57d910560000', 2, 0, 'dhcpstart', 'dhcpstart', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 14, '57d910560000', 2, 0, 'dhcpend', 'dhcpend', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 15, '57d910560000', 2, 0, 'dhcp6start', 'dhcp6start', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 16, '57d910560000', 2, 0, 'dhcp6end', 'dhcp6end', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 17, '57d910560000', 4, 0, 'createdate', 'createdate', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 18, '57d910560000', 2, 0, 'createuser', 'createuser', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 19, '57d910560000', 4, 0, 'modifydate', 'modifydate', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1578499160, 'admindb', 1578499160, 'admindb', 0, 20, '57d910560000', 2, 0, 'modifyuser', 'modifyuser', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 0, '57da3e460000', 2, 0, 'networkid', 'networkid', '', false, false, false);
@@ -5027,9 +5052,6 @@ INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 15796205
 INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', -1, 11, '57da3e460000', 2, 0, 'domain', 'COALESCE(#2.domain, #0.domain)', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 12, '57da3e460000', 1, 0, 'configured', 'configured', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1579620562, 'admindb', 1579620562, 'admindb', 0, 13, '57da3e460000', 2, 0, 'broadcast', 'broadcast', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1306422520, 'admindb', 1306422520, 'admindb', 1, 16, 'mne_application_querycols_1', 2, 0, 'text_en', 'text_en', '', false, true, false);
-INSERT INTO mne_application.querycolumns VALUES (1306422520, 'admindb', 1306422520, 'admindb', 1, 15, 'mne_application_querycols_1', 2, 0, 'text_de', 'text_de', '', false, true, false);
-INSERT INTO mne_application.querycolumns VALUES (1591195919, 'admindb', 1591195919, 'admindb', -1, 0, '48de01ca0000', 2, 0, 'id', '#1.oid', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1591195919, 'admindb', 1591195919, 'admindb', 0, 1, '48de01ca0000', 2, 0, 'schema', 'specific_schema', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1591195919, 'admindb', 1591195919, 'admindb', 0, 2, '48de01ca0000', 2, 0, 'specific_name', 'specific_name', '', false, true, false);
 INSERT INTO mne_application.querycolumns VALUES (1591195919, 'admindb', 1591195919, 'admindb', -1, 3, '48de01ca0000', 2, 0, 'fullname', '#1.proname || mne_catalog.pgplsql_fargs(#1.oid)', '', false, false, false);
@@ -5088,7 +5110,6 @@ INSERT INTO mne_application.querycolumns VALUES (1603794803, 'admindb', 16037948
 INSERT INTO mne_application.querycolumns VALUES (1603794803, 'admindb', 1603794803, 'admindb', 0, 15, '5c18a8bf0000', 2, 0, 'wop', 'wop', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1603794803, 'admindb', 1603794803, 'admindb', 0, 16, '5c18a8bf0000', 2, 0, 'wval', 'wval', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1603794803, 'admindb', 1603794803, 'admindb', 0, 17, '5c18a8bf0000', 2, 0, 'weblet', 'weblet', '', false, false, false);
-INSERT INTO mne_application.querycolumns VALUES (1603794803, 'admindb', 1603794803, 'admindb', 0, 18, '5c18a8bf0000', 2, 0, 'type', 'type', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1410256508, 'admindb', 1410256508, 'admindb', -1, 4, '4f756c120000', 4, 0, 'showhistory', 'mne_catalog.history_check(CAST( t0.table_schema AS VARCHAR), CAST( t0.table_name AS VARCHAR))', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1410256508, 'admindb', 1410256508, 'admindb', -1, 5, '4f756c120000', 4, 0, 'haveusertimecolumn', 'mne_catalog.usertimecolumn_check(CAST( t0.table_schema AS VARCHAR), CAST( t0.table_name AS VARCHAR))', '', false, false, false);
 INSERT INTO mne_application.querycolumns VALUES (1610369005, 'admindb', 1610369005, 'admindb', -1, 0, 'mne_application_menu_1', 2, 0, 'menuname', 'COALESCE(#10.applicationsid, #0.menuname)', '', false, false, false);
@@ -5629,6 +5650,7 @@ INSERT INTO mne_application.tableconstraintmessages VALUES ('personowndata_perso
 INSERT INTO mne_application.tableconstraintmessages VALUES ('storageoptpart_partid_idx', 'Das Teil ist schon in der Statistik erfasst', 'the part have a statistic record', false, 'admindb', 'admindb', 1608124170, 1608124170);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('test_testid_idx', 'Nur ein Test', 'only on test', false, 'admindb', 'admindb', 1588938463, 1588938463);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('fixturetree_parentid_fkey', 'Elternelement nicht mehr vorhanden oder hat noch Elemente', 'parent element not avaible or have elements', false, 'admindb', 'admindb', 1608287463, 1608287463);
+INSERT INTO mne_application.tableconstraintmessages VALUES ('invoicepaid_second', '', '', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('fixturetree_fixtureid_fkey', 'Inventar ist nicht vorhanden oder ist noch im Inventarbaum vorhanden', 'fixture is not avaible or is element in fixture tree', false, 'admindb', 'admindb', 1608287550, 1608287550);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('', '', '', false, 'admindb', 'admindb', 1588158053, 1588158053);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('person_personid_check', 'Interner Fehler Tabelle mne_crm.person personenid ist nicht vorhanden', '', false, 'admindb', 'admindb', 1534260784, 1534260784);
@@ -5705,6 +5727,7 @@ INSERT INTO mne_application.tableconstraintmessages VALUES ('offerprobability_pr
 INSERT INTO mne_application.tableconstraintmessages VALUES ('personskill_personid_fkey', 'Der Mitarbeitende muss in der Datenbank erfasst sein bzw. der Mitarbeitenden hat zugeordnete Fähigkeiten', 'the employee must be availible a the database resp. the employee has assigned skills', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('time_orderproducttimeid_fkey', 'Die Tätigkeit muss erfasst sein bzw. für Tätigkeit sind Zeiten erfasst', 'the activity must be availible at the database resp. is using at the time registration', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('timemanagement_orderproducttimeid_fkey', 'Die Tätigkeit muss in der Datenbank erfasst sein bzw. wird in der Zeitplanung verwendet', 'the activity must be availible at the database resp. is using at the time managment', false, 'admindb', 'admindb', 0, 0);
+INSERT INTO mne_application.tableconstraintmessages VALUES ('person_lastname_check', 'Für die Person muss ein Nachname eingeben werden', 'the person needs a last name', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('deliverynote_contactid_fkey', 'Der Kontakt muss in der Datanbank erfasst sein bzw. ist Rechnungskontakt', 'the contact must be availible at the database resp. is contact of invoices', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('deliverynote_ownerid_fkey', 'Der Betreuer muss in der Datenbank erfasst sein bzw. betreut Lieferungen', 'the owner must be availible at the database resp. is owner of deliverynotes', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('deliverynoteproduct_deliverynoteid_fkey', 'Der Lieferschein muss in der Datenbank erfasst sein bzw. besitzt Produkte', 'the delivery note must be availible at the database resp. have products', false, 'admindb', 'admindb', 0, 0);
@@ -5749,7 +5772,6 @@ INSERT INTO mne_application.tableconstraintmessages VALUES ('country_name_de_che
 INSERT INTO mne_application.tableconstraintmessages VALUES ('country_name_en_check', 'Das Land muss einen englischen Namen haben', 'the country must have a english name', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('country_countryid_check', 'Die countryid darf nicht leer sein', 'the countryid must have a content', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('oderproduct_second', 'Das Produkt existiert schon', 'the product exists', false, 'admindb', 'admindb', 0, 0);
-INSERT INTO mne_application.tableconstraintmessages VALUES ('person_lastname_check', 'Für die Person muss ein Nachname eingeben werden', 'the person needs a last name', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('person_sex_check', 'Das Geschlecht ist entweder weiblich oder mänlich', 'the sex ist fermale or male', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('fixturetype_typ_check', 'Der Inventartyp muss benannt werden', 'the fixture type needs a name', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('fixturetypetree_treename_check', 'Das Element muss einen Namen haben', 'the element needs a name', false, 'admindb', 'admindb', 0, 0);
@@ -5794,6 +5816,7 @@ INSERT INTO mne_application.tableconstraintmessages VALUES ('order_second', 'Die
 INSERT INTO mne_application.tableconstraintmessages VALUES ('fixturetree_treename_check', 'Das Inventar muss einen Namen haben', 'the fixture must have a name', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('invoiceaccount_second', 'Die Buchung ist schon zugewiesen', 'the accounting entry is allready asigned', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('trustfunction__first', '', '', false, 'admindb', 'admindb', 0, 0);
+INSERT INTO mne_application.tableconstraintmessages VALUES ('present_second', 'Die Person ist schon im Bautagebuch diese Termins', 'the person is in the build diary of this date', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('deliverynoteproduct_orderproductid_fkey', 'Das Produkt muss zu einem Auftrag gehören bzw. das Produkt wurde ausgeliefert', 'the product must be a product of a order resp. is delivered', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('purchase_crmorderid_fkey', 'Der Auftrag besitzt noch eine Bestellung', 'the order have an material order', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('purchaseinvoice_second', 'Die Belegnummer ist schon vorhanden', 'the document number exists', false, 'admindb', 'admindb', 0, 0);
@@ -5832,7 +5855,6 @@ INSERT INTO mne_application.tableconstraintmessages VALUES ('personowndata_secon
 INSERT INTO mne_application.tableconstraintmessages VALUES ('time_userid_fkey', 'Der Benutzer muss im Personalverzeichnis vorhanden sein bzw. es existieren Zeiteinträge für die Person', 'the person must be employer resp. the person have time records', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('present_check', 'Es muss mindestens eine Person anwesend sein', 'it must be mininum on person persent', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('present_count_check', 'Die Anzahl der Mitarbeiter kann nicht negativ sein', 'the employee count is not negative', false, 'admindb', 'admindb', 0, 0);
-INSERT INTO mne_application.tableconstraintmessages VALUES ('present_second', 'Die Person ist schon im Bautagebuch diese Termins', 'the person is in the build diary of this date', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('orderproductpart_orderproductid_fkey', 'Es muss ein Produkt aus dem Auftrag ausgewählt werden bzw. wird das Produkt besitzt Einträge in der Materialplanung', 'the product must be selected  from the order  resp. is using at the material planning', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('orderproductpart_ownerid_fkey', 'Bitte eine Mitarbeiter auswählen bzw. der Mitarbeiter ist noch Manager von Auftragsmaterial', 'please select a employee or the employee is still manager of order material', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('offerproductpart_ownerid_fkey', 'Es muss ein Mitarbeiter als Betreuer ausgewählt werden bzw. der Mitarbeiter ist noch Betreuer von Angebotsmaterial', 'It must be selected an employee as manager of offer material resp. the employee is manager of offer material', false, 'admindb', 'admindb', 0, 0);
@@ -5841,7 +5863,6 @@ INSERT INTO mne_application.tableconstraintmessages VALUES ('fileinterests_perso
 INSERT INTO mne_application.tableconstraintmessages VALUES ('filedata_repositoryid_fkey', 'Der Akteneintrag muss einem Aktenordner zugeordnet werden bzw. die Aktenordern ist während des Löschens nicht leer', 'the file must be contained in a folder resp. during delete of the folder the folder is not empty', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('repository_second', 'Der Name des Aktenordners existiert schon', 'the name of the file exists', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('storage_xcount_check', 'Die Anzahl 1. Position muss grösser 0 seint', 'the count of the first postion must be greater zero', false, 'admindb', 'admindb', 0, 0);
-INSERT INTO mne_application.tableconstraintmessages VALUES ('invoicepaid_second', '', '', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('shares_personid_fkey', 'Die Person muss im ERP erfasst sein bzw. die person besitzt noch Freigaben', 'the person must be availble at the ERP resp. the person have shares', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('shares_second', 'Die Person hat schon Zugriff auf die Freigabe', 'the person have allready access to the share', false, 'admindb', 'admindb', 0, 0);
 INSERT INTO mne_application.tableconstraintmessages VALUES ('shares_folderid_fkey', 'Der Ordner muss im ERP existieren bzw. der Ordner hat noch Freigaben', 'the folder must exist at the ERP resp. the folder have shares', false, 'admindb', 'admindb', 0, 0);
@@ -5874,19 +5895,6 @@ INSERT INTO mne_application.tableconstraintmessages VALUES ('partstoragemasterda
 -- Data for Name: tableregexp; Type: TABLE DATA; Schema: mne_application; Owner: admindb
 --
 
-INSERT INTO mne_application.tableregexp VALUES (1304336758, 'admindb', 1304337172, 'admindb', 'email', '.+@.+|^$', 'Emailaddresse', '');
-INSERT INTO mne_application.tableregexp VALUES (1257447284, 'admindb', 1307533102, 'admindb', 'floatemptysave', '[0-9]*[\.,][0-9]+|[0-9]+|^$', 'Bitte Gleitkommazahl mit einem . oder , als Dezimaltrenner eingeben', '');
-INSERT INTO mne_application.tableregexp VALUES (1225231635, 'admindb', 1589967209, 'admindb', 'num', '-{0,1}[0-9]+', 'Bitte eine Zahl eingeben', '');
-INSERT INTO mne_application.tableregexp VALUES (1267106143, 'admindb', 1307537443, 'admindb', 'keyvalue', '[0-9A-Fa-f]+|################', 'Schlüsselwert', '');
-INSERT INTO mne_application.tableregexp VALUES (1225231444, 'admindb', 1225783642, 'admindb', 'notempty', '.+', 'Bitte mindestens ein Zeichen eingeben', '');
-INSERT INTO mne_application.tableregexp VALUES (1225231820, 'admindb', 1322730381, 'admindb', 'floatsave', '([0-9\.]*,[0-9]+)|([0-9,]*\.[0-9]+)|([0-9]+)', 'Bitte Gleitkommazahl mit einem . oder , als Dezimaltrenner eingeben', '');
-INSERT INTO mne_application.tableregexp VALUES (1292834974, 'admindb', 1379920701, 'admindb', 'keyvalueempty', '[0-9A-Fa-f]+|################|^$', 'Schlüsselwert oder Leer', '');
-INSERT INTO mne_application.tableregexp VALUES (1358522650, 'admindb', 1420532643, 'admindb', 'color', '[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f][\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]|', 'Bitte 6 Hexadezimalziffern eingeben', '');
-INSERT INTO mne_application.tableregexp VALUES (1453898809, 'admindb', 1453901101, 'admindb', 'alphanumminus', '[a-zA-Z0-9\-_]+', 'Bitte Buchstaben, Zahlen, Bindestrich und den Unterstrich eingeben', '');
-INSERT INTO mne_application.tableregexp VALUES (1478780812, 'admindb', 1478790326, 'admindb', 'macaddr', '[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]', 'Bitte eine MAC Addresse eingeben', 'g');
-INSERT INTO mne_application.tableregexp VALUES (1478857773, 'admindb', 1478857773, 'admindb', 'macaddrempty', '[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]|^$', 'Bitte eine MAC Addresse eingeben oder leer lassen', 'g');
-INSERT INTO mne_application.tableregexp VALUES (1224788911, 'admindb', 1530178729, 'admindb', 'alpha', '[a-zA-Z_]+', 'Bitte nur Buchstaben ohne Umlaute und den Unterstrich eingeben', '');
-INSERT INTO mne_application.tableregexp VALUES (1225231474, 'admindb', 1530178748, 'admindb', 'alphanum', '[a-zA-Z0-9_]+', 'Bitte Buchstaben ohne Umlaute, Zahlen und den Unterstrich eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1225231552, 'admindb', 1530178756, 'admindb', 'alpha_alphanum', '[a-zA-Z][a-zA-Z0-9_]*', 'Bitte Buchstaben ohne Umlaute, Zahlen und den Unterstrich beginnend mit einem Buchstaben eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1225231501, 'admindb', 1530178763, 'admindb', 'alphaorempty', '[a-zA-Z_]+|^$', 'Bitte nur Buchstaben ohne Umlaute und den Unterstrich eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1225231578, 'admindb', 1530178772, 'admindb', 'alphanumorempty', '[a-zA-Z0-9_]+|^$', 'Bitte Buchstaben ohne Umlaute, Zahlen und den Unterstrich eingeben', '');
@@ -5895,6 +5903,11 @@ INSERT INTO mne_application.tableregexp VALUES (1225231751, 'admindb', 158996711
 INSERT INTO mne_application.tableregexp VALUES (1225231652, 'admindb', 1589967231, 'admindb', 'num1_num', '[1-9][0-9]*', 'Bitte eine positive Zahl eingeben die nicht mit einer 0 beginnt', '');
 INSERT INTO mne_application.tableregexp VALUES (1225231791, 'admindb', 1589967238, 'admindb', 'num1_numoempty', '[1-9][0-9]*|^$', 'Bitte eine positive Zahl eingeben die nicht mit einer 0 beginnt', '');
 INSERT INTO mne_application.tableregexp VALUES (1225231771, 'admindb', 1589967283, 'admindb', 'num1oempty', '[1-9]+|^$', 'Bitten eine positive Zahl ohne 0 eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1225231444, 'admindb', 1225783642, 'admindb', 'notempty', '.+', 'Bitte mindestens ein Zeichen eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1225231820, 'admindb', 1322730381, 'admindb', 'floatsave', '([0-9\.]*,[0-9]+)|([0-9,]*\.[0-9]+)|([0-9]+)', 'Bitte Gleitkommazahl mit einem . oder , als Dezimaltrenner eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1292834974, 'admindb', 1379920701, 'admindb', 'keyvalueempty', '[0-9A-Fa-f]+|################|^$', 'Schlüsselwert oder Leer', '');
+INSERT INTO mne_application.tableregexp VALUES (1358522650, 'admindb', 1420532643, 'admindb', 'color', '[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f][\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]|', 'Bitte 6 Hexadezimalziffern eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1453898809, 'admindb', 1453901101, 'admindb', 'alphanumminus', '[a-zA-Z0-9\-_]+', 'Bitte Buchstaben, Zahlen, Bindestrich und den Unterstrich eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1578468448, 'admindb', 1578479789, 'admindb', 'ip6addr', '^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))$', 'Bitte eine IPV6 Addresse eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1433770650, 'admindb', 1611841955, 'admindb', 'ip4addr', '^(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])$', 'Bitte eine Ip4 Addresse eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1433766450, 'admindb', 1611841965, 'admindb', 'ip4addrempty', '^((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]))$|^$', 'Bitte eine Ip4 Addresse eingeben', '');
@@ -5904,12 +5917,22 @@ INSERT INTO mne_application.tableregexp VALUES (1611841151, 'admindb', 161184200
 INSERT INTO mne_application.tableregexp VALUES (1611841074, 'admindb', 1611842137, 'admindb', 'ip4addrmaskmempty', '^((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\/[1-9][0-9]{0,1}\n)*((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\/[1-9][0-9]{0,1})\n*$|^$', 'Bitte eine Ip4 Addresse mit Maske pro Zeile eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1611840767, 'admindb', 1611842476, 'admindb', 'ip4addrmempty', '^((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\n)*((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]))\n*$|^$', 'Bitte eine Ip4 Addresse pro Zeile eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1578468479, 'admindb', 1611841822, 'admindb', 'ip6addrempty', '^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))$|^$', 'Bitte eine IPV6 Addresse eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1304336758, 'admindb', 1304337172, 'admindb', 'email', '.+@.+|^$', 'Emailaddresse', '');
+INSERT INTO mne_application.tableregexp VALUES (1257447284, 'admindb', 1307533102, 'admindb', 'floatemptysave', '[0-9]*[\.,][0-9]+|[0-9]+|^$', 'Bitte Gleitkommazahl mit einem . oder , als Dezimaltrenner eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1225231635, 'admindb', 1589967209, 'admindb', 'num', '-{0,1}[0-9]+', 'Bitte eine Zahl eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1267106143, 'admindb', 1307537443, 'admindb', 'keyvalue', '[0-9A-Fa-f]+|################', 'Schlüsselwert', '');
+INSERT INTO mne_application.tableregexp VALUES (1478780812, 'admindb', 1478790326, 'admindb', 'macaddr', '[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]', 'Bitte eine MAC Addresse eingeben', 'g');
+INSERT INTO mne_application.tableregexp VALUES (1478857773, 'admindb', 1478857773, 'admindb', 'macaddrempty', '[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]|^$', 'Bitte eine MAC Addresse eingeben oder leer lassen', 'g');
+INSERT INTO mne_application.tableregexp VALUES (1224788911, 'admindb', 1530178729, 'admindb', 'alpha', '[a-zA-Z_]+', 'Bitte nur Buchstaben ohne Umlaute und den Unterstrich eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1225231474, 'admindb', 1530178748, 'admindb', 'alphanum', '[a-zA-Z0-9_]+', 'Bitte Buchstaben ohne Umlaute, Zahlen und den Unterstrich eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1611819016, 'admindb', 1611841863, 'admindb', 'ip6addrmask', '^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))\/[1-9][0-9]{0,2}$', 'Bitte eine IPV6 Addresse mit Maske eingeben ', '');
 INSERT INTO mne_application.tableregexp VALUES (1611842078, 'admindb', 1611842078, 'admindb', 'ip4addrmaskm', '^((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\/[1-9][0-9]{0,1}\n)*((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\/[1-9][0-9]{0,1})\n*$', 'Bitte eine Ip4 Addresse mit Maske pro Zeile eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1611842332, 'admindb', 1611842332, 'admindb', 'ip6addrmaskm', '^((?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))\/[1-9][0-9]{0,2}\n)*((?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])).){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))\/[1-9][0-9]{0,2})\n*$', 'Bitte eine IPV6 Addresse mit Maske pro Zeile eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1611842258, 'admindb', 1611842476, 'admindb', 'ip4addrm', '^((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\n)*((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]).(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9]))\n*$', 'Bitte eine Ip4 Addresse pro Zeile eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1614065085, 'admindb', 1614065085, 'admindb', 'ipaddr', '^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))$|^(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])$', 'Bitte eine IP Addresse eingeben', '');
 INSERT INTO mne_application.tableregexp VALUES (1614065136, 'admindb', 1614065136, 'admindb', 'ipaddrempty', '^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))$|^(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])$|^$', 'Bitte eine IP Addresse eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1692695622, 'admindb', 1692695622, 'admindb', 'ipaddrmask', '^(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\/[1-9][0-9]{0,1}$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))\/[1-9][0-9]{0,2}$', 'Bitte eine IP Addresse mit Maske eingeben', '');
+INSERT INTO mne_application.tableregexp VALUES (1692694812, 'admindb', 1692695647, 'admindb', 'ipaddrmaskempty', '^(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\/[1-9][0-9]{0,1}$|^(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))\/[1-9][0-9]{0,2}$|^$', 'Bitte eine IP Addresse mit Maske eingeben', '');
 
 
 --
@@ -5922,6 +5945,35 @@ INSERT INTO mne_application.tableregexp VALUES (1614065136, 'admindb', 161406513
 -- Data for Name: translate; Type: TABLE DATA; Schema: mne_application; Owner: admindb
 --
 
+INSERT INTO mne_application.translate VALUES (1100158135, 'admindb', 1100158238, 'admindb', 'Company', '', 'company', '', NULL);
+INSERT INTO mne_application.translate VALUES (1103018793, 'admindb', 1106131898, 'admindb', 'englisch', '', 'english', 'Http', NULL);
+INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768033, 'admindb', 'Null', '', 'null', '', NULL);
+INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341626, 'admindb', 'Dienstag', '', 'tuesday', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1322640868, 'admindb', 1322642184, 'admindb', 'Objekt für name ', '', 'object for name', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1585636855, 'admindb', 1585636855, 'admindb', 'MneViewWeblet:getIdparam ist nur im Modifymodus erlaubt', '', 'MneViewWeblet:getIdparam only for modify', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1472112330, 'admindb', 1472112330, 'admindb', 'Zertifikate', '', 'certificates', 'HttpMenu', 1692264940);
+INSERT INTO mne_application.translate VALUES (1615185698, 'admindb', 1615185698, 'admindb', 'Mail Relay Sever', '', '', 'HttpTranslate', 1692264940);
+INSERT INTO mne_application.translate VALUES (1245403011, 'admindb', 1305880971, 'admindb', 'Aktualisieren', '', 'refresh', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1098171178, 'admindb', 1098176429, 'admindb', 'wahr', '', 'true', '', 1692777442);
+INSERT INTO mne_application.translate VALUES (1614694647, 'admindb', 1614694647, 'admindb', 'HW Adresse', '', '', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1100619107, 'admindb', 1108978694, 'admindb', '%s', '%s', '%s', 'DbConnect', 1692863697);
+INSERT INTO mne_application.translate VALUES (1612514978, 'admindb', 1612514978, 'admindb', 'Bitte CA Password eingeben', '', '', 'HttpTranslate', 1692438721);
+INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Aliases', '', '', 'HttpTranslate', 1692438722);
+INSERT INTO mne_application.translate VALUES (1692697026, 'admindb', 1692697026, 'admindb', ' Kann Zone nicht löschen', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1692697370, 'admindb', 1692697370, 'admindb', ' Kann Zone nicht hinzufügen', '', '', 'HttpTranslate', 1692697462);
+INSERT INTO mne_application.translate VALUES (1692709305, 'admindb', 1692709305, 'admindb', 'falsches Netzwerk der DHCP IPv4 Adresse', '', '', 'HttpTranslate', 1692709333);
+INSERT INTO mne_application.translate VALUES (1100790204, 'admindb', 1101396513, 'admindb', 'Land', '', 'country', 'Http', 1692774879);
+INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768063, 'admindb', 'ja', '', 'yes', '', 1692775081);
+INSERT INTO mne_application.translate VALUES (1109931296, 'admindb', 1110117789, 'admindb', 'Weblet ', '', 'weblet', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341898, 'admindb', 'Freitag', '', 'friday', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1098171178, 'admindb', 1098176417, 'admindb', 'falsch', '', 'false', '', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626511, 'admindb', 'Abschnitt links justiert formatieren', '', 'adjust section left ', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1126187645, 'admindb', 1129032483, 'admindb', 'Rahmen', '', 'frame', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1692626024, 'admindb', 1692626024, 'admindb', 'Domain Ok', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1692348942, 'admindb', 1692348942, 'admindb', 'Controller entfernen', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1692370720, 'admindb', 1692370720, 'admindb', 'wirklich Controller entfernen?', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1473843828, 'admindb', 1576768146, 'admindb', 'Domaindaten wirklich ändern? Alle Domaindaten ins besondere die Benutzer und deren Passwörter werden gelöscht', '', 'Really change domain data? All domain data, in particular the users and their passwords, are deleted', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1322640868, 'admindb', 1322642100, 'admindb', 'Id Parameter ', '', 'id parameter', 'HttpTranslate', 1692776175);
 INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768013, 'admindb', 'Wert', '', 'value', '', NULL);
 INSERT INTO mne_application.translate VALUES (1379692043, 'admindb', 1382448598, 'admindb', 'Fehler', '', 'error', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1383931493, 'admindb', 1383931493, 'admindb', 'Teile', '', 'parts', '', NULL);
@@ -5930,7 +5982,6 @@ INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276899,
 INSERT INTO mne_application.translate VALUES (1107781963, 'admindb', 1107789659, 'admindb', 'Web', '', 'web', '', NULL);
 INSERT INTO mne_application.translate VALUES (1108373074, 'admindb', 1108978602, 'admindb', 'Ausdruck', '', 'expression', '', NULL);
 INSERT INTO mne_application.translate VALUES (1127380308, 'admindb', 1127380347, 'admindb', 'Firma', '', 'company', '', NULL);
-INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Name","', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341651, 'admindb', 'Mai', '', 'may', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1590648144, 'admindb', 1600336203, 'admindb', 'Abfrage', '', 'query', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1591614618, 'admindb', 1600336207, 'admindb', 'Neue Liste', '', 'new list', 'HttpTranslate', NULL);
@@ -5939,6 +5990,7 @@ INSERT INTO mne_application.translate VALUES (1597934784, 'admindb', 1600336031,
 INSERT INTO mne_application.translate VALUES (1606732474, 'admindb', 1607409458, 'admindb', 'Monat', '', 'month', 'HttpTranslate', 0);
 INSERT INTO mne_application.translate VALUES (1599126686, 'admindb', 1600336120, 'admindb', 'Benutzer <%>existiert schon bitte anderen Namen wählen', '', 'user <%> exists - please give a other name', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1599126686, 'admindb', 1600336164, 'admindb', 'Benutzer <%> existiert schon und hat eventuell Zugriff zu einer anderen Datenbank', '', 'uer <%> exists and have perhaps access to an other database ', 'DbConnect', NULL);
+INSERT INTO mne_application.translate VALUES (1605542657, 'admindb', 1609770885, 'admindb', 'erpfixture', 'Lesen Inventar', 'fixture', 'DbGroup', 0);
 INSERT INTO mne_application.translate VALUES (1599136874, 'admindb', 1600336178, 'admindb', 'Datenbankbenutzer nicht gefunden', '', 'database user not found', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1584080721, 'admindb', 1584080721, 'admindb', 'Kein View Path', '', 'no view path', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1587130121, 'admindb', 1589297545, 'admindb', 'Editieren', '', 'edit', 'HttpTranslate', NULL);
@@ -5971,6 +6023,7 @@ INSERT INTO mne_application.translate VALUES (1358847380, 'admindb', 1589297513,
 INSERT INTO mne_application.translate VALUES (1587456569, 'admindb', 1600336194, 'admindb', 'Detail', '', 'detail', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1590646566, 'admindb', 1600336198, 'admindb', 'letzte Abfrage', '', 'last query', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1598002633, 'admindb', 1600336233, 'admindb', 'Der Aktenschrank <%s> existiert nicht', '', 'the filling cabinet don''t exist', 'DbHttpUtilsRepository', NULL);
+INSERT INTO mne_application.translate VALUES (1603468389, 'admindb', 1605023520, 'admindb', 'Vorschau 3. Mahnung', '', 'preview third reminder', 'HttpTranslate', 0);
 INSERT INTO mne_application.translate VALUES (1603189456, 'admindb', 1603189456, 'admindb', 'Angebot war eine Vorlage und wurde kopiert', '', 'offer is a template and is copied', 'DbConnect', 0);
 INSERT INTO mne_application.translate VALUES (1603189604, 'admindb', 1603189604, 'admindb', 'Angebot ohne Referenz kann nicht zum Auftrag werden', '', 'can not make a offer to a order without reference', 'DbConnect', 0);
 INSERT INTO mne_application.translate VALUES (1600936734, 'admindb', 1605023375, 'admindb', 'Letze Abfrage: keine werte angefordert', '', 'last query: no values requested', 'DbHttpUtilsQuery', 0);
@@ -5984,15 +6037,7 @@ INSERT INTO mne_application.translate VALUES (1605542249, 'admindb', 1605542249,
 INSERT INTO mne_application.translate VALUES (1605542279, 'admindb', 1605542279, 'admindb', 'adminrepository', 'Verwaltung Aktenschrank', 'admin repository', 'DbGroup', 0);
 INSERT INTO mne_application.translate VALUES (1605542308, 'admindb', 1605542308, 'admindb', 'adminshare', 'Verwaltung Freigaben', 'admin shares', 'DbGroup', 0);
 INSERT INTO mne_application.translate VALUES (1605542360, 'admindb', 1605542360, 'admindb', 'adminshipment', 'Verwaltung Auslieferung', 'admin shipment', 'DbGroup', 0);
-INSERT INTO mne_application.translate VALUES (1589783133, 'admindb', 1600335877, 'admindb', 'und andere', '', 'and other', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1589299353, 'admindb', 1600335870, 'admindb', 'keine Leseurl für ', '', 'no read url', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1410784641, 'admindb', 1410784641, 'admindb', '', '', '', '', 1692102208);
-INSERT INTO mne_application.translate VALUES (1596546431, 'admindb', 1600335949, 'admindb', 'Print', '', 'print', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1585636855, 'admindb', 1585636855, 'admindb', 'MneViewWeblet:getIdparam ist nur im Modifymodus erlaubt', '', 'MneViewWeblet:getIdparam only for modify', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1589287427, 'admindb', 1600335861, 'admindb', 'Mysql', '', 'mysql', 'HttpTranslate', 1692001177);
-INSERT INTO mne_application.translate VALUES (1583821572, 'admindb', 1583821572, 'admindb', 'Falscher Status ', '', 'wrong status', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1593681773, 'admindb', 1600335937, 'admindb', 'Sichern', '', 'save', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1585892196, 'admindb', 1585892196, 'admindb', 'Uhr', '', 'clock', 'HttpTranslate', 1692102208);
+INSERT INTO mne_application.translate VALUES (1589783133, 'admindb', 1600335877, 'admindb', 'und andere', '', 'and other', 'HttpTranslate', 1692776175);
 INSERT INTO mne_application.translate VALUES (1593604274, 'admindb', 1600335932, 'admindb', 'Wiederhohlen', '', 'repeat', 'HttpTranslate', 1692110279);
 INSERT INTO mne_application.translate VALUES (1597928363, 'admindb', 1600336012, 'admindb', 'Datei ist grösser als 5MB', '', 'file size larger than 5MB ', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1605542398, 'admindb', 1605542398, 'admindb', 'adminsystem', 'Verwaltung Betriebssystem', 'admin system', 'DbGroup', 0);
@@ -6002,13 +6047,18 @@ INSERT INTO mne_application.translate VALUES (1605541908, 'admindb', 1605597714,
 INSERT INTO mne_application.translate VALUES (1608111564, 'admindb', 1609750347, 'admindb', 'Auslagerung', '', 'outgoing', 'DbQuerySingle', 0);
 INSERT INTO mne_application.translate VALUES (1608121320, 'admindb', 1609750464, 'admindb', 'Das Teil ist für einen Auftrag reserviert', '', 'the part is reserved for an order', 'DbConnect', 0);
 INSERT INTO mne_application.translate VALUES (1608121654, 'admindb', 1609750464, 'admindb', 'Lagerplatz enthält keine passende Teile', '', 'storage location does not contain matching parts', 'DbConnect', 0);
+INSERT INTO mne_application.translate VALUES (1589287427, 'admindb', 1600335861, 'admindb', 'Mysql', '', 'mysql', 'HttpTranslate', 1692777873);
+INSERT INTO mne_application.translate VALUES (1589299353, 'admindb', 1600335870, 'admindb', 'keine Leseurl für ', '', 'no read url', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1596546431, 'admindb', 1600335949, 'admindb', 'Print', '', 'print', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1583821572, 'admindb', 1583821572, 'admindb', 'Falscher Status ', '', 'wrong status', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1585892196, 'admindb', 1585892196, 'admindb', 'Uhr', '', 'clock', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1593681773, 'admindb', 1600335937, 'admindb', 'Sichern', '', 'save', 'HttpTranslate', 1692776174);
 INSERT INTO mne_application.translate VALUES (1608121654, 'admindb', 1609750464, 'admindb', 'Es existiert ein Lagerplatz mit reservierten Teilen für diesen Auftrag', '', 'there is a storage location with reserved parts for this order', 'DbConnect', 0);
 INSERT INTO mne_application.translate VALUES (1608121654, 'admindb', 1609750464, 'admindb', ' Lagerplatz gehöhrt zu einer Auslagerung', '', 'storage space is part of an outsourcing', 'DbConnect', 0);
 INSERT INTO mne_application.translate VALUES (1608121654, 'admindb', 1609750504, 'admindb', 'Die Teile können keinem anderen Auftrag zugeordnet werden', '', 'the parts cannot be assigned to any other order', 'DbConnect', 0);
 INSERT INTO mne_application.translate VALUES (1608122308, 'admindb', 1609750504, 'admindb', 'Lieferung ist noch nicht ausgelagert', '', 'delivery has not yet been outsourced', 'DbConnect', 0);
 INSERT INTO mne_application.translate VALUES (1608122862, 'admindb', 1609750524, 'admindb', 'Reservierung für einen Auftrag wurde aufgehoben', '', 'reservation for an order has been canceled', 'DbConnect', 0);
 INSERT INTO mne_application.translate VALUES (1605542629, 'admindb', 1609770885, 'admindb', 'erpbuilddiary', 'Lesen Bautagebuch', 'builddiary', 'DbGroup', 0);
-INSERT INTO mne_application.translate VALUES (1605542657, 'admindb', 1609770885, 'admindb', 'erpfixture', 'Lesen Inventar', 'fixture', 'DbGroup', 0);
 INSERT INTO mne_application.translate VALUES (1605542673, 'admindb', 1609770885, 'admindb', 'erpmail', 'Lesen Mail', 'mail', 'DbGroup', 0);
 INSERT INTO mne_application.translate VALUES (1605542690, 'admindb', 1609770885, 'admindb', 'erppersonnal', 'Lesen Personal', 'personnal', 'DbGroup', 0);
 INSERT INTO mne_application.translate VALUES (1605542726, 'admindb', 1609770885, 'admindb', 'erprepository', 'Lesen Aktenschrank', 'repository', 'DbGroup', 0);
@@ -6040,7 +6090,6 @@ INSERT INTO mne_application.translate VALUES (1603457802, 'admindb', 1605023454,
 INSERT INTO mne_application.translate VALUES (1598340712, 'admindb', 1600336330, 'admindb', 'Der Name der Datei darf nicht leer sein', '', 'please give a name', 'DbHttpUtilsRepository', NULL);
 INSERT INTO mne_application.translate VALUES (1603468126, 'admindb', 1605023520, 'admindb', 'Vorschau 1. Mahnung', '', 'preview first reminder', 'HttpTranslate', 0);
 INSERT INTO mne_application.translate VALUES (1603468389, 'admindb', 1605023520, 'admindb', 'Vorschau 2. Mahnung', '', 'preview second reminder', 'HttpTranslate', 0);
-INSERT INTO mne_application.translate VALUES (1603468389, 'admindb', 1605023520, 'admindb', 'Vorschau 3. Mahnung', '', 'preview third reminder', 'HttpTranslate', 0);
 INSERT INTO mne_application.translate VALUES (1598343245, 'admindb', 1600336346, 'admindb', 'Ordner/Datei', '', 'directory/file', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1598342554, 'admindb', 1598342961, 'admindb', 'Änderungsnotiz', '', 'modify note', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1391603266, 'admindb', 1598343440, 'admindb', 'Ordner/Datei
@@ -6048,7 +6097,6 @@ INSERT INTO mne_application.translate VALUES (1391603266, 'admindb', 1598343440,
 INSERT INTO mne_application.translate VALUES (1598449020, 'admindb', 1600336375, 'admindb', 'kann temporäres für <%s> nicht öffnen', '', 'kann open temp for <%s>', 'TmpFile', NULL);
 INSERT INTO mne_application.translate VALUES (1598516754, 'admindb', 1598516866, 'admindb', 'interesse', '', 'interest', 'DbQuerySingle', NULL);
 INSERT INTO mne_application.translate VALUES (1598516754, 'admindb', 1598516866, 'admindb', 'inaktiv', '', 'inactive', 'DbQuerySingle', NULL);
-INSERT INTO mne_application.translate VALUES (1100158135, 'admindb', 1100158238, 'admindb', 'Company', '', 'company', '', NULL);
 INSERT INTO mne_application.translate VALUES (1383931202, 'admindb', 1383931202, 'admindb', 'Logout', '', 'logout', '', NULL);
 INSERT INTO mne_application.translate VALUES (1418990098, 'admindb', 1576762335, 'admindb', 'Rot', '', 'red', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351236365, 'admindb', 1381276711, 'admindb', 'neue Version', '', 'new version', 'HttpTranslate', NULL);
@@ -6108,26 +6156,6 @@ INSERT INTO mne_application.translate VALUES (1351237479, 'admindb', 1381276923,
 INSERT INTO mne_application.translate VALUES (1351238105, 'admindb', 1381276931, 'admindb', 'Produktmaterial', '', 'product material', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1351238105, 'admindb', 1381276937, 'admindb', 'keine Teile', '', 'no parts', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1351238105, 'admindb', 1381276950, 'admindb', 'Eigenes Material', '', 'own parts', 'DbQuery', NULL);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626392, 'admindb', 'Text fett schreiben', '', 'text bold', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768063, 'admindb', 'ja', '', 'yes', '', 1692102060);
-INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273796, 'admindb', 'aktuelle Spalte löschen', '', 'delete actual column', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273782, 'admindb', 'Spalte hinter die aktuelle Spalte hinzufügen', '', 'insert a column behind the actual column', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236362, 'admindb', 1381274137, 'admindb', 'Meldungen', '', 'message', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626399, 'admindb', 'Text kursiv schreiben', '', 'text italic', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276892, 'admindb', 'Gesamte Tabelle', '', 'entire table', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276840, 'admindb', 'nicht leer', '', 'not empty', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626520, 'admindb', 'Abschnitt rechts justiert formatieren', '', 'adjust section right', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273823, 'admindb', 'Zeile hinter die aktuelle Zeile hinzufügen', '', 'insert a row behind actual row', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236365, 'admindb', 1381276760, 'admindb', 'Exportieren', '', 'export', 'HttpTranslate', 1692102838);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626664, 'admindb', 'Aufzählung einfügen', '', 'insert list', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626631, 'admindb', 'Änderung wieder herstellen', '', 'making change back', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273831, 'admindb', 'aktuelle Zeile löschen', '', 'delete actual row', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273767, 'admindb', 'Spalte vor die aktuelle Spalte hinzufügen', '', 'insert a column before the actual column', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626529, 'admindb', 'Abschitt zentrieren', '', 'adjust section center', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236362, 'admindb', 1381273996, 'admindb', 'Keine Werte für $1:$2 gefunden', '', 'no values for $1:$2 found', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626511, 'admindb', 'Abschnitt links justiert formatieren', '', 'adjust section left ', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276869, 'admindb', 'änhlich', 'ähnlich', 'similarly', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1351236362, 'admindb', 1381274032, 'admindb', 'Mehr als einen Wertesatz gefunden für $1:$2 gefunden', '', 'more than one data set found for $1:$2', 'HttpTranslate', 1692102208);
 INSERT INTO mne_application.translate VALUES (1351239505, 'admindb', 1381276964, 'admindb', 'Produkt ', '', 'product', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351239505, 'admindb', 1381276970, 'admindb', 'Preis hinzufügen', '', 'add price', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351239505, 'admindb', 1381276976, 'admindb', 'Preis ', '', 'price', 'HttpTranslate', NULL);
@@ -6138,6 +6166,24 @@ INSERT INTO mne_application.translate VALUES (1362552848, 'admindb', 1381277089,
 INSERT INTO mne_application.translate VALUES (1362570271, 'admindb', 1381277099, 'admindb', 'Überschriften hinzufügen', '', 'add headline', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1362570271, 'admindb', 1381277109, 'admindb', 'Überschriften bearbeiten', '', 'modify headline', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1362570271, 'admindb', 1381277115, 'admindb', 'Überschriften ', '', 'headline', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273767, 'admindb', 'Spalte vor die aktuelle Spalte hinzufügen', '', 'insert a column before the actual column', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273782, 'admindb', 'Spalte hinter die aktuelle Spalte hinzufügen', '', 'insert a column behind the actual column', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273831, 'admindb', 'aktuelle Zeile löschen', '', 'delete actual row', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276869, 'admindb', 'änhlich', 'ähnlich', 'similarly', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276840, 'admindb', 'nicht leer', '', 'not empty', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626529, 'admindb', 'Abschitt zentrieren', '', 'adjust section center', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236362, 'admindb', 1381274137, 'admindb', 'Meldungen', '', 'message', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626520, 'admindb', 'Abschnitt rechts justiert formatieren', '', 'adjust section right', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236362, 'admindb', 1381274032, 'admindb', 'Mehr als einen Wertesatz gefunden für $1:$2 gefunden', '', 'more than one data set found for $1:$2', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1351236365, 'admindb', 1381276760, 'admindb', 'Exportieren', '', 'export', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626664, 'admindb', 'Aufzählung einfügen', '', 'insert list', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236362, 'admindb', 1381273996, 'admindb', 'Keine Werte für $1:$2 gefunden', '', 'no values for $1:$2 found', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273823, 'admindb', 'Zeile hinter die aktuelle Zeile hinzufügen', '', 'insert a row behind actual row', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276892, 'admindb', 'Gesamte Tabelle', '', 'entire table', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626631, 'admindb', 'Änderung wieder herstellen', '', 'making change back', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273796, 'admindb', 'aktuelle Spalte löschen', '', 'delete actual column', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626399, 'admindb', 'Text kursiv schreiben', '', 'text italic', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626392, 'admindb', 'Text fett schreiben', '', 'text bold', 'HttpTranslate', 1692776174);
 INSERT INTO mne_application.translate VALUES (1362570271, 'admindb', 1381277131, 'admindb', 'Überschriftdatei übertragen', '', 'transfer headline file', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1362570271, 'admindb', 1381277142, 'admindb', 'Art', '', 'typ', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1363680416, 'admindb', 1381277170, 'admindb', 'assoziierten Kontakt bearbeiten', '', 'modify associated contact', 'HttpTranslate', NULL);
@@ -6197,7 +6243,6 @@ INSERT INTO mne_application.translate VALUES (1351257478, 'admindb', 1382444623,
 INSERT INTO mne_application.translate VALUES (1351259294, 'admindb', 1382444630, 'admindb', 'Kontakt', '', 'contact', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1351259620, 'admindb', 1382444645, 'admindb', 'Spalte ', '', 'column', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351264106, 'admindb', 1382444692, 'admindb', 'Bitte eine Wert eingeben', '', 'please select a value', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1098171178, 'admindb', 1098176429, 'admindb', 'wahr', '', 'true', '', 1692102839);
 INSERT INTO mne_application.translate VALUES (1351264106, 'admindb', 1382444706, 'admindb', 'Kann die Referenz nicht löschen', '', 'can not delete the reference', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351323647, 'admindb', 1382444792, 'admindb', 'Firma hinzufügen', '', 'add company', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351323647, 'admindb', 1382444798, 'admindb', 'Firma ', '', 'company', 'HttpTranslate', NULL);
@@ -6260,7 +6305,6 @@ INSERT INTO mne_application.translate VALUES (1353422734, 'admindb', 1382445823,
 INSERT INTO mne_application.translate VALUES (1353478666, 'admindb', 1382445831, 'admindb', 'Primary Key hinzufügen', '', 'add primary key', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1353478666, 'admindb', 1382445841, 'admindb', 'Primary Key bearbeiten', '', 'modify primary key', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1353484291, 'admindb', 1382445851, 'admindb', 'Rechnung hinzufügen', '', 'add invoice', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1103018793, 'admindb', 1106131898, 'admindb', 'englisch', '', 'english', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1353484291, 'admindb', 1382445866, 'admindb', 'Rechnung bearbeiten', '', 'modify invoice', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1353484291, 'admindb', 1382445872, 'admindb', 'Rechnung ', '', 'invoice', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1353484291, 'admindb', 1382445912, 'admindb', 'Bitte Rechnungstext auswählen', '', 'please select invoice text', 'HttpTranslate', NULL);
@@ -6342,8 +6386,6 @@ INSERT INTO mne_application.translate VALUES (1358763543, 'admindb', 1382447228,
 INSERT INTO mne_application.translate VALUES (1358763543, 'admindb', 1382447256, 'admindb', 'Zuordnen', '', 'assign', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1358772802, 'admindb', 1382447262, 'admindb', 'Heute', '', 'today', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1358245346, 'admindb', 1382447317, 'admindb', 'Der Autoreport <%s> hat keine Zeilen', '', 'the report <%s> has no rows', 'DbHttpReport', NULL);
-INSERT INTO mne_application.translate VALUES (1322640868, 'admindb', 1322642184, 'admindb', 'Objekt für name ', '', 'object for name', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1322640868, 'admindb', 1322642100, 'admindb', 'Id Parameter ', '', 'id parameter', 'HttpTranslate', 1692102208);
 INSERT INTO mne_application.translate VALUES (1358245549, 'admindb', 1382447629, 'admindb', 'Rechnungskonditionen hinzufügen', '', 'add incoive terms', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1358245549, 'admindb', 1382447638, 'admindb', 'Rechnungskonditionen bearbeiten', '', 'modify invoice terms', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1358245549, 'admindb', 1382447644, 'admindb', 'Rechnungskonditionen ', '', 'invoice terms', 'HttpTranslate', NULL);
@@ -6414,11 +6456,7 @@ INSERT INTO mne_application.translate VALUES (1103630492, 'admindb', 1106138388,
 INSERT INTO mne_application.translate VALUES (1103561233, 'admindb', 1106138623, 'admindb', 'Tabelle ist unbekannt und kann nicht freigegeben werden', '', 'table unknown and can''t be released', 'Database', NULL);
 INSERT INTO mne_application.translate VALUES (1102613385, 'admindb', 1106138648, 'admindb', 'Addresse bearbeiten', '', 'modify address', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1109175614, 'admindb', 1109848194, 'admindb', 'Person hat kein Elternobjekt', '', 'person has no parent', 'Http', NULL);
-INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768033, 'admindb', 'Null', '', 'null', '', NULL);
 INSERT INTO mne_application.translate VALUES (1305880369, 'admindb', 1305880408, 'admindb', 'hinzufügen/ändern', '', 'add/modify', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1245403011, 'admindb', 1305880971, 'admindb', 'Aktualisieren', '', 'refresh', 'HttpTranslate', 1692102838);
-INSERT INTO mne_application.translate VALUES (1102501399, 'admindb', 1102517197, 'admindb', 'suchen', '', 'search', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1098171178, 'admindb', 1098176417, 'admindb', 'falsch', '', 'false', '', 1692102208);
 INSERT INTO mne_application.translate VALUES (1108117495, 'admindb', 1108978543, 'admindb', 'Beschriftung', '', 'label', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1107970021, 'admindb', 1108978553, 'admindb', 'Kein Weblet ausgewählt', '', 'no weblet selected', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1108464818, 'admindb', 1108978574, 'admindb', 'Foreign Keys', '', 'foreign keys', 'Http', NULL);
@@ -6433,6 +6471,7 @@ INSERT INTO mne_application.translate VALUES (1108989835, 'admindb', 1109079534,
 INSERT INTO mne_application.translate VALUES (1108744800, 'admindb', 1226562738, 'admindb', 'Ortschaft hinzufügen', '', 'add city', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1108988430, 'admindb', 1109079560, 'admindb', 'Kein Person ausgewählt', '', 'no person selected', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1109063904, 'admindb', 1109079576, 'admindb', 'Konstante', '', 'constant', 'Http', NULL);
+INSERT INTO mne_application.translate VALUES (1102501399, 'admindb', 1102517197, 'admindb', 'suchen', '', 'search', 'Http', 1692776175);
 INSERT INTO mne_application.translate VALUES (1127314659, 'admindb', 1152881882, 'admindb', 'Kunden', '', 'customer', '', NULL);
 INSERT INTO mne_application.translate VALUES (1136478095, 'admindb', 1153736806, 'admindb', 'Sehr geehrte Frau', '', 'Dear Mrs.', '', NULL);
 INSERT INTO mne_application.translate VALUES (1162301259, 'admindb', 1162301363, 'admindb', 'Lagerverwaltung', '', 'warehouse management', '', NULL);
@@ -6485,6 +6524,7 @@ INSERT INTO mne_application.translate VALUES (1107875406, 'admindb', 1107958486,
 INSERT INTO mne_application.translate VALUES (1107786488, 'admindb', 1107958494, 'admindb', 'Maske Hinzufügen', '', 'new screen', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1110286355, 'admindb', 1110286934, 'admindb', 'Datumsformat', '', 'date format', '', NULL);
 INSERT INTO mne_application.translate VALUES (1146834409, 'admindb', 1152522697, 'admindb', 'Rechnungen', '', 'invoices', '', NULL);
+INSERT INTO mne_application.translate VALUES (1098116259, 'admindb', 1107783051, 'admindb', 'Joins', '', 'joins', '', NULL);
 INSERT INTO mne_application.translate VALUES (1119606751, 'admindb', 1119876073, 'admindb', 'Kein Indexname beim Erzeugen des Indexes vorhanden', '', 'no index name during make a index', 'PgIndex', NULL);
 INSERT INTO mne_application.translate VALUES (1098102416, 'admindb', 1098103682, 'admindb', 'Zeile löschen', '', 'delete row', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1099485640, 'admindb', 1099995774, 'admindb', 'weiter', '', 'next', 'Http', NULL);
@@ -6494,8 +6534,6 @@ INSERT INTO mne_application.translate VALUES (1119876006, 'admindb', 1119876182,
 INSERT INTO mne_application.translate VALUES (1118750439, 'admindb', 1119876201, 'admindb', '%s ist keinen Zeichenkettenargument', '', '%s is not a character argument', 'Argument', NULL);
 INSERT INTO mne_application.translate VALUES (1115791869, 'admindb', 1119876209, 'admindb', 'History', '', 'history', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1103019431, 'admindb', 1124111912, 'admindb', 'mne_langid', 'de', 'en', 'Http', NULL);
-INSERT INTO mne_application.translate VALUES (1100619107, 'admindb', 1108978694, 'admindb', '%s', '%s', '%s', 'DbConnect', 1692102818);
-INSERT INTO mne_application.translate VALUES (1098718132, 'admindb', 1110286945, 'admindb', 'Sprache', '', 'language', '', 1692103218);
 INSERT INTO mne_application.translate VALUES (1126013479, 'admindb', 1126180314, 'admindb', 'Html Element', '', 'html element', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1126110580, 'admindb', 1126180336, 'admindb', 'Spaltenanzahl vom Index <%s> ist ungleich 1', '', 'column count from index <%s> is not 1', 'DbHttpAdminTable', NULL);
 INSERT INTO mne_application.translate VALUES (1107010992, 'admindb', 1107958151, 'admindb', 'Menüpunkt Hinzufügen', '', 'add menu entry', 'Http', NULL);
@@ -6511,6 +6549,7 @@ INSERT INTO mne_application.translate VALUES (1131987244, 'admindb', 1135341727,
 INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1098087767, 'admindb', 'neuer Benutzer', '', 'new User', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1146205954, 'admindb', 1147792409, 'admindb', 'Lieferung', '', 'delivery', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1144760166, 'admindb', 1144830784, 'admindb', 'Auftrag bearbeiten', '', 'modify order', 'Http', NULL);
+INSERT INTO mne_application.translate VALUES (1098718132, 'admindb', 1110286945, 'admindb', 'Sprache', '', 'language', '', 1692774879);
 INSERT INTO mne_application.translate VALUES (1137407106, 'admindb', 1137407690, 'admindb', '<%s> kann nicht übersetzt werden', '', 'can''t translate <%s>', 'DbView', NULL);
 INSERT INTO mne_application.translate VALUES (1124889063, 'admindb', 1137413267, 'admindb', 'Der Typ %d von Spalte %s ist unbekannt', '', 'type %d from column %s is unknown', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1137767766, 'admindb', 1144830664, 'admindb', 'Sql Prozeduren', '', 'sql procedures', 'Http', NULL);
@@ -6564,13 +6603,9 @@ INSERT INTO mne_application.translate VALUES (1106754220, 'admindb', 1107269039,
 INSERT INTO mne_application.translate VALUES (1107782479, 'admindb', 1107782604, 'admindb', 'screen', '', 'screen', '', NULL);
 INSERT INTO mne_application.translate VALUES (1106850234, 'admindb', 1107783033, 'admindb', 'Menüs', '', 'menu', '', NULL);
 INSERT INTO mne_application.translate VALUES (1097767982, 'admindb', 1107783046, 'admindb', 'Sichten', '', 'views', '', NULL);
-INSERT INTO mne_application.translate VALUES (1098116259, 'admindb', 1107783051, 'admindb', 'Joins', '', 'joins', '', NULL);
 INSERT INTO mne_application.translate VALUES (1098116259, 'admindb', 1107783062, 'admindb', 'Definitionen', '', 'definition', '', NULL);
 INSERT INTO mne_application.translate VALUES (1107788788, 'admindb', 1107788788, 'admindb', 'testt', '', 'test', '', NULL);
 INSERT INTO mne_application.translate VALUES (1107782574, 'admindb', 1107788851, 'admindb', 'test', '', 'test', '', NULL);
-INSERT INTO mne_application.translate VALUES (1126013479, 'admindb', 1126180343, 'admindb', 'Breite', '', 'width', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341898, 'admindb', 'Freitag', '', 'friday', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341850, 'admindb', 'Samstag', '', 'saturday', 'Http', 1692102208);
 INSERT INTO mne_application.translate VALUES (1106850700, 'admindb', 1107789659, 'admindb', 'Masken', '', 'screen', '', NULL);
 INSERT INTO mne_application.translate VALUES (1107853262, 'admindb', 1107958060, 'admindb', 'Ausgabetabelle <$1> nicht gefunden', '', 'output table <$1> not found', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1107786488, 'admindb', 1107958134, 'admindb', 'Maske Löschen', '', 'delete screen', 'Http', NULL);
@@ -6581,6 +6616,7 @@ INSERT INTO mne_application.translate VALUES (1106923200, 'admindb', 1107958209,
 INSERT INTO mne_application.translate VALUES (1107786488, 'admindb', 1107958218, 'admindb', 'Maske bearbeiten', '', 'modify screen', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1107263677, 'admindb', 1107958256, 'admindb', 'Tabellenname kann nicht von %s.%s zu %s.%s verändert werden', '', 'can''t change table name from %s.%s to %s.%s', 'PgTable', NULL);
 INSERT INTO mne_application.translate VALUES (1107010992, 'admindb', 1107958290, 'admindb', 'neuer Menüpunkt', '', 'add menu entry', 'Http', NULL);
+INSERT INTO mne_application.translate VALUES (1101392208, 'admindb', 1101396414, 'admindb', 'Länder', '', 'countrys', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1132317535, 'admindb', 1135341934, 'admindb', 'Alter style in data für %s.old', '', 'old style for %s.old in data', 'DbHttpUtilsView', NULL);
 INSERT INTO mne_application.translate VALUES (1134137308, 'admindb', 1135341964, 'admindb', 'Brief nicht gefunden', '', 'letter not found', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1132060665, 'admindb', 1135341979, 'admindb', 'Produktpreis', '', 'product price', 'Http', NULL);
@@ -6593,6 +6629,8 @@ INSERT INTO mne_application.translate VALUES (1131366484, 'admindb', 1135342115,
 INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135342120, 'admindb', 'Juni', '', 'june', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135342127, 'admindb', 'Sa', '', 'Sa', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135342136, 'admindb', 'So', '', 'so', 'Http', NULL);
+INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341850, 'admindb', 'Samstag', '', 'saturday', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1126013479, 'admindb', 1126180343, 'admindb', 'Breite', '', 'width', 'Http', 1692776174);
 INSERT INTO mne_application.translate VALUES (1134655324, 'admindb', 1135342141, 'admindb', 'Format', '', 'format', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135342147, 'admindb', 'April', '', 'april', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1131366484, 'admindb', 1135342157, 'admindb', 'Referenzmanual Hinzufügen', '', 'add referenz manual', 'Http', NULL);
@@ -6642,10 +6680,6 @@ INSERT INTO mne_application.translate VALUES (1099497783, 'admindb', 1099995743,
 INSERT INTO mne_application.translate VALUES (1100095298, 'admindb', 1100158274, 'admindb', 'DbHtmlComposer: Include <%s> nicht gefunden', '', 'DbHtmlComppser: include <%s> not found', 'DbHtml', NULL);
 INSERT INTO mne_application.translate VALUES (1100182627, 'admindb', 1100182655, 'admindb', 'DB Tabelleninhalte', '', 'db table contents', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1100182619, 'admindb', 1100182665, 'admindb', 'DBA Benutzer', '', 'dba user', 'Http', NULL);
-INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135342186, 'admindb', 'Mittwoch', '', 'wendsday', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958227, 'admindb', 'Type', 'Typ', 'type', '', 1692102247);
-INSERT INTO mne_application.translate VALUES (1109931296, 'admindb', 1110117789, 'admindb', 'Weblet ', '', 'weblet', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341956, 'admindb', 'Donnerstag', '', 'thursday', 'Http', 1692102208);
 INSERT INTO mne_application.translate VALUES (1100185463, 'admindb', 1100191266, 'admindb', 'Tabelle %s.%s existiert nicht mehr', '', 'table %s.%s is deleted', 'DbView', NULL);
 INSERT INTO mne_application.translate VALUES (1100186340, 'admindb', 1100191276, 'admindb', 'DBA Tabellen', '', 'DBA tables', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1100185441, 'admindb', 1100191295, 'admindb', 'DBA Sichten', '', 'dba views', 'Http', NULL);
@@ -6657,7 +6691,6 @@ INSERT INTO mne_application.translate VALUES (1100769600, 'admindb', 1100784788,
 INSERT INTO mne_application.translate VALUES (1100247975, 'admindb', 1100784803, 'admindb', 'Spalte <%s> unbekannt', '', 'column <%s> unknown', 'DbHttp', NULL);
 INSERT INTO mne_application.translate VALUES (1100784620, 'admindb', 1100784837, 'admindb', 'Firma Details', '', 'company details', '', NULL);
 INSERT INTO mne_application.translate VALUES (1100783100, 'admindb', 1100784846, 'admindb', 'Vorbild Schema', '', 'template schema', 'Http', NULL);
-INSERT INTO mne_application.translate VALUES (1101392208, 'admindb', 1101396414, 'admindb', 'Länder', '', 'countrys', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1101384519, 'admindb', 1101396422, 'admindb', 'neues Land', '', 'new country', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1101391533, 'admindb', 1101396434, 'admindb', 'Land gelöscht', '', 'country deleted', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1101370996, 'admindb', 1101396458, 'admindb', 'Land bearbeiten', '', 'modify country', 'Http', NULL);
@@ -6669,6 +6702,9 @@ INSERT INTO mne_application.translate VALUES (1128084754, 'admindb', 1129032399,
 INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341984, 'admindb', 'August', '', 'august', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1129024846, 'admindb', 1129032271, 'admindb', 'Spaltenid <%s> zum Sortieren in Sicht <%s> nicht gefunden', '', 'columnid <%s> for sorting in view <%s> not found', 'DbView', NULL);
 INSERT INTO mne_application.translate VALUES (1107010992, 'admindb', 1107958370, 'admindb', 'Menüpunkt bearbeiten', '', 'modify menu entry', 'Http', NULL);
+INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135342186, 'admindb', 'Mittwoch', '', 'wendsday', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341956, 'admindb', 'Donnerstag', '', 'thursday', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958227, 'admindb', 'Type', 'Typ', 'type', '', 1692792100);
 INSERT INTO mne_application.translate VALUES (1129024845, 'admindb', 1129032299, 'admindb', 'Spaltenid <%s> für Whereclause in Sicht <%s> nicht gefunden', '', 'columnid <%s> for where clause in view <%s> not found', 'DbView', NULL);
 INSERT INTO mne_application.translate VALUES (1099297994, 'admindb', 1129032322, 'admindb', 'Spaltenid', '', 'columnid', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1128602573, 'admindb', 1129032373, 'admindb', 'Anforderungszeile %s ist im falschen Format', '', 'request line %s has a wrong format', 'Http', NULL);
@@ -6722,8 +6758,6 @@ INSERT INTO mne_application.translate VALUES (1098102384, 'admindb', 1098103607,
 INSERT INTO mne_application.translate VALUES (1098102384, 'admindb', 1098103623, 'admindb', 'Gruppe Ändern', '', 'modify group', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1098102384, 'admindb', 1098103639, 'admindb', 'Gruppe Löschen', '', 'delete group', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1100773157, 'admindb', 1100784690, 'admindb', 'Gruppe', '', 'group', 'Http', 1692103232);
-INSERT INTO mne_application.translate VALUES (1100790204, 'admindb', 1101396513, 'admindb', 'Land', '', 'country', 'Http', 1692103218);
-INSERT INTO mne_application.translate VALUES (1126187645, 'admindb', 1129032483, 'admindb', 'Rahmen', '', 'frame', 'Http', 1692102208);
 INSERT INTO mne_application.translate VALUES (1127829805, 'admindb', 1127838129, 'admindb', 'Stadt', '', 'city', 'Http', 1692256249);
 INSERT INTO mne_application.translate VALUES (1098102416, 'admindb', 1098103652, 'admindb', 'Zeile hinzufügen', '', 'add row', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1098102416, 'admindb', 1098103667, 'admindb', 'Zeile ändern', '', 'modify row', 'Http', NULL);
@@ -6788,20 +6822,6 @@ INSERT INTO mne_application.translate VALUES (1101998338, 'admindb', 1102328918,
 INSERT INTO mne_application.translate VALUES (1102328704, 'admindb', 1102328969, 'admindb', 'Ortschaft <$1:$2> wirklich löschen ?', '', 'delete city <$1:$2> ?', 'Http', NULL);
 INSERT INTO mne_application.translate VALUES (1351236297, 'admindb', 1370626107, 'admindb', 'Produktzeit', '', 'product time', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1513925757, 'admindb', 1576768485, 'admindb', 'Material ', '', 'material', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1472112330, 'admindb', 1472112330, 'admindb', 'Zertifikate', '', 'certificates', 'HttpMenu', 1692102210);
-INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1098087876, 'admindb', 'Löschen', '', 'delete', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768056, 'admindb', 'Name', '', 'name', '', 1692102839);
-INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958466, 'admindb', 'Hostname', '', 'hostn', '', 1692102247);
-INSERT INTO mne_application.translate VALUES (1106923200, 'admindb', 1107958379, 'admindb', 'User', 'Benutzer', 'user', '', 1692102247);
-INSERT INTO mne_application.translate VALUES (1098085730, 'admindb', 1098085752, 'admindb', 'Ok', '', 'ok', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958451, 'admindb', 'Protokoll', '', 'protokoll', '', 1692102247);
-INSERT INTO mne_application.translate VALUES (1098103404, 'admindb', 1098103944, 'admindb', 'Tabelle hinzufügen', '', 'add table', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768048, 'admindb', 'Typ', '', 'type', '', 1692102209);
-INSERT INTO mne_application.translate VALUES (1098109177, 'admindb', 1098113914, 'admindb', 'Tabelle', '', 'table', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1107958160, 'admindb', 1107958502, 'admindb', 'Dirname', '', 'dirname', '', 1692102247);
-INSERT INTO mne_application.translate VALUES (1098103404, 'admindb', 1098103971, 'admindb', 'Tabelle löschen', '', 'delete table', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1098085730, 'admindb', 1098085761, 'admindb', 'Abbrechen', '', 'cancel', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1098087857, 'admindb', 'Hinzufügen', '', 'add', 'Http', 1692102208);
 INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626304, 'admindb', 'Bitte eine Zahl eingeben die nicht mit einer 0 beginnt', '', 'only numbers not starting with a 0', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351263532, 'admindb', 1382444676, 'admindb', 'Spaltenid <%s> unbekannt', 'Spaltenid <%s> ist unbekannt', 'column <%s> is unknown', 'DbHttpUtilsQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626552, 'admindb', ' keine Funktion zum setzen der Attribute definiert', '', 'no function defined for setting attributes', 'HttpTranslate', NULL);
@@ -6823,6 +6843,20 @@ INSERT INTO mne_application.translate VALUES (1379404840, 'admindb', 1382448163,
 INSERT INTO mne_application.translate VALUES (1379404840, 'admindb', 1382448170, 'admindb', 'Fehlerdatei bearbeiten', '', 'modify bug file', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1379404840, 'admindb', 1382448183, 'admindb', 'Fehler beim schreiben der Datei', '', 'error during writting the file', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1379416094, 'admindb', 1382448191, 'admindb', 'Mailbox hinzufügen', '', 'add mailbox', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958451, 'admindb', 'Protokoll', '', 'protokoll', '', 1692792100);
+INSERT INTO mne_application.translate VALUES (1583825117, 'admindb', 1583825117, 'admindb', 'Kein Weblet ', '', 'no weblet', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1098085730, 'admindb', 1098085761, 'admindb', 'Abbrechen', '', 'cancel', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958466, 'admindb', 'Hostname', '', 'hostn', '', 1692792100);
+INSERT INTO mne_application.translate VALUES (1098103404, 'admindb', 1098103971, 'admindb', 'Tabelle löschen', '', 'delete table', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1098085730, 'admindb', 1098085752, 'admindb', 'Ok', '', 'ok', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1106923200, 'admindb', 1107958379, 'admindb', 'User', 'Benutzer', 'user', '', 1692792100);
+INSERT INTO mne_application.translate VALUES (1098103404, 'admindb', 1098103944, 'admindb', 'Tabelle hinzufügen', '', 'add table', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1098087876, 'admindb', 'Löschen', '', 'delete', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1098087857, 'admindb', 'Hinzufügen', '', 'add', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1098109177, 'admindb', 1098113914, 'admindb', 'Tabelle', '', 'table', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768048, 'admindb', 'Typ', '', 'type', '', 1692776175);
+INSERT INTO mne_application.translate VALUES (1097767924, 'admindb', 1097768056, 'admindb', 'Name', '', 'name', '', 1692777442);
+INSERT INTO mne_application.translate VALUES (1107958160, 'admindb', 1107958502, 'admindb', 'Dirname', '', 'dirname', '', 1692792100);
 INSERT INTO mne_application.translate VALUES (1379416094, 'admindb', 1382448199, 'admindb', 'Mailbox bearbeiten', '', 'modify mailbox', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1379416094, 'admindb', 1382448214, 'admindb', 'aktivieren', '', 'activate', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1379416094, 'admindb', 1382448321, 'admindb', 'Server neu lesen', '', 'reading server', 'HttpTranslate', NULL);
@@ -6862,8 +6896,6 @@ INSERT INTO mne_application.translate VALUES (1351242994, 'admindb', 1382442095,
 INSERT INTO mne_application.translate VALUES (1351245691, 'admindb', 1382442138, 'admindb', 'Auftrag hinzufügen', '', 'add order', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351245698, 'admindb', 1382442168, 'admindb', 'Auftrag ist geschlossen', '', 'order is closed', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351245698, 'admindb', 1382442199, 'admindb', 'Das Produkt besitzt Lieferscheine und kann nicht mehr geändert werden', '', 'the product has delivery notes and can''t be modifyed', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1099297994, 'admindb', 1099300532, 'admindb', 'Spalte', '', 'row', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1100785141, 'admindb', 1101396538, 'admindb', 'Addresse', '', 'address', '', 1692023382);
 INSERT INTO mne_application.translate VALUES (1351254746, 'admindb', 1382442468, 'admindb', 'Nebenkosten', '', 'accessory charges', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351256813, 'admindb', 1382444606, 'admindb', 'Kein Produkt ausgewählt', '', 'no product selected', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1351323647, 'admindb', 1382444906, 'admindb', 'Assoziierten hinzufügen/ändern', '', 'add/modify associated ', 'HttpTranslate', NULL);
@@ -6876,6 +6908,7 @@ INSERT INTO mne_application.translate VALUES (1353051996, 'admindb', 1382445523,
 INSERT INTO mne_application.translate VALUES (1353421861, 'admindb', 1382445755, 'admindb', 'Benutzereinstellungen bearbeiten', '', 'modify user settings', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1353484291, 'admindb', 1382445892, 'admindb', 'Bitte Rechnungskonditionen auswählen', '', 'please select incoice conditions', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1353499223, 'admindb', 1382446070, 'admindb', 'Brief hinzufügen', '', 'add letter', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1382544553, 'admindb', 1383932536, 'admindb', 'Kosten bearbeiten', '', 'modify costs', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1353499223, 'admindb', 1382446179, 'admindb', 'Zum Versenden muss der Brief gespeichert werden', '', 'the letter must be saved before sending', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1354012276, 'admindb', 1382446564, 'admindb', 'Teil einer Bestellung bearbeiten', '', 'modify part from a purchase', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1354012962, 'admindb', 1382446670, 'admindb', 'Lieferschein ', '', 'delivery note', 'HttpTranslate', NULL);
@@ -6884,6 +6917,8 @@ INSERT INTO mne_application.translate VALUES (1354281338, 'admindb', 1382446799,
 INSERT INTO mne_application.translate VALUES (1355307422, 'admindb', 1382446929, 'admindb', 'Personendaten hinzufügen', '', 'add personnal data', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1380177071, 'admindb', 1382448950, 'admindb', 'Qualifikation bearbeiten', '', 'modify skill', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1380192423, 'admindb', 1382448992, 'admindb', 'keine Berechtigung das Passwort zu ändern', '', 'no authorization to change the password', 'DbConnect', NULL);
+INSERT INTO mne_application.translate VALUES (1100785141, 'admindb', 1101396538, 'admindb', 'Addresse', '', 'address', '', 1692777449);
+INSERT INTO mne_application.translate VALUES (1099297994, 'admindb', 1099300532, 'admindb', 'Spalte', '', 'row', 'Http', 1692776174);
 INSERT INTO mne_application.translate VALUES (1380634953, 'admindb', 1382449002, 'admindb', 'Material hinzufügen', '', 'add material', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1380634953, 'admindb', 1382449014, 'admindb', 'Material bearbeiten', '', 'modify material', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1381930252, 'admindb', 1382449163, 'admindb', 'Blatt drucken', '', 'print page', 'HttpTranslate', NULL);
@@ -6941,7 +6976,6 @@ INSERT INTO mne_application.translate VALUES (1382544553, 'admindb', 1383932477,
 INSERT INTO mne_application.translate VALUES (1382544553, 'admindb', 1383932486, 'admindb', 'Inventarartikel bearbeiten', '', 'modify inventory part', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1382544553, 'admindb', 1383932514, 'admindb', 'Teil ohne Bestellung inventarisieren ?', '', 'add part to the inventory without purchase ?', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1382544553, 'admindb', 1383932529, 'admindb', 'Kosten hinzufügen', '', 'add costs', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1382544553, 'admindb', 1383932536, 'admindb', 'Kosten bearbeiten', '', 'modify costs', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1382544673, 'admindb', 1383932544, 'admindb', 'Inventarart hinzufügen', '', 'add typ of inventory', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1382544673, 'admindb', 1383932554, 'admindb', 'Inventarart bearbeiten', '', 'modify type of inventory', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1385759765, 'admindb', 1387970554, 'admindb', 'Gesetz', '', 'law', 'HttpTranslate', NULL);
@@ -6999,7 +7033,6 @@ INSERT INTO mne_application.translate VALUES (1394001772, 'admindb', 1399368237,
 INSERT INTO mne_application.translate VALUES (1394607050, 'admindb', 1399368253, 'admindb', 'Der Typ %d wird nicht unterstützt', '', 'the type %d is not supported', 'PgTable', NULL);
 INSERT INTO mne_application.translate VALUES (1394618543, 'admindb', 1399368274, 'admindb', 'Fehler während des Listens der Änderungsnotizen', '', 'error during listing of change messages', 'DbHttpUtilsRepository', NULL);
 INSERT INTO mne_application.translate VALUES (1394629718, 'admindb', 1399368292, 'admindb', 'Fehler während des Hinzufügen einer Datei', '', 'error during adding a file', 'DbHttpUtilsRepository', NULL);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Primary Server', '', '', 'HttpTranslate', 1692102209);
 INSERT INTO mne_application.translate VALUES (1394630737, 'admindb', 1399368302, 'admindb', 'Neue Version hinzugefügt', '', 'new version added', 'DbHttpUtilsRepository', NULL);
 INSERT INTO mne_application.translate VALUES (1396529661, 'admindb', 1399368312, 'admindb', 'nicht abgeholt', '', 'not fetched', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1399368352, 'admindb', 1399368352, 'admindb', 'Aktenschrank', '', 'repository', '', NULL);
@@ -7137,7 +7170,6 @@ INSERT INTO mne_application.translate VALUES (1544527550, 'admindb', 1576763709,
 INSERT INTO mne_application.translate VALUES (1544598323, 'admindb', 1576763760, 'admindb', 'Lieferant wurde gewechselt', '', 'Supplier has been changed', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1544527550, 'admindb', 1576763742, 'admindb', 'Bauteil bearbeiten', '', 'modify component', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1544612578, 'admindb', 1576763779, 'admindb', 'Anzahl zum Umlagern ist 0', '', 'number to be transferred is 0', 'DbConnect', NULL);
-INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'adminpassword2', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1544612578, 'admindb', 1576767680, 'admindb', 'Umlageraufträge für Ausgangsware darf nicht verändert werden', '', 'transfer orders for outgoing goods may not be changed', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1544612719, 'admindb', 1576767971, 'admindb', 'Anzahl passt nicht auf Ziellagerplatz', '', 'number does not fit the target storage', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1544612578, 'admindb', 1576768002, 'admindb', 'Bitte andere Laufnummer wählen', '', 'please choose another serial number', 'DbConnect', NULL);
@@ -7166,7 +7198,6 @@ INSERT INTO mne_application.translate VALUES (1537521316, 'admindb', 1576760284,
 INSERT INTO mne_application.translate VALUES (1537774346, 'admindb', 1576760310, 'admindb', 'Kein Tabellenname beim Erzeugen der Tabelle vorhanden', '', 'no table name during create the table', 'PgTable', NULL);
 INSERT INTO mne_application.translate VALUES (1473922424, 'admindb', 1576760339, 'admindb', 'keine', '', 'no', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1403595903, 'admindb', 1576760382, 'admindb', 'Lagerangestellen hinzufügen', '', 'add warehouse employee', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'Device","', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1407327352, 'admindb', 1576761644, 'admindb', 'Lieferung ist schon eingelagert', '', 'delivery is already stored', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1409733147, 'admindb', 1576761811, 'admindb', 'Modifizieren der gesammten Tabelle nicht gestattet', '', 'modification of the entire table is not permitted', 'DbHttpUtilsTable', NULL);
 INSERT INTO mne_application.translate VALUES (1410170389, 'admindb', 1576762010, 'admindb', 'Löschen der gesammten Tabelle nicht gestattet', '', 'deletion of the entire table is not permitted', 'DbHttpUtilsTable', NULL);
@@ -7190,6 +7221,7 @@ INSERT INTO mne_application.translate VALUES (1521215263, 'admindb', 1576768601,
 INSERT INTO mne_application.translate VALUES (1521215431, 'admindb', 1576768626, 'admindb', 'Angebotsmaterial', '', 'offer material', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1521215482, 'admindb', 1576768636, 'admindb', 'Auftragsmaterial', '', 'order material', 'DbQuery', NULL);
 INSERT INTO mne_application.translate VALUES (1521701817, 'admindb', 1576768643, 'admindb', 'Fehler gefunden %d', '', 'error found %d', 'HttpSysexec', NULL);
+INSERT INTO mne_application.translate VALUES (1612168974, 'admindb', 1612169073, 'admindb', 'Meine Firma', '', 'my company', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1522136973, 'admindb', 1576768661, 'admindb', 'eine beliebige Zeichenkette bis 16 Zeichen', '', 'any character string up to 16 characters', 'DbHttpAdminTable', NULL);
 INSERT INTO mne_application.translate VALUES (1522161924, 'admindb', 1576768678, 'admindb', 'Bitte alle Werte korrekt ausfüllen', '', 'please fill in all values correctly', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1522739567, 'admindb', 1576768696, 'admindb', 'Anzahl der Selektfelder ist nicht gleich bei unionnum <%d>', '', 'the number of select fields is not the same for unionnum <% d>', 'DbQuery', NULL);
@@ -7197,7 +7229,6 @@ INSERT INTO mne_application.translate VALUES (1524473734, 'admindb', 1576768722,
 INSERT INTO mne_application.translate VALUES (1525677273, 'admindb', 1576768741, 'admindb', 'Bitte Bautagebuch gegebenenfalls korrigieren', '', 'please correct the building diary if necessary', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1526451328, 'admindb', 1576768783, 'admindb', 'Bitte eine Temperatur angeben', '', 'please indicate a temperature', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1530179043, 'admindb', 1576768801, 'admindb', 'Bitte nur Buchstaben und den Unterstrich eingeben', '', 'please only enter letters and the underscore', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'primaryname', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1530179043, 'admindb', 1576768818, 'admindb', 'Bitte Buchstaben, Zahlen und den Unterstrich eingeben', '', 'Please enter letters, numbers and the underscore', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1530179043, 'admindb', 1576768839, 'admindb', 'Bitte Buchstaben, Zahlen und den Unterstrich beginnend mit einem Buchstaben eingeben', '', 'please enter letters, numbers and the underscore starting with a letter', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1530619248, 'admindb', 1576768883, 'admindb', 'Verbindung zum Server unterbrochen', '', 'connection to the server interrupted', 'HttpTranslate', NULL);
@@ -7219,86 +7250,135 @@ INSERT INTO mne_application.translate VALUES (1542374275, 'admindb', 1576763247,
 INSERT INTO mne_application.translate VALUES (1545229701, 'admindb', 1576763324, 'admindb', 'Bitte eine Temperatur eingeben', '', 'please give a temperature', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1548751086, 'admindb', 1576763456, 'admindb', 'Es existiert kein Preis für das Produkt - bitte erst einen Preis anlegen', '', 'there is no price for the product - please create a price first', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1459319608, 'admindb', 1576763632, 'admindb', 'Zertifizierungsstelle hinzufügen', '', 'add certification authority', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1103724760, 'admindb', 1106139002, 'admindb', 'Drucken', '', 'print', 'Http', 1692776174);
 INSERT INTO mne_application.translate VALUES (1544511608, 'admindb', 1576763692, 'admindb', 'Anzahl zum Umlagern ist zu gross', '', 'the number to be transferred is too large', 'DbConnect', NULL);
-INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'Password","', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'Primary Server","', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1472540056, 'admindb', 1576768272, 'admindb', 'Fehler während des Umbenenens einer Datei', '', 'error while renaming a file', 'DbHttpUtilsRepository', NULL);
 INSERT INTO mne_application.translate VALUES (1478851338, 'admindb', 1576768380, 'admindb', ' Der Name existiert schon mit einem CNAME Eintrag', '', 'the name already exists with a CNAME entry', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1515145196, 'admindb', 1576768509, 'admindb', 'Der Autoreport <%s> ist schon gestartet', '', 'auto report <%s> is running', 'DbHttpReport', NULL);
 INSERT INTO mne_application.translate VALUES (1515170898, 'admindb', 1576768561, 'admindb', ' Ware kann nicht in den ausgewählten Speicherplatz eingelagert werden', '', 'goods cannot be stored in the selected storage location', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1525695684, 'admindb', 1576768765, 'admindb', 'Bautagebuch enthält 2 Einträge für den ausgewählten Zeitraum - Eintrag wird nicht verändert', '', 'construction diary contains 2 entries for the selected period - entry is not changed', 'DbConnect', NULL);
 INSERT INTO mne_application.translate VALUES (1530179043, 'admindb', 1576768864, 'admindb', 'Bitte nur Buchstaben, Zahlen, den Unterstrich und den Schrägstrich eingeben', '', 'please only enter letters, numbers, the underscore and the slash', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1478853269, 'admindb', 1478853269, 'admindb', '
-', '', '', '', NULL);
 INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Rechnername', '', 'Host', 'HttpTranslate', 0);
 INSERT INTO mne_application.translate VALUES (1612261849, 'admindb', 1612334770, 'admindb', 'Falscher Dateityp', '', 'wrong file type', 'HttpTranslate', 0);
 INSERT INTO mne_application.translate VALUES (1612263036, 'admindb', 1612334770, 'admindb', 'Kein Zertifikat', '', 'no certificate', 'HttpTranslate', 0);
-INSERT INTO mne_application.translate VALUES (1620308999, 'admindb', 1620308999, 'admindb', 'Primärer CA', '', '', 'HttpTranslate', 1691586558);
-INSERT INTO mne_application.translate VALUES (1620308999, 'admindb', 1620308999, 'admindb', 'CA Daten', '', '', 'HttpTranslate', 1691586558);
-INSERT INTO mne_application.translate VALUES (1612187619, 'admindb', 1612251505, 'admindb', 'Spalten stimmen nicht überein', '', 'cols are not equal', 'HttpTranslate', 1692001146);
 INSERT INTO mne_application.translate VALUES (1612177169, 'admindb', 1612177206, 'admindb', 'CA exitiert bereits', '', 'ca exists', 'HttpTranslate', 1691586792);
 INSERT INTO mne_application.translate VALUES (1554106162, 'admindb', 1576769023, 'admindb', 'CA Zertifikat', '', 'CA certificate', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1553697209, 'admindb', 1576768974, 'admindb', 'CA Password', '', 'CA password', 'HttpTranslate', 1692102210);
 INSERT INTO mne_application.translate VALUES (1612177135, 'admindb', 1612177156, 'admindb', 'Falsches Password', '', 'wrong password', 'HttpTranslate', 1692102784);
-INSERT INTO mne_application.translate VALUES (1612348881, 'admindb', 1612348881, 'admindb', 'Port","', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612348881, 'admindb', 1612348881, 'admindb', 'Lesezeit" ], n  "typs"    : [ "2","2","1000" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n 1', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612348881, 'admindb', 1612348881, 'admindb', 'Lesezeit" ], n  "typs"    : [ "2","2","1000" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612349009, 'admindb', 1612349009, 'admindb', 'Lesezeit" ], n  "typs"    : [ "2","2","1000" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], nget_portn 1', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612349009, 'admindb', 1612349009, 'admindb', 'Lesezeit" ], n  "typs"    : [ "2","2","1000" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], nget_portn', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Email","', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Konfiguration","', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612431869, 'admindb', 1612431869, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n"values" : [ n 1', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612431869, 'admindb', 1612431869, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n"values" : [ n', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1614074040, 'admindb', 1614074040, 'admindb', 'Erstelle Rechnerzertifikat', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612435062, 'admindb', 1612435062, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n/etc/apache2/sites-available/000-default-ssl.confn/etc/apache2/sites-available/000-default.confn/etc/apache2/sites-available/mne_erpnnur.confn/etc/apache2/sites-available/mne_erp.confn"values" : [ n 1', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'primaryaddr', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'dnsforwarder', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'dnssearch', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612435062, 'admindb', 1612435062, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n/etc/apache2/sites-available/000-default-ssl.confn/etc/apache2/sites-available/000-default.confn/etc/apache2/sites-available/mne_erpnnur.confn/etc/apache2/sites-available/mne_erp.confn"values" : [ n', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612435088, 'admindb', 1612435088, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n/etc/apache2/sites-available/000-default-ssl.confn/etc/apache2/sites-available/000-default.confn/etc/apache2/sites-available/mne_erp nur.confn/etc/apache2/sites-available/mne_erp.confn"values" : [ n 1', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1614591685, 'admindb', 1614591685, 'admindb', 'Adresse" ], n  "typs"    : [ "2","2","2" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n  "values"  : [ ]n', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612435088, 'admindb', 1612435088, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n/etc/apache2/sites-available/000-default-ssl.confn/etc/apache2/sites-available/000-default.confn/etc/apache2/sites-available/mne_erp nur.confn/etc/apache2/sites-available/mne_erp.confn"values" : [ n', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612435110, 'admindb', 1612435110, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n000-default-ssl.confn000-default.confnmne_erp nur.confnmne_erp.confn"values" : [ n 1', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1614591685, 'admindb', 1614591685, 'admindb', 'Adresse" ], n  "typs"    : [ "2","2","2" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n  "values"  : [ ]n 1', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1616063307, 'admindb', 1616063307, 'admindb', 'AD Domain ist nicht eingerichtet', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1616063355, 'admindb', 1616063355, 'admindb', 'Bitte Mail Relay Password eingeben', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1553697209, 'admindb', 1576768974, 'admindb', 'CA Password', '', 'CA password', 'HttpTranslate', 1692438721);
+INSERT INTO mne_application.translate VALUES (1612187619, 'admindb', 1612251505, 'admindb', 'Spalten stimmen nicht überein', '', 'cols are not equal', 'HttpTranslate', 1692694313);
+INSERT INTO mne_application.translate VALUES (1612169100, 'admindb', 1612177223, 'admindb', 'DNS Suchdomains', '', 'dns search', 'HttpTranslate', 1692432017);
+INSERT INTO mne_application.translate VALUES (1612334280, 'admindb', 1612334770, 'admindb', 'Port', '', 'port', 'HttpTranslate', 1692438721);
+INSERT INTO mne_application.translate VALUES (1612334280, 'admindb', 1612334770, 'admindb', 'Secure Port', '', 'secure port', 'HttpTranslate', 1692438721);
+INSERT INTO mne_application.translate VALUES (1612251092, 'admindb', 1612251562, 'admindb', 'Ordner', '', 'folder', 'HttpTranslate', 1692265956);
 INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'email@meine.domain', '', 'email@my.domain', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612169644, 'admindb', 1612177212, 'admindb', 'Region', '', 'region', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Orgnisation', '', 'organisation', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Org. Einheit', '', 'org. unit', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Überschreiben', '', 'overwrite', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1612334280, 'admindb', 1612334770, 'admindb', 'Secure Port', '', 'secure port', 'HttpTranslate', 1692102838);
-INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'enabled', '', '', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Gateway', '', 'gateway', 'HttpTranslate', 1692023381);
-INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Documentroot', '', '', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Server', '', 'server', 'HttpTranslate', 1692023381);
-INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Nameserver', '', 'name server', 'HttpTranslate', 1692023381);
-INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Aliases', '', '', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1612169100, 'admindb', 1612177250, 'admindb', 'Ipv4 Addresse', '', 'ipv4 address', 'HttpTranslate', 1692023382);
-INSERT INTO mne_application.translate VALUES (1612169100, 'admindb', 1612177223, 'admindb', 'DNS Suchdomains', '', 'dns search', 'HttpTranslate', 1692023382);
 INSERT INTO mne_application.translate VALUES (1612168974, 'admindb', 1612169073, 'admindb', 'Meine Abteilung', '', 'my unit', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Suchdomain', '', 'search', 'HttpTranslate', 1692023381);
 INSERT INTO mne_application.translate VALUES (1612247557, 'admindb', 1612251567, 'admindb', 'Download', '', 'download', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Konfiguration', '', '', 'HttpTranslate', 1692102839);
 INSERT INTO mne_application.translate VALUES (1098088863, 'admindb', 1098091245, 'admindb', 'Daten', '', 'data', 'Http', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Meine Stadt', '', 'my city', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612183634, 'admindb', 1612251487, 'admindb', 'Zertifikat', '', 'certificate', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612186843, 'admindb', 1612251542, 'admindb', 'DNS', '', 'DNS', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612186843, 'admindb', 1612251542, 'admindb', 'gültig bis', '', 'valid until', 'HttpTranslate', 1692256249);
 INSERT INTO mne_application.translate VALUES (1612186843, 'admindb', 1612251542, 'admindb', 'CA', '', 'CA', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676834, 'admindb', 'Mask', '', 'mask', 'HttpTranslate', 1692023382);
-INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676834, 'admindb', 'Broadcast', '', 'broadcast', 'HttpTranslate', 1692023382);
-INSERT INTO mne_application.translate VALUES (1612335531, 'admindb', 1612335531, 'admindb', 'Fehler:', '', '', 'HttpTranslate', 1691912278);
-INSERT INTO mne_application.translate VALUES (1612168974, 'admindb', 1612169073, 'admindb', 'Meine Firma', '', 'my company', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Lesezeit', '', 'reading time', 'HttpTranslate', 1692102838);
-INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Schnittstelle', '', 'device', 'HttpTranslate', 1692023381);
-INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Email', '', 'email', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1612334280, 'admindb', 1612334770, 'admindb', 'Port', '', 'port', 'HttpTranslate', 1692102838);
-INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'httpsonly', '', '', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1612428322, 'admindb', 1612428322, 'admindb', 'Zertifikat erneuern', '', '', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1612251092, 'admindb', 1612251562, 'admindb', 'Ordner', '', 'folder', 'HttpTranslate', 1692109348);
+INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Server', '', 'server', 'HttpTranslate', 1692716996);
+INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Nameserver', '', 'name server', 'HttpTranslate', 1692716996);
+INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Suchdomain', '', 'search', 'HttpTranslate', 1692716996);
+INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Gateway', '', 'gateway', 'HttpTranslate', 1692716996);
+INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Lesezeit', '', 'reading time', 'HttpTranslate', 1692716996);
+INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676821, 'admindb', 'Schnittstelle', '', 'device', 'HttpTranslate', 1692716997);
+INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676834, 'admindb', 'Mask', '', 'mask', 'HttpTranslate', 1692716997);
+INSERT INTO mne_application.translate VALUES (1612169100, 'admindb', 1612177250, 'admindb', 'Ipv4 Addresse', '', 'ipv4 address', 'HttpTranslate', 1692432017);
+INSERT INTO mne_application.translate VALUES (1611676719, 'admindb', 1611676834, 'admindb', 'Broadcast', '', 'broadcast', 'HttpTranslate', 1692716997);
+INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Email', '', 'email', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1472112353, 'admindb', 1472112353, 'admindb', 'Domain', '', 'domain', 'HttpMenu', 1692716996);
+INSERT INTO mne_application.translate VALUES (1353499225, 'admindb', 1382446196, 'admindb', 'Editor', '', 'editor', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626724, 'admindb', 'Bitte eine Zahl mit einem $1 eingeben', '', 'please input a number with $1', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341697, 'admindb', 'Montag', '', 'monday', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1363680416, 'admindb', 1381277174, 'admindb', 'hinzufügen', '', 'add', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1387526293, 'admindb', 1387970868, 'admindb', 'Wirklich löschen ?', '', 'realy delete ?', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1597311160, 'admindb', 1600336297, 'admindb', 'Hinzufügen/Ändern', '', 'add/modify', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1353053157, 'admindb', 1382445659, 'admindb', 'Komentar', '', 'comment', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1108978707, 'admindb', '%s: %s', '%s: %s', '%s: %s', 'Http', 1692792100);
+INSERT INTO mne_application.translate VALUES (1691582221, 'admindb', 1691582221, 'admindb', 'newlocale: ', '', '', 'DbHttp', 1691585004);
+INSERT INTO mne_application.translate VALUES (1612428322, 'admindb', 1612428322, 'admindb', 'Zertifikat erneuern', '', '', 'HttpTranslate', 1692438722);
+INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1098087885, 'admindb', 'Password', '', 'password', 'Http', 1692775081);
+INSERT INTO mne_application.translate VALUES (1584428511, 'admindb', 1584428511, 'admindb', 'Elternelement ist kein Weblet', '', 'parent is not a weblet', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1132057219, 'admindb', 1135341759, 'admindb', 'Administrator', '', 'adminstrator', 'Http', 1692776175);
+INSERT INTO mne_application.translate VALUES (1410784641, 'admindb', 1410784641, 'admindb', '', '', '', '', 1692776175);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626577, 'admindb', 'kann Cursor nach undo nicht setzen', '', 'can''t set cursor after undo', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626698, 'admindb', 'numerierte Aufzählung einfügen', '', 'insert numbered list', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626589, 'admindb', 'Änderung rückgängig machen', '', 'reverse changes', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1131636637, 'admindb', 1131980277, 'admindb', 'Parameter', '', 'parameter', 'Http', 1692776174);
+INSERT INTO mne_application.translate VALUES (1353321718, 'admindb', 1382445670, 'admindb', 'Kann Datei %s/%s nicht finden', '', 'cant find file %s/%s', 'Http', 1692789651);
+INSERT INTO mne_application.translate VALUES (1364481750, 'admindb', 1382441964, 'admindb', 'bearbeiten', '', 'modify', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276835, 'admindb', 'leer', '', 'empty', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1510332722, 'admindb', 1576768477, 'admindb', 'OK', '', 'OK', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1691918462, 'admindb', 1691918462, 'admindb', ' Kann Rückaddresse nicht hinzufügen', '', '', 'HttpTranslate', 1692863697);
+INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273812, 'admindb', 'Zeile vor die aktuelle Zeile hinzufügen', '', 'insert a row before actual row', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958269, 'admindb', 'Filename', 'Dateiname', 'file name', '', 1692792100);
+INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958393, 'admindb', 'Headerdaten:', '', 'header data:', 'Http', 1692792100);
+INSERT INTO mne_application.translate VALUES (1612169100, 'admindb', 1612177250, 'admindb', 'Ipv6 Addresse', '', 'ipv6 address', 'HttpTranslate', 1692432017);
+INSERT INTO mne_application.translate VALUES (1612335531, 'admindb', 1612335531, 'admindb', 'Fehler:', '', '', 'HttpTranslate', 1692711232);
+INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1110286754, 'admindb', 'Benutzer', '', 'user', '', 1692775081);
+INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'httpsonly', '', '', 'HttpTranslate', 1692438722);
+INSERT INTO mne_application.translate VALUES (1590572614, 'admindb', 1590572874, 'admindb', 'Bitte einen Wert für <$1> angeben', '', 'please give a value for <$1>', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1584428511, 'admindb', 1584428511, 'admindb', 'Container ist kein HTML Element', '', 'container is not an html element', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1145113099, 'admindb', 1147792286, 'admindb', 'unbekannter Typ', '', 'unknown typ', '', 1692776174);
+INSERT INTO mne_application.translate VALUES (1394625605, 'admindb', 1399368282, 'admindb', 'Neue Version', '', 'new version', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1401779431, 'admindb', 1401875505, 'admindb', 'Ihr Browser wird nicht komplett unterstützt', '', 'you browser is not complete supported', 'HttpTranslate', 1692775081);
+INSERT INTO mne_application.translate VALUES (1391688314, 'admindb', 1399368120, 'admindb', 'Kommando <%s> konnte nicht ausgeführt werden', '', 'could not start command <%s> ', 'PROCESS', 1691583320);
+INSERT INTO mne_application.translate VALUES (1691653160, 'admindb', 1691653160, 'admindb', 'Datei ist kein Schlüssel', '', '', 'HttpTranslate', 1691653531);
+INSERT INTO mne_application.translate VALUES (1691653160, 'admindb', 1691653160, 'admindb', 'Datei ist kein Zertifikat', '', '', 'HttpTranslate', 1691653531);
+INSERT INTO mne_application.translate VALUES (1691653639, 'admindb', 1691653639, 'admindb', 'Erstelle Rechner Schlüssel', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1322640867, 'admindb', 1322641393, 'admindb', 'Sonntag', '', 'sunday', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626751, 'admindb', 'Bitte eine Zahl mit einem $1 eingeben oder leer lassen', '', 'pleas insert number with a $1 or empty', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Konfiguration', '', '', 'HttpTranslate', 1692716997);
+INSERT INTO mne_application.translate VALUES (1692251936, 'admindb', 1692251936, 'admindb', 'Ist schon primary Controller', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1691585180, 'admindb', 1691585180, 'admindb', 'newlocale: %s', '', '', 'DbHttp', 1691585180);
+INSERT INTO mne_application.translate VALUES (1691585572, 'admindb', 1691585572, 'admindb', 'newlocale: %s %s', '', '', 'DbHttp', 1691585572);
+INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Mein Land', '', 'my country', 'HttpTranslate', 1692256249);
+INSERT INTO mne_application.translate VALUES (1691586854, 'admindb', 1691586854, 'admindb', 'Hochgeladenes CA File wird ignoriert - bitte Schlüssel löschen', '', '', 'HttpTranslate', 1691586878);
+INSERT INTO mne_application.translate VALUES (1691597984, 'admindb', 1691597984, 'admindb', 'Primärer Key', '', '', 'HttpTranslate', 1691598011);
+INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Meine Region', '', 'my state', 'HttpTranslate', 1692256249);
+INSERT INTO mne_application.translate VALUES (1691651355, 'admindb', 1691651355, 'admindb', 'Erstelle CA Zertifikat', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1691652177, 'admindb', 1691652177, 'admindb', 'Bitte Schlüssel und Zertifikat hochladen', '', '', 'HttpTranslate', 1691652196);
+INSERT INTO mne_application.translate VALUES (1459840954, 'admindb', 1576763719, 'admindb', 'Download CA', '', 'download CA', 'HttpTranslate', 1692256249);
+INSERT INTO mne_application.translate VALUES (1691649139, 'admindb', 1691649139, 'admindb', 'Zertifikat Daten', '', '', 'HttpTranslate', 1692256249);
+INSERT INTO mne_application.translate VALUES (1691649139, 'admindb', 1691649139, 'admindb', 'CA Key', '', '', 'HttpTranslate', 1692256249);
+INSERT INTO mne_application.translate VALUES (1691597984, 'admindb', 1691597984, 'admindb', 'Key Daten', '', '', 'HttpTranslate', 1692256249);
+INSERT INTO mne_application.translate VALUES (1447311606, 'admindb', 1576763106, 'admindb', 'Die Person hat kein login', '', 'person has no login', 'HttpTranslate', 1692103214);
+INSERT INTO mne_application.translate VALUES (1355307329, 'admindb', 1382446840, 'admindb', 'Passworte sind nicht gleich', '', 'passwords are different', 'HttpTranslate', 1692103214);
+INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'Device","', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'Password","', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'Primary Server","', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1478853269, 'admindb', 1478853269, 'admindb', '
+', '', '', '', NULL);
+INSERT INTO mne_application.translate VALUES (1612348881, 'admindb', 1612348881, 'admindb', 'Port","', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612348881, 'admindb', 1612348881, 'admindb', 'Lesezeit" ], n  "typs"    : [ "2","2","1000" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n 1', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612348881, 'admindb', 1612348881, 'admindb', 'Lesezeit" ], n  "typs"    : [ "2","2","1000" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612254366, 'admindb', 1612254366, 'admindb', '%s %d', '', '', 'HttpSysexec', 1692792100);
+INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Documentroot', '', '', 'HttpTranslate', 1692438722);
+INSERT INTO mne_application.translate VALUES (1612349009, 'admindb', 1612349009, 'admindb', 'Lesezeit" ], n  "typs"    : [ "2","2","1000" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], nget_portn 1', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612349009, 'admindb', 1612349009, 'admindb', 'Lesezeit" ], n  "typs"    : [ "2","2","1000" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], nget_portn', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Name","', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Email","', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'Konfiguration","', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612431869, 'admindb', 1612431869, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n"values" : [ n 1', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612431869, 'admindb', 1612431869, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n"values" : [ n', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1614074040, 'admindb', 1614074040, 'admindb', 'Erstelle Rechnerzertifikat', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612435062, 'admindb', 1612435062, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n/etc/apache2/sites-available/000-default-ssl.confn/etc/apache2/sites-available/000-default.confn/etc/apache2/sites-available/mne_erpnnur.confn/etc/apache2/sites-available/mne_erp.confn"values" : [ n 1', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612435062, 'admindb', 1612435062, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n/etc/apache2/sites-available/000-default-ssl.confn/etc/apache2/sites-available/000-default.confn/etc/apache2/sites-available/mne_erpnnur.confn/etc/apache2/sites-available/mne_erp.confn"values" : [ n', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612435088, 'admindb', 1612435088, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n/etc/apache2/sites-available/000-default-ssl.confn/etc/apache2/sites-available/000-default.confn/etc/apache2/sites-available/mne_erp nur.confn/etc/apache2/sites-available/mne_erp.confn"values" : [ n 1', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612435088, 'admindb', 1612435088, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n/etc/apache2/sites-available/000-default-ssl.confn/etc/apache2/sites-available/000-default.confn/etc/apache2/sites-available/mne_erp nur.confn/etc/apache2/sites-available/mne_erp.confn"values" : [ n', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1612435110, 'admindb', 1612435110, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n000-default-ssl.confn000-default.confnmne_erp nur.confnmne_erp.confn"values" : [ n 1', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1612435110, 'admindb', 1612435110, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n000-default-ssl.confn000-default.confnmne_erp nur.confnmne_erp.confn"values" : [ n', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1612435229, 'admindb', 1612435229, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], nttt000-default-ssl.confn000-default.confnmne_erp nur.confnmne_erp.conf....n"values" : [ n 1', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1616658432, 'admindb', 1616658432, 'admindb', 'Schlüssel', '', '', 'HttpTranslate', 1688623885);
+INSERT INTO mne_application.translate VALUES (1616508459, 'admindb', 1616508459, 'admindb', 'Bitte 2 stelliges Landeskenzeichen eingeben', '', '', 'HttpTranslate', 1691586591);
+INSERT INTO mne_application.translate VALUES (1620367076, 'admindb', 1620367076, 'admindb', 'Fehler während des Signierens', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1612435229, 'admindb', 1612435229, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], nttt000-default-ssl.confn000-default.confnmne_erp nur.confnmne_erp.conf....n"values" : [ n', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1612435433, 'admindb', 1612435433, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n 1', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1612435433, 'admindb', 1612435433, 'admindb', 'Zertifikat erneuern" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","" ], n  "regexps" : [ "","","notempty","","","","","","" ], n', '', '', 'HttpTranslate', NULL);
@@ -7310,6 +7390,11 @@ INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977,
 INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'netdevice', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'admin', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'adminpassword', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'adminpassword2', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'primaryname', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'primaryaddr', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'dnsforwarder', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'dnssearch', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'dhcpstart', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'dhcpend', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1613985977, 'admindb', 1613985977, 'admindb', 'dhcp6start', '', '', 'HttpTranslate', NULL);
@@ -7320,6 +7405,18 @@ INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901,
 INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'DNS Forward","', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'IPv4 Start","', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1613988901, 'admindb', 1613988901, 'admindb', 'IPv6 Start","', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'IPv4 Ende', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1612531451, 'admindb', 1612531451, 'admindb', 'Bitte Password eingeben', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Beschreibung', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Wiederholen', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Workgroup', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'IPv4 Start', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1612349230, 'admindb', 1612349230, 'admindb', 'enabled', '', '', 'HttpTranslate', 1692438722);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Device', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'IPv6 Start', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'DNS Forward', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'DNS Suche', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'IPv6 Ende', '', '', 'HttpTranslate', 1692776175);
 INSERT INTO mne_application.translate VALUES (1614084027, 'admindb', 1614084027, 'admindb', 'Typ"', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1614084027, 'admindb', 1614084027, 'admindb', 'Workgroup"', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1614084027, 'admindb', 1614084027, 'admindb', 'Beschreibung"', '', '', 'HttpTranslate', NULL);
@@ -7334,29 +7431,54 @@ INSERT INTO mne_application.translate VALUES (1614256618, 'admindb', 1614256618,
 INSERT INTO mne_application.translate VALUES (1614256618, 'admindb', 1614256618, 'admindb', 'IPv6 Ende" ], n  "typs"    : [ "2","2","2","2","2","2","2","2","2","2","2","2","2","2","2" ], n  "formats" : [ "","","","","","","","","","","","","","","" ], n  "regexps" : [ "","","","","","notempty","","","ipaddrempty","","","ip4addrempty","ip4addrempty","ip6addrempty","ip6addrempty" ], n', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1614591493, 'admindb', 1614591493, 'admindb', 'Adresse" ], n  "typs"    : [ "2","2","2" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n  "values"  : [ n 1', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1614591493, 'admindb', 1614591493, 'admindb', 'Adresse" ], n  "typs"    : [ "2","2","2" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n  "values"  : [ n', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1614591685, 'admindb', 1614591685, 'admindb', 'Adresse" ], n  "typs"    : [ "2","2","2" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n  "values"  : [ ]n 1', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1614591685, 'admindb', 1614591685, 'admindb', 'Adresse" ], n  "typs"    : [ "2","2","2" ], n  "formats" : [ "","","" ], n  "regexps" : [ "","","" ], n  "values"  : [ ]n', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1614610149, 'admindb', 1614610149, 'admindb', 'Server","', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1614610149, 'admindb', 1614610149, 'admindb', 'Nameserver","', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1614610149, 'admindb', 1614610149, 'admindb', 'Gateway","', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1615185698, 'admindb', 1615185698, 'admindb', 'Name als Maildaddresse', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1615273025, 'admindb', 1615273025, 'admindb', 'Test', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1615802457, 'admindb', 1615802457, 'admindb', 'Gruppe umbenennen nicht möglich', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'IPv6 Start', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'IPv4 Ende', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'IPv6 Ende', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1615185698, 'admindb', 1615185698, 'admindb', 'Mail Relay Sever', '', '', 'HttpTranslate', 1692102210);
-INSERT INTO mne_application.translate VALUES (1615185698, 'admindb', 1615185698, 'admindb', ' Mail Relay User', '', '', 'HttpTranslate', 1692102210);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Beschreibung', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1614604505, 'admindb', 1614604505, 'admindb', ' Kann Addresse nicht hinzufügen', '', '', 'HttpTranslate', 1691918011);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Wiederholen', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'DNS Forward', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'DNS Suche', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1615185698, 'admindb', 1615185698, 'admindb', ' Mail Relay Password', '', '', 'HttpTranslate', 1692102210);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'IPv4 Start', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Workgroup', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Primary Adresse', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Device', '', '', 'HttpTranslate', 1692102209);
+INSERT INTO mne_application.translate VALUES (1616063307, 'admindb', 1616063307, 'admindb', 'AD Domain ist nicht eingerichtet', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1616063355, 'admindb', 1616063355, 'admindb', 'Bitte Mail Relay Password eingeben', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1616404644, 'admindb', 1616404644, 'admindb', 'Aktion', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1616404644, 'admindb', 1616404644, 'admindb', 'Item', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1616404644, 'admindb', 1616404644, 'admindb', 'Menuid', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1616578525, 'admindb', 1616578525, 'admindb', 'Ordner ist nicht korrekt', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1616581866, 'admindb', 1616581866, 'admindb', 'Nur lesend', '', '', 'HttpTranslate', NULL);
+INSERT INTO mne_application.translate VALUES (1615898677, 'admindb', 1615898677, 'admindb', 'Schlüssel löschen', '', '', 'HttpTranslate', 1691586591);
+INSERT INTO mne_application.translate VALUES (1615185698, 'admindb', 1615185698, 'admindb', ' Mail Relay Password', '', '', 'HttpTranslate', 1692264940);
+INSERT INTO mne_application.translate VALUES (1616063497, 'admindb', 1616063497, 'admindb', 'Benutze altes Mail Relay Password', '', '', 'HttpTranslate', 1692264973);
+INSERT INTO mne_application.translate VALUES (1616148908, 'admindb', 1616148908, 'admindb', 'Freigabe', '', '', 'HttpTranslate', 1692265956);
+INSERT INTO mne_application.translate VALUES (1614591493, 'admindb', 1614591493, 'admindb', 'Addresstyp', '', '', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1615185698, 'admindb', 1615185698, 'admindb', ' Mail Relay User', '', '', 'HttpTranslate', 1692264940);
+INSERT INTO mne_application.translate VALUES (1616151102, 'admindb', 1616151102, 'admindb', 'Nur Lesen', '', '', 'HttpTranslate', 1692265956);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Ort', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Strasse', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Postfach', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Kürzel', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Fon priv', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Fon gesch', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Fon mobil', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'http', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'PLZ', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615458907, 'admindb', 1615458907, 'admindb', 'Uid', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615458907, 'admindb', 1615458907, 'admindb', 'Gid', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615458907, 'admindb', 1615458907, 'admindb', 'Homedir', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615458907, 'admindb', 1615458907, 'admindb', 'Login Shell', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615882233, 'admindb', 1615882233, 'admindb', 'Email Addresse', '', '', 'HttpTranslate', 1692774880);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Primary Adresse', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1614591493, 'admindb', 1614591493, 'admindb', 'Adresse', '', '', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1614695164, 'admindb', 1614695164, 'admindb', 'feste Adresse', '', '', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1615272922, 'admindb', 1615272922, 'admindb', 'Login', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Vorname', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1615459167, 'admindb', 1615459167, 'admindb', 'Unix Attribute', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1614593952, 'admindb', 1614593952, 'admindb', 'Gelesen am', '', '', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1614697793, 'admindb', 1614697793, 'admindb', 'HW Address unterschiedlich', '', '', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Nachname', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1614604505, 'admindb', 1614604505, 'admindb', ' Kann Addresse nicht hinzufügen', '', '', 'HttpTranslate', 1692863682);
+INSERT INTO mne_application.translate VALUES (1615283468, 'admindb', 1615283468, 'admindb', 'Administrator Password', '', '', 'HttpTranslate', 1692774879);
+INSERT INTO mne_application.translate VALUES (1620367416, 'admindb', 1620367416, 'admindb', 'File scheint kein Zertifikatrequest zu sein', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1620373846, 'admindb', 1620373846, 'admindb', 'Request gehört nicht zum Schlüssel', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1649917445, 'admindb', 1649917445, 'admindb', 'Bitte auf dem Hauptrechner zertifizieren', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1649917863, 'admindb', 1649917863, 'admindb', 'Name"', '', '', 'HttpTranslate', NULL);
@@ -7367,115 +7489,22 @@ INSERT INTO mne_application.translate VALUES (1649917863, 'admindb', 1649917863,
 INSERT INTO mne_application.translate VALUES (1649917863, 'admindb', 1649917863, 'admindb', 'Komentar"', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1649917863, 'admindb', 1649917863, 'admindb', 'Gelesen am"', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1649917863, 'admindb', 1649917863, 'admindb', 'HW Address unterschiedlich"', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1675174838, 'admindb', 1675174838, 'admindb', 'Netzdevice ist nicht konfiguriert', '', '', 'HttpTranslate', NULL);
 INSERT INTO mne_application.translate VALUES (1677857311, 'admindb', 1677857311, 'admindb', 'Es ist ein Fehler aufgetretenn', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1691582221, 'admindb', 1691582221, 'admindb', 'newlocale: ', '', '', 'DbHttp', 1691585004);
-INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1108978707, 'admindb', '%s: %s', '%s: %s', '%s: %s', 'Http', 1692102247);
-INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341697, 'admindb', 'Montag', '', 'monday', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1387526293, 'admindb', 1387970868, 'admindb', 'Wirklich löschen ?', '', 'realy delete ?', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1597311160, 'admindb', 1600336297, 'admindb', 'Hinzufügen/Ändern', '', 'add/modify', 'HttpTranslate', 1692102838);
-INSERT INTO mne_application.translate VALUES (1614694647, 'admindb', 1614694647, 'admindb', 'HW Adresse', '', '', 'HttpTranslate', 1692023133);
-INSERT INTO mne_application.translate VALUES (1353053157, 'admindb', 1382445659, 'admindb', 'Komentar', '', 'comment', 'HttpTranslate', 1692023133);
-INSERT INTO mne_application.translate VALUES (1685945840, 'admindb', 1685945840, 'admindb', 'Es ist ein Fehler aufgetreten', '', '', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1615459167, 'admindb', 1615459167, 'admindb', 'Unix Attribute', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Domainname', '', '', 'HttpTranslate', 1692102209);
-INSERT INTO mne_application.translate VALUES (1614591493, 'admindb', 1614591493, 'admindb', 'Addresstyp', '', '', 'HttpTranslate', 1692023133);
-INSERT INTO mne_application.translate VALUES (1130508768, 'admindb', 1135341626, 'admindb', 'Dienstag', '', 'tuesday', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Vorname', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Strasse', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1616658432, 'admindb', 1616658432, 'admindb', 'Schlüssel', '', '', 'HttpTranslate', 1692256265);
-INSERT INTO mne_application.translate VALUES (1583825117, 'admindb', 1583825117, 'admindb', 'Kein Weblet ', '', 'no weblet', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1353499225, 'admindb', 1382446196, 'admindb', 'Editor', '', 'editor', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1615898677, 'admindb', 1615898677, 'admindb', 'Schlüssel löschen', '', '', 'HttpTranslate', 1691586558);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Postfach', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Ort', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1472112353, 'admindb', 1472112353, 'admindb', 'Domain', '', 'domain', 'HttpMenu', 1692102210);
-INSERT INTO mne_application.translate VALUES (1363680416, 'admindb', 1381277174, 'admindb', 'hinzufügen', '', 'add', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626724, 'admindb', 'Bitte eine Zahl mit einem $1 eingeben', '', 'please input a number with $1', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1614593952, 'admindb', 1614593952, 'admindb', 'Gelesen am', '', '', 'HttpTranslate', 1692023133);
-INSERT INTO mne_application.translate VALUES (1615272922, 'admindb', 1615272922, 'admindb', 'Login', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615283468, 'admindb', 1615283468, 'admindb', 'Administrator Password', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1620367076, 'admindb', 1620367076, 'admindb', 'Fehler während des Signierens', '', '', 'HttpTranslate', 1691652232);
-INSERT INTO mne_application.translate VALUES (1620367416, 'admindb', 1620367416, 'admindb', 'File scheint kein Zertifikatrequest zu sein', '', '', 'HttpTranslate', 1691653545);
-INSERT INTO mne_application.translate VALUES (1351236329, 'admindb', 1381273812, 'admindb', 'Zeile vor die aktuelle Zeile hinzufügen', '', 'insert a row before actual row', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1649929138, 'admindb', 1649929138, 'admindb', 'versteckt', '', '', 'HttpTranslate', 1692023382);
-INSERT INTO mne_application.translate VALUES (1614583129, 'admindb', 1614583129, 'admindb', 'Netzwerk übernehmen', '', '', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1614697793, 'admindb', 1614697793, 'admindb', 'HW Address unterschiedlich', '', '', 'HttpTranslate', 1692023133);
-INSERT INTO mne_application.translate VALUES (1616063497, 'admindb', 1616063497, 'admindb', 'Benutze altes Mail Relay Password', '', '', 'HttpTranslate', 1692102247);
-INSERT INTO mne_application.translate VALUES (1675181138, 'admindb', 1675181138, 'admindb', ' Kann Rückaddresse nicht finden', '', '', 'HttpTranslate', 1692019576);
-INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958269, 'admindb', 'Filename', 'Dateiname', 'file name', '', 1692102247);
-INSERT INTO mne_application.translate VALUES (1401779431, 'admindb', 1401875505, 'admindb', 'Ihr Browser wird nicht komplett unterstützt', '', 'you browser is not complete supported', 'HttpTranslate', 1692102060);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Nachname', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1649929138, 'admindb', 1649929138, 'admindb', 'WLan', '', '', 'HttpTranslate', 1692023382);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Kürzel', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Fon priv', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Fon gesch', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'Fon mobil', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'http', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615278368, 'admindb', 1615278368, 'admindb', 'PLZ', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615458907, 'admindb', 1615458907, 'admindb', 'Uid', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615458907, 'admindb', 1615458907, 'admindb', 'Gid', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615458907, 'admindb', 1615458907, 'admindb', 'Homedir', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615458907, 'admindb', 1615458907, 'admindb', 'Login Shell', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1615882233, 'admindb', 1615882233, 'admindb', 'Email Addresse', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1616148908, 'admindb', 1616148908, 'admindb', 'Freigabe', '', '', 'HttpTranslate', 1692109348);
-INSERT INTO mne_application.translate VALUES (1614591493, 'admindb', 1614591493, 'admindb', 'Adresse', '', '', 'HttpTranslate', 1692023133);
-INSERT INTO mne_application.translate VALUES (1614695164, 'admindb', 1614695164, 'admindb', 'feste Adresse', '', '', 'HttpTranslate', 1692023133);
-INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1110286754, 'admindb', 'Benutzer', '', 'user', '', 1692102060);
-INSERT INTO mne_application.translate VALUES (1675181512, 'admindb', 1675181512, 'admindb', ' Kann Addresse nicht finden', '', '', 'HttpTranslate', 1692005299);
-INSERT INTO mne_application.translate VALUES (1584428511, 'admindb', 1584428511, 'admindb', 'Container ist kein HTML Element', '', 'container is not an html element', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1510332722, 'admindb', 1576768477, 'admindb', 'OK', '', 'OK', 'HttpTranslate', 1692102838);
-INSERT INTO mne_application.translate VALUES (1098087728, 'admindb', 1098087885, 'admindb', 'Password', '', 'password', 'Http', 1692102060);
-INSERT INTO mne_application.translate VALUES (1106923199, 'admindb', 1107958393, 'admindb', 'Headerdaten:', '', 'header data:', 'Http', 1692102247);
-INSERT INTO mne_application.translate VALUES (1616151102, 'admindb', 1616151102, 'admindb', 'Nur Lesen', '', '', 'HttpTranslate', 1692109348);
-INSERT INTO mne_application.translate VALUES (1616741111, 'admindb', 1616741111, 'admindb', 'Schreibzugriff', '', '', 'HttpTranslate', 1692109348);
-INSERT INTO mne_application.translate VALUES (1616404644, 'admindb', 1616404644, 'admindb', 'Aktion', '', '', 'HttpTranslate', 1692109351);
-INSERT INTO mne_application.translate VALUES (1616404644, 'admindb', 1616404644, 'admindb', 'Item', '', '', 'HttpTranslate', 1692109351);
-INSERT INTO mne_application.translate VALUES (1616404644, 'admindb', 1616404644, 'admindb', 'Menuid', '', '', 'HttpTranslate', 1692109351);
-INSERT INTO mne_application.translate VALUES (1616508459, 'admindb', 1616508459, 'admindb', 'Bitte 2 stelliges Landeskenzeichen eingeben', '', '', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1584428511, 'admindb', 1584428511, 'admindb', 'Elternelement ist kein Weblet', '', 'parent is not a weblet', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1353321718, 'admindb', 1382445670, 'admindb', 'Kann Datei %s/%s nicht finden', '', 'cant find file %s/%s', 'Http', 1692103218);
-INSERT INTO mne_application.translate VALUES (1391688314, 'admindb', 1399368120, 'admindb', 'Kommando <%s> konnte nicht ausgeführt werden', '', 'could not start command <%s> ', 'PROCESS', 1691583320);
-INSERT INTO mne_application.translate VALUES (1691653160, 'admindb', 1691653160, 'admindb', 'Datei ist kein Schlüssel', '', '', 'HttpTranslate', 1691653531);
-INSERT INTO mne_application.translate VALUES (1691653160, 'admindb', 1691653160, 'admindb', 'Datei ist kein Zertifikat', '', '', 'HttpTranslate', 1691653531);
-INSERT INTO mne_application.translate VALUES (1691653639, 'admindb', 1691653639, 'admindb', 'Erstelle Rechner Schlüssel', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1612531451, 'admindb', 1612531451, 'admindb', 'Bitte Password eingeben', '', '', 'HttpTranslate', 1692103218);
-INSERT INTO mne_application.translate VALUES (1692251676, 'admindb', 1692251676, 'admindb', 'Primär', '', '', 'HttpTranslate', 1692251750);
-INSERT INTO mne_application.translate VALUES (1692001146, 'admindb', 1692001146, 'admindb', 'Kein DNS Eintrag', '', '', 'HttpTranslate', 1692023133);
-INSERT INTO mne_application.translate VALUES (1612169100, 'admindb', 1612177250, 'admindb', 'Ipv6 Addresse', '', 'ipv6 address', 'HttpTranslate', 1692023382);
-INSERT INTO mne_application.translate VALUES (1692251936, 'admindb', 1692251936, 'admindb', 'Ist schon primary Controller', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1691585180, 'admindb', 1691585180, 'admindb', 'newlocale: %s', '', '', 'DbHttp', 1691585180);
-INSERT INTO mne_application.translate VALUES (1691585572, 'admindb', 1691585572, 'admindb', 'newlocale: %s %s', '', '', 'DbHttp', 1691585572);
-INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Mein Land', '', 'my country', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626751, 'admindb', 'Bitte eine Zahl mit einem $1 eingeben oder leer lassen', '', 'pleas insert number with a $1 or empty', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1322640867, 'admindb', 1322641393, 'admindb', 'Sonntag', '', 'sunday', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1131636637, 'admindb', 1131980277, 'admindb', 'Parameter', '', 'parameter', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1145113099, 'admindb', 1147792286, 'admindb', 'unbekannter Typ', '', 'unknown typ', '', 1692102208);
-INSERT INTO mne_application.translate VALUES (1394625605, 'admindb', 1399368282, 'admindb', 'Neue Version', '', 'new version', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1364481750, 'admindb', 1382441964, 'admindb', 'bearbeiten', '', 'modify', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1103724760, 'admindb', 1106139002, 'admindb', 'Drucken', '', 'print', 'Http', 1692102208);
-INSERT INTO mne_application.translate VALUES (1691586854, 'admindb', 1691586854, 'admindb', 'Hochgeladenes CA File wird ignoriert - bitte Schlüssel löschen', '', '', 'HttpTranslate', 1691586878);
-INSERT INTO mne_application.translate VALUES (1691597984, 'admindb', 1691597984, 'admindb', 'Primärer Key', '', '', 'HttpTranslate', 1691598011);
-INSERT INTO mne_application.translate VALUES (1590572614, 'admindb', 1590572874, 'admindb', 'Bitte einen Wert für <$1> angeben', '', 'please give a value for <$1>', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1612169479, 'admindb', 1612169625, 'admindb', 'Meine Region', '', 'my state', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1691651355, 'admindb', 1691651355, 'admindb', 'Erstelle CA Zertifikat', '', '', 'HttpTranslate', NULL);
-INSERT INTO mne_application.translate VALUES (1691652177, 'admindb', 1691652177, 'admindb', 'Bitte Schlüssel und Zertifikat hochladen', '', '', 'HttpTranslate', 1691652196);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626589, 'admindb', 'Änderung rückgängig machen', '', 'reverse changes', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1459840954, 'admindb', 1576763719, 'admindb', 'Download CA', '', 'download CA', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1691649139, 'admindb', 1691649139, 'admindb', 'Zertifikat Daten', '', '', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1691649139, 'admindb', 1691649139, 'admindb', 'CA Key', '', '', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1691597984, 'admindb', 1691597984, 'admindb', 'Key Daten', '', '', 'HttpTranslate', 1692256249);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626577, 'admindb', 'kann Cursor nach undo nicht setzen', '', 'can''t set cursor after undo', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1351236328, 'admindb', 1370626698, 'admindb', 'numerierte Aufzählung einfügen', '', 'insert numbered list', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1473843828, 'admindb', 1576768146, 'admindb', 'Domaindaten wirklich ändern? Alle Domaindaten ins besondere die Benutzer und deren Passwörter werden gelöscht', '', 'Really change domain data? All domain data, in particular the users and their passwords, are deleted', 'HttpTranslate', 1692102208);
-INSERT INTO mne_application.translate VALUES (1132057219, 'admindb', 1135341759, 'admindb', 'Administrator', '', 'adminstrator', 'Http', 1692102209);
-INSERT INTO mne_application.translate VALUES (1612254366, 'admindb', 1612254366, 'admindb', '%s %d', '', '', 'HttpSysexec', 1692102247);
-INSERT INTO mne_application.translate VALUES (1692253267, 'admindb', 1692253267, 'admindb', 'wirklich zum Primary Controller ändern?', '', '', 'HttpTranslate', 1692257501);
-INSERT INTO mne_application.translate VALUES (1691918462, 'admindb', 1691918462, 'admindb', ' Kann Rückaddresse nicht hinzufügen', '', '', 'HttpTranslate', 1691918716);
-INSERT INTO mne_application.translate VALUES (1612514978, 'admindb', 1612514978, 'admindb', 'Bitte CA Password eingeben', '', '', 'HttpTranslate', 1692102838);
-INSERT INTO mne_application.translate VALUES (1351237472, 'admindb', 1381276835, 'admindb', 'leer', '', 'empty', 'HttpTranslate', 1692102839);
-INSERT INTO mne_application.translate VALUES (1447311606, 'admindb', 1576763106, 'admindb', 'Die Person hat kein login', '', 'person has no login', 'HttpTranslate', 1692103214);
-INSERT INTO mne_application.translate VALUES (1355307329, 'admindb', 1382446840, 'admindb', 'Passworte sind nicht gleich', '', 'passwords are different', 'HttpTranslate', 1692103214);
+INSERT INTO mne_application.translate VALUES (1620308999, 'admindb', 1620308999, 'admindb', 'Primärer CA', '', '', 'HttpTranslate', 1691586592);
+INSERT INTO mne_application.translate VALUES (1620308999, 'admindb', 1620308999, 'admindb', 'CA Daten', '', '', 'HttpTranslate', 1691586592);
+INSERT INTO mne_application.translate VALUES (1649929138, 'admindb', 1649929138, 'admindb', 'WLan', '', '', 'HttpTranslate', 1692432017);
+INSERT INTO mne_application.translate VALUES (1649929138, 'admindb', 1649929138, 'admindb', 'versteckt', '', '', 'HttpTranslate', 1692432017);
+INSERT INTO mne_application.translate VALUES (1616741111, 'admindb', 1616741111, 'admindb', 'Schreibzugriff', '', '', 'HttpTranslate', 1692265956);
+INSERT INTO mne_application.translate VALUES (1685945840, 'admindb', 1685945840, 'admindb', 'Es ist ein Fehler aufgetreten', '', '', 'HttpTranslate', 1692776174);
+INSERT INTO mne_application.translate VALUES (1614583129, 'admindb', 1614583129, 'admindb', 'Netzwerk übernehmen', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1692257441, 'admindb', 1692257441, 'admindb', 'Primär', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1692257441, 'admindb', 1692257441, 'admindb', 'wirklich zum Primary Controller ändern?', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Domainname', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1613987084, 'admindb', 1613987084, 'admindb', 'Primary Server', '', '', 'HttpTranslate', 1692776175);
+INSERT INTO mne_application.translate VALUES (1692257514, 'admindb', 1692257514, 'admindb', 'Kein DNS Eintrag', '', '', 'HttpTranslate', 1692777442);
+INSERT INTO mne_application.translate VALUES (1675181138, 'admindb', 1675181138, 'admindb', ' Kann Rückaddresse nicht finden', '', '', 'HttpTranslate', 1692863818);
+INSERT INTO mne_application.translate VALUES (1675181512, 'admindb', 1675181512, 'admindb', ' Kann Addresse nicht finden', '', '', 'HttpTranslate', 1692864032);
+INSERT INTO mne_application.translate VALUES (1675174838, 'admindb', 1675174838, 'admindb', 'Netzdevice ist nicht konfiguriert', '', '', 'HttpTranslate', 1692709239);
 
 
 --
@@ -7515,1109 +7544,1109 @@ INSERT INTO mne_application.year VALUES (2022, 2024, '0', 'admindb', 'admindb', 
 -- Data for Name: yearday; Type: TABLE DATA; Schema: mne_application; Owner: admindb
 --
 
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 1, 7, '01012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 2, 1, '02012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 3, 2, '03012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 4, 3, '04012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 5, 4, '05012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 6, 5, '06012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 7, 6, '07012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 8, 7, '08012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 9, 1, '09012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 10, 2, '10012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 11, 3, '11012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 12, 4, '12012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 13, 5, '13012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 14, 6, '14012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 15, 7, '15012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 16, 1, '16012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 17, 2, '17012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 18, 3, '18012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 19, 4, '19012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 20, 5, '20012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 21, 6, '21012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 22, 7, '22012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 23, 1, '23012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 24, 2, '24012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 25, 3, '25012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 26, 4, '26012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 27, 5, '27012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 28, 6, '28012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 29, 7, '29012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 30, 1, '30012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 31, 2, '31012022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 1, 3, '01022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 2, 4, '02022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 3, 5, '03022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 4, 6, '04022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 5, 7, '05022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 6, 1, '06022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 7, 2, '07022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 8, 3, '08022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 9, 4, '09022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 10, 5, '10022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 11, 6, '11022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 12, 7, '12022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 13, 1, '13022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 14, 2, '14022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 15, 3, '15022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 16, 4, '16022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 17, 5, '17022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 18, 6, '18022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 19, 7, '19022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 20, 1, '20022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 21, 2, '21022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 22, 3, '22022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 23, 4, '23022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 24, 5, '24022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 25, 6, '25022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 26, 7, '26022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 27, 1, '27022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 28, 2, '28022022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 1, 3, '01032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 2, 4, '02032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 3, 5, '03032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 4, 6, '04032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 5, 7, '05032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 6, 1, '06032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 7, 2, '07032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 8, 3, '08032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 9, 4, '09032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 10, 5, '10032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 11, 6, '11032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 12, 7, '12032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 13, 1, '13032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 14, 2, '14032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 15, 3, '15032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 16, 4, '16032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 17, 5, '17032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 18, 6, '18032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 19, 7, '19032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 20, 1, '20032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 21, 2, '21032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 22, 3, '22032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 23, 4, '23032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 24, 5, '24032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 25, 6, '25032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 26, 7, '26032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 27, 1, '27032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 28, 2, '28032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 29, 3, '29032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 30, 4, '30032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 31, 5, '31032022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 1, 6, '01042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 2, 7, '02042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 3, 1, '03042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 4, 2, '04042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 5, 3, '05042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 6, 4, '06042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 7, 5, '07042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 8, 6, '08042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 9, 7, '09042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 10, 1, '10042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 11, 2, '11042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 12, 3, '12042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 13, 4, '13042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 14, 5, '14042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 15, 6, '15042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 16, 7, '16042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 17, 1, '17042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 18, 2, '18042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 19, 3, '19042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 20, 4, '20042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 21, 5, '21042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 22, 6, '22042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 23, 7, '23042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 24, 1, '24042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 25, 2, '25042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 26, 3, '26042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 27, 4, '27042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 28, 5, '28042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 29, 6, '29042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 30, 7, '30042022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 1, 1, '01052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 2, 2, '02052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 3, 3, '03052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 4, 4, '04052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 5, 5, '05052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 6, 6, '06052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 7, 7, '07052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 8, 1, '08052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 9, 2, '09052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 10, 3, '10052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 11, 4, '11052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 12, 5, '12052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 13, 6, '13052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 14, 7, '14052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 15, 1, '15052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 16, 2, '16052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 17, 3, '17052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 18, 4, '18052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 19, 5, '19052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 20, 6, '20052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 21, 7, '21052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 22, 1, '22052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 23, 2, '23052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 24, 3, '24052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 25, 4, '25052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 26, 5, '26052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 27, 6, '27052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 28, 7, '28052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 29, 1, '29052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 30, 2, '30052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 31, 3, '31052022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 1, 4, '01062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 2, 5, '02062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 3, 6, '03062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 4, 7, '04062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 5, 1, '05062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 6, 2, '06062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 7, 3, '07062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 8, 4, '08062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 9, 5, '09062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 10, 6, '10062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 11, 7, '11062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 12, 1, '12062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 13, 2, '13062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 14, 3, '14062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 15, 4, '15062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 16, 5, '16062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 17, 6, '17062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 18, 7, '18062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 19, 1, '19062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 20, 2, '20062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 21, 3, '21062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 22, 4, '22062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 23, 5, '23062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 24, 6, '24062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 25, 7, '25062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 26, 1, '26062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 27, 2, '27062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 28, 3, '28062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 29, 4, '29062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 30, 5, '30062022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 1, 6, '01072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 2, 7, '02072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 3, 1, '03072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 4, 2, '04072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 5, 3, '05072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 6, 4, '06072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 7, 5, '07072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 8, 6, '08072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 9, 7, '09072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 10, 1, '10072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 11, 2, '11072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 12, 3, '12072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 13, 4, '13072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 14, 5, '14072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 15, 6, '15072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 16, 7, '16072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 17, 1, '17072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 18, 2, '18072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 19, 3, '19072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 20, 4, '20072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 21, 5, '21072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 22, 6, '22072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 23, 7, '23072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 24, 1, '24072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 25, 2, '25072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 26, 3, '26072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 27, 4, '27072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 28, 5, '28072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 29, 6, '29072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 30, 7, '30072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 31, 1, '31072022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 1, 2, '01082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 2, 3, '02082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 3, 4, '03082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 4, 5, '04082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 5, 6, '05082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 6, 7, '06082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 7, 1, '07082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 8, 2, '08082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 9, 3, '09082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 10, 4, '10082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 11, 5, '11082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 12, 6, '12082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 13, 7, '13082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 14, 1, '14082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 15, 2, '15082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 16, 3, '16082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 17, 4, '17082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 18, 5, '18082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 19, 6, '19082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 20, 7, '20082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 21, 1, '21082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 22, 2, '22082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 23, 3, '23082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 24, 4, '24082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 25, 5, '25082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 26, 6, '26082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 27, 7, '27082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 28, 1, '28082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 29, 2, '29082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 30, 3, '30082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 31, 4, '31082022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 1, 5, '01092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 2, 6, '02092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 3, 7, '03092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 4, 1, '04092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 5, 2, '05092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 6, 3, '06092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 7, 4, '07092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 8, 5, '08092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 9, 6, '09092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 10, 7, '10092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 11, 1, '11092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 12, 2, '12092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 13, 3, '13092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 14, 4, '14092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 15, 5, '15092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 16, 6, '16092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 17, 7, '17092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 18, 1, '18092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 19, 2, '19092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 20, 3, '20092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 21, 4, '21092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 22, 5, '22092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 23, 6, '23092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 24, 7, '24092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 25, 1, '25092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 26, 2, '26092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 27, 3, '27092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 28, 4, '28092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 29, 5, '29092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 30, 6, '30092022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 1, 7, '01102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 2, 1, '02102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 3, 2, '03102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 4, 3, '04102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 5, 4, '05102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 6, 5, '06102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 7, 6, '07102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 8, 7, '08102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 9, 1, '09102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 10, 2, '10102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 11, 3, '11102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 12, 4, '12102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 13, 5, '13102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 14, 6, '14102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 15, 7, '15102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 16, 1, '16102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 17, 2, '17102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 18, 3, '18102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 19, 4, '19102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 20, 5, '20102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 21, 6, '21102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 22, 7, '22102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 23, 1, '23102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 24, 2, '24102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 25, 3, '25102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 26, 4, '26102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 27, 5, '27102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 28, 6, '28102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 29, 7, '29102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 30, 1, '30102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 31, 2, '31102022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 1, 3, '01112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 2, 4, '02112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 3, 5, '03112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 4, 6, '04112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 5, 7, '05112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 6, 1, '06112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 7, 2, '07112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 8, 3, '08112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 9, 4, '09112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 10, 5, '10112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 11, 6, '11112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 12, 7, '12112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 13, 1, '13112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 14, 2, '14112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 15, 3, '15112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 16, 4, '16112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 17, 5, '17112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 18, 6, '18112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 19, 7, '19112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 20, 1, '20112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 21, 2, '21112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 22, 3, '22112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 23, 4, '23112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 24, 5, '24112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 25, 6, '25112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 26, 7, '26112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 27, 1, '27112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 28, 2, '28112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 29, 3, '29112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 30, 4, '30112022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 1, 5, '01122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 2, 6, '02122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 3, 7, '03122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 4, 1, '04122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 5, 2, '05122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 6, 3, '06122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 7, 4, '07122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 8, 5, '08122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 9, 6, '09122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 10, 7, '10122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 11, 1, '11122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 12, 2, '12122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 13, 3, '13122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 14, 4, '14122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 15, 5, '15122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 16, 6, '16122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 17, 7, '17122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 18, 1, '18122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 19, 2, '19122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 20, 3, '20122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 21, 4, '21122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 22, 5, '22122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 23, 6, '23122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 24, 7, '24122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 25, 1, '25122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 26, 2, '26122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 27, 3, '27122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 28, 4, '28122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 29, 5, '29122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 30, 6, '30122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 31, 7, '31122022', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 1, 1, '01012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 2, 2, '02012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 3, 3, '03012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 4, 4, '04012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 5, 5, '05012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 6, 6, '06012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 7, 7, '07012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 8, 1, '08012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 9, 2, '09012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 10, 3, '10012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 11, 4, '11012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 12, 5, '12012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 13, 6, '13012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 14, 7, '14012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 15, 1, '15012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 16, 2, '16012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 17, 3, '17012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 18, 4, '18012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 19, 5, '19012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 20, 6, '20012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 21, 7, '21012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 22, 1, '22012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 23, 2, '23012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 24, 3, '24012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 25, 4, '25012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 26, 5, '26012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 27, 6, '27012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 28, 7, '28012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 29, 1, '29012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 30, 2, '30012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 31, 3, '31012023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 1, 4, '01022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 2, 5, '02022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 3, 6, '03022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 4, 7, '04022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 5, 1, '05022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 6, 2, '06022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 7, 3, '07022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 8, 4, '08022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 9, 5, '09022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 10, 6, '10022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 11, 7, '11022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 12, 1, '12022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 13, 2, '13022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 14, 3, '14022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 15, 4, '15022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 16, 5, '16022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 17, 6, '17022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 18, 7, '18022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 19, 1, '19022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 20, 2, '20022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 21, 3, '21022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 22, 4, '22022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 23, 5, '23022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 24, 6, '24022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 25, 7, '25022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 26, 1, '26022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 27, 2, '27022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 28, 3, '28022023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 1, 4, '01032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 2, 5, '02032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 3, 6, '03032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 4, 7, '04032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 5, 1, '05032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 6, 2, '06032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 7, 3, '07032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 8, 4, '08032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 9, 5, '09032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 10, 6, '10032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 11, 7, '11032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 12, 1, '12032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 13, 2, '13032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 14, 3, '14032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 15, 4, '15032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 16, 5, '16032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 17, 6, '17032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 18, 7, '18032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 19, 1, '19032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 20, 2, '20032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 21, 3, '21032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 22, 4, '22032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 23, 5, '23032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 24, 6, '24032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 25, 7, '25032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 26, 1, '26032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 27, 2, '27032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 28, 3, '28032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 29, 4, '29032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 30, 5, '30032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 31, 6, '31032023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 1, 7, '01042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 2, 1, '02042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 3, 2, '03042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 4, 3, '04042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 5, 4, '05042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 6, 5, '06042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 7, 6, '07042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 8, 7, '08042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 9, 1, '09042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 10, 2, '10042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 11, 3, '11042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 12, 4, '12042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 13, 5, '13042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 14, 6, '14042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 15, 7, '15042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 16, 1, '16042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 17, 2, '17042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 18, 3, '18042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 19, 4, '19042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 20, 5, '20042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 21, 6, '21042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 22, 7, '22042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 23, 1, '23042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 24, 2, '24042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 25, 3, '25042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 26, 4, '26042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 27, 5, '27042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 28, 6, '28042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 29, 7, '29042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 30, 1, '30042023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 1, 2, '01052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 2, 3, '02052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 3, 4, '03052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 4, 5, '04052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 5, 6, '05052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 6, 7, '06052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 7, 1, '07052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 8, 2, '08052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 9, 3, '09052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 10, 4, '10052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 11, 5, '11052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 12, 6, '12052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 13, 7, '13052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 14, 1, '14052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 15, 2, '15052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 16, 3, '16052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 17, 4, '17052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 18, 5, '18052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 19, 6, '19052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 20, 7, '20052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 21, 1, '21052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 22, 2, '22052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 23, 3, '23052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 24, 4, '24052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 25, 5, '25052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 26, 6, '26052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 27, 7, '27052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 28, 1, '28052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 29, 2, '29052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 30, 3, '30052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 31, 4, '31052023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 1, 5, '01062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 2, 6, '02062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 3, 7, '03062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 4, 1, '04062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 5, 2, '05062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 6, 3, '06062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 7, 4, '07062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 8, 5, '08062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 9, 6, '09062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 10, 7, '10062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 11, 1, '11062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 12, 2, '12062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 13, 3, '13062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 14, 4, '14062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 15, 5, '15062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 16, 6, '16062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 17, 7, '17062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 18, 1, '18062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 19, 2, '19062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 20, 3, '20062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 21, 4, '21062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 22, 5, '22062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 23, 6, '23062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 24, 7, '24062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 25, 1, '25062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 26, 2, '26062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 27, 3, '27062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 28, 4, '28062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 29, 5, '29062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 30, 6, '30062023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 1, 7, '01072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 2, 1, '02072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 3, 2, '03072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 4, 3, '04072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 5, 4, '05072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 6, 5, '06072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 7, 6, '07072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 8, 7, '08072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 9, 1, '09072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 10, 2, '10072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 11, 3, '11072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 12, 4, '12072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 13, 5, '13072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 14, 6, '14072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 15, 7, '15072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 16, 1, '16072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 17, 2, '17072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 18, 3, '18072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 19, 4, '19072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 20, 5, '20072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 21, 6, '21072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 22, 7, '22072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 23, 1, '23072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 24, 2, '24072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 25, 3, '25072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 26, 4, '26072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 27, 5, '27072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 28, 6, '28072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 29, 7, '29072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 30, 1, '30072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 31, 2, '31072023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 1, 3, '01082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 2, 4, '02082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 3, 5, '03082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 4, 6, '04082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 5, 7, '05082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 6, 1, '06082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 7, 2, '07082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 8, 3, '08082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 9, 4, '09082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 10, 5, '10082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 11, 6, '11082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 12, 7, '12082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 13, 1, '13082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 14, 2, '14082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 15, 3, '15082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 16, 4, '16082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 17, 5, '17082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 18, 6, '18082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 19, 7, '19082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 20, 1, '20082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 21, 2, '21082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 22, 3, '22082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 23, 4, '23082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 24, 5, '24082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 25, 6, '25082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 26, 7, '26082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 27, 1, '27082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 28, 2, '28082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 29, 3, '29082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 30, 4, '30082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 31, 5, '31082023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 1, 6, '01092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 2, 7, '02092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 3, 1, '03092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 4, 2, '04092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 5, 3, '05092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 6, 4, '06092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 7, 5, '07092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 8, 6, '08092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 9, 7, '09092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 10, 1, '10092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 11, 2, '11092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 12, 3, '12092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 13, 4, '13092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 14, 5, '14092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 15, 6, '15092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 16, 7, '16092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 17, 1, '17092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 18, 2, '18092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 19, 3, '19092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 20, 4, '20092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 21, 5, '21092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 22, 6, '22092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 23, 7, '23092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 24, 1, '24092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 25, 2, '25092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 26, 3, '26092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 27, 4, '27092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 28, 5, '28092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 29, 6, '29092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 30, 7, '30092023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 1, 1, '01102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 2, 2, '02102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 3, 3, '03102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 4, 4, '04102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 5, 5, '05102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 6, 6, '06102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 7, 7, '07102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 8, 1, '08102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 9, 2, '09102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 10, 3, '10102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 11, 4, '11102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 12, 5, '12102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 13, 6, '13102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 14, 7, '14102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 15, 1, '15102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 16, 2, '16102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 17, 3, '17102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 18, 4, '18102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 19, 5, '19102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 20, 6, '20102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 21, 7, '21102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 22, 1, '22102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 23, 2, '23102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 24, 3, '24102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 25, 4, '25102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 26, 5, '26102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 27, 6, '27102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 28, 7, '28102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 29, 1, '29102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 30, 2, '30102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 31, 3, '31102023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 1, 4, '01112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 2, 5, '02112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 3, 6, '03112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 4, 7, '04112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 5, 1, '05112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 6, 2, '06112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 7, 3, '07112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 8, 4, '08112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 9, 5, '09112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 10, 6, '10112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 11, 7, '11112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 12, 1, '12112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 13, 2, '13112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 14, 3, '14112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 15, 4, '15112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 16, 5, '16112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 17, 6, '17112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 18, 7, '18112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 19, 1, '19112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 20, 2, '20112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 21, 3, '21112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 22, 4, '22112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 23, 5, '23112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 24, 6, '24112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 25, 7, '25112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 26, 1, '26112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 27, 2, '27112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 28, 3, '28112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 29, 4, '29112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 30, 5, '30112023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 1, 6, '01122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 2, 7, '02122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 3, 1, '03122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 4, 2, '04122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 5, 3, '05122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 6, 4, '06122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 7, 5, '07122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 8, 6, '08122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 9, 7, '09122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 10, 1, '10122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 11, 2, '11122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 12, 3, '12122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 13, 4, '13122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 14, 5, '14122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 15, 6, '15122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 16, 7, '16122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 17, 1, '17122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 18, 2, '18122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 19, 3, '19122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 20, 4, '20122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 21, 5, '21122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 22, 6, '22122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 23, 7, '23122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 24, 1, '24122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 25, 2, '25122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 26, 3, '26122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 27, 4, '27122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 28, 5, '28122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 29, 6, '29122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 30, 7, '30122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 31, 1, '31122023', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 1, 2, '01012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 2, 3, '02012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 3, 4, '03012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 4, 5, '04012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 5, 6, '05012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 6, 7, '06012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 7, 1, '07012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 8, 2, '08012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 9, 3, '09012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 10, 4, '10012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 11, 5, '11012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 12, 6, '12012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 13, 7, '13012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 14, 1, '14012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 15, 2, '15012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 16, 3, '16012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 17, 4, '17012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 18, 5, '18012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 19, 6, '19012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 20, 7, '20012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 21, 1, '21012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 22, 2, '22012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 23, 3, '23012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 24, 4, '24012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 25, 5, '25012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 26, 6, '26012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 27, 7, '27012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 28, 1, '28012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 29, 2, '29012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 30, 3, '30012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 31, 4, '31012024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 1, 5, '01022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 2, 6, '02022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 3, 7, '03022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 4, 1, '04022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 5, 2, '05022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 6, 3, '06022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 7, 4, '07022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 8, 5, '08022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 9, 6, '09022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 10, 7, '10022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 11, 1, '11022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 12, 2, '12022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 13, 3, '13022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 14, 4, '14022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 15, 5, '15022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 16, 6, '16022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 17, 7, '17022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 18, 1, '18022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 19, 2, '19022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 20, 3, '20022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 21, 4, '21022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 22, 5, '22022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 23, 6, '23022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 24, 7, '24022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 25, 1, '25022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 26, 2, '26022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 27, 3, '27022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 28, 4, '28022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 29, 5, '29022024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 1, 6, '01032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 2, 7, '02032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 3, 1, '03032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 4, 2, '04032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 5, 3, '05032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 6, 4, '06032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 7, 5, '07032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 8, 6, '08032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 9, 7, '09032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 10, 1, '10032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 11, 2, '11032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 12, 3, '12032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 13, 4, '13032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 14, 5, '14032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 15, 6, '15032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 16, 7, '16032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 17, 1, '17032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 18, 2, '18032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 19, 3, '19032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 20, 4, '20032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 21, 5, '21032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 22, 6, '22032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 23, 7, '23032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 24, 1, '24032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 25, 2, '25032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 26, 3, '26032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 27, 4, '27032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 28, 5, '28032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 29, 6, '29032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 30, 7, '30032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 31, 1, '31032024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 1, 2, '01042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 2, 3, '02042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 3, 4, '03042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 4, 5, '04042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 5, 6, '05042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 6, 7, '06042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 7, 1, '07042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 8, 2, '08042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 9, 3, '09042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 10, 4, '10042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 11, 5, '11042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 12, 6, '12042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 13, 7, '13042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 14, 1, '14042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 15, 2, '15042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 16, 3, '16042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 17, 4, '17042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 18, 5, '18042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 19, 6, '19042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 20, 7, '20042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 21, 1, '21042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 22, 2, '22042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 23, 3, '23042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 24, 4, '24042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 25, 5, '25042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 26, 6, '26042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 27, 7, '27042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 28, 1, '28042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 29, 2, '29042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 30, 3, '30042024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 1, 4, '01052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 2, 5, '02052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 3, 6, '03052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 4, 7, '04052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 5, 1, '05052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 6, 2, '06052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 7, 3, '07052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 8, 4, '08052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 9, 5, '09052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 10, 6, '10052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 11, 7, '11052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 12, 1, '12052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 13, 2, '13052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 14, 3, '14052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 15, 4, '15052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 16, 5, '16052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 17, 6, '17052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 18, 7, '18052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 19, 1, '19052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 20, 2, '20052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 21, 3, '21052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 22, 4, '22052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 23, 5, '23052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 24, 6, '24052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 25, 7, '25052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 26, 1, '26052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 27, 2, '27052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 28, 3, '28052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 29, 4, '29052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 30, 5, '30052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 31, 6, '31052024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 1, 7, '01062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 2, 1, '02062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 3, 2, '03062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 4, 3, '04062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 5, 4, '05062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 6, 5, '06062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 7, 6, '07062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 8, 7, '08062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 9, 1, '09062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 10, 2, '10062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 11, 3, '11062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 12, 4, '12062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 13, 5, '13062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 14, 6, '14062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 15, 7, '15062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 16, 1, '16062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 17, 2, '17062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 18, 3, '18062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 19, 4, '19062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 20, 5, '20062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 21, 6, '21062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 22, 7, '22062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 23, 1, '23062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 24, 2, '24062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 25, 3, '25062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 26, 4, '26062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 27, 5, '27062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 28, 6, '28062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 29, 7, '29062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 30, 1, '30062024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 1, 2, '01072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 2, 3, '02072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 3, 4, '03072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 4, 5, '04072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 5, 6, '05072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 6, 7, '06072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 7, 1, '07072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 8, 2, '08072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 9, 3, '09072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 10, 4, '10072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 11, 5, '11072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 12, 6, '12072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 13, 7, '13072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 14, 1, '14072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 15, 2, '15072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 16, 3, '16072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 17, 4, '17072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 18, 5, '18072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 19, 6, '19072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 20, 7, '20072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 21, 1, '21072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 22, 2, '22072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 23, 3, '23072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 24, 4, '24072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 25, 5, '25072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 26, 6, '26072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 27, 7, '27072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 28, 1, '28072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 29, 2, '29072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 30, 3, '30072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 31, 4, '31072024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 1, 5, '01082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 2, 6, '02082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 3, 7, '03082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 4, 1, '04082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 5, 2, '05082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 6, 3, '06082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 7, 4, '07082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 8, 5, '08082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 9, 6, '09082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 10, 7, '10082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 11, 1, '11082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 12, 2, '12082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 13, 3, '13082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 14, 4, '14082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 15, 5, '15082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 16, 6, '16082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 17, 7, '17082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 18, 1, '18082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 19, 2, '19082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 20, 3, '20082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 21, 4, '21082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 22, 5, '22082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 23, 6, '23082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 24, 7, '24082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 25, 1, '25082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 26, 2, '26082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 27, 3, '27082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 28, 4, '28082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 29, 5, '29082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 30, 6, '30082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 31, 7, '31082024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 1, 1, '01092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 2, 2, '02092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 3, 3, '03092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 4, 4, '04092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 5, 5, '05092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 6, 6, '06092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 7, 7, '07092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 8, 1, '08092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 9, 2, '09092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 10, 3, '10092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 11, 4, '11092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 12, 5, '12092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 13, 6, '13092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 14, 7, '14092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 15, 1, '15092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 16, 2, '16092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 17, 3, '17092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 18, 4, '18092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 19, 5, '19092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 20, 6, '20092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 21, 7, '21092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 22, 1, '22092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 23, 2, '23092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 24, 3, '24092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 25, 4, '25092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 26, 5, '26092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 27, 6, '27092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 28, 7, '28092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 29, 1, '29092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 30, 2, '30092024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 1, 3, '01102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 2, 4, '02102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 3, 5, '03102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 4, 6, '04102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 5, 7, '05102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 6, 1, '06102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 7, 2, '07102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 8, 3, '08102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 9, 4, '09102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 10, 5, '10102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 11, 6, '11102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 12, 7, '12102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 13, 1, '13102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 14, 2, '14102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 15, 3, '15102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 16, 4, '16102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 17, 5, '17102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 18, 6, '18102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 19, 7, '19102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 20, 1, '20102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 21, 2, '21102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 22, 3, '22102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 23, 4, '23102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 24, 5, '24102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 25, 6, '25102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 26, 7, '26102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 27, 1, '27102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 28, 2, '28102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 29, 3, '29102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 30, 4, '30102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 31, 5, '31102024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 1, 6, '01112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 2, 7, '02112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 3, 1, '03112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 4, 2, '04112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 5, 3, '05112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 6, 4, '06112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 7, 5, '07112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 8, 6, '08112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 9, 7, '09112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 10, 1, '10112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 11, 2, '11112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 12, 3, '12112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 13, 4, '13112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 14, 5, '14112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 15, 6, '15112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 16, 7, '16112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 17, 1, '17112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 18, 2, '18112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 19, 3, '19112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 20, 4, '20112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 21, 5, '21112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 22, 6, '22112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 23, 7, '23112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 24, 1, '24112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 25, 2, '25112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 26, 3, '26112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 27, 4, '27112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 28, 5, '28112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 29, 6, '29112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 30, 7, '30112024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 1, 1, '01122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 2, 2, '02122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 3, 3, '03122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 4, 4, '04122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 5, 5, '05122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 6, 6, '06122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 7, 7, '07122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 8, 1, '08122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 9, 2, '09122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 10, 3, '10122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 11, 4, '11122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 12, 5, '12122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 13, 6, '13122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 14, 7, '14122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 15, 1, '15122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 16, 2, '16122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 17, 3, '17122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 18, 4, '18122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 19, 5, '19122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 20, 6, '20122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 21, 7, '21122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 22, 1, '22122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 23, 2, '23122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 24, 3, '24122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 25, 4, '25122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 26, 5, '26122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 27, 6, '27122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 28, 7, '28122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 29, 1, '29122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 30, 2, '30122024', 'admindb', 'admindb', 1692260123, 1692260123);
-INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 31, 3, '31122024', 'admindb', 'admindb', 1692260123, 1692260123);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 1, 7, '01012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 2, 1, '02012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 3, 2, '03012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 4, 3, '04012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 5, 4, '05012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 6, 5, '06012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 7, 6, '07012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 8, 7, '08012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 9, 1, '09012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 10, 2, '10012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 11, 3, '11012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 12, 4, '12012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 13, 5, '13012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 14, 6, '14012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 15, 7, '15012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 16, 1, '16012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 17, 2, '17012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 18, 3, '18012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 19, 4, '19012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 20, 5, '20012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 21, 6, '21012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 22, 7, '22012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 23, 1, '23012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 24, 2, '24012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 25, 3, '25012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 26, 4, '26012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 27, 5, '27012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 28, 6, '28012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 29, 7, '29012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 30, 1, '30012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 1, 31, 2, '31012022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 1, 3, '01022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 2, 4, '02022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 3, 5, '03022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 4, 6, '04022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 5, 7, '05022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 6, 1, '06022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 7, 2, '07022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 8, 3, '08022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 9, 4, '09022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 10, 5, '10022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 11, 6, '11022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 12, 7, '12022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 13, 1, '13022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 14, 2, '14022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 15, 3, '15022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 16, 4, '16022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 17, 5, '17022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 18, 6, '18022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 19, 7, '19022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 20, 1, '20022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 21, 2, '21022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 22, 3, '22022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 23, 4, '23022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 24, 5, '24022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 25, 6, '25022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 26, 7, '26022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 27, 1, '27022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 2, 28, 2, '28022022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 1, 3, '01032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 2, 4, '02032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 3, 5, '03032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 4, 6, '04032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 5, 7, '05032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 6, 1, '06032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 7, 2, '07032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 8, 3, '08032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 9, 4, '09032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 10, 5, '10032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 11, 6, '11032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 12, 7, '12032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 13, 1, '13032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 14, 2, '14032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 15, 3, '15032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 16, 4, '16032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 17, 5, '17032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 18, 6, '18032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 19, 7, '19032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 20, 1, '20032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 21, 2, '21032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 22, 3, '22032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 23, 4, '23032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 24, 5, '24032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 25, 6, '25032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 26, 7, '26032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 27, 1, '27032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 28, 2, '28032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 29, 3, '29032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 30, 4, '30032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 1, 3, 31, 5, '31032022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 1, 6, '01042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 2, 7, '02042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 3, 1, '03042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 4, 2, '04042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 5, 3, '05042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 6, 4, '06042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 7, 5, '07042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 8, 6, '08042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 9, 7, '09042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 10, 1, '10042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 11, 2, '11042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 12, 3, '12042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 13, 4, '13042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 14, 5, '14042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 15, 6, '15042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 16, 7, '16042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 17, 1, '17042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 18, 2, '18042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 19, 3, '19042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 20, 4, '20042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 21, 5, '21042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 22, 6, '22042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 23, 7, '23042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 24, 1, '24042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 25, 2, '25042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 26, 3, '26042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 27, 4, '27042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 28, 5, '28042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 29, 6, '29042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 4, 30, 7, '30042022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 1, 1, '01052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 2, 2, '02052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 3, 3, '03052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 4, 4, '04052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 5, 5, '05052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 6, 6, '06052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 7, 7, '07052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 8, 1, '08052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 9, 2, '09052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 10, 3, '10052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 11, 4, '11052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 12, 5, '12052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 13, 6, '13052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 14, 7, '14052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 15, 1, '15052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 16, 2, '16052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 17, 3, '17052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 18, 4, '18052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 19, 5, '19052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 20, 6, '20052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 21, 7, '21052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 22, 1, '22052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 23, 2, '23052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 24, 3, '24052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 25, 4, '25052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 26, 5, '26052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 27, 6, '27052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 28, 7, '28052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 29, 1, '29052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 30, 2, '30052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 5, 31, 3, '31052022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 1, 4, '01062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 2, 5, '02062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 3, 6, '03062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 4, 7, '04062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 5, 1, '05062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 6, 2, '06062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 7, 3, '07062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 8, 4, '08062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 9, 5, '09062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 10, 6, '10062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 11, 7, '11062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 12, 1, '12062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 13, 2, '13062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 14, 3, '14062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 15, 4, '15062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 16, 5, '16062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 17, 6, '17062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 18, 7, '18062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 19, 1, '19062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 20, 2, '20062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 21, 3, '21062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 22, 4, '22062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 23, 5, '23062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 24, 6, '24062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 25, 7, '25062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 26, 1, '26062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 27, 2, '27062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 28, 3, '28062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 29, 4, '29062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 2, 6, 30, 5, '30062022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 1, 6, '01072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 2, 7, '02072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 3, 1, '03072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 4, 2, '04072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 5, 3, '05072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 6, 4, '06072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 7, 5, '07072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 8, 6, '08072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 9, 7, '09072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 10, 1, '10072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 11, 2, '11072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 12, 3, '12072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 13, 4, '13072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 14, 5, '14072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 15, 6, '15072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 16, 7, '16072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 17, 1, '17072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 18, 2, '18072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 19, 3, '19072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 20, 4, '20072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 21, 5, '21072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 22, 6, '22072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 23, 7, '23072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 24, 1, '24072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 25, 2, '25072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 26, 3, '26072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 27, 4, '27072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 28, 5, '28072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 29, 6, '29072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 30, 7, '30072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 7, 31, 1, '31072022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 1, 2, '01082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 2, 3, '02082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 3, 4, '03082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 4, 5, '04082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 5, 6, '05082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 6, 7, '06082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 7, 1, '07082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 8, 2, '08082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 9, 3, '09082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 10, 4, '10082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 11, 5, '11082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 12, 6, '12082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 13, 7, '13082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 14, 1, '14082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 15, 2, '15082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 16, 3, '16082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 17, 4, '17082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 18, 5, '18082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 19, 6, '19082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 20, 7, '20082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 21, 1, '21082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 22, 2, '22082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 23, 3, '23082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 24, 4, '24082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 25, 5, '25082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 26, 6, '26082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 27, 7, '27082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 28, 1, '28082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 29, 2, '29082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 30, 3, '30082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 8, 31, 4, '31082022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 1, 5, '01092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 2, 6, '02092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 3, 7, '03092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 4, 1, '04092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 5, 2, '05092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 6, 3, '06092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 7, 4, '07092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 8, 5, '08092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 9, 6, '09092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 10, 7, '10092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 11, 1, '11092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 12, 2, '12092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 13, 3, '13092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 14, 4, '14092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 15, 5, '15092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 16, 6, '16092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 17, 7, '17092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 18, 1, '18092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 19, 2, '19092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 20, 3, '20092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 21, 4, '21092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 22, 5, '22092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 23, 6, '23092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 24, 7, '24092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 25, 1, '25092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 26, 2, '26092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 27, 3, '27092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 28, 4, '28092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 29, 5, '29092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 3, 9, 30, 6, '30092022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 1, 7, '01102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 2, 1, '02102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 3, 2, '03102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 4, 3, '04102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 5, 4, '05102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 6, 5, '06102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 7, 6, '07102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 8, 7, '08102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 9, 1, '09102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 10, 2, '10102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 11, 3, '11102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 12, 4, '12102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 13, 5, '13102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 14, 6, '14102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 15, 7, '15102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 16, 1, '16102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 17, 2, '17102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 18, 3, '18102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 19, 4, '19102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 20, 5, '20102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 21, 6, '21102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 22, 7, '22102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 23, 1, '23102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 24, 2, '24102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 25, 3, '25102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 26, 4, '26102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 27, 5, '27102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 28, 6, '28102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 29, 7, '29102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 30, 1, '30102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 10, 31, 2, '31102022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 1, 3, '01112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 2, 4, '02112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 3, 5, '03112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 4, 6, '04112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 5, 7, '05112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 6, 1, '06112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 7, 2, '07112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 8, 3, '08112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 9, 4, '09112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 10, 5, '10112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 11, 6, '11112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 12, 7, '12112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 13, 1, '13112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 14, 2, '14112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 15, 3, '15112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 16, 4, '16112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 17, 5, '17112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 18, 6, '18112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 19, 7, '19112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 20, 1, '20112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 21, 2, '21112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 22, 3, '22112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 23, 4, '23112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 24, 5, '24112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 25, 6, '25112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 26, 7, '26112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 27, 1, '27112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 28, 2, '28112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 29, 3, '29112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 11, 30, 4, '30112022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 1, 5, '01122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 2, 6, '02122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 3, 7, '03122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 4, 1, '04122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 5, 2, '05122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 6, 3, '06122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 7, 4, '07122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 8, 5, '08122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 9, 6, '09122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 10, 7, '10122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 11, 1, '11122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 12, 2, '12122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 13, 3, '13122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 14, 4, '14122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 15, 5, '15122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 16, 6, '16122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 17, 7, '17122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 18, 1, '18122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 19, 2, '19122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 20, 3, '20122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 21, 4, '21122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 22, 5, '22122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 23, 6, '23122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 24, 7, '24122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 25, 1, '25122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 26, 2, '26122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 27, 3, '27122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 28, 4, '28122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 29, 5, '29122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 30, 6, '30122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2022, 4, 12, 31, 7, '31122022', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 1, 1, '01012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 2, 2, '02012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 3, 3, '03012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 4, 4, '04012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 5, 5, '05012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 6, 6, '06012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 7, 7, '07012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 8, 1, '08012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 9, 2, '09012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 10, 3, '10012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 11, 4, '11012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 12, 5, '12012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 13, 6, '13012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 14, 7, '14012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 15, 1, '15012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 16, 2, '16012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 17, 3, '17012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 18, 4, '18012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 19, 5, '19012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 20, 6, '20012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 21, 7, '21012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 22, 1, '22012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 23, 2, '23012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 24, 3, '24012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 25, 4, '25012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 26, 5, '26012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 27, 6, '27012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 28, 7, '28012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 29, 1, '29012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 30, 2, '30012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 1, 31, 3, '31012023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 1, 4, '01022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 2, 5, '02022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 3, 6, '03022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 4, 7, '04022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 5, 1, '05022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 6, 2, '06022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 7, 3, '07022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 8, 4, '08022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 9, 5, '09022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 10, 6, '10022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 11, 7, '11022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 12, 1, '12022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 13, 2, '13022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 14, 3, '14022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 15, 4, '15022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 16, 5, '16022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 17, 6, '17022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 18, 7, '18022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 19, 1, '19022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 20, 2, '20022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 21, 3, '21022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 22, 4, '22022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 23, 5, '23022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 24, 6, '24022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 25, 7, '25022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 26, 1, '26022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 27, 2, '27022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 2, 28, 3, '28022023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 1, 4, '01032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 2, 5, '02032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 3, 6, '03032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 4, 7, '04032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 5, 1, '05032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 6, 2, '06032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 7, 3, '07032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 8, 4, '08032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 9, 5, '09032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 10, 6, '10032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 11, 7, '11032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 12, 1, '12032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 13, 2, '13032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 14, 3, '14032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 15, 4, '15032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 16, 5, '16032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 17, 6, '17032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 18, 7, '18032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 19, 1, '19032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 20, 2, '20032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 21, 3, '21032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 22, 4, '22032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 23, 5, '23032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 24, 6, '24032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 25, 7, '25032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 26, 1, '26032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 27, 2, '27032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 28, 3, '28032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 29, 4, '29032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 30, 5, '30032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 1, 3, 31, 6, '31032023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 1, 7, '01042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 2, 1, '02042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 3, 2, '03042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 4, 3, '04042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 5, 4, '05042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 6, 5, '06042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 7, 6, '07042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 8, 7, '08042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 9, 1, '09042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 10, 2, '10042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 11, 3, '11042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 12, 4, '12042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 13, 5, '13042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 14, 6, '14042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 15, 7, '15042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 16, 1, '16042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 17, 2, '17042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 18, 3, '18042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 19, 4, '19042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 20, 5, '20042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 21, 6, '21042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 22, 7, '22042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 23, 1, '23042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 24, 2, '24042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 25, 3, '25042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 26, 4, '26042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 27, 5, '27042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 28, 6, '28042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 29, 7, '29042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 4, 30, 1, '30042023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 1, 2, '01052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 2, 3, '02052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 3, 4, '03052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 4, 5, '04052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 5, 6, '05052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 6, 7, '06052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 7, 1, '07052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 8, 2, '08052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 9, 3, '09052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 10, 4, '10052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 11, 5, '11052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 12, 6, '12052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 13, 7, '13052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 14, 1, '14052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 15, 2, '15052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 16, 3, '16052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 17, 4, '17052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 18, 5, '18052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 19, 6, '19052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 20, 7, '20052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 21, 1, '21052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 22, 2, '22052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 23, 3, '23052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 24, 4, '24052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 25, 5, '25052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 26, 6, '26052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 27, 7, '27052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 28, 1, '28052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 29, 2, '29052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 30, 3, '30052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 5, 31, 4, '31052023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 1, 5, '01062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 2, 6, '02062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 3, 7, '03062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 4, 1, '04062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 5, 2, '05062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 6, 3, '06062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 7, 4, '07062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 8, 5, '08062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 9, 6, '09062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 10, 7, '10062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 11, 1, '11062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 12, 2, '12062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 13, 3, '13062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 14, 4, '14062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 15, 5, '15062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 16, 6, '16062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 17, 7, '17062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 18, 1, '18062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 19, 2, '19062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 20, 3, '20062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 21, 4, '21062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 22, 5, '22062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 23, 6, '23062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 24, 7, '24062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 25, 1, '25062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 26, 2, '26062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 27, 3, '27062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 28, 4, '28062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 29, 5, '29062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 2, 6, 30, 6, '30062023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 1, 7, '01072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 2, 1, '02072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 3, 2, '03072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 4, 3, '04072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 5, 4, '05072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 6, 5, '06072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 7, 6, '07072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 8, 7, '08072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 9, 1, '09072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 10, 2, '10072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 11, 3, '11072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 12, 4, '12072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 13, 5, '13072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 14, 6, '14072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 15, 7, '15072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 16, 1, '16072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 17, 2, '17072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 18, 3, '18072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 19, 4, '19072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 20, 5, '20072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 21, 6, '21072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 22, 7, '22072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 23, 1, '23072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 24, 2, '24072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 25, 3, '25072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 26, 4, '26072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 27, 5, '27072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 28, 6, '28072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 29, 7, '29072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 30, 1, '30072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 7, 31, 2, '31072023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 1, 3, '01082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 2, 4, '02082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 3, 5, '03082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 4, 6, '04082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 5, 7, '05082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 6, 1, '06082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 7, 2, '07082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 8, 3, '08082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 9, 4, '09082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 10, 5, '10082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 11, 6, '11082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 12, 7, '12082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 13, 1, '13082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 14, 2, '14082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 15, 3, '15082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 16, 4, '16082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 17, 5, '17082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 18, 6, '18082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 19, 7, '19082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 20, 1, '20082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 21, 2, '21082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 22, 3, '22082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 23, 4, '23082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 24, 5, '24082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 25, 6, '25082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 26, 7, '26082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 27, 1, '27082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 28, 2, '28082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 29, 3, '29082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 30, 4, '30082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 8, 31, 5, '31082023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 1, 6, '01092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 2, 7, '02092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 3, 1, '03092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 4, 2, '04092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 5, 3, '05092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 6, 4, '06092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 7, 5, '07092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 8, 6, '08092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 9, 7, '09092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 10, 1, '10092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 11, 2, '11092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 12, 3, '12092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 13, 4, '13092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 14, 5, '14092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 15, 6, '15092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 16, 7, '16092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 17, 1, '17092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 18, 2, '18092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 19, 3, '19092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 20, 4, '20092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 21, 5, '21092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 22, 6, '22092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 23, 7, '23092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 24, 1, '24092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 25, 2, '25092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 26, 3, '26092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 27, 4, '27092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 28, 5, '28092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 29, 6, '29092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 3, 9, 30, 7, '30092023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 1, 1, '01102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 2, 2, '02102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 3, 3, '03102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 4, 4, '04102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 5, 5, '05102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 6, 6, '06102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 7, 7, '07102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 8, 1, '08102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 9, 2, '09102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 10, 3, '10102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 11, 4, '11102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 12, 5, '12102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 13, 6, '13102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 14, 7, '14102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 15, 1, '15102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 16, 2, '16102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 17, 3, '17102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 18, 4, '18102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 19, 5, '19102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 20, 6, '20102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 21, 7, '21102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 22, 1, '22102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 23, 2, '23102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 24, 3, '24102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 25, 4, '25102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 26, 5, '26102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 27, 6, '27102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 28, 7, '28102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 29, 1, '29102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 30, 2, '30102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 10, 31, 3, '31102023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 1, 4, '01112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 2, 5, '02112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 3, 6, '03112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 4, 7, '04112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 5, 1, '05112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 6, 2, '06112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 7, 3, '07112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 8, 4, '08112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 9, 5, '09112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 10, 6, '10112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 11, 7, '11112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 12, 1, '12112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 13, 2, '13112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 14, 3, '14112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 15, 4, '15112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 16, 5, '16112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 17, 6, '17112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 18, 7, '18112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 19, 1, '19112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 20, 2, '20112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 21, 3, '21112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 22, 4, '22112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 23, 5, '23112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 24, 6, '24112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 25, 7, '25112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 26, 1, '26112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 27, 2, '27112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 28, 3, '28112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 29, 4, '29112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 11, 30, 5, '30112023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 1, 6, '01122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 2, 7, '02122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 3, 1, '03122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 4, 2, '04122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 5, 3, '05122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 6, 4, '06122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 7, 5, '07122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 8, 6, '08122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 9, 7, '09122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 10, 1, '10122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 11, 2, '11122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 12, 3, '12122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 13, 4, '13122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 14, 5, '14122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 15, 6, '15122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 16, 7, '16122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 17, 1, '17122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 18, 2, '18122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 19, 3, '19122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 20, 4, '20122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 21, 5, '21122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 22, 6, '22122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 23, 7, '23122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 24, 1, '24122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 25, 2, '25122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 26, 3, '26122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 27, 4, '27122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 28, 5, '28122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 29, 6, '29122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 30, 7, '30122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (false, 2023, 4, 12, 31, 1, '31122023', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 1, 2, '01012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 2, 3, '02012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 3, 4, '03012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 4, 5, '04012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 5, 6, '05012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 6, 7, '06012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 7, 1, '07012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 8, 2, '08012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 9, 3, '09012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 10, 4, '10012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 11, 5, '11012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 12, 6, '12012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 13, 7, '13012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 14, 1, '14012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 15, 2, '15012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 16, 3, '16012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 17, 4, '17012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 18, 5, '18012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 19, 6, '19012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 20, 7, '20012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 21, 1, '21012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 22, 2, '22012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 23, 3, '23012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 24, 4, '24012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 25, 5, '25012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 26, 6, '26012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 27, 7, '27012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 28, 1, '28012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 29, 2, '29012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 30, 3, '30012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 1, 31, 4, '31012024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 1, 5, '01022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 2, 6, '02022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 3, 7, '03022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 4, 1, '04022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 5, 2, '05022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 6, 3, '06022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 7, 4, '07022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 8, 5, '08022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 9, 6, '09022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 10, 7, '10022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 11, 1, '11022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 12, 2, '12022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 13, 3, '13022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 14, 4, '14022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 15, 5, '15022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 16, 6, '16022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 17, 7, '17022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 18, 1, '18022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 19, 2, '19022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 20, 3, '20022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 21, 4, '21022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 22, 5, '22022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 23, 6, '23022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 24, 7, '24022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 25, 1, '25022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 26, 2, '26022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 27, 3, '27022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 28, 4, '28022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 2, 29, 5, '29022024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 1, 6, '01032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 2, 7, '02032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 3, 1, '03032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 4, 2, '04032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 5, 3, '05032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 6, 4, '06032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 7, 5, '07032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 8, 6, '08032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 9, 7, '09032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 10, 1, '10032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 11, 2, '11032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 12, 3, '12032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 13, 4, '13032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 14, 5, '14032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 15, 6, '15032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 16, 7, '16032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 17, 1, '17032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 18, 2, '18032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 19, 3, '19032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 20, 4, '20032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 21, 5, '21032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 22, 6, '22032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 23, 7, '23032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 24, 1, '24032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 25, 2, '25032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 26, 3, '26032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 27, 4, '27032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 28, 5, '28032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 29, 6, '29032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 30, 7, '30032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 1, 3, 31, 1, '31032024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 1, 2, '01042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 2, 3, '02042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 3, 4, '03042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 4, 5, '04042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 5, 6, '05042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 6, 7, '06042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 7, 1, '07042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 8, 2, '08042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 9, 3, '09042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 10, 4, '10042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 11, 5, '11042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 12, 6, '12042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 13, 7, '13042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 14, 1, '14042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 15, 2, '15042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 16, 3, '16042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 17, 4, '17042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 18, 5, '18042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 19, 6, '19042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 20, 7, '20042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 21, 1, '21042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 22, 2, '22042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 23, 3, '23042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 24, 4, '24042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 25, 5, '25042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 26, 6, '26042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 27, 7, '27042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 28, 1, '28042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 29, 2, '29042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 4, 30, 3, '30042024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 1, 4, '01052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 2, 5, '02052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 3, 6, '03052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 4, 7, '04052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 5, 1, '05052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 6, 2, '06052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 7, 3, '07052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 8, 4, '08052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 9, 5, '09052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 10, 6, '10052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 11, 7, '11052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 12, 1, '12052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 13, 2, '13052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 14, 3, '14052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 15, 4, '15052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 16, 5, '16052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 17, 6, '17052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 18, 7, '18052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 19, 1, '19052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 20, 2, '20052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 21, 3, '21052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 22, 4, '22052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 23, 5, '23052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 24, 6, '24052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 25, 7, '25052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 26, 1, '26052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 27, 2, '27052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 28, 3, '28052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 29, 4, '29052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 30, 5, '30052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 5, 31, 6, '31052024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 1, 7, '01062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 2, 1, '02062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 3, 2, '03062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 4, 3, '04062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 5, 4, '05062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 6, 5, '06062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 7, 6, '07062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 8, 7, '08062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 9, 1, '09062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 10, 2, '10062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 11, 3, '11062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 12, 4, '12062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 13, 5, '13062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 14, 6, '14062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 15, 7, '15062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 16, 1, '16062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 17, 2, '17062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 18, 3, '18062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 19, 4, '19062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 20, 5, '20062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 21, 6, '21062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 22, 7, '22062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 23, 1, '23062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 24, 2, '24062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 25, 3, '25062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 26, 4, '26062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 27, 5, '27062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 28, 6, '28062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 29, 7, '29062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 2, 6, 30, 1, '30062024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 1, 2, '01072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 2, 3, '02072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 3, 4, '03072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 4, 5, '04072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 5, 6, '05072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 6, 7, '06072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 7, 1, '07072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 8, 2, '08072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 9, 3, '09072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 10, 4, '10072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 11, 5, '11072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 12, 6, '12072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 13, 7, '13072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 14, 1, '14072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 15, 2, '15072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 16, 3, '16072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 17, 4, '17072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 18, 5, '18072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 19, 6, '19072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 20, 7, '20072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 21, 1, '21072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 22, 2, '22072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 23, 3, '23072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 24, 4, '24072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 25, 5, '25072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 26, 6, '26072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 27, 7, '27072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 28, 1, '28072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 29, 2, '29072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 30, 3, '30072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 7, 31, 4, '31072024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 1, 5, '01082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 2, 6, '02082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 3, 7, '03082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 4, 1, '04082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 5, 2, '05082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 6, 3, '06082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 7, 4, '07082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 8, 5, '08082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 9, 6, '09082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 10, 7, '10082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 11, 1, '11082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 12, 2, '12082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 13, 3, '13082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 14, 4, '14082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 15, 5, '15082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 16, 6, '16082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 17, 7, '17082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 18, 1, '18082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 19, 2, '19082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 20, 3, '20082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 21, 4, '21082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 22, 5, '22082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 23, 6, '23082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 24, 7, '24082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 25, 1, '25082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 26, 2, '26082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 27, 3, '27082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 28, 4, '28082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 29, 5, '29082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 30, 6, '30082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 8, 31, 7, '31082024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 1, 1, '01092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 2, 2, '02092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 3, 3, '03092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 4, 4, '04092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 5, 5, '05092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 6, 6, '06092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 7, 7, '07092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 8, 1, '08092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 9, 2, '09092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 10, 3, '10092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 11, 4, '11092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 12, 5, '12092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 13, 6, '13092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 14, 7, '14092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 15, 1, '15092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 16, 2, '16092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 17, 3, '17092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 18, 4, '18092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 19, 5, '19092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 20, 6, '20092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 21, 7, '21092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 22, 1, '22092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 23, 2, '23092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 24, 3, '24092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 25, 4, '25092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 26, 5, '26092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 27, 6, '27092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 28, 7, '28092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 29, 1, '29092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 3, 9, 30, 2, '30092024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 1, 3, '01102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 2, 4, '02102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 3, 5, '03102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 4, 6, '04102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 5, 7, '05102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 6, 1, '06102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 7, 2, '07102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 8, 3, '08102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 9, 4, '09102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 10, 5, '10102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 11, 6, '11102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 12, 7, '12102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 13, 1, '13102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 14, 2, '14102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 15, 3, '15102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 16, 4, '16102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 17, 5, '17102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 18, 6, '18102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 19, 7, '19102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 20, 1, '20102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 21, 2, '21102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 22, 3, '22102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 23, 4, '23102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 24, 5, '24102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 25, 6, '25102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 26, 7, '26102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 27, 1, '27102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 28, 2, '28102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 29, 3, '29102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 30, 4, '30102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 10, 31, 5, '31102024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 1, 6, '01112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 2, 7, '02112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 3, 1, '03112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 4, 2, '04112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 5, 3, '05112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 6, 4, '06112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 7, 5, '07112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 8, 6, '08112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 9, 7, '09112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 10, 1, '10112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 11, 2, '11112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 12, 3, '12112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 13, 4, '13112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 14, 5, '14112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 15, 6, '15112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 16, 7, '16112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 17, 1, '17112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 18, 2, '18112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 19, 3, '19112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 20, 4, '20112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 21, 5, '21112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 22, 6, '22112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 23, 7, '23112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 24, 1, '24112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 25, 2, '25112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 26, 3, '26112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 27, 4, '27112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 28, 5, '28112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 29, 6, '29112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 11, 30, 7, '30112024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 1, 1, '01122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 2, 2, '02122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 3, 3, '03122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 4, 4, '04122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 5, 5, '05122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 6, 6, '06122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 7, 7, '07122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 8, 1, '08122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 9, 2, '09122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 10, 3, '10122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 11, 4, '11122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 12, 5, '12122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 13, 6, '13122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 14, 7, '14122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 15, 1, '15122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 16, 2, '16122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 17, 3, '17122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 18, 4, '18122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 19, 5, '19122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 20, 6, '20122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 21, 7, '21122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 22, 1, '22122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 23, 2, '23122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 24, 3, '24122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 25, 4, '25122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 26, 5, '26122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 27, 6, '27122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 28, 7, '28122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 29, 1, '29122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 30, 2, '30122024', 'admindb', 'admindb', 1692868321, 1692868321);
+INSERT INTO mne_application.yearday VALUES (true, 2024, 4, 12, 31, 3, '31122024', 'admindb', 'admindb', 1692868321, 1692868321);
 
 
 --
 -- Data for Name: id_count; Type: TABLE DATA; Schema: mne_catalog; Owner: admindb
 --
 
-INSERT INTO mne_catalog.id_count VALUES (0, 32768, 1616741328);
+INSERT INTO mne_catalog.id_count VALUES (0, 32768, 1692691139);
 
 
 --
@@ -9270,6 +9299,7 @@ GRANT SELECT ON TABLE mne_application.querywheres TO PUBLIC;
 --
 
 GRANT SELECT ON TABLE mne_application.selectlist TO PUBLIC;
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mne_application.selectlist TO erpdb;
 
 
 --
