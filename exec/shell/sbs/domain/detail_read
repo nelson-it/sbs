@@ -5,7 +5,7 @@
 
 cols="domaintyp,domain,workgroup,description,netdevice,adminpassword,adminpassword2,administrator,primaryname,primaryaddr,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcp6start,dhcp6end";
 labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Administrator,Primary Server,Primary Adresse,DNS Forward,DNS Suche,IPv4 Start,IPv4 Ende,IPv6 Start,IPv6 Ende";
-regexps="primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
+regexps="workgroup:notempty,primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
 
 mne_need_error
 systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
@@ -41,7 +41,7 @@ if [ "$?" = "0" ]; then
     
     dnssearch=$(cat "/etc/resolv.conf" 2>/dev/null | awk '/^#/ { next; } /search/ { sub(/^.*search[ \t]*/, "");  print $0; exit 0 }')
 else
-	json_writeheader "$cols" "$labels" "" "" "primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty";
+	json_writeheader "$cols" "$labels" "" "" "workgroup:notempty,primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty";
     domaintyp="standalone";
 	workgroup=$( cat "$domainconfigfile"  2>/dev/null | awk -v FS== '/^#/ { next; } /workgroup/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')
 	description=$( cat "$domainconfigfile" 2>/dev/null | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0}')

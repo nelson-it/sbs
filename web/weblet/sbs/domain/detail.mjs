@@ -94,16 +94,27 @@ class MneSbsDomain extends MneDbView
       MneElement.mkClass(this.frame, 'domaintyp' + this.obj.inputs.domaintyp.getValue(), true,  'domaintyp');
       if ( this.obj.inputs.domaintyp.getValue() == 'standalone' || this.obj.inputs.domaintyp.getValue() == '' )
       {
-        var passwd = 'dummy';
-        this.obj.inputs.adminpassword.setValue(passwd);
-        this.obj.inputs.adminpassword2.setValue(passwd);
+        var p = this.obj.inputs.adminpassword
+        p.setTyp(p.dpytype, MneInput.checktype['ok'], p.format)
+        p = this.obj.inputs.netdevice
+        p.setTyp(p.dpytype, MneInput.checktype['ok'], p.format)
+        p = this.obj.inputs.domain
+        p.setTyp(p.dpytype, MneInput.checktype['ok'], p.format)
       }
       else
       {
-        var passwd = '';
-        this.obj.inputs.adminpassword.setValue(passwd);
-        this.obj.inputs.adminpassword2.setValue(passwd);
+        var p = this.obj.inputs.adminpassword
+        p.setTyp(p.dpytype, MneInput.checktype['notempty'], p.format)
+        p = this.obj.inputs.netdevice
+        p.setTyp(p.dpytype, MneInput.checktype['notempty'], p.format)
+        p = this.obj.inputs.domain
+        p.setTyp(p.dpytype, MneInput.checktype['notempty'], p.format)
       }
+      var passwd = '';
+      this.obj.inputs.adminpassword.setValue(passwd);
+      this.obj.inputs.adminpassword2.setValue(passwd);
+      this.obj.inputs.netdevice.setValue(passwd);
+      this.obj.inputs.domain.setValue(passwd);
     });
     this.obj.inputs.adminpassword.addEventListener('input', (evt) => {  this.checkpasswd() } );
 

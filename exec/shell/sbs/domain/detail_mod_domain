@@ -14,6 +14,13 @@ radvdconf=$(findtemplate  domain radvd.conf)
 check_cert
 
 # -------------------------------------------
+# check netdevice
+# -------------------------------------------
+if [ ! -x "/sys/class/net/$vanetdevice" ]; then
+  echo "Bitte Device auswählen" >&2
+fi
+
+# -------------------------------------------
 # bereinigen
 # -------------------------------------------
 
