@@ -3,7 +3,7 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-conffile="$netconfigdir/00-mne-$vadeviceInput_old.yaml"
-rm -f $conffile 
+rm "$netplandir/$vafileInput_old.yaml"
+echo | netplan try > /dev/null;
 
 exit 0

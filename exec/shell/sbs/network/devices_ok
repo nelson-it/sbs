@@ -10,16 +10,31 @@ if [ -d "$cloudcfgdir" ] && [ ! -f "$cloudcfgdir/99-mne-disable-network-config.c
   cp $disable $cloudcfgdir/99-mne-disable-network-config.cfg;
 fi
 
+if [ "$vafileInput_old" == "" ]; then
+  vafileInput_old="$vafileInput"
+fi
 
-conffile="$netplandir/00-mne-$vadeviceInput.yaml"
-mv "$conffile" "$conffile.save"
-echo "$vaconfigInput" > "$conffile"
+if [ "$vafileInput" != "$vafileInput_old" ] && [ -f "$netplandir/$vafileInput_old".yaml ] ; then
+  mv "$netplandir/$vafileInput_old".yaml "$netplandir/$vafileInput".yaml
+fi
+
+if [ -f "$netplandir/$vafileInput".yaml ] ; then
+  mv "$netplandir/$vafileInput".yaml "$netplandir/$vafileInput.save"
+fi
+
+echo "$vaconfigInput" > "$netplandir/$vafileInput".yaml
 
 mne_need_error 
-echo | netplan try > /dev/null
+( echo | netplan try > /dev/null; exit $?)
 if [ "$?" != "0" ]; then
-  mv "$conffile.save" "$conffile"
+  if [ -f  "$netplandir/$vafileInput.save" ]; then
+    mv "$netplandir/$vafileInput.save" "$netplandir/$vafileInput".yaml
+  else
+    rm "$netplandir/$vafileInput".yaml
+  fi
   exit 1
 fi
+
+rm "$netplandir/$vafileInput.save"
  
 exit 0
