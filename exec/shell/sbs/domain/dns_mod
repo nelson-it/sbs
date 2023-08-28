@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 . sbs/exec/config/allg
 . $netbasedir/config/functions

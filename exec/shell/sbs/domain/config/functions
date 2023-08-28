@@ -363,23 +363,20 @@ function dhcp_fix_mod()
     addrtyp=
     idname="hardware ethernet"
     mask=$(ipmask2int $(awk '/subnet.*{/ { print $4 }' < /etc/dhcp/dhcpd.conf ))
-    echo t"$(awk '/subnet.*{/ { print $2 "/'$mask'"}' < /etc/dhcp/dhcpd.conf)"t t"$(netmask $3/$mask | sed -e 's/^[[:space:]]*//')"t >&$logfile
     if [ "$(awk '/subnet.*{/ { print $2 "/'$mask'"}' < /etc/dhcp/dhcpd.conf)" != "$(netmask $3/$mask | sed -e 's/^[[:space:]]*//')" ]; then
-      return
+      return 0
     fi
   elif [ "$7" = "AAAA" ]; then
     addrtyp=6
     idname="host-identifier option dhcp6.client-id"
     net="$(awk '/subnet6.*{/ { print $2 }' < /etc/dhcp/dhcpd6.conf)"
     if [ "$net" != "$(netmask $3/${net#*/} | sed -e 's/^[[:space:]]*//')" ]; then
-      return
+      return 0
     fi
   else
-    return;
+    return 0;
   fi
   
-  echo "Fix" >&$logfile
-
   prog='/host[ \t]+'$1'[ \t]*{/ { hostfound=1; }
         /}/                     { if ( hostfound ) { hostfound=0; next; }}
         /#}/                    { if ( hostfound ) { hostfound=0; next; }}
