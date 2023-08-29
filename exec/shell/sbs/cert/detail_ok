@@ -66,7 +66,7 @@ cert_mkcrt "$(hostname)" "$vapasswdInput"
 mne_error_ignore=1
 rm /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt >&$logfile 2>&1
 mne_error_ignore=
-cp $certcadir/ca.crt /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt
+ln -s $certcadir/ca.crt /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt
 update-ca-certificates >&$logfile 2>&1
 
 exit 0
