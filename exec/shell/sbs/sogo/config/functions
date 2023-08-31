@@ -29,7 +29,7 @@ function sogo_confprog()
 # prog
 function write_postfix()
 {
-    for dir in sasl ldap
+    for dir in sasl ldap maps
     do
       mkdir -p           $postfixconf/$dir >&$logfile 2>&1
       chown root:postfix $postfixconf/$dir >&$logfile 2>&1
@@ -37,7 +37,7 @@ function write_postfix()
       chmod g+s          $postfixconf/$dir >&$logfile 2>&1
     done
 
-    for file in main.cf master.cf ldap/aliases ldap/canonical ldap/mailbox_maps ldap/uid_maps sasl/passwd 
+    for file in main.cf master.cf ldap/aliases ldap/canonical ldap/mailbox_maps ldap/uid_maps sasl/passwd
     do
         template="$(findtemplate postfix $file)"
         savefile $postfixconf/$file
@@ -46,9 +46,14 @@ function write_postfix()
         chmod 640 $postfixconf/$file
     done
     
+    touch $postfixconf/maps/aliases
+    chgrp postfix $postfixconf/maps/aliases
+    chmod 640 $postfixconf/maps/aliases
+    
     chmod 644 $postfixconf/main.cf
 
     postmap $postfixconf/sasl/passwd  >&$logfile 2>&1
+    postmap $postfixconf/maps/aliases >&$logfile 2>&1
     systemctl restart postfix.service
 }
 
