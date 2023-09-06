@@ -32,7 +32,7 @@ function check_cert()
   chmod 644 $certcadir/ca.crt 2>&$logfile
 
   mne_error_ignore=1
-  rm /usr/local/share/ca-certificates/mne_sbsca.crt >&$logfile 2>&1
+  rm /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt >&$logfile 2>&1
   mne_error_ignore=
   ln -s $certcadir/ca.crt /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt
   update-ca-certificates >&$logfile 2>&1
