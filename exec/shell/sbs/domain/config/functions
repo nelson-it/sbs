@@ -125,7 +125,7 @@ function mod_bind()
   
   cat << EOF >"$domainbindroot/named.conf.samba"
 dlz "AD DNS Zone" {
-    database "dlopen /usr/lib/$(uname -i)-linux-gnu/samba/bind9/dlz_bind9_12.so";
+    database "dlopen /usr/lib/$(uname -i)-linux-gnu/samba/bind9/dlz_bind9_18.so";
 };
 EOF
   
