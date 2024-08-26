@@ -8,13 +8,13 @@ udomain=$(echo "$vadomainInput"  | awk '{print toupper($0)}')
 domaindn=$(echo "$vadomainInput" | sed -e "s/^/dc=/" -e "s/\./,dc=/g")
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
+systemctl is-enabled samba-ad-dc.service >/dev/null 2>&$logfile
 if [ "$?" = "0" ]; then
   if [ "$vaadministratorInput" = "" ]; then
     vaadministratorInput="administrator"
   fi
-  echo "$vaadminpasswordInput" | samba-tool domain demote --username="$vaadministratorInput" >&$logfile 2>&1
-  systemctl disable --now sogo samba-ad-dc.service named isc-dhcp-server isc-dhcp-server6 2>&$logfile 1>&2
+  echo "$vaadminpasswordInput" | samba-tool domain demote --username="$vaadministratorInput" >&$logfile 2>&$logfile
+  systemctl disable --now sogo samba-ad-dc.service named isc-dhcp-server isc-dhcp-server6 2>&$logfile 1>&$logfile
   
   rm_config
   

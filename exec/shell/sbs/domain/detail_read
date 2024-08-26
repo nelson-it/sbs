@@ -8,7 +8,7 @@ labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Admini
 regexps="workgroup:notempty,primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
+systemctl is-enabled samba-ad-dc.service >/dev/null 2>/dev/null
 if [ "$?" = "0" ]; then
 	json_writeheader "$cols" "$labels" "" "" "adminpassword:notempty,domain:notempty,$regexps"
 
@@ -30,7 +30,7 @@ if [ "$?" = "0" ]; then
     workgroup=$(echo "$info" | awk -v FS=: '/Netbios domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
 	description=$( cat "$domainconfigfile"  | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0 }')
     
-    netdevice=$(cat "$domainconfigfile" | awk '/interfaces =/ { print $NF }')
+    netdevice=$(cat "$domainconfigfile" | awk '/interfaces =/ { sub( /^.*lo */, "", $0 ); print $0 }')
     dnsforwarder=$(cat "$domainforwarderfile" 2>/dev/null | awk '/forwarders/ { start=1; next } /}/ { start=0 } { if ( start ) { sub(";",""); printf("%s%s", space, $NF); space=" " }}')
     
     dhcpstart=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $2); print $2; exit 0 }')

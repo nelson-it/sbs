@@ -3,11 +3,11 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-mkdir -p $certcadir   2>&1 >/dev/null
-mkdir -p $certkeydir  2>&1 >/dev/null
-mkdir -p $certcertdir 2>&1 >/dev/null
-mkdir -p $certcsrdir  2>&1 >/dev/null
-mkdir -p $certextdir  2>&1 >/dev/null
+mkdir -p $certcadir   2>/dev/null >/dev/null
+mkdir -p $certkeydir  2>/dev/null >/dev/null
+mkdir -p $certcertdir 2>/dev/null >/dev/null
+mkdir -p $certcsrdir  2>/dev/null >/dev/null
+mkdir -p $certextdir  2>/dev/null >/dev/null
 
 chown -R root:$daemongroup $certcadir
 chown -R root:root         $certkeydir
@@ -48,7 +48,7 @@ fi
 if [ ! -f "$certcadir/ca.key" ] || [ ! -f "$certcadir/ca.crt" ] || [ "$vaoverwriteInput" = "1" ]; then
     echo "#mne_lang#Erstelle CA Zertifikat#" >&2
     echo $vapasswdInput | openssl genrsa -des3 -passout stdin -out $certcadir/ca.key 4096   >&$logfile 2>&$logfile
-    echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&1
+    echo $vapasswdInput | openssl req -new -sha256 -x509 -days 3650 -passin stdin -key $certcadir/ca.key -out $certcadir/ca.crt -config $(dirname $BASH_SOURCE)/openssl.conf -extensions v3_ca -subj "/CN=$vaorgInput CA/C=$vacountryInput/ST=$vastateInput/L=$vacityInput/O=$vaorgInput/OU=$vaorgunitInput/emailAddress=$vaemailInput" >&$logfile 2>&$logfile
 fi
 
 chmod 660 $certcadir/ca.key
@@ -64,9 +64,9 @@ check_capasswd "$vapasswdInput"
 cert_mkcrt "$(hostname)" "$vapasswdInput"
 
 mne_error_ignore=1
-rm /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt >&$logfile 2>&1
+rm /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt >&$logfile 2>&$logfile
 mne_error_ignore=
 ln -s $certcadir/ca.crt /usr/local/share/ca-certificates/mne_sbsca_$(hostname).crt
-update-ca-certificates >&$logfile 2>&1
+update-ca-certificates >&$logfile 2>&$logfile
 
 exit 0

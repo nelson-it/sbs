@@ -8,10 +8,10 @@ smbconf=$(findtemplate domain smb_standalone.conf)
 systemctl daemon-reload
 
 mne_error_ignore=1
-systemctl disable --now sogo samba-ad-dc.service samba-ad-dc.service named isc-dhcp-server isc-dhcp-server6 2>&$logfile 1>&2
+systemctl disable --now sogo samba-ad-dc.service samba-ad-dc.service named isc-dhcp-server isc-dhcp-server6 2>&$logfile 1>&$logfile
 
-systemctl unmask smbd nmbd winbind systemd-resolved 2>&$logfile 1>&2
-systemctl enable smbd nmbd winbind systemd-resolved 2>&$logfile 1>&2
+systemctl unmask smbd nmbd winbind systemd-resolved 2>&$logfile 1>&$logfile
+systemctl enable smbd nmbd winbind systemd-resolved 2>&$logfile 1>&$logfile
 
 systemctl daemon-reload
 mne_error_ignore=
@@ -30,5 +30,5 @@ savefile /etc/samba/smb.conf
 awk "$prog" $smbconf > /etc/samba/smb.conf
 
 systemctl daemon-reload
-systemctl restart smbd.service      2>&$logfile 1>&2
-systemctl restart nmbd.service      2>&$logfile 1>&2
+systemctl restart smbd.service      2>&$logfile 1>&$logfile
+systemctl restart nmbd.service      2>&$logfile 1>&$logfile

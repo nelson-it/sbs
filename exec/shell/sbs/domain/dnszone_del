@@ -5,7 +5,7 @@
 . $(dirname $BASH_SOURCE)/config/functions
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service 2>&1 >/dev/null
+systemctl is-enabled samba-ad-dc.service 2>/dev/null >/dev/null
 if [ "$?" = "0" ]; then
 
   info=$(samba-tool domain info 127.0.0.1)
@@ -13,7 +13,7 @@ if [ "$?" = "0" ]; then
   check_dnspasswd $domain
   
   mne_need_error
-  samba-tool dns zonedelete $(hostname) "$vanameInput_old" --use-kerberos=required >&$logfile 2>&1
+  samba-tool dns zonedelete $(hostname) "$vanameInput_old" --use-kerberos=required >&$logfile 2>&$logfile
   if [ "$?" != "0" ]; then
     echo '#mne_lang# Kann Zone nicht löschen#' >&2
     exit 1;

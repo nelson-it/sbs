@@ -8,7 +8,7 @@ udomain=$(echo "$vadomainInput"  | awk '{print toupper($0)}')
 domaindn=$(echo "$vadomainInput" | sed -e "s/^/dc=/" -e "s/\./,dc=/g")
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
+systemctl is-enabled samba-ad-dc.service >/dev/null 2>/dev/null
 if [ "$?" = "0" ]; then
   host=$(hostname | awk '{ print toupper($0) }')
   master=$(samba-tool fsmo show | sed -n "/SchemaMasterRole.*CN=$host/p" )
@@ -20,7 +20,7 @@ if [ "$?" = "0" ]; then
   if [ "$vaadministratorInput" = "" ]; then
     vaadministratorInput="administrator"
   fi
-  echo "$vaadminpasswordInput" | samba-tool fsmo transfer --role=all --username="$vaadministratorInput" >&$logfile 2>&1
+  echo "$vaadminpasswordInput" | samba-tool fsmo transfer --role=all --username="$vaadministratorInput" >&$logfile 2>&$logfile
   
 else
   echo "#mne_lang#Ist kein Domaincontroller#" >&2

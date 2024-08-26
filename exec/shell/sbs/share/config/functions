@@ -10,7 +10,7 @@ fi
 function domain_type()
 {
   mne_need_error
-  systemctl is-enabled samba-ad-dc.service 2>&1 >/dev/null
+  systemctl is-enabled samba-ad-dc.service 2>/dev/null >/dev/null
   if [ "$?" = "0" ]; then echo "primary"; else echo "standalone"; fi
 }
 
@@ -169,11 +169,11 @@ function write_apache()
                                           { print $0 }'
    
       awk "$prog" < "$template" > "$apacherootdir/conf-available/$confname"
-      a2enconf "$confname" >&$logfile 2>&1
+      a2enconf "$confname" >&$logfile 2>&$logfile
     fi
     
     mne_need_error
-    err="$(apachectl configtest 2>&1 >/dev/null ; exit $? )"
+    err="$(apachectl configtest 2>/dev/null >/dev/null ; exit $? )"
     if [ "$?" != "0" ]; then
        echo "$err" >$2
        a2disconf "$confname"
@@ -200,15 +200,15 @@ function write_access()
     fi
 
     mne_need_error 2
-    samba-tool group list | egrep "^$groupname\$" 2>&1 >/dev/null
+    samba-tool group list | egrep "^$groupname\$" 2>/dev/null >/dev/null
     if [ ! "$?" = "0" ]; then
-      samba-tool group add "$groupname" >&$logfile 2>&1
+      samba-tool group add "$groupname" >&$logfile 2>&$logfile
     fi
 
     mne_need_error 2
-    samba-tool group list | egrep "^$groupnameread\$" 2>&1 >/dev/null
+    samba-tool group list | egrep "^$groupnameread\$" 2>/dev/null >/dev/null
     if [ ! "$?" = "0" ]; then
-       samba-tool group add "$groupnameread" >&$logfile 2>&1
+       samba-tool group add "$groupnameread" >&$logfile 2>&$logfile
     fi
     
     dusid=$(wbinfo --name-to-sid="Domain Users" | cut -f1 "-d ")

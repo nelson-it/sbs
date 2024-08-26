@@ -16,8 +16,10 @@ check_cert
 # -------------------------------------------
 # check netdevice
 # -------------------------------------------
-if [ ! -x "/sys/class/net/$vanetdevice" ]; then
+eval $( echo "$vanetdeviceInput" | awk -F "#" '{ printf("interface=\"%s\"; vanetdeviceInput=\"%s\"", $1, $2); }' )
+if [ "$vanetdeviceInput" = "" ]; then
   echo "Bitte Device auswählen" >&2
+  exit 1;
 fi
 
 # -------------------------------------------
@@ -26,15 +28,15 @@ fi
 
 systemctl daemon-reload
 mne_error_ignore=1
-systemctl disable --now smbd nmbd winbind systemd-resolved 2>&$logfile 1>&2
-systemctl mask          smbd nmbd winbind 2>&$logfile 1>&2
-systemctl unmask  samba-ad-dc.service 2>&$logfile 1>&2
+systemctl disable --now smbd nmbd winbind systemd-resolved 2>&$logfile 1>&$logfile
+systemctl mask          smbd nmbd winbind 2>&$logfile 1>&$logfile
+systemctl unmask  samba-ad-dc.service 2>&$logfile 1>&$logfile
 mne_error_ignore=
 
-systemctl enable samba-ad-dc.service 2>&$logfile 1>&2
-systemctl stop   samba-ad-dc.service 2>&$logfile 1>&2
+systemctl enable samba-ad-dc.service 2>&$logfile 1>&$logfile
+systemctl stop   samba-ad-dc.service 2>&$logfile 1>&$logfile
 
-systemctl enable named.service 2>&$logfile 1>&2
+systemctl enable named.service 2>&$logfile 1>&$logfile
 
 systemctl daemon-reload
 
@@ -55,7 +57,7 @@ if [ "$vadomaintypInput" == "primary" ]; then
      --domain="$vaworkgroupInput" \
      --server-role=dc \
      --dns-backend=SAMBA_INTERNAL \
-     --adminpass="$vaadminpasswordInput" >&$logfile 2>&1
+     --adminpass="$vaadminpasswordInput" >&$logfile 2>&$logfile
 
 else
   echo "nameserver $vaprimaryaddrInput" > /etc/resolv.conf
@@ -66,11 +68,11 @@ else
     --option="bind interfaces only=yes" \
     --realm="$vadomainInput" -U"$vaadministratorInput" \
     --dns-backend=SAMBA_INTERNAL \
-    --password="$vaadminpasswordInput" >&$logfile 2>&1
+    --password="$vaadminpasswordInput" >&$logfile 2>&$logfile
   
 fi
 
-samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&1
+samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&$logfile
 
 mod_smbconf
 mod_bind "$namedoption"
@@ -78,31 +80,31 @@ mod_netpar "$vadomainInput" "$vanetdeviceInput" "$vadnsforwarderInput" "$vadnsse
 mod_cert "$vaworkgroupInput" "$globalextra"
 mod_kerberos
 
-samba-tool user setexpiry --noexpiry administrator >&$logfile 2>&1
-samba-tool user setexpiry --noexpiry dns-"$hostname" >&$logfile 2>&1
-samba-tool domain passwordsettings set --complexity=off >&$logfile 2>&1
-samba-tool domain passwordsettings set --min-pwd-length=1 >&$logfile 2>&1
-samba-tool user setpassword "administrator" --newpassword="$vaadminpasswordInput" >&$logfile 2>&1
-samba-tool group addmembers DnsAdmins dns-"$hostname" >&$logfile 2>&1
+samba-tool user setexpiry --noexpiry administrator >&$logfile 2>&$logfile
+samba-tool user setexpiry --noexpiry dns-"$hostname" >&$logfile 2>&$logfile
+samba-tool domain passwordsettings set --complexity=off >&$logfile 2>&$logfile
+samba-tool domain passwordsettings set --min-pwd-length=1 >&$logfile 2>&$logfile
+samba-tool user setpassword "administrator" --newpassword="$vaadminpasswordInput" >&$logfile 2>&$logfile
+samba-tool group addmembers DnsAdmins dns-"$hostname" >&$logfile 2>&$logfile
 samba-tool user disable Guest
 
 mne_need_error
-samba-tool user show www-data >/dev/null 2>&1
+samba-tool user show www-data >/dev/null 2>/dev/null
 if [ "$?" != "0" ]; then
-  samba-tool user create www-data --rfc2307-from-nss --random-password --description="Unprivileged user for Webservices" >&$logfile 2>&1
-  samba-tool user setexpiry --noexpiry www-data >&$logfile 2>&1
+  samba-tool user create www-data --rfc2307-from-nss --random-password --description="Unprivileged user for Webservices" >&$logfile 2>&$logfile
+  samba-tool user setexpiry --noexpiry www-data >&$logfile 2>&$logfile
 fi
 
-mkdir -p /etc/mne/dns >&$logfile 2>&1
+mkdir -p /etc/mne/dns >&$logfile 2>&$logfile
 chmod 755 /etc/mne/dns
 
-systemctl restart samba-ad-dc >&$logfile 2>&1
-systemctl restart named >&$logfile 2>&1
+systemctl restart samba-ad-dc >&$logfile 2>&$logfile
+systemctl restart named >&$logfile 2>&$logfile
 sleep 2
-systemctl status samba-ad-dc >&$logfile 2>&1
+systemctl status samba-ad-dc >&$logfile 2>&$logfile
 
-echo "$vaadminpasswordInput" | kinit  administrator@$udomain >&$logfile 2>&1
-klist >&$logfile 2>&1
+echo "$vaadminpasswordInput" | kinit  administrator@$udomain >&$logfile 2>&$logfile
+klist >&$logfile 2>&$logfile
 
 addr4=$(ip -4 address show dev $vanetdeviceInput | awk '/inet/ { print $2 }')
 addr6=$(ip -6 address show dev $vanetdeviceInput | awk '/inet6/ { if ( substr($2,1,4) != "fe80" ) print $2 } ')
@@ -112,7 +114,7 @@ addr6=$(ip -6 address show dev $vanetdeviceInput | awk '/inet6/ { if ( substr($2
 # -------------------------------------------
 workgroup=$(samba-tool domain info 127.0.0.1 | awk -v FS=: '/Netbios domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
 
-echo "$vaadminpasswordInput" | net rpc rights grant "$workgroup\Domain Admins" SeDiskOperatorPrivilege -Uadministrator -I ${addr4%%/*} >&$logfile 2>&1 
+echo "$vaadminpasswordInput" | net rpc rights grant "$workgroup\Domain Admins" SeDiskOperatorPrivilege -Uadministrator -I ${addr4%%/*} >&$logfile 2>&$logfile 
 
 mod_dhcp "$addr4" "$vadhcpstartInput" "$vadhcpendInput" "$addr6" "$vadhcp6startInput" "$vadhcp6endInput" \
          "$vadomainInput" "$vadnssearchInput" "" "" "$vanetdeviceInput" \

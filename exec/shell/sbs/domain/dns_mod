@@ -5,7 +5,7 @@
 . $(dirname $BASH_SOURCE)/config/functions
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service 2>&1 >/dev/null
+systemctl is-enabled samba-ad-dc.service 2>/dev/null >/dev/null
 if [ "$?" = "0" ]; then
 
   if [ "$vadns_recordInput" != "$vadns_recordInput_old" ]; then
@@ -22,14 +22,14 @@ if [ "$?" = "0" ]; then
   eval "$(get_reverse $vadns_recordInput_old $vaaddressInput_old)"
 
   mne_need_error
-  samba-tool dns delete $(hostname) $vadomainInput "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" --use-kerberos=required >&$logfile 2>&1
+  samba-tool dns delete $(hostname) $vadomainInput "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" --use-kerberos=required >&$logfile 2>&$logfile
   if [ "$?" != "0" ]; then
     echo '#mne_lang# Kann Addresse nicht finden#' >&2
   fi
   
   if [ "$vadns_recordInput_old" = "AAAA" ] || [ "$vadns_recordInput_old" = "A" ]; then
     mne_need_error
-    samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$vadomainInput" --use-kerberos=required >&$logfile 2>&1
+    samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$vadomainInput" --use-kerberos=required >&$logfile 2>&$logfile
     if [ "$?" != "0" ]; then
       echo '#mne_lang# Kann Rückaddresse nicht finden#' >&2
     fi    
@@ -37,14 +37,14 @@ if [ "$?" = "0" ]; then
 
  eval "$(get_reverse $vadns_recordInput $vaaddressInput)"
   mne_need_error
-  samba-tool dns add $(hostname) $vadomainInput "$vanameInput" "$vadns_recordInput" "$vaaddressInput" --use-kerberos=required >&$logfile 2>&1
+  samba-tool dns add $(hostname) $vadomainInput "$vanameInput" "$vadns_recordInput" "$vaaddressInput" --use-kerberos=required >&$logfile 2>&$logfile
   if [ "$?" != "0" ]; then
     echo '#mne_lang# Kann Addresse nicht hinzufügen#' >&2
   fi
   
   if [ "$vadns_recordInput" = "AAAA" ] || [ "$vadns_recordInput" = "A" ]; then
      mne_need_error
-    samba-tool dns add $(hostname) $zone $raddr PTR "$vanameInput.$vadomainInput" --use-kerberos=required >&$logfile 2>&1
+    samba-tool dns add $(hostname) $zone $raddr PTR "$vanameInput.$vadomainInput" --use-kerberos=required >&$logfile 2>&$logfile
     if [ "$?" != "0" ]; then
       echo '#mne_lang# Kann Rückaddresse nicht hinzufügen#' >&2
     fi

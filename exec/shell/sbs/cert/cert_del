@@ -18,7 +18,7 @@ if [ -f "$file" ]; then
 fi
 
 if [ "$vadirInput_old" == 'ext' ]; then
-	update-ca-certificates -f >&$logfile 2>&1
+	update-ca-certificates -f >&$logfile 2>&$logfile
 fi
 
 exit 0

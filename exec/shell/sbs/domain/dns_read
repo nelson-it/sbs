@@ -27,7 +27,7 @@ prog='/mnecomment/         { comment = $0; sub("#mnecomment", "", comment);  }
       /hardware ethernet/  { mac  = ( fix ) ? $3 : $4; sub(";", "", mac);   } 
       /dhcp6.client-id/    { mac  = ( fix ) ? $4 : $5; sub(";", "", mac); } '
 
-#awk "$prog" /etc/dhcp/fix.conf 1>&2 2>&$logfile
+#awk "$prog" /etc/dhcp/fix.conf 1>&$logfile 2>&$logfile
 eval $(awk -v recordtype=A "$prog" /etc/dhcp/fix.conf  2>&$logfile )
 eval $(awk -v recordtype=AAAA "$prog" /etc/dhcp/fix6.conf 2>&$logfile )
 
@@ -41,7 +41,7 @@ done
 echo '  "values"  : ['
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
+systemctl is-enabled samba-ad-dc.service >/dev/null 2>&$logfile
 if [ "$?" = "0" ]; then
 
   s_readtime=$(date +%s)

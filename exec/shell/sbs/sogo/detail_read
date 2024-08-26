@@ -14,7 +14,7 @@ fi
 
 domainok=
 mne_need_error
-systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
+systemctl is-enabled samba-ad-dc.service >/dev/null 2>/dev/null
 if [ "$?" = "0" ]; then
   domainok=true
 fi

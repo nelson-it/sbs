@@ -3,4 +3,4 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-samba-tool user delete "$vasAMAccountNameInput_old" >&$logfile 2>&1
+samba-tool user delete "$vasAMAccountNameInput_old" >&$logfile 2>&$logfile

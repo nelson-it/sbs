@@ -17,7 +17,7 @@ fi
 if [ "$vasAMAccountNameInput" != "$cn" ]; then
 	
   echo -e "dn: cn=$cn,cn=users,$domaindn\nchangetype: modrdn\nnewrdn: cn=$vasAMAccountNameInput\ndeleteoldrdn: 1\n" | \
-    ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&1
+    ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&$logfile
 
   echo -e "dn: cn=$vasAMAccountNameInput,cn=users,$domaindn\n"\
           "changetype: modify\n"\
@@ -27,10 +27,10 @@ if [ "$vasAMAccountNameInput" != "$cn" ]; then
           "replace: userPrincipalName\n"\
           "userPrincipalName: $vasAMAccountNameInput@$domain\n"\
           "-\n"\
-  | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&1 
+  | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&$logfile 
 fi
 
-samba-tool user setexpiry  "$vasAMAccountNameInput" --noexpiry >&$logfile 2>&1
+samba-tool user setexpiry  "$vasAMAccountNameInput" --noexpiry >&$logfile 2>&$logfile
 
 eval $(read_ldap "user" "$vasAMAccountNameInput")
 mod_ldap "$dn" "$vacols" "$vapasswd" "$domaindn"

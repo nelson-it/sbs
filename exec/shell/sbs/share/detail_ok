@@ -37,9 +37,9 @@ if [ "$domaintype" = "primary" ]; then
     bindpassword=$(dd if=/dev/urandom bs=2048 count=1 2>/dev/null |tr -dc "a-zA-Z0-9"|fold -w 64 |head -1)
     echo "$bindpassword" > "$shareconfigdir/bindpassword"
     chmod 600 "$shareconfigdir/bindpassword"
-    samba-tool user create "$apacheuser" --random-password $option 2>&1 >&$logfile
-    samba-tool user setexpiry --noexpiry "$apacheuser" 2>&1 >&$logfile
-    samba-tool user setpassword "$apacheuser" --newpassword="$bindpassword" 2>&1 >&$logfile
+    samba-tool user create "$apacheuser" --random-password $option 2>&$logfile >&$logfile
+    samba-tool user setexpiry --noexpiry "$apacheuser" 2>&$logfile >&$logfile
+    samba-tool user setpassword "$apacheuser" --newpassword="$bindpassword" 2>&$logfile >&$logfile
   else
     bindpassword=$(cat $shareconfigdir/bindpassword)
   fi 

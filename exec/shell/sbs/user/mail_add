@@ -14,4 +14,4 @@ if [ "$sAMAccountName" = "" ]; then
 fi
 
 echo -e "dn: $dn\nchangetype: modify\nadd: otherMailbox\notherMailbox: $vaotherMailboxInput\n" \
-  | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&1 
+  | sed -e 's/^ *//' | ldapmodify -H ldaps://localhost -D "cn=administrator,cn=users,$domaindn" -w "$vapasswd" -x >&$logfile 2>&$logfile 

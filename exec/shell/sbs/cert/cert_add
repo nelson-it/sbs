@@ -35,7 +35,7 @@ if [ "$vadirInput" == 'ext' ]; then
     mv "$file" "$dir/$vafilenameInput"
 	mne_error_ignore=0
    
-	update-ca-certificates >&$logfile 2>&1
+	update-ca-certificates >&$logfile 2>&$logfile
 fi
 
 if [ "$vadirInput" == 'csr' ]; then

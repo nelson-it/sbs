@@ -12,6 +12,6 @@ prog='/####HTTPPORT####/  { gsub(/####HTTPPORT####/, "'$vaportInput'");  }
 savefile $apacherootdir/ports.conf
 awk "$prog" "$portfile" > $apacherootdir/ports.conf
 
-$apacherestart 1>&$logfile 2>&1
+$apacherestart 1>&$logfile 2>&$logfile
 
 exit 0

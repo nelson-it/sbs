@@ -19,7 +19,7 @@ if [ "$vanameInput" = "000-default-ssl" ] || [ "$vanameInput" = "000-default" ];
     vanameInput="$vanameInput_old";
 
     mne_need_error
-    systemctl is-enabled samba-ad-dc.service >/dev/null 2>&1
+    systemctl is-enabled samba-ad-dc.service >/dev/null 2>/dev/null
     if [ "$?" = "0" ]; then
        domain=$(samba-tool domain info 127.0.0.1 | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
        vaaliasesInput="$(hostname).$domain $domain"
@@ -69,17 +69,17 @@ if [ "$varenewcertInput" != "0" ]; then
 fi
 
 if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then
-    a2ensite "$vanameInput" >&$logfile 2>&1 
+    a2ensite "$vanameInput" >&$logfile 2>&$logfile 
     mne_need_error
-    err="$(apachectl configtest  2>&1 >/dev/null; exit $? )"
+    err="$(apachectl configtest  2>/dev/null >/dev/null; exit $? )"
     if [ "$?" != "0" ]; then
        echo "$err" >&2
        a2dissite "$vanameInput"
-       $apachereload >&$logfile 2>&1 
+       $apachereload >&$logfile 2>&$logfile 
        exit 1
     fi
 else
-    a2dissite "$vanameInput" >&$logfile 2>&1  
+    a2dissite "$vanameInput" >&$logfile 2>&$logfile  
 fi
 
-$apachereload >&$logfile 2>&1
+$apachereload >&$logfile 2>&$logfile
