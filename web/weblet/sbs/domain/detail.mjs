@@ -58,7 +58,7 @@ class MneSbsDomain extends MneDbView
   
   getParamNetpar(p)
   {
-      "domaintyp,domain,workgroup,description,netdevice,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcp6start,dhcp6end".split(',').forEach( ( item) =>
+      "domaintyp,domain,workgroup,description,netdevice,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcpdns,dhcp6start,dhcp6end,dhcp6dns".split(',').forEach( ( item) =>
       {
         p = this.addParam(p, item + "Input", this.obj.inputs[item]);
       });

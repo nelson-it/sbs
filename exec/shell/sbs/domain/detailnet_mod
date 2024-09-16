@@ -11,7 +11,7 @@ dhcpconf6=$(findtemplate  domain dhcpd6.conf)
 dhcpupdate=$(findtemplate domain update-samba-dns.sh)
 radvdconf=$(findtemplate  domain radvd.conf)
 
-#cols="domaintyp,domain,workgroup,description,netdevice,admin,adminpassword,adminpassword2,primaryname,primaryaddr,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcp6start,dhcp6end";
+#cols="domaintyp,domain,workgroup,description,netdevice,admin,adminpassword,adminpassword2,primaryname,primaryaddr,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcpdns,dhcp6start,dhcp6end,dhcp6dns";
 if [ "$vadescriptionInput" = "" ]; then
     vadescriptionInput="%h server (Samba,Nelson - technische Informatik)"
 fi
@@ -21,13 +21,10 @@ domaindn=$(echo "$vadomainInput" | sed -e "s/^/dc=/" -e "s/\./,dc=/g")
 
 if [ "$vadomaintypInput" == "primary" ] || [ "$vadomaintypInput" == "second" ]; then
 
-  addr4=$(ip -4 address show dev $vanetdeviceInput | awk '/inet/ { print $2 }')
-  addr6=$(ip -6 address show dev $vanetdeviceInput | awk '/inet6/ { if ( substr($2,1,4) != "fe80" ) print $2 } ')
-  
   check_dnspasswd $udomain
   mod_netpar "$vadomainInput" "$vanetdeviceInput" "$vadnsforwarderInput" "$vadnssearchInput"
-  mod_dhcp "$addr4" "$vadhcpstartInput" "$vadhcpendInput" "$addr6" "$vadhcp6startInput" "$vadhcp6endInput" \
-           "$vadomainInput" "$vadnssearchInput" "" "" "$vanetdeviceInput" \
+  mod_dhcp "$vadhcpdnsInput" "$vadhcpstartInput" "$vadhcpendInput" "$vadhcp6dnsInput" "$vadhcp6startInput" "$vadhcp6endInput" \
+           "$vadomainInput" "$vadnssearchInput" "" "" "nicht mehr relevant" \
            "$dhcpconf4" "$dhcpconf6" "$dhcpupdate" "$radvdconf"
 fi
 

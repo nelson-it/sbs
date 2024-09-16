@@ -198,7 +198,7 @@ function mod_netpar()
         echo "" > $bindconf/named.conf.options.forwarders;
     fi
     
-    rm -f /etc/resolv.conf 1>&logfile 2>&$logfile
+    rm -f /etc/resolv.conf 1>&$logfile 2>&$logfile
     echo "nameserver 127.0.0.1"  > /etc/resolv.conf
     echo "domain $1" >> /etc/resolv.conf
     if [ "$4" != "" ]; then
@@ -220,8 +220,8 @@ function mod_kerberos()
     echo "  }"                    >>  $domainkerberosfile
 }
 
-# ip4addr ip4start ip4end ip6addr ip6start ip6end
-# domain dnssearch broadcast router netdevice
+# ip4dnsaddr ip4start ip4end ip6dnsaddr ip6start ip6end
+# domain dnssearch broadcast router dummy
 # dhcpconf4 $dhcpconf6 dhcpupdate radvdconf
 function mod_dhcp()
 {
@@ -239,8 +239,8 @@ function mod_dhcp()
     
     local ip4netdevice=
     local ip6netdevice=
-    local ip4addr=
-    local ip6addr=
+    local ip4addr="$1"
+    local ip6addr="$4"
     
     systemctl stop  isc-dhcp-server  2>&$logfile 1>&$logfile
     systemctl stop  isc-dhcp-server6 2>&$logfile 1>&$logfile
@@ -252,24 +252,33 @@ function mod_dhcp()
 
     net=0.0.0.0/32
     if [ "$2" != "" ] && [ "$3" != "" ]; then
-      for addr in $1 
+      for netdevice in $(ls /sys/class/net)
       do
-          mask=$(echo $addr | cut -f2 -d/)
-          net=$(netmask $addr)
+        for addr in $(ip -4 address show dev $netdevice | awk '/inet/ { print $2 }')
+        do
+            mask=$(echo $addr | cut -f2 -d/)
+            net=$(netmask $addr)
 
-          netstart=$(netmask $2/$mask)
-          netend=$(netmask $3/$mask)
+            netstart=$(netmask $2/$mask)
+            netend=$(netmask $3/$mask)
           
-          if [ "$netstart" != "$net" ]; then continue; fi;
-          if [ "$netend" != "$net" ]; then continue; fi;
+            if [ "$netstart" != "$net" ]; then continue; fi;
+            if [ "$netend" != "$net" ]; then continue; fi;
         
-          ip4addr="$addr"
-          ip4netdevice=${11}
-          ip4broadcast=$(sipcalc -4 $addr | awk '/Broadcast/ { print $4 }')
-          ip4router=$(route -n  | awk '/^0\.0\.0\.0.*'$device'/ { print $2 }')
+            if [ "$ip4addr" = "" ]; then
+              ip4addr="$addr"
+            fi
           
-          systemctl enable  isc-dhcp-server 2>&$logfile 1>&$logfile
+            ip4netdevice=$netdevice
+            ip4broadcast=$(sipcalc -4 $addr | awk '/Broadcast/ { print $4 }')
+            ip4router=$(route -n  | awk '/^0\.0\.0\.0.*'$device'/ { print $2 }')
+          
+            systemctl enable  isc-dhcp-server 2>&$logfile 1>&$logfile
+            break;
+        done
+        if [ "$ip4netdevice" != "" ]; then break; fi;
       done
+      
       if [ "$ip4netdevice" == "" ]; then
         echo "#mne_lang#falsches Netzwerk der DHCP IPv4 Adresse#" >&2;
         exit 1;
@@ -278,27 +287,40 @@ function mod_dhcp()
     
     net6=0000::/64
     if [ "$5" != "" ] && [ "$6" != "" ]; then
-      for addr in "$4" 
+      for netdevice in $(ls /sys/class/net)
       do
-        mask6=$(echo $addr | cut -f2 -d/)
-        net6=$(ipv6calc --addr2compaddr $(sipcalc $addr | fgrep -i subnet | cut -d '-' -f 2))
+        for addr in $(ip -6 address show dev $netdevice | awk '/inet6/ { if ( substr($2,1,4) != "fe80" ) print $2 } ')
+        do
+          mask6=$(echo $addr | cut -f2 -d/)
+          net6=$(ipv6calc --addr2compaddr $(sipcalc $addr | fgrep -i subnet | cut -d '-' -f 2))
+  
+          if [ "$5" != "" ]; then
+              net6start=$(ipv6calc --addr2compaddr $(sipcalc $5/$mask6 | fgrep -i subnet | cut -d '-' -f 2))
+          fi
 
-        if [ "$5" != "" ]; then
-            net6start=$(ipv6calc --addr2compaddr $(sipcalc $5/$mask6 | fgrep -i subnet | cut -d '-' -f 2))
-            if [ "$net6start" != "$net6" ]; then continue; fi;
-        fi
+          if [ "$6" != "" ]; then
+              net6end=$(ipv6calc --addr2compaddr $(sipcalc $6/$mask6 | fgrep -i subnet | cut -d '-' -f 2))
+          fi
 
-        if [ "$6" != "" ]; then
-            net6end=$(ipv6calc --addr2compaddr $(sipcalc $6/$mask6 | fgrep -i subnet | cut -d '-' -f 2))
-            if [ "$net6end" != "$net6" ]; then continue; fi;
-        fi
-
-        ip6netdevice=${11}
-        ip6addr=$addr
-        ip6router=$(route -6n | awk '/::\/0.*'${11}'/ { print $2 }')
-        systemctl enable  isc-dhcp-server6 2>&$logfile 1>&$logfile
-        systemctl enable radvd             2>&$logfile 1>&$logfile
+          if [ "$net6start" != "$net6" ]; then continue; fi;
+          if [ "$net6end" != "$net6" ]; then continue; fi;
+        
+          ip6netdevice=$netdevice
+        
+          if [ "$ip6addr" = "" ];then
+            ip6addr=$addr
+          fi
+        
+          ip6router=$(route -6n | awk '/::\/0.*'$netdevice'/ { print $2 }')
+          systemctl enable  isc-dhcp-server6 2>&$logfile 1>&$logfile
+          systemctl enable radvd             2>&$logfile 1>&$logfile
+        
+          break;
+        done
+        
+        if [ "$ip6netdevice" != "" ]; then break; fi;
       done
+      
       if [ "$ip6netdevice" == "" ]; then
         echo "#mne_lang#falsches Netzwerk der DHCP IPv6 Adresse#" >&2;
         exit 1;
@@ -308,8 +330,8 @@ function mod_dhcp()
     prog='/####DOMAIN####/     { gsub(/####DOMAIN####/,"'$7'"); }
       /####HOST####/       { gsub(/####HOST####/,"'$(hostname)'"); }
       /####DSEARCH####/    { gsub(/####DSEARCH####/,"'$(echo "$7 $8" | awk -v RS=' '  '{ if (!seen[$1]++) { printf "%s%s",sep,$1; sep=" " } }' | sed -e 's/^ */\\"/' -e 's/ *$/\\"/' -e 's/  */\\", \\"/g')'"); }
-      /####ADDR####/       { gsub(/####ADDR####/,"'$( echo $ip4addr | cut -f1 -d/)'"); }
-      /####ADDR6####/      { gsub(/####ADDR6####/,"'$( echo $ip6addr | cut -f1 -d/)'"); }
+      /####DNSADDR####/    { gsub(/####DNSADDR####/,"'$( echo $ip4addr | cut -f1 -d/)'"); }
+      /####DNSADDR6####/   { gsub(/####DNSADDR6####/,"'$( echo $ip6addr | cut -f1 -d/)'"); }
       /####MASK####/       { gsub(/####MASK####/,"'$(ipnetmask mask)'"); }
       /####NET####/        { gsub(/####NET####/,"'$( echo $net | cut -f1 -d/)'"); }
       /####NET6####/       { gsub(/####NET6####/,"'$net6'"); }
@@ -320,7 +342,7 @@ function mod_dhcp()
       /####BCAST####/      { gsub(/####BCAST####/,"'$ip4broadcast'"); }
       /####ROUTER4####/     { gsub(/####ROUTER4####/,"'$ip4router'"); }
       /####ROUTER6####/     { gsub(/####ROUTER6####/,"'$ip6router'"); }
-      /####NETDEVICE####/  { gsub(/####NETDEVICE####/,"'${11}'"); }
+      /####NETDEVICE####/  { gsub(/####NETDEVICE####/,"'$ip6netdevice'"); }
                            { print $0 }'
     
     savefile /etc/dhcp/dhcpd.conf

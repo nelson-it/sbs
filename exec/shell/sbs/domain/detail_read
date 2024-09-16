@@ -3,9 +3,9 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
-cols="domaintyp,domain,workgroup,description,netdevice,adminpassword,adminpassword2,administrator,primaryname,primaryaddr,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcp6start,dhcp6end";
-labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Administrator,Primary Server,Primary Adresse,DNS Forward,DNS Suche,IPv4 Start,IPv4 Ende,IPv6 Start,IPv6 Ende";
-regexps="workgroup:notempty,primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
+cols="domaintyp,domain,workgroup,description,netdevice,adminpassword,adminpassword2,administrator,primaryname,primaryaddr,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcpdns,dhcp6start,dhcp6end,dhcp6dns";
+labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Administrator,Primary Server,Primary Adresse,DNS Forward,DNS Suche,IPv4 Start,IPv4 Ende,IPv4 DNS Server,IPv6 Start,IPv6 Ende,IPv6 DNS Server";
+regexps="workgroup:notempty,primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcpdns:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty,dhcp6dns:ip6addrempty"
 
 mne_need_error
 systemctl is-enabled samba-ad-dc.service >/dev/null 2>/dev/null
@@ -28,16 +28,18 @@ if [ "$?" = "0" ]; then
     
     domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
     workgroup=$(echo "$info" | awk -v FS=: '/Netbios domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
-	description=$( cat "$domainconfigfile"  | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0 }')
+	  description=$( cat "$domainconfigfile"  | awk -v FS== '/^#/ { next; } /server string/ { sub(/^[ \t]+/, "", $2); print $2; exit 0 }')
     
     netdevice=$(cat "$domainconfigfile" | awk '/interfaces =/ { sub( /^.*lo */, "", $0 ); print $0 }')
     dnsforwarder=$(cat "$domainforwarderfile" 2>/dev/null | awk '/forwarders/ { start=1; next } /}/ { start=0 } { if ( start ) { sub(";",""); printf("%s%s", space, $NF); space=" " }}')
     
     dhcpstart=$(cat "$domaindhcpfile" 2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $2); print $2; exit 0 }')
     dhcpend=$(cat "$domaindhcpfile"   2>/dev/null | awk '/^#/ { next; } /range/ { sub(";", "", $3); print $3; exit 0 }')
+    dhcpdns=$(cat "$domaindhcpfile"   2>/dev/null | awk '/^#/ { next; } /domain-name-servers/ { sub( "^.*domain-name-servers *", "", $0); sub(";", "", $0); print $0; exit 0 }')
 
     dhcp6start=$(cat "$domaindhcp6file" 2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $2); print $2; exit 0 }')
     dhcp6end=$(cat "$domaindhcp6file"   2>/dev/null | awk '/^#/ { next; } /range6/ { sub(";", "", $3); print $3; exit 0 }')
+    dhcp6dns=$(cat "$domaindhcp6file"   2>/dev/null | awk '/^#/ { next; } /dhcp6.name-servers/ { sub( "^.*dhcp6.name-servers *", "", $0); sub(";", "", $0); print $0; exit 0 }')
     
     dnssearch=$(cat "/etc/resolv.conf" 2>/dev/null | awk '/^#/ { next; } /search/ { sub(/^.*search[ \t]*/, "");  print $0; exit 0 }')
 else
@@ -51,5 +53,5 @@ else
 fi
 
 echo '  "values"  : ['
-json_writedata "$domaintyp" "$domain" "$workgroup" "$description" "$netdevice" "$adminpassword" "$adminpassword2" "$administrator" "$primaryname" "$primaryaddr" "$dnsforwarder" "$dnssearch" "$dhcpstart" "$dhcpend" "$dhcp6start" "$dhcp6end" 
+json_writedata "$domaintyp" "$domain" "$workgroup" "$description" "$netdevice" "$adminpassword" "$adminpassword2" "$administrator" "$primaryname" "$primaryaddr" "$dnsforwarder" "$dnssearch" "$dhcpstart" "$dhcpend" "$dhcpdns" "$dhcp6start" "$dhcp6end" "$dhcp6dns"
 echo ']'

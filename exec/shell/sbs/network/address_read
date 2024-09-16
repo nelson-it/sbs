@@ -18,7 +18,6 @@ for device in `ls /sys/class/net`
 do
   if [ "$device" != "lo" ]; then
 
-    ip address show dev $device | awk "$prog" >&$logfile
     ip address show dev $device | awk "$prog" | \
     while read line
     do
