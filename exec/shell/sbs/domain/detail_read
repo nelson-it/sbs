@@ -5,7 +5,7 @@
 
 cols="domaintyp,domain,workgroup,description,netdevice,adminpassword,adminpassword2,administrator,primaryname,primaryaddr,dnsforwarder,dnssearch,dhcpstart,dhcpend,dhcpdns,dhcp6start,dhcp6end,dhcp6dns";
 labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Administrator,Primary Server,Primary Adresse,DNS Forward,DNS Suche,IPv4 Start,IPv4 Ende,IPv4 DNS Server,IPv6 Start,IPv6 Ende,IPv6 DNS Server";
-regexps="workgroup:notempty,primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcpdns:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty,dhcp6dns:ip6addrempty"
+regexps="workgroup:notempty,primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcpdns:ip4addrempty,dhcp6start:ip6addrempty"
 
 mne_need_error
 systemctl is-enabled samba-ad-dc.service >/dev/null 2>/dev/null

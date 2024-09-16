@@ -110,7 +110,7 @@ klist >&$logfile 2>&$logfile
 # -------------------------------------------
 workgroup=$(samba-tool domain info 127.0.0.1 | awk -v FS=: '/Netbios domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
 
-echo "$vaadminpasswordInput" | net rpc rights grant "$workgroup\Domain Admins" SeDiskOperatorPrivilege -Uadministrator -I ${addr4%%/*} >&$logfile 2>&$logfile 
+echo "$vaadminpasswordInput" | net rpc rights grant "$workgroup\Domain Admins" SeDiskOperatorPrivilege -Uadministrator -I 127.0.0.1 >&$logfile 2>&$logfile 
 
 mod_dhcp "$vadhcpdnsInput" "$vadhcpstartInput" "$vadhcpendInput" "$vadhcp6dnsInput" "$vadhcp6startInput" "$vadhcp6endInput" \
          "$vadomainInput" "$vadnssearchInput" "" "" "nicht mehr relevant" \
