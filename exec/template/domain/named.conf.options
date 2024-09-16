@@ -7,7 +7,7 @@ options {
         dnssec-validation no;
 
         auth-nxdomain no;    # conform to RFC1035
-        listen-on-v6 { ::1; fd00::/8; fe80::/16; }
+        listen-on-v6 { ::1; fd00::/8; fe80::/16; };
 
         include "/etc/bind/named.conf.options.local";
 };
