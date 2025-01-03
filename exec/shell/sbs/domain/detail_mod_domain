@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 globalextra=$(findtemplate domain primary_globalextra.conf)
 namedoption=$(findtemplate domain named.conf.options )
@@ -27,6 +27,7 @@ fi
 
 systemctl daemon-reload
 mne_error_ignore=1
+systemctl stop          smbd nmbd winbind systemd-resolved 2>&$logfile 1>&$logfile
 systemctl disable --now smbd nmbd winbind systemd-resolved 2>&$logfile 1>&$logfile
 systemctl mask          smbd nmbd winbind 2>&$logfile 1>&$logfile
 systemctl unmask  samba-ad-dc.service 2>&$logfile 1>&$logfile

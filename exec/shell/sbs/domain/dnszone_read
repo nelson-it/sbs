@@ -12,12 +12,11 @@ json_writeheader "$cols" "$labels" "" "" "$regexp"
 echo '  "values"  : ['
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service >/dev/null 2>/dev/null
+info=$(samba-tool domain info 127.0.0.1 2>/dev/null) 
 if [ "$?" = "0" ]; then
 
   s_readtime=$(date +%s)
 
-  info=$(samba-tool domain info 127.0.0.1)
   domain=$(echo "$info" | awk -v FS=: '/Domain/ { sub(/^[ \t]+/, "", $2); print $2 }')
   check_dnspasswd $domain
 

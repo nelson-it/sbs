@@ -12,12 +12,14 @@ json_writeheader "$ids" "$labels" "" "" "$regexps";
 
 echo '  "values"  : ['
 
-for file in $(ls -1 "$netplandir")
-do
-  if [ "${file##*.}" == "yaml" ]; then
-    json_writedata "${file%.*}" "$(cat "$netplandir/$file")"
-  fi
-done
+if [ -d "$netplandir" ]; then
+   for file in $(ls -1 "$netplandir")
+  do
+    if [ "${file##*.}" == "yaml" ]; then
+      json_writedata "${file%.*}" "$(cat "$netplandir/$file")"
+    fi
+  done
+fi
 
 echo ']'
 

@@ -5,7 +5,7 @@
 . $(dirname $BASH_SOURCE)/config/functions
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service 2>/dev/null >/dev/null
+samba-tool domain info 127.0.0.1 >/dev/null 2>/dev/null
 if [ "$?" = "0" ]; then
 
   if [ "$vadns_recordInput" != "$vadns_recordInput_old" ]; then

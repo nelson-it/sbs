@@ -41,7 +41,7 @@ done
 echo '  "values"  : ['
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service >/dev/null 2>&$logfile
+samba-tool domain info 127.0.0.1 >/dev/null 2>/dev/null
 if [ "$?" = "0" ]; then
 
   s_readtime=$(date +%s)

@@ -8,11 +8,11 @@ labels="Typ,Domainname,Workgroup,Beschreibung,Device,Password,Wiederholen,Admini
 regexps="workgroup:notempty,primaryaddr:ipaddrempty,dhcpstart:ip4addrempty,dhcpend:ip4addrempty,dhcp6start:ip6addrempty,dhcp6end:ip6addrempty"
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service >/dev/null 2>/dev/null
+grep '^[^#;]*directory domain controller' "$domainrootdir/smb.conf" >/dev/null 2>/dev/null
 if [ "$?" = "0" ]; then
 	json_writeheader "$cols" "$labels" "" "" "adminpassword:notempty,domain:notempty,$regexps"
 
-    host=$(hostname | awk '{ print toupper($0) }')
+  host=$(hostname | awk '{ print toupper($0) }')
 	info=$(samba-tool fsmo show | sed -n "/SchemaMasterRole/p" ) 
 	master=$(echo $info | sed -n "/SchemaMasterRole.*CN=$host/p" )
 	if [ "$master" = "" ];then

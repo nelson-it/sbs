@@ -3,6 +3,11 @@
 . sbs/exec/config/allg
 . $(dirname $BASH_SOURCE)/config/functions
 
+if [ ! -d "$netplandir" ]; then
+  echo "can't edit configuration - may be docker" >&2
+  exit 0
+fi
+
 disable=$(findtemplate network netplan_disable)
 conf_single=$(findtemplate network netplan_single)
 
