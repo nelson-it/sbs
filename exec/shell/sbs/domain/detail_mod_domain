@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 globalextra=$(findtemplate domain primary_globalextra.conf)
 namedoption=$(findtemplate domain named.conf.options )

@@ -17,7 +17,7 @@ prog='/inet[^6]/ { found=1; printf("addr='"'"'%s'"'"'; bcast='"'"'%s'"'"'; mask=
     search=`cat /etc/resolv.conf | awk '/^search[ \t]/ { print $2 }'`
 nameserver=$(cat /etc/resolv.conf | awk 'BEGIN { found=""; } /^nameserver[ \t]+/ { gsub(/%.*$/,"",$2); printf("%s%s",found,$2); found = "," }')
  
-   domain=`hostname --domain`
+   domain=`hostname -d`
   
 echo '  "values"  : ['
 json_writedata "$hostname" "$domain" "$nameserver" "$search" "$gw" "$acttime"

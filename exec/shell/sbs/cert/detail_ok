@@ -57,7 +57,7 @@ chmod 664 $certcadir/ca.crt
 if [ ! -f $certkeydir/$(hostname).key ]; then
   echo "#mne_lang#Erstelle Rechner Schlüssel#" >&2
   cert_mkkey "$(hostname)"
-  cert_mkcsr "$(hostname)" "$(hostname)" "$(hostname --all-fqdns | sed -e 's/ *$//' -e "s/  */\n/g" | sort -u | awk '{ printf("%s%s", space, $0); space=" "  }')"
+  cert_mkcsr "$(hostname)" "$(hostname)" "$(hostname --all-fqdns 2>/dev/null | sed -e 's/ *$//' -e "s/  */\n/g" | sort -u | awk '{ printf("%s%s", space, $0); space=" "  }')"
 fi
 
 check_capasswd "$vapasswdInput"

@@ -1,6 +1,6 @@
 . $(dirname $BASH_SOURCE)/config
 
-if [ ! -d "$certdatabasedir" ]; then
+if [ ! -d "$certcadir" ]; then
   mkdir -p "$certcadir"   >/dev/null 2>/dev/null
   mkdir -p "$certkeydir"  >/dev/null 2>/dev/null
   mkdir -p "$certcertdir" >/dev/null 2>/dev/null
