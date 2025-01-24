@@ -10,13 +10,21 @@ fi
 
 function get_port()
 {
-    port=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /listen/ { print $2; exit; }' $apacherootdir/ports.conf)
+    if [ -f $apacherootdir/ports.conf ]; then
+      port=$(awk '/^[ \t]*#/ { next } tolower($1) ~ /listen/ { print $2; exit; }' $apacherootdir/ports.conf)
+    else
+      port=80
+    fi
     echo "$port"
 }
 
 function get_sport()
 {
-    port=$(awk 'BEGIN { ok=0 } /^[ \t]*#/ { next } /ssl_mod/ { ok=1; next } /mod_gnutls/ { ok=1; next } tolower($1) ~ /listen/ { if ( ok ) { print $2; exit; } }' $apacherootdir/ports.conf)
+    if [ -f $apacherootdir/ports.conf ]; then
+      port=$(awk 'BEGIN { ok=0 } /^[ \t]*#/ { next } /ssl_mod/ { ok=1; next } /mod_gnutls/ { ok=1; next } tolower($1) ~ /listen/ { if ( ok ) { print $2; exit; } }' $apacherootdir/ports.conf)
+    else
+      port=443
+    fi
     echo "$port"
 }
 

@@ -9,7 +9,7 @@ if [ ! -f  $certcadir/ca.crt ]; then
 fi
 
 mne_need_error
-systemctl is-enabled samba-ad-dc.service 2>/dev/null >/dev/null
+samba-tool domain info 127.0.0.1 >/dev/null 2>/dev/null
 if [ "$?" != "0" ]; then
     echo "#mne_lang#AD Domain ist nicht eingerichtet#" >&2
     exit 1
@@ -78,31 +78,31 @@ sogoprog=$(sogo_confprog "$certcertdir" "$certkeydir" "$domaindn" "$domain" "cn=
 # ==================================================================
 # Datenbank und Datenbankbenutzer
 # ==================================================================
-pg_addaccess "local.*$DB.*postgres"       "local   $DB       postgres                         trust"
-pg_addaccess "host.*$sogouser.*127.0.0.1" "host    $DB       $sogouser          127.0.0.1/32  trust"
+pg_addaccess "local.*$PGDATABSE.*postgres"       "local   $PGDATABSE       postgres                         trust"
+pg_addaccess "host.*$sogouser.*127.0.0.1"        "host    $PGDATABSE       $sogouser          127.0.0.1/32  trust"
 
 pg_adduser "$sogouser"
-echo "ALTER ROLE \"$sogouser\" SET search_path TO ext_sogo;"              | psql -U postgres $DB >&$logfile 2>&$logfile
-echo "CREATE SCHEMA ext_sogo AUTHORIZATION \"$sogouser\";"                | psql -U postgres $DB >&$logfile 2>&$logfile
-echo "ALTER  SCHEMA ext_sogo OWNER TO \"$sogouser\";"                     | psql -U postgres $DB >&$logfile 2>&$logfile
+echo "ALTER ROLE \"$sogouser\" SET search_path TO ext_sogo;"              | psql -U postgres >&$logfile 2>&$logfile
+echo "CREATE SCHEMA ext_sogo AUTHORIZATION \"$sogouser\";"                | psql -U postgres >&$logfile 2>&$logfile
+echo "ALTER  SCHEMA ext_sogo OWNER TO \"$sogouser\";"                     | psql -U postgres >&$logfile 2>&$logfile
 
 cmd=
-for tbl in $(psql -qAt -c "select tablename from pg_tables where schemaname = 'ext_sogo';" -U postgres $DB)
+for tbl in $(psql -qAt -c "select tablename from pg_tables where schemaname = 'ext_sogo';" -U postgres)
 do
   cmd="$cmd""ALTER TABLE ext_sogo.\"$tbl\" owner to \"$sogouser\";"
 done
 
-for tbl in $(psql -qAt -c "select sequence_name from information_schema.sequences where sequence_schema = 'ext_sogo';" -U postgres $DB)
+for tbl in $(psql -qAt -c "select sequence_name from information_schema.sequences where sequence_schema = 'ext_sogo';" -U postgres)
 do
   cmd="$cmd""ALTER SEQUENCE ext_sogo.\"$tbl\" owner to \"$sogouser\";"
 done
 
-for tbl in $(psql -qAt -c "select table_name from information_schema.views where table_schema = 'ext_sogo';" -U postgres $DB)
+for tbl in $(psql -qAt -c "select table_name from information_schema.views where table_schema = 'ext_sogo';" -U postgres )
 do
   cmd="$cmd""ALTER VIEW ext_sogo.\"$tbl\" owner to \"$sogouser\";"
 done
 
-echo "$cmd" | psql -U postgres $DB >&$logfile 2>&$logfile
+echo "$cmd" | psql -U postgres >&$logfile 2>&$logfile
 
 # ==================================================================
 # Conf File
@@ -111,14 +111,20 @@ prog='/####BINDPASSWORD####/ { gsub(/####BINDPASSWORD####/, "'$bindpassword'"); 
       /####BINDUSER####/     { gsub(/####BINDUSER####/,"'$sogouser'"); }
       /####DOMAIN####/       { gsub(/####DOMAIN####/,"'$domain'"); }
       /####DOMAINDN####/     { gsub(/####DOMAINDN####/,"'$domaindn'"); }
-      /####DATABASE####/     { gsub(/####DATABASE####/,"'$DB'"); }
+      /####DBHOST####/       { gsub(/####DBHOST####/,"'$databasehost'"); }
+      /####DBPORT####/       { gsub(/####DBPORT####/,"'$PGPORT'"); }
+      /####DATABASE####/     { gsub(/####DATABASE####/,"'$PGDATABASE'"); }
+      /####IMAPHOST####/     { gsub(/####IMAPHOST####/,"'$imaphost'"); }
+      /####SMTPHOST####/     { gsub(/####SMTPHOST####/,"'$postfixhost'"); }
+      /####LDAPHOST####/     { gsub(/####LDAPHOST####/,"'$ldaphost'"); }
       /####EMAIL####/        { gsub(/####EMAIL####/,"'$sogouser'@'$domain'"); }
                              { print $0 }'
 
-sogoconf="$(findtemplate sogo sogo.conf)"
+sogotemplate="$(findtemplate sogo sogo.conf)"
 mkdir -p /etc/sogo 1>&$logfile 2>&$logfile
 savefile /etc/sogo/sogo.conf
-awk "$prog" < $sogoconf > /etc/sogo/sogo.conf
+awk "$prog" < $sogotemplate > $sogoconfigdir/sogo.conf 
+cp $sogoconfigdir/sogo.conf /etc/sogo/sogo.conf
 
 systemctl enable mne_sogo.service 1>&$logfile 2>&$logfile
 systemctl daemon-reload

@@ -2,12 +2,19 @@
 
 configdir=$projectroot/config
 datadir=/opt/mne/data
+
 logid=sbs
+
+sogohost=127.0.0.1
+imaphost=127.0.0.1
+postfixhost=127.0.0.1
+apachehost=127.0.0.1
+databasehost=127.0.0.1
+ldaphost=127.0.0.1
+
+sambalocalinterfaces=lo
 
 certbasedir="$projectroot/sbs/exec/shell/sbs/cert/"
 domainbasedir="$projectroot/sbs/exec/shell/sbs/domain/"
 netbasedir="$projectroot/sbs/exec/shell/sbs/network/"
 apachebasedir="$projectroot/sbs/exec/shell/sbs/apache/"
-
-DBHOST="localhost"
-DB="sbsdb"

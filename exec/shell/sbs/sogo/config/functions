@@ -4,6 +4,9 @@
 
 . $(dirname $BASH_SOURCE)/config
 
+[ -e $sogoconfigdir ]    || mkdir -p $sogoconfigdir
+[ -e $dovecotconfigdir ] || mkdir -p $dovecotconfigdir
+[ -e $postfixconfigdir ] || mkdir -p $postfixconfigdir
 
 # certcertdir certkeydir domaindn domain binddn bindpassword mailrelay mailrelayuser mailrelaypassword
 function sogo_confprog()
@@ -31,61 +34,75 @@ function write_postfix()
 {
     for dir in sasl ldap maps
     do
-      mkdir -p           $postfixconf/$dir >&$logfile 2>&$logfile
-      chown root:postfix $postfixconf/$dir >&$logfile 2>&$logfile
-      chmod 750          $postfixconf/$dir >&$logfile 2>&$logfile
-      chmod g+s          $postfixconf/$dir >&$logfile 2>&$logfile
+      mkdir -p           $postfixconfigdir/$dir >&$logfile 2>&$logfile
+      chown root:postfix $postfixconfigdir/$dir >&$logfile 2>&$logfile
+      chmod 750          $postfixconfigdir/$dir >&$logfile 2>&$logfile
+      chmod g+s          $postfixconfigdir/$dir >&$logfile 2>&$logfile
     done
 
     for file in main.cf master.cf ldap/aliases ldap/canonical ldap/mailbox_maps ldap/uid_maps sasl/passwd
     do
         template="$(findtemplate postfix $file)"
         savefile $postfixconf/$file
-        awk "$1" < $template > $postfixconf/$file
-        chgrp postfix $postfixconf/$file
-        chmod 640 $postfixconf/$file
+        awk "$1" < $template > $postfixconfigdir/$file
+        chgrp postfix $postfixconfigdir/$file
+        chmod 640 $postfixconfigdir/$file
     done
     
-    touch $postfixconf/maps/aliases
-    chgrp postfix $postfixconf/maps/aliases
-    chmod 640 $postfixconf/maps/aliases
+    touch $postfixconfigdir/maps/aliases
+    chgrp postfix $postfixconfigdir/maps/aliases
+    chmod 640 $postfixconfigdir/maps/aliases
     
-    chmod 644 $postfixconf/main.cf
+    chmod 644 $postfixconfigdir/main.cf
 
-    postmap $postfixconf/sasl/passwd  >&$logfile 2>&$logfile
-    postmap $postfixconf/maps/aliases >&$logfile 2>&$logfile
+    if [ -d $postfixconf ]; then
+        ( cd $postfixconfigdir; tar -cf - . ) | ( cd $postfixconf; tar -xf - );
+        postmap $postfixconf/sasl/passwd  >&$logfile 2>&$logfile
+        postmap $postfixconf/maps/aliases >&$logfile 2>&$logfile
+    fi
     systemctl restart postfix.service
 }
 
 # prog
 function write_dovecot()
 {
-    mkdir -p /var/dovecot 2>&$logfile
-    chown root:mail /var/dovecot
-    chmod 770 /var/dovecot
-    chmod g+s /var/dovecot
+    mkdir -p $dovecotconfigdir/conf.d 2>&$logfile >&$logfile
+    chown root:root $dovecotconfigdir/conf.d 2>&$logfile >&$logfile
+    chmod 755       $dovecotconfigdir/conf.d 2>&$logfile >&$logfile
        
     for file in dovecot-ldap.conf.ext conf.d/10-auth.conf  conf.d/10-master.conf  conf.d/10-ssl.conf  conf.d/15-mailboxes.conf
     do
         template="$(findtemplate dovecot $file)"
         savefile $dovecotconf/$file
-        awk "$1" < $template > $dovecotconf/$file
-        chgrp dovecot $dovecotconf/$file
-        chmod 640 $dovecotconf/$file
+        awk "$1" < $template > $dovecotconfigdir/$file
+        chgrp dovecot $dovecotconfigdir/$file
+        chmod 640 $dovecotconfigdir/$file
     done
 
+    if [ -d $dovecotconf ]; then
+      ( cd $dovcotconfigdir; tar -cf - . ) | ( cd $dovecotconf; tar -xf - );
+
+      mkdir -p /var/dovecot 2>&$logfile
+      chown root:mail /var/dovecot
+      chmod 770 /var/dovecot
+      chmod g+s /var/dovecot
+    fi
+       
     systemctl restart dovecot.service
 }
 
 function write_apache()
 {
-port=$(get_port)
-sport=$(get_sport)
+  local port=$(get_port)
+  local sport=$(get_sport)
 
-template="$(findtemplate sogo site.conf)"
-site_writeconf "$(cat $template)" "$port" "$sport" "sogo" "sogo" "sogo.$1" "" "" "$datadir"
+  local prog='/####SOGOHOST####/  { gsub(/####SOGOHOST####/, "'$sogohost'");  }
+                                  { print $0 }'
 
-a2ensite sogo >&$logfile 2>&$logfile
-systemctl reload apache2 >&$logfile 2>&$logfile
+  template="$(findtemplate sogo site.conf)"
+  site_writeconf "$(awk "$prog" < $template)" "$port" "$sport" "sogo" "sogo" "sogo.$1" "" "" "$datadir"
+
+  a2ensite sogo >&$logfile 2>&$logfile
+  systemctl reload apache2 >&$logfile 2>&$logfile
 
 }

@@ -22,7 +22,7 @@ eval $( arp -n | awk '{ if ( $2 == "ether" ) printf("amac[%s]=\"%s\"\n", $1, $3)
 prog='/mnecomment/         { comment = $0; sub("#mnecomment", "", comment);  }
       /[ /t]*host.*{/      { fix=1; host = $2; addr=""; mac=""; comment="" }
       /#[ /t]*host.*{/     { fix=0; host = $3; addr=""; mac=""; comment="" }
-      /}|#}/               { printf("host[%s]=\"%s\"\nmac[%s+%s]=\"%s\"\nfix[%s+%s]=\"%s\"\ncomment[%s+%s]=\"%s\"\naddrfound[%s+%s]=\"\"\nrecordtype[%s+%s]=\"%s\"\n", addr, host, addr, host, mac, addr, host, fix, addr, host, comment, addr, host, addr, host, recordtype ) }
+      /}|#[ /t]*}/         { printf("host[%s]=\"%s\"\nmac[%s+%s]=\"%s\"\nfix[%s+%s]=\"%s\"\ncomment[%s+%s]=\"%s\"\naddrfound[%s+%s]=\"\"\nrecordtype[%s+%s]=\"%s\"\n", addr, host, addr, host, mac, addr, host, fix, addr, host, comment, addr, host, addr, host, recordtype ) }
       /fixed-address/      { addr = ( fix ) ? $2 : $3; sub(";", "", addr); }
       /hardware ethernet/  { mac  = ( fix ) ? $3 : $4; sub(";", "", mac);   } 
       /dhcp6.client-id/    { mac  = ( fix ) ? $4 : $5; sub(";", "", mac); } '
@@ -101,11 +101,11 @@ if [ "$?" = "0" ]; then
   
   for key in "${!addrfound[@]}"
   do
-    if [ "${addrfound[$key]}" != "1" ] && [ "${fix[$key]}" != "0" ]; then
+    if [ "${addrfound[$key]}" != "1" ]; then
       s_name="${key#*+}"
       s_dns_record="${recordtype[$key]}"
       s_address="${key%+*}"
-      s_fix=1
+      s_fix=${fix[$key]}
       s_mac=${mac[$key]}
       s_comment=${comment[$key]}
       s_missmatch=

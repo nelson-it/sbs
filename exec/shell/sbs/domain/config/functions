@@ -4,6 +4,7 @@
 #	mkdir -p "$apacheconfigdir";
 #fi
 
+[ -e $domainconfigdir ] || mkdir -p $domainconfigdir
 
 # domain
 function check_dnspasswd()
@@ -117,24 +118,34 @@ function mod_smbconf()
 # namedoption
 function mod_bind()
 {
+  local namedoption=$(findtemplate domain named.conf.options )
+  savefile $domainbindroot/named.conf.options
+
   fgrep "$domainbindroot/named.conf.samba" $domainbindroot/named.conf 1>&$logfile 2>&$logfile
   if [ "$?" != "0" ];then
     savefile $domainbindroot/named.conf
-    echo "include \"$domainbindroot/named.conf.samba\";" >> $domainbindroot/named.conf
+    cp $domainbindroot/named.conf $domainconfigdir/named.conf
+    echo "include \"$domainbindroot/named.conf.samba\";" >> $domainconfigdir/named.conf
   fi
   
-  cat << EOF >"$domainbindroot/named.conf.samba"
+  cat << EOF >"$domainconfigdir/named.conf.samba"
 dlz "AD DNS Zone" {
     database "dlopen /usr/lib/$(uname -i)-linux-gnu/samba/bind9/dlz_bind9_18.so";
 };
 EOF
   
-  touch $domainbindroot/named.conf.options.local
-  touch $domainbindroot/named.conf.options.forwarders
+  touch $domainconfigdir/named.conf.options.local
+  touch $domainconfigdir/named.conf.options.forwarders
   
-  savefile $domainbindroot/named.conf.options
-  cp "$1" $domainbindroot/named.conf.options
+  cp "$namedoption" $domainconfigdir/named.conf.options
 
+  cp $domainconfigdir/named.conf                    $domainbindroot/named.conf
+  cp $domainconfigdir/named.conf.options            $domainbindroot/named.conf.options
+  cp $domainconfigdir/named.conf.options.local      $domainbindroot/named.conf.options.local
+  cp $domainconfigdir/named.conf.samba              $domainbindroot/named.conf.samba
+  cp $domainconfigdir/named.conf.options.forwarders $domainbindroot/named.conf.options.forwarders
+  
+  
   chmod 640 /var/lib/samba/private/dns.keytab
   chown root:bind /var/lib/samba/private/dns.keytab
   chown root:bind $domainbindroot/rndc.key
@@ -177,34 +188,39 @@ function mod_netpar()
     savefile /etc/hosts
     cp "$template" /etc/hosts
     
-    sed -e '/^passwd:/s@ *winbind@@' -e '/^passwd:/s@$@ winbind@' -e '/^group:/s@ *winbind@@' -e '/^group:/s@$@ winbind@' < /etc/nsswitch.conf  > /tmp/nsswitch.$$
-    mv /tmp/nsswitch.$$ /etc/nsswitch.conf
+    sed -e '/^passwd:/s@ *winbind@@' -e '/^passwd:/s@$@ winbind@' -e '/^group:/s@ *winbind@@' -e '/^group:/s@$@ winbind@' < /etc/nsswitch.conf  > $domainconfigdir/nsswitch.conf
+    cp $domainconfigdir/nsswitch.conf /etc/nsswitch.conf
     
-    sed -e "/interfaces =/s@interfaces.*\$@interfaces = lo $2@" < $domainrootdir/smb.conf  > /tmp/smb.$$; 
+    sed -e "/interfaces =/s@interfaces.*\$@interfaces = $sambalocalinterfaces $2@" < $domainrootdir/smb.conf  > /tmp/smb.$$; 
     mv /tmp/smb.$$ $domainrootdir/smb.conf;
     
-    sed -e "/TLS_REQCERT/d" < /etc/ldap/ldap.conf  > /tmp/ldap.$$; 
-    mv /tmp/ldap.$$ /etc/ldap/ldap.conf;
-    echo "" >> $ldapconf/ldap.conf
-    echo "TLS_REQCERT allow" >> /etc/ldap/ldap.conf
+    sed -e "/TLS_REQCERT/d" < /etc/ldap/ldap.conf  > $domainconfigdir/ldap.conf; 
+    echo "TLS_REQCERT allow" >> $domainconfigdir/ldap.conf
+    cp $domainconfigdir/ldap.conf /etc/ldap/ldap.conf;
     
     if [ "$3" != "" ]; then
         echo "$3" | sed -e 's/$/;\n};/g ;'\
                                  -e 's/,/ /g'\
                                  -e 's/  */;\n    /g'\
                                  -e 's/^/    /'\
-                                 -e '1 i forwarders {' > $domainbindroot/named.conf.options.forwarders;
+                                 -e '1 i forwarders {' > $domainconfigdir/named.conf.options.forwarders;
     else
-        echo "" > $bindconf/named.conf.options.forwarders;
+        echo "" > $domainconfigdir/named.conf.options.forwarders;
+    fi
+
+    cp $domainconfigdir/named.conf.options.forwarders $domainbindroot/named.conf.options.forwarders
+
+    
+    echo "nameserver 127.0.0.1"  > $domainconfigdir/resolv.conf
+    echo "domain $1" >> $domainconfigdir/resolv.conf
+    if [ "$4" != "" ]; then
+       echo "search $1 $4" | awk -v RS=' '  '{ if (!seen[$1]++) { printf "%s%s",sep,$1; sep=" " } }' >> $domainconfigdir/resolv.conf
     fi
     
     rm -f /etc/resolv.conf 1>&$logfile 2>&$logfile
-    echo "nameserver 127.0.0.1"  > /etc/resolv.conf
-    echo "domain $1" >> /etc/resolv.conf
-    if [ "$4" != "" ]; then
-       echo "search $1 $4" | awk -v RS=' '  '{ if (!seen[$1]++) { printf "%s%s",sep,$1; sep=" " } }' >> /etc/resolv.conf
-    fi
+    cp $domainconfigdir/resolv.conf /etc/resolv.conf
     
+    systemctl restart samba-ad-dc >&$logfile 2>&$logfile
     systemctl restart named >&$logfile 2>&$logfile
 }
 
@@ -226,11 +242,15 @@ function mod_kerberos()
 function mod_dhcp()
 {
     mkdir -p /etc/mne/dhcpd 1>&$logfile 2>&$logfile
+    touch $domainconfigdir/fix.conf 1>&$logfile 2>&$logfile
+    touch $domainconfigdir/fix6.conf 1>&$logfile 2>&$logfile
     touch /etc/dhcp/fix.conf 1>&$logfile 2>&$logfile
     touch /etc/dhcp/fix6.conf 1>&$logfile 2>&$logfile
     
     dhcp_mod_appamor
     
+    [ -e $domainconfigdir ] || mkdir -p $domainconfigdir
+
     mkdir -p /var/lib/samba/dhcpd-dns >&$logfile 2>&$logfile
     chown root:dhcpd /var/lib/samba/dhcpd-dns >&$logfile 2>&$logfile
     chmod 750 /var/lib/samba/dhcpd-dns >&$logfile 2>&$logfile
@@ -351,18 +371,23 @@ function mod_dhcp()
     savefile /etc/mne/dhcpd/update-samba-dns.sh
     savefile /etc/default/isc-dhcp-server
 
-    awk "$prog" < ${12} > /etc/dhcp/dhcpd.conf
-    awk "$prog" < ${13} > /etc/dhcp/dhcpd6.conf
-    awk "$prog" < ${14} > /etc/mne/dhcpd/update-samba-dns.sh
-    awk "$prog" < ${15} > /etc/radvd.conf
+    awk "$prog" < ${12} > $domainconfigdir/dhcpd.conf
+    awk "$prog" < ${13} > $domainconfigdir/dhcpd6.conf
+    awk "$prog" < ${14} > $domainconfigdir/update-samba-dns.sh
+    awk "$prog" < ${15} > $domainconfigdir/radvd.conf
+    
+    cp $domainconfigdir/dhcpd.conf /etc/dhcp/dhcpd.conf
+    cp $domainconfigdir/dhcpd6.conf /etc/dhcp/dhcpd6.conf
+    cp $domainconfigdir/radvd.conf /etc/radvd.conf
+    cp $domainconfigdir/update-samba-dns.sh /etc/mne/dhcpd/update-samba-dns.sh
     
     chmod +x /etc/mne/dhcpd/update-samba-dns.sh
     
     echo "INTERFACESv4=\"$ip4netdevice\""  > /etc/default/isc-dhcp-server
     echo "INTERFACESv6=\"$ip6netdevice\"" >> /etc/default/isc-dhcp-server
     
-    if [ "$ip4netdevice" ]; then systemctl start isc-dhcp-server; fi
-    if [ "$ip6netdevice" ]; then systemctl start isc-dhcp-server6; systemctl start radvd; fi
+    if [ "$ip4netdevice" ]; then systemctl start isc-dhcp-server >&$logfile 2>&$logfile; fi
+    if [ "$ip6netdevice" ]; then systemctl start isc-dhcp-server6 >&$logfile 2>&$logfile; systemctl start radvd >&$logfile 2>&$logfile; fi
 }
 
 function dhcp_mod_appamor()
@@ -381,32 +406,40 @@ function dhcp_mod_appamor()
 function dhcp_fix_mod()
 {
 
+  local fix=$5
+  local addrtyp=
+  
   if [ "$7" = "A" ]; then
     addrtyp=
     idname="hardware ethernet"
     mask=$(ipmask2int $(awk '/subnet.*{/ { print $4 }' < /etc/dhcp/dhcpd.conf ))
     if [ "$(awk '/subnet.*{/ { print $2 "/'$mask'"}' < /etc/dhcp/dhcpd.conf)" != "$(netmask $3/$mask | sed -e 's/^[[:space:]]*//')" ]; then
-      return 0
+      if [ "$fix" = 1 ]; then
+        echo "#mne_lang#Kann feste Addresse nicht zuweisen - falsches Netz#" 1>&2
+      fi
+      fix=0
     fi
   elif [ "$7" = "AAAA" ]; then
     addrtyp=6
     idname="host-identifier option dhcp6.client-id"
     net="$(awk '/subnet6.*{/ { print $2 }' < /etc/dhcp/dhcpd6.conf)"
     if [ "$net" != "$(netmask $3/${net#*/} | sed -e 's/^[[:space:]]*//')" ]; then
-      return 0
+      if [ "$fix" = 1 ]; then
+        echo "#mne_lang#Kann feste Addresse nicht zuweisen - falsches Netz#" 1>&2
+      fi
+      fix=0 
     fi
   else
     return 0;
   fi
   
   prog='/host[ \t]+'$1'[ \t]*{/ { hostfound=1; }
-        /}/                     { if ( hostfound ) { hostfound=0; next; }}
-        /#}/                    { if ( hostfound ) { hostfound=0; next; }}
+        /}|#[ /t]*}/            { if ( hostfound ) { hostfound=0; next; }}
                                 { if ( hostfound != 1 ) print $0 }
                   END           { 
                                    if ( "'$2'" != "" && "'$3'" != "" )
                                    {
-                                     kommentar = ( '"$5"' == 1 ) ? " " : "#";
+                                     kommentar = ( '"$fix"' == 1 ) ? " " : "#";
                                      printf("%s   host '"$2"' {\n", kommentar );
                                      printf("#mnecomment'$6'\n" );
                                      printf("%s              option host-name \"'"$2"'\";\n", kommentar );
@@ -417,8 +450,8 @@ function dhcp_fix_mod()
                                    }
                                 }'
    
-   awk "$prog" < "/etc/dhcp/fix$addrtyp.conf" > /tmp/fix$$
-   mv /tmp/fix$$ "/etc/dhcp/fix$addrtyp.conf"
+   awk "$prog" < "/etc/dhcp/fix$addrtyp.conf" > $domainconfigdir/fix$addrtyp.conf
+   cp $domainconfigdir/fix$addrtyp.conf "/etc/dhcp/fix$addrtyp.conf"
    chown dhcpd:dhcpd "/etc/dhcp/fix$addrtyp.conf"
 
 }
@@ -426,10 +459,9 @@ function dhcp_fix_mod()
 function dhcp_fix_del()
 {
 
-  if [ "$2" = "A" ]; then
-    filename=/etc/dhcp/fix.conf
-  else
-    filename=/etc/dhcp/fix6.conf
+  local addrtyp=
+  if [ "$2" = "AAAA" ]; then
+    addrtyp=6
   fi
 
   prog='/host[ \t]+'$1'[ \t]*{/ { hostfound=1; host = ( substr($0,1,1) == "#" ) ? $3 : $2; }
@@ -441,9 +473,9 @@ function dhcp_fix_del()
                                    }
                                    { if ( hostfound != 1 ) print $0 }'
    
-   awk "$prog" < $filename > /tmp/fix$$
-   mv /tmp/fix$$ $filename
-   chown dhcpd:dhcpd "$filename"
+   awk "$prog" < "/etc/dhcp/fix$addrtyp.conf" > $domainconfigdir/fix$addrtyp.conf
+   cp $domainconfigdir/fix$addrtyp.conf "/etc/dhcp/fix$addrtyp.conf"
+   chown dhcpd:dhcpd "/etc/dhcp/fix$addrtyp.conf"
 
 }
 

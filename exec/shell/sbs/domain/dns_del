@@ -18,19 +18,21 @@ if [ "$?" = "0" ]; then
   
   mne_need_error
   samba-tool dns delete $(hostname) $vadomainInput "$vanameInput_old" "$vadns_recordInput_old" "$vaaddressInput_old" --use-kerberos=required >&$logfile 2>&$logfile
-  if [ "$?" != "0" ]; then
-    echo '#mne_lang# Kann Addresse nicht finden#' 1>&2
+  noaddr="$?"
+  
+  if [ "$zone" != "" ] && [ "$noaddr" = "0" ]; then
+    if [ "$vadns_recordInput_old" = "AAAA" ] || [ "$vadns_recordInput_old" = "A" ]; then
+      mne_need_error
+      samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$vadomainInput" --use-kerberos=required >&$logfile 2>&$logfile
+      if [ "$?" != "0" ]; then
+        echo '#mne_lang# Kann Rückaddresse nicht finden#' 1>&2
+      fi    
+    fi
   fi
   
-  if [ "$vadns_recordInput_old" = "AAAA" ] || [ "$vadns_recordInput_old" = "A" ]; then
-    mne_need_error
-    samba-tool dns delete $(hostname) $zone $raddr PTR "$vanameInput_old.$vadomainInput" --use-kerberos=required >&$logfile 2>&$logfile
-    if [ "$?" != "0" ]; then
-      echo '#mne_lang# Kann Rückaddresse nicht finden#' 1>&2
-    fi    
+  if [ "$vafixInput_old" = "0" ]; then
+    dhcp_fix_del "$vanameInput_old" "$vadns_recordInput_old"
   fi
-  
-  dhcp_fix_del "$vanameInput_old" "$vadns_recordInput"
 fi
 
 exit 0

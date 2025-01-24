@@ -41,7 +41,7 @@ class MneSbsDns extends MneTableWeblet
       modcols: ['name', 'dns_record', 'address', 'fix', 'mac', 'comment'],
       modtyps: {},
 
-      delids: ['name', 'dns_record', 'address'],
+      delids: ['name', 'dns_record', 'address', 'fix'],
       deltyps: {},
       delconfirmids: ['name', 'dns_record', 'address'],
 

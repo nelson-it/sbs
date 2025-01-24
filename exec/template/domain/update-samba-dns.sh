@@ -103,9 +103,9 @@ case $op in
         ip=$(ipv6calc --addr2compaddr $ip)
         addrname="fixed-address6"
       fi
-      prog='/#[ \t]*host[ \t]+'$name'[ \t]*{/ { hostfound=1; next; }
-                    /host[ \t]+'$name'[ \t]*{/        { hostfound=2; }
-                    /}/                        { if ( hostfound == 1 ) { hostfound = 0; next; } }
+      prog='/#[ \t]*host[ \t]+'$name'[ \t]*{/  { hostfound=1; next; }
+                    /host[ \t]+'$name'[ \t]*{/ { hostfound=2; }
+                    /}|#[ /t]*}/               { if ( hostfound == 1 ) { hostfound = 0; next; } }
                                                { if ( hostfound != 1 ) print $0 }
                     END                        { 
                                                  if ( hostfound !=2 )
@@ -118,8 +118,8 @@ case $op in
                                                    printf("#   }\n");
                                                  }
                                                }'
-      awk "$prog" < $filename > /tmp/fix$$
-      mv /tmp/fix$$ $filename
+      cp $filename /tmp/fix$$
+      awk "$prog" > $filename < /tmp/fix$$
       chown dhcpd:dhcpd "$filename"
     fi
     ;;

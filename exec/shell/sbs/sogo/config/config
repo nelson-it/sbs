@@ -1,2 +1,6 @@
 postfixconf=/etc/postfix
 dovecotconf=/etc/dovecot
+
+sogoconfigdir=$configdir/sogo
+dovecotconfigdir=$configdir/dovecot
+postfixconfigdir=$configdir/postfix

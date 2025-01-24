@@ -1,7 +1,6 @@
 #!/bin/bash
 
 globalextra=$(findtemplate domain primary_globalextra.conf)
-namedoption=$(findtemplate domain named.conf.options )
 
 dhcpconf4=$(findtemplate  domain dhcpd4.conf)
 dhcpconf6=$(findtemplate  domain dhcpd6.conf)
@@ -50,7 +49,7 @@ hostname=$(hostname)
 savefile "$domainconfigfile"
 if [ "$vadomaintypInput" == "primary" ]; then
   samba-tool domain provision \
-    --option="interfaces=lo,$vanetdeviceInput" \
+     --option="interfaces=$sambalocalinterfaces $vanetdeviceInput" \
      --option="bind interfaces only=yes" \
      --use-rfc2307 \
      --realm="$vadomainInput" \
@@ -64,7 +63,7 @@ else
   echo "search $vadomainInput" >> /etc/resolv.conf
 
 	samba-tool domain join $vadomainInput DC \
-    --option="interfaces=lo,$vanetdeviceInput" \
+    --option="interfaces=$sambalocalinterfaces $vanetdeviceInput" \
     --option="bind interfaces only=yes" \
     --realm="$vadomainInput" -U"$vaadministratorInput" \
     --dns-backend=SAMBA_INTERNAL \
@@ -75,7 +74,7 @@ fi
 samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&$logfile
 
 mod_smbconf
-mod_bind "$namedoption"
+mod_bind
 mod_netpar "$vadomainInput" "$vanetdeviceInput" "$vadnsforwarderInput" "$vadnssearchInput"
 mod_cert "$vaworkgroupInput" "$globalextra"
 mod_kerberos
