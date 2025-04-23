@@ -10,3 +10,6 @@ samba-tool group addmembers "$groupnameread" "$valoginInput" >&$logfile
 if [ "$varwInput" = "1" ]; then
   samba-tool group addmembers "$groupname" "$valoginInput" >&$logfile
 fi
+
+apachectl graceful >&$logfile 2>&$logfile
+smbcontrol all reload-config >&$logfile 2>&$logfile

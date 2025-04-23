@@ -1,9 +1,5 @@
 . $(dirname $BASH_SOURCE)/config
 
-#if [ ! -d "$apacheconfigdir" ]; then
-#	mkdir -p "$apacheconfigdir";
-#fi
-
 [ -e $domainconfigdir ] || mkdir -p $domainconfigdir
 
 # domain
@@ -80,14 +76,12 @@ function rm_config()
 
     mkdir -p /var/lib/samba >&$logfile 2>&$logfile
 
-    mne_ignore_error=1
-    if [ -f $domainrootdir/smb.conf ];then
-        rm $domainrootdir/smb.conf >&$logfile 2>&$logfile
-        rm $domainrootdir/validuser.conf >&$logfile 2>&$logfile
-        rm $domainrootdir/shares.conf >&$logfile 2>&$logfile
-        rm $domainrootdir/globalextra.conf >&$logfile 2>&$logfile
-    fi
-    mne_ignore_error=
+    [ ! -f $domainrootdir/smb.conf ]         ||  rm $domainrootdir/smb.conf >&$logfile 2>&$logfile
+    [ ! -f $domainrootdir/validuser.conf ]   ||  rm $domainrootdir/validuser.conf >&$logfile 2>&$logfile
+    [ ! -f $domainrootdir/shares.conf ]      ||  rm $domainrootdir/shares.conf >&$logfile 2>&$logfile
+    [ ! -f $domainrootdir/globalextra.conf ] ||  rm $domainrootdir/globalextra.conf >&$logfile 2>&$logfile
+    
+    [ ! -f $domainconfigdir/domain ] || rm  -f $domainconfigdir/domain >&$logfile 2>&$logfile
 }
 
 function mod_smbconf()
@@ -113,6 +107,8 @@ function mod_smbconf()
     touch $domainrootdir/dhcp.conf;
     touch $domainrootdir/dnsforward.conf;
     touch $domainrootdir/shares.conf;
+    
+    echo $1 > $domainconfigdir/domain
 }
 
 # namedoption

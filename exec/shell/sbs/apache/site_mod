@@ -69,17 +69,18 @@ if [ "$varenewcertInput" != "0" ]; then
 fi
 
 if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then
-    a2ensite "$vanameInput" >&$logfile 2>&$logfile 
+    [ ! -e "/etc/apache2/sites-enabled/$vanameInput.conf" ] || rm "/etc/apache2/sites-enabled/$vanameInput.conf" >&$logfile 2>&$logfile 
+    ln -s /etc/apache2/sites-available/$vanameInput.conf /etc/apache2/sites-enabled  >&$logfile 2>&$logfile 
     mne_need_error
-    err="$(apachectl configtest  2>/dev/null >/dev/null; exit $? )"
+    err="$(apachectl configtest; exit $? )"
     if [ "$?" != "0" ]; then
        echo "$err" >&2
-       a2dissite "$vanameInput"
-       $apachereload >&$logfile 2>&$logfile 
+       [ ! -e "/etc/apache2/sites-enabled/$vanameInput.conf" ] || rm "/etc/apache2/sites-enabled/$vanameInput.conf" >&$logfile 2>&$logfile 
+       apachectl graceful >&$logfile 2>&$logfile
        exit 1
     fi
 else
-    a2dissite "$vanameInput" >&$logfile 2>&$logfile  
+    [ ! -e "/etc/apache2/sites-enabled/$vanameInput.conf" ] || rm "/etc/apache2/sites-enabled/$vanameInput.conf" >&$logfile 2>&$logfile 
 fi
 
-$apachereload >&$logfile 2>&$logfile
+apachectl graceful >&$logfile 2>&$logfile

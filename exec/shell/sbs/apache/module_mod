@@ -19,5 +19,5 @@ else
     fi
 fi
 
-$apachereload 2>&$logfile >&$logfile
+apachectl graceful >&$logfile 2>&$logfile
 exit $exit_status

@@ -126,10 +126,6 @@ savefile /etc/sogo/sogo.conf
 awk "$prog" < $sogotemplate > $sogoconfigdir/sogo.conf 
 cp $sogoconfigdir/sogo.conf /etc/sogo/sogo.conf
 
-systemctl enable mne_sogo.service 1>&$logfile 2>&$logfile
-systemctl daemon-reload
-systemctl restart mne_sogo.service
-
 # ==================================================================
 # Postfix, Dovecot, Apache
 # ==================================================================
@@ -137,5 +133,13 @@ systemctl restart mne_sogo.service
 write_postfix "$sogoprog"
 write_dovecot "$sogoprog"
 write_apache  "$domain"
+
+# ==================================================================
+# Start/Restart Sogo
+# ==================================================================
+
+systemctl enable mne_sogo.service 1>&$logfile 2>&$logfile
+systemctl daemon-reload
+systemctl restart mne_sogo.service
 
 exit 0

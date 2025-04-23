@@ -73,7 +73,7 @@ fi
 
 samba_upgradedns --dns-backend=BIND9_DLZ >&$logfile 2>&$logfile
 
-mod_smbconf
+mod_smbconf $vadomainInput
 mod_bind
 mod_netpar "$vadomainInput" "$vanetdeviceInput" "$vadnsforwarderInput" "$vadnssearchInput"
 mod_cert "$vaworkgroupInput" "$globalextra"

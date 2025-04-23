@@ -10,7 +10,7 @@ fi
 function domain_type()
 {
   mne_need_error
-  systemctl is-enabled samba-ad-dc.service 2>/dev/null >/dev/null
+  samba-tool domain info 127.0.0.1 >/dev/null 2>/dev/null
   if [ "$?" = "0" ]; then echo "primary"; else echo "standalone"; fi
 }
 
@@ -55,7 +55,6 @@ function read_shares()
 # share
 function read_share()
 {
-echo $datadir >&$logfile
     local prog='/\[.*\]/   { start = 0 }
                 /\['$1'\]/ { start = 1 ; printf ( "share=\"'$1'\";") }
                /read only/ { if ( start ) printf ("readonly=\"%s\";", ( $NF != "no" ) ? "true" : "false" ) }
@@ -150,8 +149,8 @@ function write_apache()
     local groupname="Mneshare $(Tolower $hostname) $(Tolower $6)"
     local groupnameread="$groupname Read"
     
-    rm -f "$apacherootdir/conf-available/$oldname" >&$logfile
-    rm -f "$apacherootdir/conf-enabled/$oldname" >&$logfile
+    [ -e "/etc/apache2/conf-available/$oldname" ] || rm -f "$apacherootdir/conf-available/$oldname" >&$logfile
+    [ -e "/etc/apache2/conf-enabled/$oldname" ]   || rm -f "$apacherootdir/conf-enabled/$oldname" >&$logfile
 
     if [ "$9" = "1" ]; then groupname="$groupname Disabled"; fi
 
@@ -169,18 +168,18 @@ function write_apache()
                                           { print $0 }'
    
       awk "$prog" < "$template" > "$apacherootdir/conf-available/$confname"
-      a2enconf "$confname" >&$logfile 2>&$logfile
+      ln -s "/etc/apache2/conf-available/$confname" /etc/apache2/conf-enabled/$confname >&$logfile 2>&$logfile
     fi
     
     mne_need_error
     err="$(apachectl configtest 2>/dev/null >/dev/null ; exit $? )"
     if [ "$?" != "0" ]; then
        echo "$err" >$2
-       a2disconf "$confname"
+       [ -e "/etc/apache2/conf-enabled/$confname" ] || rm "/etc/apache2/conf-enabled/$confname"
        exit 1
     fi
     
-    systemctl reload apache2.service
+    apachectl graceful >&$logfile 2>&$logfile
 }
 
 # location groupname groupnamewrite
@@ -216,11 +215,13 @@ function write_access()
     
     sddl=$(samba-tool ntacl get --as-sddl "$datadir" | sed -e "s/(A.*$//" )
     samba-tool ntacl set "$sddl$du" "$datadir"
+    setfacl -m g:www-data:rx "$datadir"
     p=
     for dir in $(echo $location | tr "/" "\n")
     do
         sddl=$(samba-tool ntacl get --as-sddl "$datadir/$p/$dir" | sed -e "s/(A.*$//" )
         samba-tool ntacl set "$sddl$du" "$datadir/$p/$dir"
+        setfacl -m g:www-data:rx "$datadir/$p/$dir"
         p="$p/$dir"
     done
     
@@ -236,6 +237,7 @@ function write_access()
     samba-tool ntacl set "$sddl$wr$rd$ww" "$path"
 
     chmod g+s "$path"
+    setfacl -m d:g:www-data:rx "$path"
     ( cd "$path"; getfacl . | setfacl -R --set-file=- . )
     
     smbcontrol all reload-config

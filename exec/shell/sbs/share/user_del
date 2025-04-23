@@ -7,3 +7,6 @@ eval $(get_groupnames "$vashareInput_old")
 
 samba-tool group removemembers "$groupnameread" "$valoginInput_old" >&$logfile
 samba-tool group removemembers "$groupname" "$valoginInput_old" >&$logfile
+
+apachectl graceful >&$logfile 2>&$logfile
+smbcontrol all reload-config >&$logfile 2>&$logfile

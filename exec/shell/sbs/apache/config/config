@@ -1,4 +1,1 @@
-apacherootdir="/etc/apache2"
-
-apachereload="systemctl reload apache2.service"
-apacherestart="systemctl restart apache2.service"
+[ "$aapacherootdir" != "" ] || apacherootdir="/etc/apache2"

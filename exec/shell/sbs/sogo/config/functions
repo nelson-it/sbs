@@ -32,63 +32,76 @@ function sogo_confprog()
 # prog
 function write_postfix()
 {
-    for dir in sasl ldap maps
-    do
-      mkdir -p           $postfixconfigdir/$dir >&$logfile 2>&$logfile
-      chown root:postfix $postfixconfigdir/$dir >&$logfile 2>&$logfile
-      chmod 750          $postfixconfigdir/$dir >&$logfile 2>&$logfile
-      chmod g+s          $postfixconfigdir/$dir >&$logfile 2>&$logfile
-    done
+   for dir in sasl ldap maps
+   do
+       mkdir -p           $postfixconfigdir/$dir >&$logfile 2>&$logfile
+   done
 
     for file in main.cf master.cf ldap/aliases ldap/canonical ldap/mailbox_maps ldap/uid_maps sasl/passwd
     do
         template="$(findtemplate postfix $file)"
-        savefile $postfixconf/$file
         awk "$1" < $template > $postfixconfigdir/$file
-        chgrp postfix $postfixconfigdir/$file
-        chmod 640 $postfixconfigdir/$file
     done
     
     touch $postfixconfigdir/maps/aliases
-    chgrp postfix $postfixconfigdir/maps/aliases
-    chmod 640 $postfixconfigdir/maps/aliases
     
-    chmod 644 $postfixconfigdir/main.cf
 
     if [ -d $postfixconf ]; then
+        find -type f $postfixconfigdir | while read file
+        do 
+            savefile $postfixconf/$file
+            chgrp postfix $postfixconfigdir/$file
+            chmod 640 $postfixconfigdir/$file
+        done
+
+        chmod 644 $postfixconfigdir/main.cf
+    
+        for dir in sasl ldap maps
+        do
+          chown root:postfix $postfixconfigdir/$dir >&$logfile 2>&$logfile
+          chmod 750          $postfixconfigdir/$dir >&$logfile 2>&$logfile
+          chmod g+s          $postfixconfigdir/$dir >&$logfile 2>&$logfile
+        done
+
         ( cd $postfixconfigdir; tar -cf - . ) | ( cd $postfixconf; tar -xf - );
         postmap $postfixconf/sasl/passwd  >&$logfile 2>&$logfile
         postmap $postfixconf/maps/aliases >&$logfile 2>&$logfile
+
+        systemctl restart postfix.service
     fi
-    systemctl restart postfix.service
 }
 
 # prog
 function write_dovecot()
 {
-    mkdir -p $dovecotconfigdir/conf.d 2>&$logfile >&$logfile
+    mkdir -p        $dovecotconfigdir/conf.d 2>&$logfile >&$logfile
     chown root:root $dovecotconfigdir/conf.d 2>&$logfile >&$logfile
     chmod 755       $dovecotconfigdir/conf.d 2>&$logfile >&$logfile
        
     for file in dovecot-ldap.conf.ext conf.d/10-auth.conf  conf.d/10-master.conf  conf.d/10-ssl.conf  conf.d/15-mailboxes.conf
     do
         template="$(findtemplate dovecot $file)"
-        savefile $dovecotconf/$file
         awk "$1" < $template > $dovecotconfigdir/$file
-        chgrp dovecot $dovecotconfigdir/$file
-        chmod 640 $dovecotconfigdir/$file
     done
 
     if [ -d $dovecotconf ]; then
+      find -type f $dovecotconfigdir | while read file
+      do 
+        savefile $dovecotconf/$file
+        chgrp dovecot $dovecotconfigdir/$file
+        chmod 640 $dovecotconfigdir/$file
+      done
+      
       ( cd $dovcotconfigdir; tar -cf - . ) | ( cd $dovecotconf; tar -xf - );
 
       mkdir -p /var/dovecot 2>&$logfile
       chown root:mail /var/dovecot
       chmod 770 /var/dovecot
       chmod g+s /var/dovecot
+
+      systemctl restart dovecot.service
     fi
        
-    systemctl restart dovecot.service
 }
 
 function write_apache()
@@ -102,7 +115,7 @@ function write_apache()
   template="$(findtemplate sogo site.conf)"
   site_writeconf "$(awk "$prog" < $template)" "$port" "$sport" "sogo" "sogo" "sogo.$1" "" "" "$datadir"
 
-  a2ensite sogo >&$logfile 2>&$logfile
-  systemctl reload apache2 >&$logfile 2>&$logfile
+  ln -s /etc/apache2/sites-available/sogo.conf /etc/apache2/sites-enabled >&$logfile 2>&$logfile
+  apachectl graceful >&$logfile 2>&$logfile
 
 }
