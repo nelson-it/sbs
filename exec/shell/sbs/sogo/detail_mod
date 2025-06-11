@@ -57,7 +57,7 @@ samba-tool user setpassword "$sogouser" --newpassword="$bindpassword" 2>&$logfil
 # DNS Alias einrichten
 # ==================================================================
 mne_error_ignore=1
-samba-tool dns add "$hostname" $domain sogo CNAME "$hostname.$domain" --use-kerberos=required 2>&$logfile >&$logfile
+samba-tool dns add "$hostname" $domain sogo CNAME "$apachehost.$domain" --use-kerberos=required 2>&$logfile >&$logfile
 mne_error_ignore=
 
 # ==================================================================

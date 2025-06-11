@@ -24,6 +24,7 @@ function sogo_confprog()
         /####MAILRELAY####/       { gsub(/####MAILRELAY####/,"'$7'"); }
         /####MAILRELAYUSER####/   { gsub(/####MAILRELAYUSER####/,"'$8'"); }
         /####MAILRELAYPASSWD####/ { gsub(/####MAILRELAYPASSWD####/,"'$9'"); }
+        /####LDAPHOST####/        { gsub(/####LDAPHOST####/,"'$ldaphost'"); }
         /####WRAPPERMODE####/     { gsub(/####WRAPPERMODE####/,"'$wrappermode'"); }
                                   { print $0 }'
 

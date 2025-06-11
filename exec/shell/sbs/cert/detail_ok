@@ -58,9 +58,9 @@ if [ ! -f $certkeydir/$(hostname).key ]; then
   echo "#mne_lang#Erstelle Rechner Schlüssel#" >&2
   cert_mkkey "$(hostname)"
   domain="$(awk '/domain/ { print $2'} < /etc/resolv.conf)"
-  addhost="$SERVER_HOSTNAMES"
+  addhost="$SERVER_HOSTNAME"
   if [ "$domain" != "" ]; then
-    addhost="$addhost $(echo $(hostname) $SERVER_HOSTNAMES | sed -e 's/ *$//' -e "s/  */\n/g" | awk ' { printf("%s%s.'$domain'", space, $0); space=" " }')"
+    addhost="$addhost $(echo $(hostname) $SERVER_HOSTNAME | sed -e 's/ *$//' -e "s/  */\n/g" | awk ' { printf("%s%s.'$domain'", space, $0); space=" " }')"
   fi
   cert_mkcsr "$(hostname)" "$(hostname)" "$addhost"
 fi

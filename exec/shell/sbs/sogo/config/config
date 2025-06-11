@@ -4,3 +4,5 @@ dovecotconf=/etc/dovecot
 sogoconfigdir=$configdir/sogo
 dovecotconfigdir=$configdir/dovecot
 postfixconfigdir=$configdir/postfix
+
+[ ! "$apachehost" = "" ] || apachehost=$(hostname)

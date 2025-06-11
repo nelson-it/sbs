@@ -1,5 +1,5 @@
 #uris = ldaps://localhost
-hosts = ####HOST####.####DOMAIN####
+hosts = ####HOST####
 tls = yes
 dn = ####BINDDN####
 dnpass = ####BINDPASSWORD####

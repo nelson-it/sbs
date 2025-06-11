@@ -9,3 +9,4 @@ domaindhcpfile="/etc/dhcp/dhcpd.conf"
 domaindhcp6file="/etc/dhcp/dhcpd6.conf"
 
 domainbindroot="/etc/bind"
+domainapparmorconf="/etc/apparmor.d"

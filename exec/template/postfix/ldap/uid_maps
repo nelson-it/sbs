@@ -1,4 +1,4 @@
-server_host = ldaps://localhost
+server_host = ldaps://####LDAPHOST####
 version         = 3
 bind            = yes
 start_tls       = no

@@ -126,11 +126,13 @@ function write_samba()
     
     prog='/\[.*\]/ { if ( found == 1 ) found = 0 } /\['$2'\]/ { found = 1;} { if ( found != 1 ) print $0 }'
     savefile "$domainrootdir/shares.conf"
-    awk "$prog" < $savedfile > "$domainrootdir/shares.conf"
+    awk "$prog" < $savedfile > "$domainconfigdir$domainrootdir/shares.conf"
     
     if [ "$3" != "" ]; then
-      echo "$share" >>  "$domainrootdir/shares.conf"
+      echo "$share" >>  "$domainconfigdir$domainrootdir/shares.conf"
     fi
+
+    cp "$domainconfigdir$domainrootdir/shares.conf" "$domainrootdir/shares.conf"
 }
 
 #domaintype domain domaindn bindpassword share_old share location description readonly
