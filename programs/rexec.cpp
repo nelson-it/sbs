@@ -88,7 +88,7 @@ int main(int argc, char **argv)
     va[i + 12] = NULL;
 
     execv( va[0], va);
-    fprintf(stderr, "command not executed <%s>\n", va[0]);
+    fprintf(stderr, "command not executed <%s> <%d>\n", va[0], errno);
     fflush(stderr);
     exit(-1);
 }
