@@ -122,14 +122,10 @@ function mod_bind()
   local namedoption=$(findtemplate domain named.conf.options )
   savefile $domainbindroot/named.conf.options
 
-  fgrep "$domainbindroot/named.conf.samba" $domainbindroot/named.conf 1>&$logfile 2>&$logfile
-  if [ "$?" != "0" ];then
-    savefile $domainbindroot/named.conf
-    echo "include \"$domainbindroot/named.conf.samba\";" >> $domainconfigdir$domainbindroot/named.conf
-  fi
+  savefile $domainbindroot/named.conf
+  sed -e '/named.conf.samba/d' < $domainbindroot/named.conf > $domainconfigdir$domainbindroot/named.conf
+  echo "include \"$domainbindroot/named.conf.samba\";" >> $domainconfigdir$domainbindroot/named.conf
 
-  cp $domainbindroot/named.conf $domainconfigdir$domainbindroot/named.conf
-  
   cat << EOF >"$domainconfigdir$domainbindroot/named.conf.samba"
 dlz "AD DNS Zone" {
     database "dlopen /usr/lib/$(uname -i)-linux-gnu/samba/bind9/dlz_bind9_18.so";
@@ -386,7 +382,6 @@ function mod_dhcp()
       /####END6####/       { gsub(/####END6####/,"'$6'"); }
       /####BCAST####/      { gsub(/####BCAST####/,"'$ip4broadcast'"); }
       /####ROUTER4####/     { gsub(/####ROUTER4####/,"'$ip4router'"); }
-      /####ROUTER6####/     { gsub(/####ROUTER6####/,"'$ip6router'"); }
       /####NETDEVICE####/  { gsub(/####NETDEVICE####/,"'$ip6netdevice'"); }
                            { print $0 }'
     

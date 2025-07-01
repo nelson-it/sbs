@@ -1,0 +1,17 @@
+#!/bin/bash
+
+hub-tool login puran2
+
+if [ "$1" = "" ]; then
+  exit 0
+fi
+
+for tag in $1
+do
+  hub-tool tag rm -f puran2/sbs-database:$tag
+  hub-tool tag rm -f puran2/sbs-init:$tag
+  hub-tool tag rm -f puran2/sbs-sbsserver:$tag
+  hub-tool tag rm -f puran2/sbs-sogoserver:$tag
+  hub-tool tag rm -f puran2/sbs-apache:$tag
+done
+

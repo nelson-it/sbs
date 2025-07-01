@@ -1,0 +1,8 @@
+#/bin/bash
+
+./down
+
+docker image prune -a
+docker system prune -a
+docker volume prune -a
+

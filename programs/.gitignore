@@ -5,6 +5,7 @@
 /winservice.exe
 /winservice.inc
 /server
+/rexec
 /HttpReport*
 /xml.inc
 /xml
