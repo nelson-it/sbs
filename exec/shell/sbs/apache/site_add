@@ -39,7 +39,7 @@ cert_mkkey "$vanameInput"
 cert_mkcsr "$vanameInput" "$vadomainInput" "$vaaliasesInput"
 cert_mkcrt "$vanameInput" "$vapasswd"
 
-[ -e "/etc/apache2/sites-enabled/$vanameInput.conf" ] || rm "/etc/apache2/sites-enabled/$vanameInput.conf"
+[ -e "/etc/apache2/sites-enabled/$vanameInput.conf" ] && rm "/etc/apache2/sites-enabled/$vanameInput.conf"
 
 if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then
     ln -s /etc/apache2/sites-available/$vanameInput.conf /etc/apache2/sites-enabled >&$logfile 2>&$logfile 
@@ -47,11 +47,9 @@ if [ "$vaenabledInput" != "" ] && [ "$vaenabledInput" != "0" ]; then
     err="$(apachectl configtest; exit $? )"
     if [ "$?" != "0" ]; then
        echo "$err" >&2
-       [ -e "/etc/apache2/sites-enabled/$vanameInput" ] || rm "/etc/apache2/sites-enabled/$vanameInput"
+       [ -e "/etc/apache2/sites-enabled/$vanameInput" ] && rm "/etc/apache2/sites-enabled/$vanameInput"
        exit 1
     fi
     apachectl graceful >&$logfile 2>&$logfile
-else
-    [ ! -e "/etc/apache2/sites-enabled/$vanameInput.conf" ] || rm "/etc/apache2/sites-enabled/$vanameInput.conf" >&$logfile 2>&$logfile 
 fi
 

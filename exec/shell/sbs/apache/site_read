@@ -58,9 +58,11 @@ do
       $0 = gensub(/(.*VirtualHost.*\*:)$port.*>/, "\\1####HTTPPORT####>", "g");
       $0 = gensub(/(.*VirtualHost.*\*:)$sport.*>/, "\\1####HTTPSPORT####>", "g");
 
+      $0 = gensub(/(^#[Mm][Dd]omain).*/,  "\\1 ####DOMAIN####", "g" );
       $0 = gensub(/(^#[Ss]erver[Nn]ame).*/,  "\\1 ####DOMAIN####", "g" );
       $0 = gensub(/(^#[Ss]erver[Aa]lias).*/,    "\\1 ####ALIAS####",  "g" );
 
+      $0 = gensub(/(^[^#]*[Mm][Dd]omain).*/,  "\\1 ####DOMAIN####", "g" );
       $0 = gensub(/(^[^#]*[Ss]erver[Nn]ame).*/,  "\\1 ####DOMAIN####", "g" );
       $0 = gensub(/(^[^#]*[Ss]erver[Aa]dmin).*/, "\\1 ####EMAIL####",  "g" );
       $0 = gensub(/(^[^#]*[Ss]erver[Aa]lias).*/,    "\\1 ####ALIAS####",  "g" );

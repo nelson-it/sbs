@@ -394,11 +394,11 @@ function mod_dhcp()
     awk "$prog" < ${12} > $domainconfigdir/etc/dhcp/dhcpd.conf
     awk "$prog" < ${13} > $domainconfigdir/etc/dhcp/dhcpd6.conf
     awk "$prog" < ${14} > $domainconfigdir/etc/mne/dhcp/update-samba-dns.sh
-    awk "$prog" < ${15} > $domainconfigdir/etc/dhcp/radvd.conf
+    awk "$prog" < ${15} > $domainconfigdir/etc/radvd.conf
     
     cp $domainconfigdir/etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
     cp $domainconfigdir/etc/dhcp/dhcpd6.conf /etc/dhcp/dhcpd6.conf
-    cp $domainconfigdir/etc/dhcp/radvd.conf /etc/radvd.conf
+    cp $domainconfigdir/etc/radvd.conf /etc/radvd.conf
     cp $domainconfigdir/etc/mne/dhcp/update-samba-dns.sh /etc/mne/dhcpd/update-samba-dns.sh
     
     chmod +x $domainconfigdir/etc/mne/dhcp/update-samba-dns.sh
