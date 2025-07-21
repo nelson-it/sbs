@@ -114,7 +114,7 @@ function write_apache()
                                   { print $0 }'
 
   template="$(findtemplate sogo site.conf)"
-  site_writeconf "$(awk "$prog" < $template)" "$port" "$sport" "sogo" "sogo" "sogo.$1" "" "" "$datadir"
+  site_writeconf "$(awk "$prog" < $template)" "$port" "$sport" "mne_sogo" "sogo" "sogo.$1" "" "" "$datadir"
 
   ln -s /etc/apache2/sites-available/sogo.conf /etc/apache2/sites-enabled >&$logfile 2>&$logfile
   apachectl graceful >&$logfile 2>&$logfile
