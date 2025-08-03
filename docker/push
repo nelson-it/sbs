@@ -3,17 +3,8 @@
 PROJECT=mnesbs
 PROJECTROOT=../..
 
-if [ -f versioncount ]; then
-    VERSIONCOUNT=$(cat versioncount)
-    let VERSIONCOUNT="$VERSIONCOUNT+1"
-else
-    VERSIONCOUNT=1
-fi
-echo $VERSIONCOUNT > versioncount
-
 VERSION="$(cat $PROJECTROOT/installer/$PROJECT/dist/version)"
-MINOR_VERSION="$VERSION-$VERSIONCOUNT"
-echo baue Version $MINOR_VERSION
+echo baue Version $VERSION
 
 export IMAGE_TAG=latest
 
