@@ -187,6 +187,8 @@ function mod_netpar()
     cp "$template" /etc/hosts
     
     [ -e $domainconfigdir/etc/ldap ] || mkdir -p $domainconfigdir/etc/ldap
+    [ -e $domainconfigdir$domainrootdir ] || mkdir -p $domainconfigdir$domainrootdir
+    [ -e $domainconfigdir$domainbindroot ] || mkdir -p $domainconfigdir$domainbindroot
     
     sed -e '/^passwd:/s@ *winbind@@' -e '/^passwd:/s@$@ winbind@' -e '/^group:/s@ *winbind@@' -e '/^group:/s@$@ winbind@' < /etc/nsswitch.conf  > $domainconfigdir/etc/nsswitch.conf
     cp $domainconfigdir/etc/nsswitch.conf /etc/nsswitch.conf
