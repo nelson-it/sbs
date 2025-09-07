@@ -12,19 +12,17 @@ export IMAGE_TAG=latest
 # docker image prune -a
 docker compose -f ../../docker/sbs/compose.yaml --profile push build 
 
-docker tag  puran2/database:latest puran2/database:sbs-latest
-docker tag  puran2/database:latest puran2/database:sbs-$VERSION
-
 docker tag  puran2/apache:latest puran2/apache:sbs-latest
 docker tag  puran2/apache:latest puran2/apache:sbs-$VERSION
 
+docker tag  puran2/sbs-database:latest puran2/database:sbs-$VERSION
 docker tag  puran2/sbs-init:latest puran2/sbs-init:$VERSION
 docker tag  puran2/sbs-sbsserver:latest puran2/sbs-sbsserver:$VERSION
 docker tag  puran2/sbs-sogoserver:latest puran2/sbs-sogoserver:$VERSION
 docker tag  puran2/sbs-coredns:latest puran2/sbs-coredns:$VERSION
 
-docker push --all-tags puran2/database
 docker push --all-tags puran2/apache
+docker push --all-tags puran2/sbs-database
 docker push --all-tags puran2/sbs-init
 docker push --all-tags puran2/sbs-sbsserver
 docker push --all-tags puran2/sbs-sogoserver
