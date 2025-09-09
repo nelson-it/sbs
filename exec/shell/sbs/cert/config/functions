@@ -71,7 +71,7 @@ function cert_mkcsr()
   echo $aliases | awk 'BEGIN { RS=" "; printf("subjectAltName = @alt_names\n[alt_names]\n") } { count++; printf("DNS.%d = %s\n", count, $0) }' > $(dirname $BASH_SOURCE)/multi.cnf
 
   cat "$certbasedir/openssl.conf" "$(dirname $BASH_SOURCE)/multi.cnf" > "$(dirname $BASH_SOURCE)/sslconf.cnf"
-  openssl req -new -sha256 -key "$certkeydir/$1.key" -out "$certcsrdir/$1.csr" -config "$(dirname $BASH_SOURCE)/sslconf.cnf" -subj "/C=${ca[C]}/ST=${ca[ST]}/L=${ca[L]}/O=Site $1 : ${ca[O]}/OU=Websites : ${ca[O]}" >&$logfile 2>&$logfile
+  openssl req -new -sha256 -key "$certkeydir/$1.key" -out "$certcsrdir/$1.csr" -config "$(dirname $BASH_SOURCE)/sslconf.cnf" -subj "/C=${ca[C]}/ST=${ca[ST]}/L=${ca[L]}/O=Site $2/OU=Websites : ${ca[O]}" >&$logfile 2>&$logfile
 
   rm -f "$(dirname $BASH_SOURCE)/sslconf.cnf"
 }
