@@ -64,7 +64,7 @@ class MneSbsUserDetail extends MneDbView
   
   async ok()
   {
-    var cols,i;
+    var cols,i,name;
     
     if ( ! this.obj.run.passval )
     {
@@ -77,10 +77,12 @@ class MneSbsUserDetail extends MneDbView
     cols='';
     for ( i in this.obj.inputs )
       if ( ! this.obj.inputs[i].noautoread ) cols += i + ",";
-    cols = cols.substring(0,cols.length - 1);
-
+    cols += 'displayName' //cols.substring(0,cols.length - 1);
+    
+    name = this.obj.inputs['givenName'].getValue() + " " + this.obj.inputs['sn'].getValue();
+    
     if ( this.obj.run.passval )
-      try { await super.ok({ passwd : this.obj.run.passval, cols : cols }); } catch (e) { this.obj.run.passval = ""; throw e };
+      try { await super.ok({ passwd : this.obj.run.passval, displayNameInput : name, cols : cols }); } catch (e) { this.obj.run.passval = ""; throw e };
     
     this.obj.run.values.sAMAccountName = this.obj.inputs.sAMAccountName.getValue(false);
   }

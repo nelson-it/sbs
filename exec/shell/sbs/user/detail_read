@@ -9,8 +9,6 @@ json_writeheader "$vacols" "$labels" "mail:email,wWWHomePage:http," "" "sAMAccou
 
 eval $(read_ldap user "$vasAMAccountNameInput_old")
 
-echo "$street" >&$logfile
-
 echo '  "values"  : ['
 if [ "$sAMAccountName" != "" ]; then
   json_writedata "$sAMAccountName" "$description" "$givenName" "$sn" "$street" "$postOfficeBox" "$l" "$co" "$initials" "$homePhone" "$telephoneNumber" "$mobile" "$mail" "$wWWHomePage" "$preferredLanguage" "$postalCode"  "$uidNumber"  "$gidNumber"  "$unixHomeDirectory"  "$loginShell"

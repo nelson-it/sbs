@@ -14,6 +14,7 @@ eval $(get_groupnames "$vashareInput_old")
 
 declare -A rw
 eval $(read_users "$groupnameread" "rd" "false" "$domaindn")
+eval $(read_users "$groupname" "rd" "false" "$domaindn")
 eval $(read_users "$groupname" "rw" "true" "$domaindn")
 
 echo '  "values"  : ['
