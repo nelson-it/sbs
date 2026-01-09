@@ -68,12 +68,12 @@ function cert_mkcsr()
   rm -f "$certcertdir/$1.crt" 2>/dev/null >/dev/null
 
   aliases=$(echo "$2 $3" | sed -e 's/ *$//')
-  echo $aliases | awk 'BEGIN { RS=" "; printf("subjectAltName = @alt_names\n[alt_names]\n") } { count++; printf("DNS.%d = %s\n", count, $0) }' > $(dirname $BASH_SOURCE)/multi.cnf
+  echo $aliases | awk 'BEGIN { RS=" "; printf("subjectAltName = @alt_names\n[alt_names]\n") } { count++; printf("DNS.%d = %s\n", count, $0) }' > /tmp/multi.cnf
 
-  cat "$certbasedir/openssl.conf" "$(dirname $BASH_SOURCE)/multi.cnf" > "$(dirname $BASH_SOURCE)/sslconf.cnf"
-  openssl req -new -sha256 -key "$certkeydir/$1.key" -out "$certcsrdir/$1.csr" -config "$(dirname $BASH_SOURCE)/sslconf.cnf" -subj "/C=${ca[C]}/ST=${ca[ST]}/L=${ca[L]}/O=Site $2/OU=Websites : ${ca[O]}" >&$logfile 2>&$logfile
+  cat "$certbasedir/openssl.conf" "/tmp/multi.cnf" > "/tmp/sslconf.cnf"
+  openssl req -new -sha256 -key "$certkeydir/$1.key" -out "$certcsrdir/$1.csr" -config "/tmp/sslconf.cnf" -subj "/C=${ca[C]}/ST=${ca[ST]}/L=${ca[L]}/O=Site $2/OU=Websites : ${ca[O]}" >&$logfile 2>&$logfile
 
-  rm -f "$(dirname $BASH_SOURCE)/sslconf.cnf"
+  rm -f "/tmp/sslconf.cnf" /tmp/multi.conf
 }
 
 # name file
@@ -100,7 +100,7 @@ function cert_mkcrt()
 
   mne_need_error
   openssl req -in "$certcsrdir/$1.csr" -noout -text 2>&$logfile | \
-    awk '/Subject Alternative Name/ { p=1; next; } { if ( p ) { gsub(" " , ""); printf("subjectAltName=%s\n", $0); exit } } ' > $(dirname $BASH_SOURCE)/multi.cnf
+    awk '/Subject Alternative Name/ { p=1; next; } { if ( p ) { gsub(" " , ""); printf("subjectAltName=%s\n", $0); exit } } ' > /tmp/multi.cnf
 
   if [ "${PIPESTATUS[0]}" != "0" ]; then
     echo "#mne_lang#File scheint kein Zertifikatrequest zu sein#" >&2
@@ -110,10 +110,10 @@ function cert_mkcrt()
 
   if [ ! -f "$certcadir/ca.key" ]; then
     echo "#mne_lang#Bitte auf dem Hauptrechner zertifizieren#"  >&2
-    openssl x509 -req -days 365 -extfile $(dirname $BASH_SOURCE)/multi.cnf \
+    openssl x509 -req -days 365 -extfile /tmp/multi.cnf \
 		         -in "$certcsrdir/$1.csr" -out "$certcertdir/$1.crt" -signkey "$certkeydir/$1.key"  2>&$logfile >&$logfile
   else
-    openssl x509 -req -days 365 -extfile $(dirname $BASH_SOURCE)/multi.cnf \
+    openssl x509 -req -days 365 -extfile /tmp/multi.cnf \
 		         -in "$certcsrdir/$1.csr" -CA $certcadir/ca.crt -CAkey $certcadir/ca.key -CAcreateserial -CAserial $certcadir/serial.seq \
 		         -out "$certcertdir/$1.crt" -passin "pass:$2" 2>&$logfile >&$logfile 
   fi
@@ -126,7 +126,7 @@ function cert_mkcrt()
    chmod 644 "$certcertdir/$1.crt"
   fi   
 
-rm -f $(dirname $BASH_SOURCE)/multi.cnf
+rm -f /tmp/multi.cnf
 
 }
 
